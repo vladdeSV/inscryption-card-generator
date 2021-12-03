@@ -4,6 +4,7 @@ type Card = {
     name: string
     health: number
     power: number | 'ants' | 'bell' | 'cards' | 'mirror' | undefined
+    terrain?: boolean,
     cost?: {
         type: 'blood' | 'bones'
         amount: number
@@ -15,8 +16,8 @@ type Card = {
 }
 
 // type CreatureId = 'custom' | 'stoat' | 'stinkbug' | 'adder'
-type Sigil = 'fledgling'
-type Tribe = 'canine' | 'insect' | 'reptile' | 'hooved' | 'avian' | undefined
+type Sigil = string
+type Tribe = 'canine' | 'insect' | 'reptile' | 'hooved' | 'bird' | undefined
 
 
 // type PeltCard = Card & {
