@@ -168,7 +168,7 @@ function generateCard(card: Card, opts: any): Buffer {
     }
   }
 
-  if (card.sigils) {
+  if (card.sigils.length) {
     const sigil = card.sigils[0]
     const sigilPath = `./resource/sigils/${sigil}.png`
     const hz = isTerrainCard(card) ? -70 : -2
