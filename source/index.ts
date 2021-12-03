@@ -185,9 +185,6 @@ function generateCard(card: Card, opts: any): Buffer {
 
       const tribePath = `./resource/tribes/${tribe}.png`
       execSync(`${im} ${out} \\( "${tribePath}" -resize 233% -gravity ${align.g} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${align.t} \\) -composite ${out}`)
-
-
-      // execSync(`${im} ${out} \\( "${tribePath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${hz}+63 \\) -composite ${out}`)
     }
   }
 
@@ -198,8 +195,8 @@ function generateCard(card: Card, opts: any): Buffer {
     execSync(`${im} ${out} \\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${hz}+63 \\) -composite ${out}`)
   }
 
-  if(card.cost) {
-    const {amount, type} = card.cost;
+  if (card.cost) {
+    const { amount, type } = card.cost;
 
     const costPath = `./resource/costs/${amount}${type}.png`
     execSync(`${im} ${out} \\( "${costPath}" -interpolate Nearest -filter point -resize ${opts.c}% -filter box -gravity northeast -geometry +${opts.a}+${opts.b} \\) -composite ${out}`)
