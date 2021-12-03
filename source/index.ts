@@ -13,12 +13,12 @@ server.get('/card', async (request, reply) => {
   const health = Number(q.health ?? 1)
   const portraitData = q.portraitData;
   const sigils = ((s: string[] | string) => {
-    if(!s) { return [] }
+    if (!s) { return [] }
     if (!Array.isArray(s)) { s = [s] }
     return s
   })(q['sigils[]'])
   const tribes = ((s: string[] | string) => {
-    if(!s) { return [] }
+    if (!s) { return [] }
     if (!Array.isArray(s)) { s = [s] }
     return [...new Set(s)]
   })(q['tribes[]'])
@@ -33,7 +33,6 @@ server.get('/card', async (request, reply) => {
   })(q.terrain)
 
   console.log(q);
-
 
   const cardType = ((s: unknown): Card['type'] => {
     switch (s) {
