@@ -22,6 +22,28 @@ server.get('/card', async (request, reply) => {
     if (!Array.isArray(s)) { s = [s] }
     return [...new Set(s)]
   })(q['tribes[]'])
+  const cost = ((s: string | undefined): Card['cost'] => {
+    if (!s) {
+      return undefined
+    }
+
+    const match = s.match(/(\d)(blood|bones?)/)
+    if (!match) {
+      return undefined
+    }
+
+    const costAmount = Number(match[1])
+    const costType = ((i) => {
+      switch (i) {
+        default:
+        case 'blood': return 'blood'
+        case 'bone':
+        case 'bones': return 'bone'
+      }
+    })(match[2])
+
+    return { amount: costAmount, type: costType }
+  })(q.cost)
 
   const terrain = ((s: unknown): Card['terrain'] => {
     switch (s) {
@@ -49,6 +71,7 @@ server.get('/card', async (request, reply) => {
     health: health,
     tribes: tribes,
     sigils: sigils,
+    cost: cost,
     type: cardType,
     enhanced: false,
     terrain: terrain,
@@ -173,6 +196,13 @@ function generateCard(card: Card, opts: any): Buffer {
     const sigilPath = `./resource/sigils/${sigil}.png`
     const hz = isTerrainCard(card) ? -70 : -2
     execSync(`${im} ${out} \\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${hz}+63 \\) -composite ${out}`)
+  }
+
+  if(card.cost) {
+    const {amount, type} = card.cost;
+
+    const costPath = `./resource/costs/${amount}${type}.png`
+    execSync(`${im} ${out} \\( "${costPath}" -interpolate Nearest -filter point -resize ${opts.c}% -filter box -gravity northeast -geometry +${opts.a}+${opts.b} \\) -composite ${out}`)
   }
 
   // apply text

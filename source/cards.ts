@@ -6,7 +6,7 @@ type Card = {
     power: number | 'ants' | 'bell' | 'cards' | 'mirror' | undefined
     terrain?: boolean,
     cost?: {
-        type: 'blood' | 'bones'
+        type: 'blood' | 'bone'
         amount: number
     }
     enhanced: boolean | undefined
