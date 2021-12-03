@@ -1,4 +1,4 @@
-import { execSync } from 'child_process'
+import { execSync, spawnSync } from 'child_process'
 import fastify from 'fastify'
 import { existsSync, readFileSync, unlink, unlinkSync, writeFileSync } from 'fs'
 import { Card } from './cards'
@@ -112,13 +112,7 @@ function generateCard(card: Card, opts: any): Buffer {
     const extraData = card.extra;
     if (typeof extraData === 'object' && extraData && hasOwnProperty(extraData, 'portraitData')) {
       if (typeof extraData.portraitData === 'string') {
-
-        // this is horrible!! storing user input in dir??? FUCK NO DO NOT COMMIT THIS
-        const imageFileName = 'custom_image'
-
-        writeFileSync(imageFileName, extraData.portraitData, 'base64');
-        execSync(`${im} ${out} \\( "${imageFileName}" -gravity center -geometry ${portraitOffset} \\) -composite ${out}`)
-        unlinkSync(imageFileName);
+        spawnSync(`${im} ${out} \\( - -gravity center -geometry ${portraitOffset} \\) -composite ${out}`, { shell: true, input: Buffer.from(extraData.portraitData, 'base64') })
       }
     }
 
