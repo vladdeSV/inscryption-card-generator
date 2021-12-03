@@ -8,7 +8,7 @@ const server = fastify()
 server.get('/card', async (request, reply) => {
 
   const q = (request.query as any)
-  const name = q.name ?? ''
+  const name = (q.name as string ?? '').toLowerCase()
   const power = q.power ? Number(q.power) : undefined
   const health = Number(q.health ?? 1)
   const portraitData = q.portraitData;
@@ -92,7 +92,7 @@ function generateCard(card: Card, opts: any): Buffer {
     }
 
     // if we are here, then auto is set
-    if (card.portrait?.match(/^warren(_eaten[1-3]$)?/) && card.name.toLowerCase() === 'warren') {
+    if (card.portrait?.match(/^warren(_eaten[1-3]$)?/) && card.name === 'warren') {
       return false
     }
 
