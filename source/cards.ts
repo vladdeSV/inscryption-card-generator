@@ -17,7 +17,7 @@ type Card = {
 
 // type CreatureId = 'custom' | 'stoat' | 'stinkbug' | 'adder'
 type Sigil = string
-type Tribe = 'canine' | 'insect' | 'reptile' | 'hooved' | 'bird' | undefined
+type Tribe = string //'canine' | 'insect' | 'reptile' | 'hooved' | 'bird'
 
 
 // type PeltCard = Card & {

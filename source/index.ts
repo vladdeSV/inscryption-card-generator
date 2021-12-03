@@ -12,7 +12,17 @@ server.get('/card', async (request, reply) => {
   const power = q.power ? Number(q.power) : undefined
   const health = Number(q.health ?? 1)
   const portraitData = q.portraitData;
-  const sigils = Array.isArray(q['sigils[]']) ? q['sigils[]'] : q['sigils[]'] ? [q['sigils[]']] : undefined
+  const sigils = ((s: string[] | string) => {
+    if(!s) { return [] }
+    if (!Array.isArray(s)) { s = [s] }
+    return s
+  })(q['sigils[]'])
+  const tribes = ((s: string[] | string) => {
+    if(!s) { return [] }
+    if (!Array.isArray(s)) { s = [s] }
+    return [...new Set(s)]
+  })(q['tribes[]'])
+
   const terrain = ((s: unknown): Card['terrain'] => {
     switch (s) {
       default:
@@ -38,7 +48,7 @@ server.get('/card', async (request, reply) => {
     name: name,
     power: power,
     health: health,
-    tribes: [],
+    tribes: tribes,
     sigils: sigils,
     type: cardType,
     enhanced: false,
@@ -135,26 +145,24 @@ function generateCard(card: Card, opts: any): Buffer {
   const scale = '538.94%'
   execSync(`${im} ${out} -filter Box -scale ${scale} ${out}`)
 
-  card.tribes = ['bird', 'canine', 'hooved', 'reptile', 'insect']
+  //card.tribes = ['bird', 'canine', 'hooved', 'reptile', 'insect']
   if (card.tribes.length) {
     const tribes = card.tribes
 
-
-    const hz = opts.b
     const aligns = [
-      {g: 'northwest', t: `-11+8`},
-      {g: 'north', t:`-6+8`},
-      {g: 'northeast', t:`-15+8`},
-      {g: 'center', t:`-${opts.a}+${opts.c}`},
-      {g: 'center', t:`+${opts.b}+${opts.c}`},
+      { g: 'northwest', t: `-11+8` },
+      { g: 'north', t: `-6+8` },
+      { g: 'northeast', t: `-15+8` },
+      { g: 'center', t: `-138+105` },
+      { g: 'center', t: `+1250+105` },
     ]
 
     for (let i = 0; i < Math.min(tribes.length, 5); i++) {
       const tribe = tribes[i]
       const align = aligns[i]
-     
+
       const tribePath = `./resource/tribes/${tribe}.png`
-      execSync(`${im} ${out} \\( "${tribePath}" -resize 233% -gravity ${align.g} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${align.t} \\) -composite ${out}`) 
+      execSync(`${im} ${out} \\( "${tribePath}" -resize 233% -gravity ${align.g} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${align.t} \\) -composite ${out}`)
 
 
       // execSync(`${im} ${out} \\( "${tribePath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${hz}+63 \\) -composite ${out}`)
