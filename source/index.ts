@@ -195,7 +195,7 @@ function generateCard(card: Card, opts: any): Buffer {
       { g: 'north', t: `-6+8` },
       { g: 'northeast', t: `-15+8` },
       { g: 'center', t: `-138+105` },
-      { g: 'center', t: `+1250+105` },
+      { g: 'center', t: `+125+105` },
     ]
 
     for (let i = 0; i < Math.min(tribes.length, 5); i++) {
