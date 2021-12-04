@@ -1,6 +1,6 @@
 import { execSync, spawnSync } from 'child_process'
 import fastify from 'fastify'
-import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
 import { Card } from './cards'
 import objectHash from 'object-hash';
 
@@ -247,7 +247,11 @@ function generateCard(card: Card, opts: any): Buffer {
   }
 
   const buffer = readFileSync('./out.png')
-  renameSync('./out.png', cacheCardPath)
+
+  if (card.portrait !== 'custom') {
+    writeFileSync(cacheCardPath, buffer)
+  }
+  unlinkSync('./out.png')
 
   return buffer
 }
