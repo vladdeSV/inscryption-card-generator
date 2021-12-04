@@ -15,7 +15,8 @@ server.get('/card', async (request, reply) => {
   const sigils = ((s: string[] | string) => {
     if (!s) { return [] }
     if (!Array.isArray(s)) { s = [s] }
-    return s
+    s = s.filter(x => x)
+    return [...new Set(s)]
   })(q['sigils[]'])
   const tribes = ((s: string[] | string) => {
     if (!s) { return [] }
@@ -188,11 +189,28 @@ function generateCard(card: Card, opts: any): Buffer {
     }
   }
 
-  if (card.sigils.length) {
-    const sigil = card.sigils[0]
-    const sigilPath = `./resource/sigils/${sigil}.png`
-    const hz = isTerrainCard(card) ? -70 : -2
-    execSync(`${im} ${out} \\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${hz}+63 \\) -composite ${out}`)
+  const sigilCount = card.sigils.length
+  if (sigilCount > 0) {
+    const sigils = card.sigils;
+    for (let i = 0; i < sigilCount; ++i) {
+      const sigil = sigils[i];
+      const sigilPath = `./resource/sigils/${sigil}.png`
+      const xoffset = isTerrainCard(card) ? -70 : -2
+
+      if (sigilCount === 1) {
+        execSync(`${im} ${out} \\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite ${out}`)
+      } else {
+        const rotateAmount = 2 * Math.PI / sigilCount
+        const baseRotation = sigilCount === 2 ? 0.63 : Math.PI / 6
+        const dist = sigilCount > 2 ? 80 : 90
+        const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
+        const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * i)
+        const y = 330 - dist * Math.sin(baseRotation + rotateAmount * i) - (sigilCount === 3 ? 20 : 0)
+        const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
+
+        execSync(`${im} ${out} \\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite ${out}`)
+      }
+    }
   }
 
   if (card.cost) {
