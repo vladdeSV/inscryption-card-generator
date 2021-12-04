@@ -223,7 +223,7 @@ function generateCard(card: Card, opts: any): Buffer {
         const dist = sigilCount > 2 ? 80 : 90
         const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
         const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * i)
-        const y = 330 - dist * Math.sin(baseRotation + rotateAmount * i) - (sigilCount === 3 ? 20 : 0)
+        const y = 330 - dist * Math.sin(baseRotation + rotateAmount * i) - (sigilCount === 3 ? 15 : 0)
         const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
 
         execSync(`${im} ${out} \\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite ${out}`)
