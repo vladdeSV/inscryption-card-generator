@@ -100,6 +100,7 @@ server.get('/card', async (request, reply) => {
   const buffer = generateCard(card, opts)
 
   reply.type('image/png')
+  reply.header('Content-Disposition', `inline; filename="${card.name.replace(/\s/g, '_')}.png"`)
   reply.send(buffer)
 
 })
