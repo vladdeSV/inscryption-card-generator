@@ -11,7 +11,7 @@ server.get('/card', async (request, reply) => {
   const q = (request.query as any)
   const name = (q.name as string ?? '').toLowerCase()
   const power = q.power ? Number(q.power) : undefined
-  const health = Number(q.health ?? 1)
+  const health = q.health ? Number(q.health) : undefined
   const portraitData = q.portraitData;
 
   const sigils = ((s: string[] | string) => {
@@ -239,7 +239,7 @@ function generateCard(card: Card, opts: any): Buffer {
   }
 
   // apply text
-  execSync(`${im} ${out} -font ${font} -fill black -pointsize 200 ${card.power !== undefined ? `-gravity southwest -annotate +64+104 "${card.power}"` : ''} -gravity southeast -annotate +${healthHorizontalOffset}+23 "${card.health}" -pointsize ${namePointSize} -gravity center -annotate +0-408 "${card.name}" ${out}`)
+  execSync(`${im} ${out} -font ${font} -fill black -pointsize 200 ${card.power !== undefined ? `-gravity southwest -annotate +64+104 "${card.power}"` : ''} ${card.health !== undefined ? `-gravity southeast -annotate +${healthHorizontalOffset}+23 "${card.health}"` : ''} -pointsize ${namePointSize} -gravity center -annotate +0-408 "${card.name}" ${out}`)
 
 
   if (card.decal) {

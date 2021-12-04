@@ -2,7 +2,7 @@ type Card = {
     type: 'common' | 'rare' | 'terrain' | 'pelt'
     portrait: string | undefined
     name: string
-    health: number
+    health: number | undefined
     power: number | 'ants' | 'bell' | 'cards' | 'mirror' | undefined
     terrain?: boolean,
     decal?: string,
