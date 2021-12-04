@@ -12,7 +12,8 @@
   "dependencies": {
     "@types/gm": "^1.18.10",
     "fastify": "^3.24.0",
-    "gm": "^1.23.1"
+    "gm": "^1.23.1",
+    "object-hash": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",

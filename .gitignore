@@ -1,6 +1,9 @@
 /node_modules
 /out
 
+#
+/cache
+
 # contains copyrighted material, which i am not allowed to share
 /resource
 

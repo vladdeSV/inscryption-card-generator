@@ -1,7 +1,8 @@
 import { execSync, spawnSync } from 'child_process'
 import fastify from 'fastify'
-import { existsSync, readFileSync, unlink, unlinkSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'fs'
 import { Card } from './cards'
+import objectHash from 'object-hash';
 
 const server = fastify()
 
@@ -116,7 +117,16 @@ function generateCard(card: Card, opts: any): Buffer {
   const out = 'out.png'
   const font = './resource/HEAVYWEIGHT.TTF'
 
+  const cardHash = objectHash(card)
+  const cacheCardPath = `./cache/${cardHash}.png`
+
+  if (existsSync(cacheCardPath)) {
+    return readFileSync(cacheCardPath)
+  }
+
+
   const isTerrainCard = (card: Card): boolean => {
+
     if (card.terrain !== undefined) {
       return card.terrain;
     }
@@ -231,14 +241,13 @@ function generateCard(card: Card, opts: any): Buffer {
   execSync(`${im} ${out} -font ${font} -fill black -pointsize 200 ${card.power !== undefined ? `-gravity southwest -annotate +64+104 "${card.power}"` : ''} -gravity southeast -annotate +${healthHorizontalOffset}+23 "${card.health}" -pointsize ${namePointSize} -gravity center -annotate +0-408 "${card.name}" ${out}`)
 
 
-  if(card.decal) {
+  if (card.decal) {
     const decalPath = `./resource/decals/${card.decal}.png`
     execSync(`${im} ${out} \\( ${decalPath} -filter Box -scale ${scale} \\) -composite ${out}`)
   }
 
-
   const buffer = readFileSync('./out.png')
-  unlinkSync('./out.png')
+  renameSync('./out.png', cacheCardPath)
 
   return buffer
 }
