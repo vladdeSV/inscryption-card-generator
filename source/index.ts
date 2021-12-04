@@ -12,17 +12,20 @@ server.get('/card', async (request, reply) => {
   const power = q.power ? Number(q.power) : undefined
   const health = Number(q.health ?? 1)
   const portraitData = q.portraitData;
+
   const sigils = ((s: string[] | string) => {
     if (!s) { return [] }
     if (!Array.isArray(s)) { s = [s] }
     s = s.filter(x => x)
     return [...new Set(s)]
   })(q['sigils[]'])
+
   const tribes = ((s: string[] | string) => {
     if (!s) { return [] }
     if (!Array.isArray(s)) { s = [s] }
     return [...new Set(s)]
   })(q['tribes[]'])
+
   const cost = ((s: string | undefined): Card['cost'] => {
     if (!s) {
       return undefined
@@ -66,6 +69,9 @@ server.get('/card', async (request, reply) => {
     }
   })(q.type)
 
+  const decal = q.decal
+  const enhanced = Boolean(q.enhanced)
+
   const card: Card = {
     name: name,
     power: power,
@@ -74,9 +80,10 @@ server.get('/card', async (request, reply) => {
     sigils: sigils,
     cost: cost,
     type: cardType,
-    enhanced: false,
+    enhanced: enhanced,
     terrain: terrain,
     portrait: ((s: unknown): string | undefined => (typeof s === 'string') ? s : undefined)(q.portrait),
+    decal: decal,
     extra: {
       portraitData: portraitData
     }
@@ -217,11 +224,18 @@ function generateCard(card: Card, opts: any): Buffer {
     const { amount, type } = card.cost;
 
     const costPath = `./resource/costs/${amount}${type}.png`
-    execSync(`${im} ${out} \\( "${costPath}" -interpolate Nearest -filter point -resize ${opts.c}% -filter box -gravity northeast -geometry +${opts.a}+${opts.b} \\) -composite ${out}`)
+    execSync(`${im} ${out} \\( "${costPath}" -interpolate Nearest -filter point -resize 460% -filter box -gravity east -geometry +32-265 \\) -composite ${out}`)
   }
 
   // apply text
   execSync(`${im} ${out} -font ${font} -fill black -pointsize 200 ${card.power !== undefined ? `-gravity southwest -annotate +64+104 "${card.power}"` : ''} -gravity southeast -annotate +${healthHorizontalOffset}+23 "${card.health}" -pointsize ${namePointSize} -gravity center -annotate +0-408 "${card.name}" ${out}`)
+
+
+  if(card.decal) {
+    const decalPath = `./resource/decals/${card.decal}.png`
+    execSync(`${im} ${out} \\( ${decalPath} -filter Box -scale ${scale} \\) -composite ${out}`)
+  }
+
 
   const buffer = readFileSync('./out.png')
   unlinkSync('./out.png')

@@ -5,6 +5,7 @@ type Card = {
     health: number
     power: number | 'ants' | 'bell' | 'cards' | 'mirror' | undefined
     terrain?: boolean,
+    decal?: string,
     cost?: {
         type: 'blood' | 'bone'
         amount: number
