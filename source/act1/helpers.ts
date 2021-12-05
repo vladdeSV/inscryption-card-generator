@@ -7,15 +7,14 @@ function costFromInput(input: any): Cost | undefined {
       return undefined
     }
 
-    const amount = Number(match[0])
-    let type = match[1]
+    const amount = Number(match[1])
+    let type = match[2]
 
     if (type === 'bone') {
       type = 'bones'
     }
 
     return Cost.check({ amount, type })
-
   }
 }
 
