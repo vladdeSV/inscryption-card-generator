@@ -1,8 +1,8 @@
 import fastify from 'fastify'
-import { cardFromData } from './act1/helpers';
+import { cardFromData, imageStateFromCard } from './act1/helpers';
 import { Card } from './act1/types';
 
-const presets: {[s:string]: {}} = {
+const presets: { [s: string]: {} } = {
   "mini_moon": { type: "common", name: "mini moon", power: 1, health: 9, tribes: [], sigils: ["allstrike", "squirrelorbit", "reach"], portrait: "moon", decals: [], options: {} },
   "wolf": { type: "common", name: "wolf", power: 3, health: 2, tribes: ["canine"], sigils: [], cost: { amount: 2, type: "blood" }, portrait: "wolf", decals: [], options: {} },
   "cat": { type: "common", name: "cat", power: 0, health: 1, tribes: [], sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "cat", decals: [], options: {} },
@@ -68,7 +68,7 @@ const server = fastify()
 server.get('/act1/:creature', async (request, reply) => {
   const creatureId = request.url.match(/\/act1\/(\w+)/)?.[1] ?? '';
   const data = presets[creatureId]
-  
+
   if (data === undefined) {
     reply.code(404)
     reply.send(`Unknown id '${creatureId}'`)
@@ -81,8 +81,33 @@ server.get('/act1/:creature', async (request, reply) => {
 
 server.get('/act1/', async (request, reply) => {
   const card = cardFromData(request.query);
+  if (card === undefined) {
+    reply.code(422)
+    reply.send('Error parsing input data (todo add error message)')
+    return
+  }
 
-  reply.send(JSON.stringify(card))
+  const state = imageStateFromCard(card)
+  
+  const buffer = await new Promise<Buffer>((resolve, reject) => {
+    state.toBuffer((error, buffer) => {
+      if (error) {
+        console.error(error)
+        reject(undefined)
+      }
+      resolve(buffer)
+    })
+  })
+
+  if (!buffer) {
+    reply.code(500)
+    reply.send('Unknown error when creating image')
+    return
+  }
+
+  reply.type('image/png')
+  reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)
+  reply.send(buffer)
 })
 
 server.listen(8080, (err, address) => {

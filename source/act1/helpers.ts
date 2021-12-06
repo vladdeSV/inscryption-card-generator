@@ -1,3 +1,4 @@
+import gm, { State } from "gm"
 import { Card, Cost } from "./types"
 
 function costFromInput(input: any): Cost | undefined {
@@ -43,4 +44,32 @@ function cardFromData(q: any): Card {
   return card
 }
 
-export { cardFromData, costFromInput, arrayify }
+function imageStateFromCard(card: Card): State {
+  const state = gm.subClass({ imageMagick: true })(`./resource/cards/${card.type}.png`)
+    .font('./resource/HEAVYWEIGHT.TTF')
+    .filter('Box')
+
+  const portrait = card.portrait
+  if (portrait) {
+    if (portrait === 'custom') {
+      // todo
+    } else {
+      // state.
+    }
+  }
+
+  state.resize(674, 1024)
+
+  const name = card.name
+  if (name) {
+    state.out('(')
+      .pointSize(120)
+      .gravity('center')
+      .draw(`gravity center scale 1.15,1 text 0,-408 '${name}'`)
+      .out(')')
+  }
+
+  return state
+}
+
+export { cardFromData, imageStateFromCard, costFromInput, arrayify }
