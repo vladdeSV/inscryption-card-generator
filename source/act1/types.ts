@@ -182,6 +182,7 @@ const Card = Record({
   options: Record({
     isTerrain: Union(Literal('auto'), Literal('yes'), Literal('no')).optional(),
     isEnhanced: Boolean.optional(),
+    isGolden: Boolean.optional(),
     portraitData: String.optional(),
   }),
 });

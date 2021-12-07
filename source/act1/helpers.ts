@@ -37,6 +37,7 @@ function cardFromData(q: any): Card {
     options: {
       isTerrain: q.terrain,
       isEnhanced: q.enhanced,
+      isGolden: q.golden
       portraitData: q.portraitData
     }
   })
