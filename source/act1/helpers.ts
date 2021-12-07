@@ -160,8 +160,9 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
 
   const name = card.name
   if (name) {
+    const namePointSize = (name.length > 13) ? 90 : (name.length > 11 ? 100 : 120)
     const escapeName = (name: string) => name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"')
-    im(`-font '${font}' -pointsize 120 -draw "gravity center scale 1.15,1 text 0,-408 '${escapeName(name)}'"`)
+    im(`-font '${font}' -pointsize ${namePointSize} -draw "gravity center scale 1.115,1 text 0,-412 '${escapeName(name)}'"`)
   }
 
   for (const decal of card.decals) {
