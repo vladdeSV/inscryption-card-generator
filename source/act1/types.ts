@@ -180,7 +180,7 @@ const Card = Record({
   sigils: Array(Sigil),
   decals: Array(Decal),
   options: Record({
-    isTerrain: Union(Literal('auto'), Literal('yes'), Literal('no')).optional(),
+    isTerrain: Boolean.optional(),
     isEnhanced: Boolean.optional(),
     isGolden: Boolean.optional(),
     portraitData: String.optional(),

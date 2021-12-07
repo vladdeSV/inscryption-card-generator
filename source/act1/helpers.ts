@@ -51,18 +51,13 @@ function cardFromData(q: any): Card {
 
 function isTerrainCard(card: Card): boolean {
 
-  const terrain = card.options.isTerrain ?? 'auto';
+  const terrain = card.options.isTerrain;
 
-  if (terrain === 'yes') {
-    return true;
+  if (typeof terrain === 'boolean') {
+    return terrain;
   }
 
-  if (terrain === 'no') {
-    return false;
-  }
-
-  // if we are here, then auto is set
-
+  // if we are here, then terrain === 'auto'
   if (card.type === 'terrain') {
     const isWarren = card.portrait?.match(/^warren(_eaten[1-3]$)?/) && card.name === 'warren'
     if (isWarren) {
