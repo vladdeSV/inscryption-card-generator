@@ -11,8 +11,8 @@ function costFromInput(input: any): Cost | undefined {
     const amount = Number(match[1])
     let type = match[2]
 
-    if (type === 'bone') {
-      type = 'bones'
+    if (type === 'bones') {
+      type = 'bone'
     }
 
     return Cost.check({ amount, type })
@@ -29,7 +29,7 @@ function cardFromData(q: any): Card {
     name: q.name,
     portrait: q.portrait,
     health: q.health ? Number(q.health) : undefined,
-    power: q.power ? (typeof q.power === 'number' ? Number(q.power) : q.power) : undefined,
+    power: typeof q.power === 'number' ? Number(q.power) : q.power,
     cost: costFromInput(q.cost),
     tribes: q['tribes[]'] ? [...new Set(arrayify(q['tribes[]']))] : [],
     sigils: q['sigils[]'] ? [...new Set(arrayify(q['sigils[]']))] : [],
@@ -70,7 +70,7 @@ function isTerrainCard(card: Card): boolean {
   return false
 }
 
-async function bufferFromCard(card: Card): Promise<Buffer> {
+async function bufferFromCard(card: Card, opts: any): Promise<Buffer> {
 
   const commands: string[] = []
   const im = (command: string) => commands.push(command)
@@ -116,11 +116,11 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     const { amount, type } = cost;
 
     const costPath = `./resource/costs/${amount}${type}.png`
-    im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 460% -filter box -gravity east -geometry +32-265 \\) -composite`)
+    im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 440% -filter box -gravity east -geometry +32-265 \\) -composite`)
   }
 
   const power = card.power
-  if (power) {
+  if (power !== undefined) {
     if (typeof power === 'number') {
       im(`-font ${font} -pointsize 200 -draw "gravity southwest text 64,104 '${power}'"`)
     } else {
@@ -129,7 +129,7 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   }
 
   const health = card.health
-  if (health) {
+  if (health !== undefined) {
     im(`-font ${font} -pointsize 200 -draw "gravity southeast text ${60 + bottomBarOffset},23 '${health}'"`)
   }
 
@@ -156,9 +156,38 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
 
   const name = card.name
   if (name) {
-    const namePointSize = (name.length > 13) ? 90 : (name.length > 11 ? 100 : 120)
+    const nameSizing = (length: number) => {
+      switch (length) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+          return { size: 120, wm: 1.155, hm: 1.115, yoff: 41 }
+        case 12:
+          // fixme
+          return { size: 100, wm: 1.17, hm: 1.1, yoff: 35 }
+        case 13:
+          return { size: 100, wm: 1.115, hm: 1, yoff: 0 }
+        case 14:
+        default:
+          return { size: 90, wm: 1.115, hm: 1, yoff: 0 }
+      }
+    }
+    
+    const nameSize = nameSizing(name.length)
+    console.log(name, nameSize);
+
+
     const escapeName = (name: string) => name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"')
-    im(`-font '${font}' -pointsize ${namePointSize} -draw "gravity center scale 1.115,1 text 0,-412 '${escapeName(name)}'"`)
+    im(`-font '${font}' -pointsize ${nameSize.size} -draw "gravity center scale ${nameSize.wm},${nameSize.hm} text 3,${-404 + nameSize.yoff} '${escapeName(name)}'"`)
   }
 
   for (const decal of card.decals) {

@@ -13,12 +13,12 @@ const presets: { [s: string]: Card } = {
   "grand_fir": { type: "terrain", name: "grand fir", health: 3, tribes: [], sigils: ["reach"], portrait: "tree", decals: [], options: {} },
   "boulder": { type: "terrain", name: "boulder", health: 5, tribes: [], sigils: [], portrait: "boulder", decals: [], options: {} },
   "sparrow": { type: "common", name: "sparrow", power: 1, health: 2, tribes: ["bird"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "sparrow", decals: [], options: {} },
-  "pronghorn": { type: "common", name: "pronghorn", power: 1, health: 3, tribes: ["hooved"], sigils: ["strafe", "splitstrike"], cost: { amount: 2, type: "blood" }, portrait: "pronghorn", decals: [], options: {} },
+  "pronghorn": { type: "common", name: "pronghorn", power: 1, health: 3, tribes: ["hooved"], sigils: ["splitstrike", "strafe"], cost: { amount: 2, type: "blood" }, portrait: "pronghorn", decals: [], options: {} },
   "kingfisher": { type: "common", name: "kingfisher", power: 1, health: 1, tribes: ["bird"], sigils: ["flying", "submerge"], cost: { amount: 1, type: "blood" }, portrait: "kingfisher", decals: [], options: {} },
-  "amoeba": { type: "rare", name: "amoeba", power: 1, health: 2, tribes: [], sigils: ["randomability"], cost: { amount: 2, type: "bones" }, portrait: "amoeba", decals: [], options: {} },
+  "amoeba": { type: "rare", name: "amoeba", power: 1, health: 2, tribes: [], sigils: ["randomability"], cost: { amount: 2, type: "bone" }, portrait: "amoeba", decals: [], options: {} },
   "bullfrog": { type: "common", name: "bullfrog", power: 1, health: 3, tribes: ["reptile"], sigils: ["reach"], cost: { amount: 1, type: "blood" }, portrait: "bullfrog", decals: [], options: {} },
   "adder": { type: "common", name: "adder", power: 1, health: 1, tribes: ["reptile"], sigils: ["deathtouch"], cost: { amount: 2, type: "blood" }, portrait: "adder", decals: [], options: {} },
-  "rattler": { type: "common", name: "rattler", power: 3, health: 1, tribes: ["reptile"], sigils: [], cost: { amount: 6, type: "bones" }, portrait: "rattler", decals: [], options: {} },
+  "rattler": { type: "common", name: "rattler", power: 3, health: 1, tribes: ["reptile"], sigils: [], cost: { amount: 6, type: "bone" }, portrait: "rattler", decals: [], options: {} },
   "river_snapper": { type: "common", name: "river snapper", power: 1, health: 6, tribes: ["reptile"], sigils: [], cost: { amount: 2, type: "blood" }, portrait: "turtle", decals: [], options: {} },
   "skink": { type: "common", name: "skink", power: 1, health: 2, tribes: ["reptile"], sigils: ["tailonhit"], cost: { amount: 1, type: "blood" }, portrait: "skink", decals: [], options: {} },
   "ouroboros": { type: "rare", name: "ouroboros", tribes: ["reptile"], sigils: ["drawcopyondeath"], cost: { amount: 2, type: "blood" }, portrait: "ouroboros", decals: [], options: {} },
@@ -40,28 +40,30 @@ const presets: { [s: string]: Card } = {
   "porcupine": { type: "common", name: "porcupine", power: 1, health: 2, tribes: [], sigils: ["sharp"], cost: { amount: 1, type: "blood" }, portrait: "porcupine", decals: [], options: {} },
   "rat_king": { type: "common", name: "rat king", power: 2, health: 1, tribes: [], sigils: ["quadruplebones"], cost: { amount: 2, type: "blood" }, portrait: "ratking", decals: [], options: {} },
   "beaver": { type: "common", name: "beaver", power: 1, health: 3, tribes: [], sigils: ["createdams"], cost: { amount: 2, type: "blood" }, portrait: "beaver", decals: [], options: {} },
-  "opossum": { type: "common", name: "opossum", power: 1, health: 1, tribes: [], sigils: [], cost: { amount: 2, type: "bones" }, portrait: "opossum", decals: [], options: {} },
-  "bat": { type: "common", name: "bat", power: 2, health: 1, tribes: [], sigils: ["flying"], cost: { amount: 4, type: "bones" }, portrait: "bat", decals: [], options: {} },
+  "opossum": { type: "common", name: "opossum", power: 1, health: 1, tribes: [], sigils: [], cost: { amount: 2, type: "bone" }, portrait: "opossum", decals: [], options: {} },
+  "bat": { type: "common", name: "bat", power: 2, health: 1, tribes: [], sigils: ["flying"], cost: { amount: 4, type: "bone" }, portrait: "bat", decals: [], options: {} },
   "grizzly": { type: "common", name: "grizzly", power: 4, health: 6, tribes: [], sigils: [], cost: { amount: 3, type: "blood" }, portrait: "grizzly", decals: [], options: {} },
   "great_white": { type: "common", name: "great white", power: 4, health: 2, tribes: [], sigils: ["submerge"], cost: { amount: 3, type: "blood" }, portrait: "shark", decals: [], options: {} },
-  "mole_man": { type: "rare", name: "mole man", power: 0, health: 6, tribes: [], sigils: ["whackamole", "reach"], cost: { amount: 1, type: "blood" }, portrait: "moleman", decals: [], options: {} },
+  "mole_man": { type: "rare", name: "mole man", power: 0, health: 6, tribes: [], sigils: ["reach", "whackamole"], cost: { amount: 1, type: "blood" }, portrait: "moleman", decals: [], options: {} },
   "amalgam": { type: "rare", name: "amalgam", power: 3, health: 3, tribes: ["bird", "canine", "hooved", "reptile", "insect"], sigils: [], cost: { amount: 2, type: "blood" }, portrait: "amalgam", decals: [], options: {} },
   "the_daus": { type: "rare", name: "the daus", power: 2, health: 2, tribes: [], sigils: ["createbells"], cost: { amount: 2, type: "blood" }, portrait: "daus", decals: [], options: {} },
   "pack_rat": { type: "rare", name: "pack rat", power: 2, health: 2, tribes: [], sigils: ["randomconsumable"], cost: { amount: 2, type: "blood" }, portrait: "packrat", decals: [], options: {} },
   "urayuli": { type: "rare", name: "urayuli", power: 7, health: 7, tribes: [], sigils: [], cost: { amount: 4, type: "blood" }, portrait: "urayuli", decals: [], options: {} },
-  "alpha": { type: "common", name: "alpha", power: 1, health: 2, tribes: ["canine"], sigils: ["buffneighbours"], cost: { amount: 5, type: "bones" }, portrait: "alpha", decals: [], options: {} },
-  "coyote": { type: "common", name: "coyote", power: 2, health: 1, tribes: ["canine"], sigils: [], cost: { amount: 4, type: "bones" }, portrait: "coyote", decals: [], options: {} },
+  "alpha": { type: "common", name: "alpha", power: 1, health: 2, tribes: ["canine"], sigils: ["buffneighbours"], cost: { amount: 5, type: "bone" }, portrait: "alpha", decals: [], options: {} },
+  "coyote": { type: "common", name: "coyote", power: 2, health: 1, tribes: ["canine"], sigils: [], cost: { amount: 4, type: "bone" }, portrait: "coyote", decals: [], options: {} },
   "bloodhound": { type: "common", name: "bloodhound", power: 2, health: 3, tribes: ["canine"], sigils: ["guarddog"], cost: { amount: 2, type: "blood" }, portrait: "bloodhound", decals: [], options: {} },
   "bee": { type: "common", name: "bee", power: 1, health: 1, tribes: ["insect"], sigils: ["flying"], portrait: "bee", decals: [], options: {} },
   "beehive": { type: "common", name: "beehive", power: 0, health: 2, tribes: ["insect"], sigils: ["beesonhit"], cost: { amount: 1, type: "blood" }, portrait: "beehive", decals: [], options: {} },
-  "cockroach": { type: "common", name: "cockroach", power: 1, health: 1, tribes: ["insect"], sigils: ["drawcopyondeath"], cost: { amount: 4, type: "bones" }, portrait: "cockroach", decals: [], options: {} },
-  "corpse_maggots": { type: "common", name: "corpse maggots", power: 1, health: 2, tribes: ["insect"], sigils: ["corpseeater"], cost: { amount: 5, type: "bones" }, portrait: "maggots", decals: [], options: {} },
+  "cockroach": { type: "common", name: "cockroach", power: 1, health: 1, tribes: ["insect"], sigils: ["drawcopyondeath"], cost: { amount: 4, type: "bone" }, portrait: "cockroach", decals: [], options: {} },
+  "corpse_maggots": { type: "common", name: "corpse maggots", power: 1, health: 2, tribes: ["insect"], sigils: ["corpseeater"], cost: { amount: 5, type: "bone" }, portrait: "maggots", decals: [], options: {} },
   "mantis": { type: "common", name: "mantis", power: 1, health: 1, tribes: ["insect"], sigils: ["splitstrike"], cost: { amount: 1, type: "blood" }, portrait: "mantis", decals: [], options: {} },
   "ring_worm": { type: "common", name: "ring worm", power: 0, health: 1, tribes: ["insect"], sigils: [], cost: { amount: 1, type: "blood" }, portrait: "ringworm", decals: [], options: {} },
   "strange_larva": { type: "rare", name: "strange larva", power: 0, health: 3, tribes: ["insect"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "mothman_1", decals: [], options: {} },
   "strange_pupa": { type: "rare", name: "strange pupa", power: 0, health: 3, tribes: ["insect"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "mothman_2", decals: [], options: {} },
   "mothman": { type: "rare", name: "mothman", power: 7, health: 3, tribes: ["insect"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "mothman_3", decals: [], options: {} },
-  "the_smoke": { type: "common", name: "the smoke", power: 0, health: 1, tribes: [], sigils: ["quadruplebones"], portrait: "smoke", decals: ["smoke"], options: {} }
+  "the_smoke": { type: "common", name: "the smoke", power: 0, health: 1, tribes: [], sigils: ["quadruplebones"], portrait: "smoke", decals: ["smoke"], options: {} },
+  "gold_nugget": { type: "terrain", name: "gold nugget", power: undefined, health: 2, tribes: [], sigils: [], portrait: "goldnugget", decals: [], options: {} },
+  "golden_pelt": { type: "terrain", name: "golden pelt", power: undefined, health: 3, tribes: [], sigils: [], portrait: "pelt_golden", decals: [], options: {} },
 }
 
 const server = fastify()
@@ -76,7 +78,7 @@ server.get('/act1/:creature', async (request, reply) => {
     return
   }
 
-  const buffer = await bufferFromCard(card)
+  const buffer = await bufferFromCard(card, {a: Number((request as any).query.a), b: Number((request as any).query.b)})
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)

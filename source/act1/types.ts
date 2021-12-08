@@ -1,4 +1,4 @@
-import { Static, Record, String, Number, Boolean, Literal, Union, Optional, Array } from 'runtypes'
+import { Static, Record, String, Number, Boolean, Literal, Union, Array } from 'runtypes'
 
 const CardType = Union(Literal('common'), Literal('rare'), Literal('terrain'), Literal('empty'))
 const BloodCost = Record({
@@ -6,7 +6,7 @@ const BloodCost = Record({
   amount: Number.withConstraint(n => n >= 1 && n <= 4, { name: 'BloodCost' }),
 })
 const BoneCost = Record({
-  type: Literal('bones'),
+  type: Literal('bone'),
   amount: Number.withConstraint(n => n >= 1 && n <= 10, { name: 'BoneCost' }),
 })
 
