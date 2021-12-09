@@ -81,7 +81,7 @@ function isTerrainCard(card: Card): boolean {
   return false
 }
 
-async function bufferFromCard(card: Card, opts: any): Promise<Buffer> {
+async function bufferFromCard(card: Card): Promise<Buffer> {
 
   const commands: string[] = []
   const im = (command: string) => commands.push(command)
@@ -192,7 +192,7 @@ async function bufferFromCard(card: Card, opts: any): Promise<Buffer> {
           return { size: 90, wm: 1.115, hm: 1, yoff: 0 }
       }
     }
-    
+
     const nameSize = nameSizing(name.length)
     console.log(name, nameSize);
 

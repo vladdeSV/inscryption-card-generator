@@ -1,4 +1,5 @@
 import fastify from 'fastify'
+import { writeFileSync } from 'fs';
 import { bufferFromCard, cardFromData } from './act1/helpers';
 import { Card } from './act1/types';
 
@@ -78,7 +79,7 @@ server.get('/act1/:creature', async (request, reply) => {
     return
   }
 
-  const buffer = await bufferFromCard(card, {a: Number((request as any).query.a), b: Number((request as any).query.b)})
+  const buffer = await bufferFromCard(card)
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)
