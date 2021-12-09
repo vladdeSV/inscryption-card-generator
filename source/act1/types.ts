@@ -163,6 +163,7 @@ const Tribe = Union(
 )
 
 const Health = Number.withConstraint(n => n >= 0)
+type Power = Static<typeof Power>
 const Power = Union(
   Number.withConstraint(n => n >= 0),
   Literal('ants'), Literal('bell'), Literal('cards'), Literal('mirror')
@@ -187,4 +188,4 @@ const Card = Record({
   }),
 });
 
-export { Card, Cost }
+export { Card, Cost, Power }

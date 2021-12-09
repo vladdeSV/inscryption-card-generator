@@ -1,7 +1,7 @@
 import { exec, execSync } from "child_process"
-import { Card, Cost } from "./types"
+import { Card, Cost, Power } from "./types"
 
-function costFromInput(input: any): Cost | undefined {
+function costFromInput(input: unknown): Cost | undefined {
   if (typeof input === 'string') {
     const match = input.match(/^(\d+)(blood|bones?)$/)
     if (match === null) {
@@ -19,6 +19,17 @@ function costFromInput(input: any): Cost | undefined {
   }
 }
 
+function powerFromInput(input: unknown): number | Power | undefined {
+  if (Power.guard(input)) {
+    return input
+  }
+
+  const power = Number(input)
+  if (!Number.isNaN(power)) {
+    return power
+  }
+}
+
 function arrayify(input: unknown) {
   return Array.isArray(input) ? input : [input]
 }
@@ -29,7 +40,7 @@ function cardFromData(q: any): Card {
     name: q.name,
     portrait: q.portrait,
     health: q.health ? Number(q.health) : undefined,
-    power: typeof q.power === 'number' ? Number(q.power) : q.power,
+    power: powerFromInput(q.power),
     cost: costFromInput(q.cost),
     tribes: q['tribes[]'] ? [...new Set(arrayify(q['tribes[]']))] : [],
     sigils: q['sigils[]'] ? [...new Set(arrayify(q['sigils[]']))] : [],
