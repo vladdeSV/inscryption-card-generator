@@ -166,7 +166,7 @@ const Health = Number.withConstraint(n => n >= 0)
 type Power = Static<typeof Power>
 const Power = Union(
   Number.withConstraint(n => n >= 0),
-  Literal('ants'), Literal('bell'), Literal('cards'), Literal('mirror')
+  Literal('ants'), Literal('bell'), Literal('cardsinhand'), Literal('mirror')
 )
 
 type Card = Static<typeof Card>
