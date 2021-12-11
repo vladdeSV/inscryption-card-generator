@@ -65,6 +65,9 @@ const presets: { [s: string]: Card } = {
   "the_smoke": { type: "common", name: "the smoke", power: 0, health: 1, tribes: [], sigils: ["quadruplebones"], portrait: "smoke", decals: ["smoke"], options: {} },
   "gold_nugget": { type: "terrain", name: "gold nugget", power: undefined, health: 2, tribes: [], sigils: [], portrait: "goldnugget", decals: [], options: {} },
   "golden_pelt": { type: "terrain", name: "golden pelt", power: undefined, health: 3, tribes: [], sigils: [], portrait: "pelt_golden", decals: [], options: {} },
+  "squid_bell": { type: "common", name: "squid bell", power: 'bell', health: 3, tribes: [], sigils: [], cost: { amount: 2, type: "blood" }, portrait: "squidbell", decals: [], options: { isSquid: true } },
+  "squid_mirror": { type: "common", name: "squid mirror", power: 'mirror', health: 3, tribes: [], sigils: [], cost: { amount: 1, type: "blood" }, portrait: "squidmirror", decals: [], options: { isSquid: true } },
+  "squid_cards": { type: "common", name: "squid cards", power: 'cardsinhand', health: 1, tribes: [], sigils: [], cost: { amount: 1, type: "blood" }, portrait: "squidcards", decals: [], options: { isSquid: true } },
 }
 
 const server = fastify()

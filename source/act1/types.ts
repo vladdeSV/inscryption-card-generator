@@ -184,6 +184,7 @@ const Card = Record({
     isTerrain: Boolean.optional(),
     isEnhanced: Boolean.optional(),
     isGolden: Boolean.optional(),
+    isSquid: Boolean.optional(),
     portraitData: String.optional(),
   }),
 });

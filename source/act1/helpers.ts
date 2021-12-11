@@ -166,8 +166,11 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     }
   }
 
-  const name = card.name
-  if (name) {
+  if (card.options.isSquid) {
+    const squidTitlePath = `./resource/misc/squid_title.png`
+    im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
+  } else if (card.name) {
+    const name = card.name
     const nameSizing = (length: number) => {
       switch (length) {
         case 0:
