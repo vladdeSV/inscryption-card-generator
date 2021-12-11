@@ -56,37 +56,12 @@ function cardFromData(q: any): Card {
   return card
 }
 
-// async function execAsync(command: string): Promise<Buffer> {
-//   return await new Promise((r, e) => exec(command, (e, stdout, _) => r(Buffer.from(stdout))))
-// }
-
-function isTerrainCard(card: Card): boolean {
-
-  const terrain = card.options.isTerrain;
-
-  if (typeof terrain === 'boolean') {
-    return terrain;
-  }
-
-  // if we are here, then terrain === 'auto'
-  if (card.type === 'terrain') {
-    const isWarren = card.portrait?.match(/^warren(_eaten[1-3]$)?/) && card.name === 'warren'
-    if (isWarren) {
-      return false
-    }
-
-    return true
-  }
-
-  return false
-}
-
 async function bufferFromCard(card: Card): Promise<Buffer> {
 
   const commands: string[] = []
   const im = (command: string) => commands.push(command)
 
-  const isTerrain = isTerrainCard(card)
+  const isTerrain = card.options.isTerrain ?? false
   const bottomBarOffset = isTerrain ? 80 : 0
   const font = './resource/HEAVYWEIGHT.TTF'
 
