@@ -107,11 +107,11 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   im(`-filter Box -resize 674x1024`)
 
   const aligns: { gravity: string, geometry: string }[] = [
-    { gravity: 'northwest', geometry: `-11+8` },
-    { gravity: 'north', geometry: `-6+8` },
-    { gravity: 'northeast', geometry: `-15+8` },
-    { gravity: 'center', geometry: `-138+105` },
-    { gravity: 'center', geometry: `+125+105` },
+    { gravity: 'northwest', geometry: `-11+0` },
+    { gravity: 'north', geometry: `-1+4` },
+    { gravity: 'northeast', geometry: `-15+3` },
+    { gravity: 'center', geometry: `-121+101` },
+    { gravity: 'center', geometry: `+125+101` },
   ]
 
   // todo: coud be converted to one command
