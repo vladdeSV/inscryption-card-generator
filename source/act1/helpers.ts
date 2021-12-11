@@ -135,7 +135,8 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     if (typeof power === 'number') {
       im(`-font ${font} -pointsize 200 -draw "gravity southwest text 64,104 '${power}'"`)
     } else {
-      // show attack type symbol
+      const statIconPath = `./resource/staticon/${power}.png`
+      im(`\\( "${statIconPath}" -interpolate Nearest -filter point -resize 490% -filter box -gravity southwest -geometry +5+95 \\) -composite`)
     }
   }
 
