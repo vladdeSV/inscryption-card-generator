@@ -9,10 +9,6 @@ const presets: { [s: string]: Card } = {
   "wolf_cub": { type: "common", name: "wolf cub", power: 1, health: 1, tribes: ["canine"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "wolfcub", decals: [], options: {} },
   "cat": { type: "common", name: "cat", power: 0, health: 1, tribes: [], sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "cat", decals: [], options: {} },
   "mantis_god": { type: "rare", name: "mantis god", power: 1, health: 1, tribes: ["insect"], sigils: ["tristrike"], cost: { amount: 1, type: "blood" }, portrait: "mantisgod", decals: [], options: {} },
-  "warren": { type: "terrain", name: "warren", power: 0, health: 2, tribes: [], sigils: ["drawrabbits"], cost: { amount: 1, type: "blood" }, portrait: "warren", decals: [], options: {} },
-  "snow_fir": { type: "terrain", name: "snow fir", health: 4, tribes: [], sigils: ["reach"], portrait: "tree_snowcovered", decals: [], options: {} },
-  "grand_fir": { type: "terrain", name: "grand fir", health: 3, tribes: [], sigils: ["reach"], portrait: "tree", decals: [], options: {} },
-  "boulder": { type: "terrain", name: "boulder", health: 5, tribes: [], sigils: [], portrait: "boulder", decals: [], options: {} },
   "sparrow": { type: "common", name: "sparrow", power: 1, health: 2, tribes: ["bird"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "sparrow", decals: [], options: {} },
   "pronghorn": { type: "common", name: "pronghorn", power: 1, health: 3, tribes: ["hooved"], sigils: ["splitstrike", "strafe"], cost: { amount: 2, type: "blood" }, portrait: "pronghorn", decals: [], options: {} },
   "kingfisher": { type: "common", name: "kingfisher", power: 1, health: 1, tribes: ["bird"], sigils: ["flying", "submerge"], cost: { amount: 1, type: "blood" }, portrait: "kingfisher", decals: [], options: {} },
@@ -63,11 +59,30 @@ const presets: { [s: string]: Card } = {
   "strange_pupa": { type: "rare", name: "strange pupa", power: 0, health: 3, tribes: ["insect"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "mothman_2", decals: [], options: {} },
   "mothman": { type: "rare", name: "mothman", power: 7, health: 3, tribes: ["insect"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "mothman_3", decals: [], options: {} },
   "the_smoke": { type: "common", name: "the smoke", power: 0, health: 1, tribes: [], sigils: ["quadruplebones"], portrait: "smoke", decals: ["smoke"], options: {} },
-  "gold_nugget": { type: "terrain", name: "gold nugget", power: undefined, health: 2, tribes: [], sigils: [], portrait: "goldnugget", decals: [], options: {} },
-  "golden_pelt": { type: "terrain", name: "golden pelt", power: undefined, health: 3, tribes: [], sigils: [], portrait: "pelt_golden", decals: [], options: {} },
   "squid_bell": { type: "common", name: "squid bell", power: 'bell', health: 3, tribes: [], sigils: [], cost: { amount: 2, type: "blood" }, portrait: "squidbell", decals: [], options: { isSquid: true } },
   "squid_mirror": { type: "common", name: "squid mirror", power: 'mirror', health: 3, tribes: [], sigils: [], cost: { amount: 1, type: "blood" }, portrait: "squidmirror", decals: [], options: { isSquid: true } },
   "squid_cards": { type: "common", name: "squid cards", power: 'cardsinhand', health: 1, tribes: [], sigils: [], cost: { amount: 1, type: "blood" }, portrait: "squidcards", decals: [], options: { isSquid: true } },
+
+  "strange_frog": { type: "terrain", name: "strange frog", portrait: 'trapfrog', power: 1, health: 2, cost: { type: 'blood', amount: 1 }, tribes: [], sigils: ["reach"], decals: [], options: {} },
+  "warren": { type: "terrain", name: "warren", power: 0, health: 2, tribes: [], sigils: ["drawrabbits"], cost: { amount: 1, type: "blood" }, portrait: "warren", decals: [], options: {} },
+  "frozen_opossum": { type: "terrain", name: "frozen opossum", portrait: 'frozen_opossum', power: 0, health: 5, tribes: [], sigils: ['icecube'], decals: [], options: {} },
+  "caged_wolf": { type: "terrain", name: "caged wolf", portrait: 'cagedwolf', cost: { type: 'blood', amount: 2 }, health: 6, sigils: [], tribes: ['canine'], decals: [], options: { isTerrain: true } },
+
+  "bait_bucket": { type: "terrain", name: "bait bucket", portrait: 'baitbucket', health: 1, tribes: [], sigils: [], decals: ['blood'], options: { isTerrain: true } },
+  
+  "grand_fir": { type: "terrain", name: "grand fir", portrait: "tree", health: 3, tribes: [], sigils: ["reach"], decals: [], options: { isTerrain: true } },
+  "snow_fir": { type: "terrain", name: "snow fir", portrait: "tree_snowcovered", health: 4, tribes: [], sigils: ["reach"], decals: [], options: { isTerrain: true } },
+  "stump": { type: "terrain", name: "stump", portrait: "stump", health: 1, tribes: [], sigils: [], decals: [], options: { isTerrain: true } },
+  "boulder": { type: "terrain", name: "boulder", portrait: "boulder", health: 5, tribes: [], sigils: [], decals: [], options: { isTerrain: true } },
+  "chime": {type: "terrain", name: "chime", portrait: "dausbell", health: 1, tribes: [], sigils: [], decals: [], options: { isTerrain: true } },
+  "dam": {type: "terrain", name: "dam", portrait: "dam", health: 2, tribes: [], sigils: [], decals: [], options: { isTerrain: true } },
+  "leaping_trap": { type: "terrain", name: "leaping trap", portrait: 'trap', health: 1, tribes: [], sigils: ['steeltrap', 'reach'], decals: [], options: { isTerrain: true } },
+  "rabbit_pelt": { type: "terrain", name: "rabbit pelt", health: 1, portrait: "pelt_hare", options: { isTerrain: true }, tribes: [], sigils: [], decals: [] },
+  "wolf_pelt": { type: "terrain", name: "wolf pelt", health: 2, portrait: "pelt_wolf", options: { isTerrain: true }, tribes: [], sigils: [], decals: [] },
+  
+  // "gold_nugget": { type: "terrain", name: "gold nugget", portrait: "goldnugget", health: 2, tribes: [], sigils: [], decals: [], options: { isTerrain: true } },
+  // "golden_pelt": { type: "terrain", name: "golden pelt", health: 3, portrait: "pelt_golden", options: { isTerrain: true, isGolden: true }, tribes: [], sigils: [], decals: [] },
+
 }
 
 const server = fastify()
