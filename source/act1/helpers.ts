@@ -99,7 +99,7 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     } else {
       const portraitLocation = `./resource/portraits/${portrait}.png`
 
-      im(`\\( '${portraitLocation}' -gravity center -geometry +1-15 \\) -composite`)
+      im(`\\( '${portraitLocation}' -gravity center -geometry +0-15 \\) -composite`)
     }
   }
 
