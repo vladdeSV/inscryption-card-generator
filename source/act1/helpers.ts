@@ -198,8 +198,6 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     }
 
     const nameSize = nameSizing(name.length)
-    console.log(name, nameSize);
-
 
     const escapeName = (name: string) => name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"')
     im(`-font '${font}' -pointsize ${nameSize.size} -draw "gravity center scale ${nameSize.wm},${nameSize.hm} text 3,${-404 + nameSize.yoff} '${escapeName(name)}'"`)
