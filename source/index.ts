@@ -95,7 +95,7 @@ server.get('/act1/:creature', async (request, reply) => {
     return
   }
 
-  const buffer = await bufferFromCard(card, request.query)
+  const buffer = await bufferFromCard(card)
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)
@@ -110,8 +110,7 @@ server.get('/act1/', async (request, reply) => {
     return
   }
 
-  console.log(request.query);
-  const buffer = await bufferFromCard(card, request.query)
+  const buffer = await bufferFromCard(card)
 
   if (!buffer) {
     reply.code(500)
@@ -131,16 +130,3 @@ server.listen(8080, (err, address) => {
   }
   console.log(`Server listening at ${address}`)
 })
-
-  ; (async () => {
-    for (const name in presets) {
-      if (Object.prototype.hasOwnProperty.call(presets, name)) {
-        const card = presets[name];
-
-        const buffer = await bufferFromCard(card);
-        console.log(name);
-        writeFileSync(`./cards/${name}.png`, buffer)
-      }
-    }
-
-  })()
