@@ -177,16 +177,16 @@ const Card = Record({
   health: Health.optional(),
   power: Power.optional(),
   cost: Cost.optional(),
-  tribes: Array(Tribe),
-  sigils: Array(Sigil),
-  decals: Array(Decal),
+  tribes: Array(Tribe).optional(),
+  sigils: Array(Sigil).optional(),
+  decals: Array(Decal).optional(),
   options: Record({
     isTerrain: Boolean.optional(),
     isEnhanced: Boolean.optional(),
     isGolden: Boolean.optional(),
     isSquid: Boolean.optional(),
     portraitData: String.optional(),
-  }),
+  }).optional(),
 });
 
 export { Card, Cost, Power }

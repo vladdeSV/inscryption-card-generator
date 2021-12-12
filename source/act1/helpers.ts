@@ -61,7 +61,7 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   const commands: string[] = []
   const im = (command: string) => commands.push(command)
 
-  const isTerrain = card.options.isTerrain ?? false
+  const isTerrain = card.options?.isTerrain ?? false
   const bottomBarOffset = isTerrain ? 80 : 0
   const font = './resource/HEAVYWEIGHT.TTF'
 
@@ -90,11 +90,14 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   ]
 
   // todo: coud be converted to one command
-  for (const [index, tribe] of card.tribes.entries()) {
-    const tribeLocation = `./resource/tribes/${tribe}.png`
-    const { gravity, geometry } = aligns[index]
+  const tribes = card.tribes
+  if (tribes) {
+    for (const [index, tribe] of tribes.entries()) {
+      const tribeLocation = `./resource/tribes/${tribe}.png`
+      const { gravity, geometry } = aligns[index]
 
-    im(`\\( "${tribeLocation}" -resize 233% -gravity ${gravity} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${geometry} \\) -composite`)
+      im(`\\( "${tribeLocation}" -resize 233% -gravity ${gravity} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${geometry} \\) -composite`)
+    }
   }
 
   const cost = card.cost
@@ -121,27 +124,30 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   }
 
   // todo: refactor this behemoth
-  const sigilCount = card.sigils.length
-  for (const [index, sigil] of card.sigils.entries()) {
-    const sigilPath = `./resource/sigils/${sigil}.png`
-    const xoffset = isTerrain ? -70 : -2
+  const sigils = card.sigils
+  if (sigils) {
+    const sigilCount = sigils.length
+    for (const [index, sigil] of sigils.entries()) {
+      const sigilPath = `./resource/sigils/${sigil}.png`
+      const xoffset = isTerrain ? -70 : -2
 
-    if (sigilCount === 1) {
-      im(`\\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite`)
-    } else {
-      const rotateAmount = 2 * Math.PI / sigilCount
-      const baseRotation = sigilCount === 2 ? 0.63 : Math.PI / 6
-      const dist = sigilCount > 2 ? 80 : 90
-      const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
-      const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * index)
-      const y = 330 - dist * Math.sin(baseRotation + rotateAmount * index) - (sigilCount === 3 ? 15 : 0)
-      const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
+      if (sigilCount === 1) {
+        im(`\\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite`)
+      } else {
+        const rotateAmount = 2 * Math.PI / sigilCount
+        const baseRotation = sigilCount === 2 ? 0.63 : Math.PI / 6
+        const dist = sigilCount > 2 ? 80 : 90
+        const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
+        const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * index)
+        const y = 330 - dist * Math.sin(baseRotation + rotateAmount * index) - (sigilCount === 3 ? 15 : 0)
+        const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
 
-      im(`\\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
+        im(`\\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
+      }
     }
   }
 
-  if (card.options.isSquid) {
+  if (card.options?.isSquid) {
     const squidTitlePath = `./resource/misc/squid_title.png`
     im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
   } else if (card.name) {
@@ -178,9 +184,12 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     im(`-font '${font}' -pointsize ${nameSize.size} -draw "gravity center scale ${nameSize.wm},${nameSize.hm} text 3,${-404 + nameSize.yoff} '${escapeName(name)}'"`)
   }
 
-  for (const decal of card.decals) {
-    const decalPath = `./resource/decals/${decal}.png`
-    im(`\\( ${decalPath} -filter Box -resize 674x1024 \\) -composite`)
+  const decals = card.decals
+  if (decals) {
+    for (const decal of decals) {
+      const decalPath = `./resource/decals/${decal}.png`
+      im(`\\( ${decalPath} -filter Box -resize 674x1024 \\) -composite`)
+    }
   }
 
   const firstCommand = commands.shift()
