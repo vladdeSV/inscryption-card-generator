@@ -34,22 +34,22 @@ function arrayify(input: unknown) {
   return Array.isArray(input) ? input : [input]
 }
 
-function cardFromData(q: any): Card {
+function cardFromData(body: any): Card {
   const card = Card.check({
-    type: q.type,
-    name: q.name,
-    portrait: q.portrait,
-    health: q.health ? Number(q.health) : undefined,
-    power: powerFromInput(q.power),
-    cost: costFromInput(q.cost),
-    tribes: q['tribes[]'] ? [...new Set(arrayify(q['tribes[]']))] : [],
-    sigils: q['sigils[]'] ? [...new Set(arrayify(q['sigils[]']))] : [],
-    decals: q['decals[]'] ? [...new Set(arrayify(q['decals[]']))] : [],
+    type: body.type,
+    name: body.name,
+    portrait: body.portrait,
+    health: body.health ? Number(body.health) : undefined,
+    power: powerFromInput(body.power),
+    cost: costFromInput(body.cost),
+    tribes: body.tribes ? [...new Set(arrayify(body.tribes))] : [],
+    sigils: body.sigils ? [...new Set(arrayify(body.sigils))] : [],
+    decals: body.decals ? [...new Set(arrayify(body.decals))] : [],
     options: {
-      isTerrain: q.terrain,
-      isEnhanced: q.enhanced,
-      isGolden: q.golden,
-      portraitData: q.portraitData
+      isTerrain: body.terrain,
+      isEnhanced: body.enhanced,
+      isGolden: body.golden,
+      portraitData: body.portraitData
     }
   })
 

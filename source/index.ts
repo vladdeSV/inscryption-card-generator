@@ -102,19 +102,20 @@ server.get('/act1/:creature', async (request, reply) => {
   reply.send(buffer)
 })
 
-server.get('/act1/', async (request, reply) => {
-  const card = cardFromData(request.query);
-  if (card === undefined) {
+server.put('/act1/', async (request, reply) => {
+  let card: Card;
+  try {
+    card = cardFromData(request.body);
+  } catch (e: any) {
     reply.code(422)
-    reply.send('Error parsing input data (todo add error message)')
+    reply.send(`Error parsing input data`)
     return
   }
 
   const buffer = await bufferFromCard(card)
-
   if (!buffer) {
     reply.code(500)
-    reply.send('Unknown error when creating image')
+    reply.send('Unknown error occured when creating image')
     return
   }
 
