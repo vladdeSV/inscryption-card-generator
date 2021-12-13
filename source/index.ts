@@ -32,7 +32,7 @@ const presets: { [s: string]: Card } = {
   "frozen_opossum": { type: "terrain", name: "frozen opossum", portrait: 'frozen_opossum', power: 0, health: 5, sigils: ['icecube'] },
   "geck": { type: "rare", name: "geck", power: 1, health: 1, tribes: ["reptile"], portrait: "geck" },
   "grand_fir": { type: "terrain", name: "grand fir", portrait: "tree", health: 3, sigils: ["reach"], options: { isTerrain: true } },
-  "great_white": { type: "common", name: "great white", power: 4, health: 2, sigils: ["submerge"], cost: { amount: 3, type: "blood" }, portrait: "shark" },
+  "great_white": { type: "common", name: "great white", power: 4, health: 2, sigils: ["submerge"], cost: { amount: 3, type: "blood" }, portrait: "shark", decals: ['blood'] },
   "grizzly": { type: "common", name: "grizzly", power: 4, health: 6, cost: { amount: 3, type: "blood" }, portrait: "grizzly" },
   "kingfisher": { type: "common", name: "kingfisher", power: 1, health: 1, tribes: ["bird"], sigils: ["submerge", "flying"], cost: { amount: 1, type: "blood" }, portrait: "kingfisher" },
   "leaping_trap": { type: "terrain", name: "leaping trap", portrait: 'trap', health: 1, sigils: ['steeltrap', 'reach'], options: { isTerrain: true } },
