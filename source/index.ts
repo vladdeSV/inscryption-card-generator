@@ -98,7 +98,7 @@ server.get('/act1/:creature', async (request, reply) => {
   const buffer = await bufferFromCard(card)
 
   reply.type('image/png')
-  reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)
+  reply.header('Content-Disposition', `inline; filename="${(card.name || 'creature').replace(/\s/g, '_')}.png"`)
   reply.send(buffer)
 })
 
