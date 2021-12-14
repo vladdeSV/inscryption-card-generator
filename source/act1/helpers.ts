@@ -35,6 +35,14 @@ function cardFromData(body: any): Card {
     }
   })
 
+  if (card.portrait === 'custom') {
+    if (typeof card.options?.portraitData !== 'string') {
+      throw 'custom portrait requires data'
+    }
+
+    card.options.portraitData = card.options.portraitData.replace(/[\s\r\n]/g, '')
+  }
+
   return card
 }
 
