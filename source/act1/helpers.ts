@@ -1,23 +1,5 @@
 import { exec, execSync } from "child_process"
-import { Card, Cost, Power } from "./types"
-
-function costFromInput(input: unknown): Cost | undefined {
-  if (typeof input === 'string') {
-    const match = input.match(/^(\d+)(blood|bones?)$/)
-    if (match === null) {
-      return undefined
-    }
-
-    const amount = Number(match[1])
-    let type = match[2]
-
-    if (type === 'bones') {
-      type = 'bone'
-    }
-
-    return Cost.check({ amount, type })
-  }
-}
+import { Card, Power } from "./types"
 
 function powerFromInput(input: unknown): number | Power | undefined {
   if (Power.guard(input)) {
@@ -41,7 +23,7 @@ function cardFromData(body: any): Card {
     portrait: body.portrait,
     health: body.health ? Number(body.health) : undefined,
     power: powerFromInput(body.power),
-    cost: costFromInput(body.cost),
+    cost: body.cost,
     tribes: body.tribes ? [...new Set(arrayify(body.tribes))] : [],
     sigils: body.sigils ? [...new Set(arrayify(body.sigils))] : [],
     decals: body.decals ? [...new Set(arrayify(body.decals))] : [],
@@ -198,4 +180,4 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   return execSync(finalCommand)
 }
 
-export { cardFromData, bufferFromCard, costFromInput, arrayify }
+export { cardFromData, bufferFromCard, arrayify }
