@@ -70,7 +70,7 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
 
   if (card.options?.hasBorder) {
     const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
-    im(`./resource/cards/borders/border_front_${borderName}.png -composite`)
+    im(`./resource/cards/borders/${borderName}.png -composite`)
   }
 
   // make big
@@ -186,7 +186,6 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
       im(`\\( ${decalPath} -filter Box -resize 674x1024 \\) -composite`)
     }
   }
-
 
   try {
     const command = commands.map(x => `convert - ${x} -`).join(' | ')
