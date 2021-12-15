@@ -1,5 +1,6 @@
 import { exec, execSync } from "child_process"
-import { Card, Power } from "./types"
+import { readFileSync } from "fs"
+import { Card, CardType, Power } from "./types"
 
 function powerFromInput(input: unknown): number | Power | undefined {
   if (Power.guard(input)) {
@@ -31,6 +32,7 @@ function cardFromData(body: any): Card {
       isTerrain: body.terrain,
       isEnhanced: body.enhanced,
       isGolden: body.golden,
+      hasBorder: body.border,
       portraitData: body.portraitData
     }
   })
@@ -64,6 +66,11 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
 
       im(`\\( '${portraitLocation}' -gravity center -geometry +0-15 \\) -composite`)
     }
+  }
+
+  if (card.options?.hasBorder) {
+    const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
+    im(`./resource/cards/borders/border_front_${borderName}.png -composite`)
   }
 
   // make big
