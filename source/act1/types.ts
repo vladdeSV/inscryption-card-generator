@@ -198,4 +198,20 @@ const Card = Record({
   }).optional(),
 });
 
-export { Card, CardType, Cost, Power }
+type CardBackType = Static<typeof CardBackType>
+const CardBackType = Union(
+  Literal('common'),
+  Literal('squirrel'),
+  Literal('bee'),
+  Literal('deathcard')
+)
+
+type CardBack = Static<typeof CardBack>
+const CardBack = Record({
+  type: CardBackType,
+  options: Record({
+    hasBorder: Boolean.optional(),
+  }).optional()
+})
+
+export { Card, CardType, CardBack, CardBackType, Cost, Power }

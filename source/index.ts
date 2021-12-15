@@ -1,7 +1,7 @@
 import fastify from 'fastify'
 import { writeFileSync } from 'fs';
-import { bufferFromCard, cardFromData } from './act1/helpers';
-import { Card } from './act1/types';
+import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
+import { Card, CardBack, CardBackType } from './act1/types';
 
 const presets: { [s: string]: Card } = {
   // "mini_moon": { type: "common", name: "mini moon", power: 1, health: 9,  sigils: ["allstrike", "squirrelorbit", "reach"], portrait: "moon",  },
@@ -102,6 +102,23 @@ server.get('/act1/:creature', async (request, reply) => {
   reply.send(buffer)
 })
 
+server.get('/act1/backs/:type', async (request, reply) => {
+  const type = request.url.match(/\/act1\/backs\/(\w+)/)?.[1];
+
+  if (!CardBackType.guard(type)) {
+    reply.code(404)
+    reply.send(`Unknown back type '${type}'`)
+    return
+  }
+
+  const cardBack = cardBackFromData({type})
+  const buffer = bufferFromCardBack(cardBack)
+
+  reply.type('image/png')
+  reply.header('Content-Disposition', `inline; filename="back_${(cardBack.type)}.png"`)
+  reply.send(buffer)
+})
+
 server.put('/act1/', async (request, reply) => {
   let card: Card;
   try {
@@ -121,6 +138,29 @@ server.put('/act1/', async (request, reply) => {
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name ?? 'creature').replace(/\s/g, '_')}.png"`)
+  reply.send(buffer)
+})
+
+
+server.put('/act1/backs/', async (request, reply) => {
+  let cardBack: CardBack;
+  try {
+    cardBack = cardBackFromData(request.body);
+  } catch (e: any) {
+    reply.code(422)
+    reply.send(`Error parsing input data`)
+    return
+  }
+
+  const buffer = bufferFromCardBack(cardBack)
+  if (!buffer) {
+    reply.code(500)
+    reply.send('Unknown error occured when creating image')
+    return
+  }
+
+  reply.type('image/png')
+  reply.header('Content-Disposition', `inline; filename="back_${cardBack.type}.png"`)
   reply.send(buffer)
 })
 

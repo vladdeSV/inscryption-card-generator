@@ -1,6 +1,6 @@
-import { exec, execSync } from "child_process"
+import { execSync } from "child_process"
 import { readFileSync } from "fs"
-import { Card, CardType, Power } from "./types"
+import { Card, CardBack, CardBackType, CardType, Power } from "./types"
 
 function powerFromInput(input: unknown): number | Power | undefined {
   if (Power.guard(input)) {
@@ -48,7 +48,18 @@ function cardFromData(body: any): Card {
   return card
 }
 
-async function bufferFromCard(card: Card): Promise<Buffer> {
+function cardBackFromData(body: any): CardBack {
+  const cardBack = CardBack.check({
+    type: body.type,
+    options: {
+      hasBorder: body.border,
+    }
+  })
+
+  return cardBack
+}
+
+function bufferFromCard(card: Card): Buffer {
 
   const commands: string[] = []
   const im = (command: string) => commands.push(command)
@@ -196,4 +207,32 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   }
 }
 
-export { cardFromData, bufferFromCard }
+function bufferFromCardBack(cardBack: CardBack): Buffer {
+  const commands: string[] = []
+  const im = (command: string) => commands.push(command)
+
+  if (cardBack.options?.hasBorder) {
+    const borderName = ((cardBackType: CardBackType): 'common' | 'common_special' => {
+      switch (cardBackType) {
+        case 'common':
+          return 'common'
+        default:
+          return 'common_special'
+      }
+    })(cardBack.type)
+    im(`./resource/cards/backs/borders/${borderName}.png -composite`)
+  }
+
+  // make big
+  im(`-filter Box -resize 674x1024`)
+
+  try {
+    const command = commands.map(x => `convert - ${x} -`).join(' | ')
+    const baseCardBuffer = readFileSync(`./resource/cards/backs/${cardBack.type}.png`)
+    return execSync(command, { input: baseCardBuffer })
+  } catch (e: unknown) {
+    throw new Error('Image creation failed')
+  }
+}
+
+export { cardFromData, cardBackFromData, bufferFromCard, bufferFromCardBack }
