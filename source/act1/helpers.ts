@@ -197,4 +197,4 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   }
 }
 
-export { cardFromData, bufferFromCard, arrayify }
+export { cardFromData, bufferFromCard }
