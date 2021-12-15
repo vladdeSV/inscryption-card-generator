@@ -55,8 +55,6 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
   const bottomBarOffset = isTerrain ? 80 : 0
   const font = './resource/HEAVYWEIGHT.TTF'
 
-  im(`./resource/cards/${card.type}.png`)
-
   const portrait = card.portrait
   if (portrait) {
     if (portrait === 'custom') {
@@ -182,10 +180,14 @@ async function bufferFromCard(card: Card): Promise<Buffer> {
     }
   }
 
-  const firstCommand = commands.shift()
-  const finalCommand = 'convert ' + firstCommand + ' - | ' + commands.map(x => `convert - ${x} -`).join(' | ')
 
-  return execSync(finalCommand)
+  try {
+    const command = commands.map(x => `convert - ${x} -`).join(' | ')
+    const baseCardBuffer = readFileSync(`./resource/cards/${card.type}.png`)
+    return execSync(command, { input: baseCardBuffer })
+  } catch (e: unknown) {
+    throw new Error('Image creation failed')
+  }
 }
 
 export { cardFromData, bufferFromCard, arrayify }
