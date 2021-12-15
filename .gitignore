@@ -6,6 +6,7 @@
 
 # contains copyrighted material, which i am not allowed to share
 /resource
+/resource.*.zip
 
 # temp source
 source.bak
