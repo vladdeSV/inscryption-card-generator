@@ -179,7 +179,7 @@ const Power = Union(
 
 type Card = Static<typeof Card>
 const Card = Record({
-  type: CardType,
+  cardtype: CardType,
   name: String.optional(),
   portrait: Union(Creature, Literal('custom')).optional(),
   health: Health.optional(),
