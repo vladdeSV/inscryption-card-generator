@@ -22,6 +22,7 @@ const presets: { [s: string]: Card } = {
   "caged_wolf": { type: "terrain", name: "caged wolf", portrait: 'cagedwolf', cost: { type: 'blood', amount: 2 }, health: 6, tribes: ['canine'], options: { isTerrain: true } },
   "cat": { type: "common", name: "cat", power: 0, health: 1, sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "cat" },
   "child_13": { type: "rare", name: "child 13", power: 0, health: 1, tribes: ["hooved"], sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "jerseydevil_sleeping" },
+  "child_13_awake": { type: "rare", name: "child 13", power: 2, health: 1, tribes: ["hooved"], sigils: ["flying", "sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "jerseydevil" },
   "chime": { type: "terrain", name: "chime", portrait: "dausbell", health: 1, options: { isTerrain: true } },
   "cockroach": { type: "common", name: "cockroach", power: 1, health: 1, tribes: ["insect"], sigils: ["drawcopyondeath"], cost: { amount: 4, type: "bone" }, portrait: "cockroach" },
   "corpse_maggots": { type: "common", name: "corpse maggots", power: 1, health: 2, tribes: ["insect"], sigils: ["corpseeater"], cost: { amount: 5, type: "bone" }, portrait: "maggots" },
