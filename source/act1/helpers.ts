@@ -80,7 +80,7 @@ function bufferFromCard(card: Card): Buffer {
   }
 
   if (card.options?.hasBorder) {
-    const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.cardtype)
+    const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
     im(`./resource/cards/borders/${borderName}.png -composite`)
   }
 
@@ -209,7 +209,7 @@ function bufferFromCard(card: Card): Buffer {
 
   try {
     const command = commands.map(x => `convert - ${x} -`).join(' | ')
-    const baseCardBuffer = readFileSync(`./resource/cards/${card.cardtype}.png`)
+    const baseCardBuffer = readFileSync(`./resource/cards/${card.type}.png`)
     return execSync(command, { input: baseCardBuffer })
   } catch (e: unknown) {
     throw new Error('Image creation failed')
