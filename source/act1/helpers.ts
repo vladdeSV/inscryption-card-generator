@@ -131,24 +131,40 @@ function bufferFromCard(card: Card): Buffer {
 
   // todo: refactor this behemoth
   const sigils = card.sigils
-  if (sigils) {
+  if (sigils && sigils.length) {
     const sigilCount = sigils.length
-    for (const [index, sigil] of sigils.entries()) {
-      const sigilPath = `./resource/sigils/${sigil}.png`
-      const xoffset = isTerrain ? -70 : -2
+    const xoffset = isTerrain ? -70 : -2
 
-      if (sigilCount === 1) {
-        im(`\\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite`)
-      } else {
+    if (sigilCount === 1) {
+      const sigilPath = `./resource/sigils/${sigils[0]}.png`
+      im(`\\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite`)
+    } else if (sigilCount === 2) {
+
+      const geopos = (a: number, b: number): string => {
+        const firstSign = a > 0 ? '+' : '-'
+        const secondSign = b > 0 ? '+' : '-'
+        return `${firstSign}${Math.abs(a)}${secondSign}${Math.abs(b)}`
+      }
+
+      const x1 = xoffset + 77
+      const x2 = xoffset - 73
+      const sigilPath1 = `./resource/sigils/${sigils[0]}.png`
+      const sigilPath2 = `./resource/sigils/${sigils[1]}.png`
+      im(`\\( "${sigilPath1}" -filter Box -resize 370% -gravity center -geometry ${geopos(x1, 277)} \\) -composite`)
+      im(`\\( "${sigilPath2}" -filter Box -resize 370% -gravity center -geometry ${geopos(x2, 385)} \\) -composite`)
+
+    } else {
+
+      for (const [index, sigil] of sigils.entries()) {
+        const sigilPath = `./resource/sigils/${sigil}.png`
         const rotateAmount = 2 * Math.PI / sigilCount
-        const baseRotation = sigilCount === 2 ? 0.63 : Math.PI / 6
-        const dist = sigilCount > 2 ? 80 : 90
-        const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
+        const baseRotation = Math.PI / 6
+        const dist = 80
+        const scale = (sigilCount >= 5) ? 200 : 270
         const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * index)
         const y = 330 - dist * Math.sin(baseRotation + rotateAmount * index) - (sigilCount === 3 ? 15 : 0)
-        const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
 
-        im(`\\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
+        im(`\\( "${sigilPath}" -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
       }
     }
   }
