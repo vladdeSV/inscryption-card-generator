@@ -92,9 +92,9 @@ const presets: { [s: string]: Card } = {
   "leshy": { type: 'rare', decals: ['leshy'] },
 
   "greater_smoke": { type: "common", name: "greater smoke", power: 1, health: 3, sigils: ["quadruplebones"], portrait: "smoke_improved", decals: ["smoke"], options: { isEnhanced: true } },
-  "gold_nugget": { type: "terrain", name: "gold nugget", portrait: "goldnugget", health: 2, options: { isTerrain: true } },
+  
+  "gold_nugget": { type: "terrain", name: "gold nugget", portrait: "goldnugget", health: 2, options: { isTerrain: true, isGolden: true } },
   "golden_pelt": { type: "terrain", name: "golden pelt", health: 3, portrait: "pelt_golden", options: { isTerrain: true, isGolden: true } },
-
 }
 
 const server = fastify()
