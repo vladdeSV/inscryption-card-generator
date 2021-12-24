@@ -198,6 +198,15 @@ function bufferFromCard(card: Card): Buffer {
     }
   }
 
+  if (card.options?.isGolden) {
+    im(`\\( -clone 0 -fill rgb\\(255,160,27\\) -colorize 100 \\) -compose multiply -composite`)
+
+    // use emission for default portraits
+    if (card.portrait && card.portrait !== 'custom') {
+      im(`\\( ./resource/emissions/${card.portrait}.png -filter Box -resize 539% -gravity center -geometry +0-${15 * (1024 / 190)} \\) -compose overlay -composite`)
+    }
+  }
+
   try {
     const command = commands.map(x => `convert - ${x} -`).join(' | ')
     const baseCardBuffer = readFileSync(`./resource/cards/${card.type}.png`)
