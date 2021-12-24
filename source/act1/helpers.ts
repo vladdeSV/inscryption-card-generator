@@ -203,7 +203,7 @@ function bufferFromCard(card: Card): Buffer {
 
     // use emission for default portraits
     if (card.portrait && card.portrait !== 'custom') {
-      im(`\\( ./resource/emissions/${card.portrait}.png -filter Box -resize 539% -gravity center -geometry +0-${15 * (1024 / 190)} \\) -compose overlay -composite`)
+      im(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize 539% -gravity center -geometry +0-${15 * (1024 / 190)} \\) -compose overlay -composite`)
     }
   }
 
