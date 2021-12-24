@@ -157,37 +157,9 @@ function bufferFromCard(card: Card): Buffer {
     const squidTitlePath = `./resource/misc/squid_title.png`
     im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
   } else if (card.name) {
-    const name = card.name
-    const nameSizing = (length: number) => {
-      switch (length) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-          return { size: 120, wm: 1.125, hm: 1.115, yoff: 41 }
-        case 12:
-          // fixme
-          return { size: 100, wm: 1.17, hm: 1.1, yoff: 35 }
-        case 13:
-          return { size: 100, wm: 1.115, hm: 1, yoff: 0 }
-        case 14:
-        default:
-          return { size: 90, wm: 1.115, hm: 1, yoff: 0 }
-      }
-    }
-
-    const nameSize = nameSizing(name.length)
-
-    const escapeName = (name: string) => name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"')
-    im(`-font '${font}' -pointsize ${nameSize.size} -draw "gravity center scale ${nameSize.wm},${nameSize.hm} text 3,${-404 + nameSize.yoff} '${escapeName(name)}'"`)
+    const unescapedName = card.name.replace(/[^A-Za-z&'*-./? ]/g, '?')
+    const size = '580x135'
+    im(`\\( -font '${font}' -size ${size} -background none label:"${unescapedName}" -trim -gravity center -extent ${size} \\) -gravity north -geometry +0+26 -composite`)
   }
 
   const decals = card.decals
