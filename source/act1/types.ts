@@ -20,7 +20,7 @@ const BoneCost = Record({
 
 type Cost = Static<typeof Cost>
 const Cost = Union(BloodCost, BoneCost)
-const Decal = Union(Literal('smoke'), Literal('stitched'), Literal('blood'))
+const Decal = Union(Literal('smoke'), Literal('stitched'), Literal('blood'), Literal('child'), Literal('leshy'))
 const Creature = Union(
   Literal('baitbucket'),
   Literal('boulder'),
