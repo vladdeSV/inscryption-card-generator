@@ -172,7 +172,7 @@ function bufferFromCard(card: Card): Buffer {
         case 9:
         case 10:
         case 11:
-          return { size: 120, wm: 1.155, hm: 1.115, yoff: 41 }
+          return { size: 120, wm: 1.125, hm: 1.115, yoff: 41 }
         case 12:
           // fixme
           return { size: 100, wm: 1.17, hm: 1.1, yoff: 35 }
