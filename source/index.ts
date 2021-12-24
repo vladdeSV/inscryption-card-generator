@@ -5,7 +5,7 @@ import { Card, CardBack, CardBackType } from './act1/types';
 
 const presets: { [s: string]: Card } = {
   // "mini_moon": { type: "common", name: "mini moon", power: 1, health: 9,  sigils: ["allstrike", "squirrelorbit", "reach"], portrait: "moon",  },
-  "adder": { type: "common", name: "adder", power: 1, health: 3, tribes: ["reptile"], sigils: ["deathtouch"], cost: { amount: 2, type: "blood" }, portrait: "adder" },
+  "adder": { type: "common", name: "adder", power: 1, health: 1, tribes: ["reptile"], sigils: ["deathtouch"], cost: { amount: 2, type: "blood" }, portrait: "adder" },
   "alpha": { type: "common", name: "alpha", power: 1, health: 2, tribes: ["canine"], sigils: ["buffneighbours"], cost: { amount: 5, type: "bone" }, portrait: "alpha" },
   "amalgam": { type: "rare", name: "amalgam", power: 3, health: 3, tribes: ["bird", "canine", "hooved", "reptile", "insect"], cost: { amount: 2, type: "blood" }, portrait: "amalgam" },
   "ant_queen": { type: 'common', name: 'ant queen', power: 'ants', health: 3, cost: { amount: 2, type: 'blood' }, portrait: 'antqueen', tribes: ['insect'], sigils: ['drawant'] },
