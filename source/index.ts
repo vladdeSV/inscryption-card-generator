@@ -126,7 +126,7 @@ server.get('/act1/backs/:type', async (request, reply) => {
     return
   }
 
-  const cardBack = cardBackFromData({type})
+  const cardBack = cardBackFromData({ type })
   const buffer = bufferFromCardBack(cardBack)
 
   reply.type('image/png')
