@@ -189,7 +189,7 @@ function bufferFromCard(card: Card): Buffer {
   }
 
   if (card.options?.isGolden) {
-    im(`\\( -clone 0 -fill rgb\\(255,160,27\\) -colorize 100 \\) -compose multiply -composite`)
+    im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -compose hardlight -composite`)
 
     // use emission for default portraits
     if (card.portrait && card.portrait !== 'custom') {
