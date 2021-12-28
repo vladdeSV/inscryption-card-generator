@@ -173,7 +173,9 @@ function bufferFromCard(card: Card): Buffer {
     const squidTitlePath = `./resource/misc/squid_title.png`
     im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
   } else if (card.name) {
-    const unescapedName = card.name.replace(/[^A-Za-z&'*-./? ]/g, '?')
+    console.log(card.name);
+    
+    const unescapedName = card.name //.replace(/[^A-Za-z&'*-./? ]/g, '?')
     const size = '580x135'
     im(`\\( -font '${font}' -size ${size} -background none label:"${unescapedName}" -trim -gravity center -extent ${size} \\) -gravity north -geometry +0+26 -composite`)
   }
