@@ -66,7 +66,7 @@ function bufferFromCard(card: Card): Buffer {
 
   const isTerrain = card.options?.isTerrain ?? false
   const bottomBarOffset = isTerrain ? 80 : 0
-  const font = './resource/HEAVYWEIGHT.TTF'
+  const font = './resource/HEAVYWEIGHT.otf'
 
   const portrait = card.portrait
   if (portrait) {
