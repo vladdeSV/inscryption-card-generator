@@ -146,13 +146,13 @@ export class LeshyCardGenerator implements CardGenerator {
       }
     }
 
-    // const decals = card.decals
-    // if (decals) {
-    //   for (const decal of decals) {
-    //     const decalPath = `./resource/decals/${decal}.png`
-    //     im(`\\( ${decalPath} -filter Box -resize x1024 \\) -composite`)
-    //   }
-    // }
+    const decals = card.decals
+    if (decals) {
+      for (const decal of decals) {
+        const decalPath = `./resource/decals/${decal}.png`
+        im(`\\( ${decalPath} -filter Box -resize x1050 \\) -composite`)
+      }
+    }
 
     im('-') // to stdout
 
