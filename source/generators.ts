@@ -63,7 +63,7 @@ export class LeshyCardGenerator implements CardGenerator {
       const { amount, type } = cost;
 
       const costPath = `./resource/costs/${amount}${type}.png`
-      im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 288x -filter box -gravity east \\) -gravity northeast -geometry +32+109 -composite -gravity northwest`)
+      im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 284x -filter box -gravity east \\) -gravity northeast -geometry +32+110 -composite -gravity northwest`)
     }
 
     const power = card.power
