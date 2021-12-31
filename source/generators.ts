@@ -37,7 +37,7 @@ export class LeshyCardGenerator implements CardGenerator {
       im(`./resource/cards/borders/${borderName}.png -composite`)
     }
 
-    im(`-filter Box -resize x1050`) // make big //// FIXME: should be 1050px height
+    im(`-filter Box -resize x1050`) // make big
 
     // // todo: coud be converted to one command
     // const tribes = card.tribes
