@@ -12,10 +12,6 @@ interface CardGenerator {
 export class LeshyCardGenerator implements CardGenerator {
 
   generate(card: Card): Buffer {
-
-    const isTerrain = card.options?.isTerrain ?? false
-    const bottomBarOffset = isTerrain ? 80 : 0
-
     const commands: string[] = []
     const im = (cmd: string) => commands.push(cmd);
 
@@ -28,6 +24,7 @@ export class LeshyCardGenerator implements CardGenerator {
     im(`convert ./resource/cards/${card.type}.png`)
     im(`-font ./resource/HEAVYWEIGHT.otf -pointsize 200`)
 
+    const isTerrain = card.options?.isTerrain ?? false
     const portrait = card.portrait;
     if (portrait) {
       if (portrait === 'custom') {
@@ -107,21 +104,22 @@ export class LeshyCardGenerator implements CardGenerator {
         const sigilPath2 = `./resource/sigils/${sigils[1]}.png`
         im(`\\( ${sigilPath1} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(331 + xoffset, 720)} \\) -composite`)
         im(`\\( ${sigilPath2} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(180 + xoffset, 833)} \\) -composite`)
+      } else {
+
+        throw new Error('Multiple sigils not supported (more than 2 sigils)')
+
+        // for (const [index, sigil] of sigils.entries()) {
+        //   const sigilPath = `./resource/sigils/${sigil}.png`
+        //   const rotateAmount = 2 * Math.PI / sigilCount
+        //   const baseRotation = Math.PI / 6
+        //   const dist = 80
+        //   const scale = (sigilCount >= 5) ? 200 : 270
+        //   const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * index)
+        //   const y = 330 - dist * Math.sin(baseRotation + rotateAmount * index) - (sigilCount === 3 ? 15 : 0)
+
+        //   im(`\\( "${sigilPath}" -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
+        // }
       }
-      //    else {
-
-      //     for (const [index, sigil] of sigils.entries()) {
-      //       const sigilPath = `./resource/sigils/${sigil}.png`
-      //       const rotateAmount = 2 * Math.PI / sigilCount
-      //       const baseRotation = Math.PI / 6
-      //       const dist = 80
-      //       const scale = (sigilCount >= 5) ? 200 : 270
-      //       const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * index)
-      //       const y = 330 - dist * Math.sin(baseRotation + rotateAmount * index) - (sigilCount === 3 ? 15 : 0)
-
-      //       im(`\\( "${sigilPath}" -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite`)
-      //     }
-      //   }
     }
 
     if (card.options?.isSquid) {
