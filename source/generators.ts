@@ -71,12 +71,11 @@ export class LeshyCardGenerator implements CardGenerator {
       if (typeof power === 'number') {
         const size = '114x215'
         const position = '+68+729'
-        // const position = '+41+815' - gravity northeast
         im(`\\( -pointsize 0 -size ${size} -background none label:"${power}" -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
       } else {
-        throw new Error('Custom portraits are not available')
-        // const statIconPath = `./resource/staticon/${power}.png`
-        // im(`\\( "${statIconPath}" -interpolate Nearest -filter point -resize 490% -filter box -gravity southwest -geometry +5+95 \\) -composite`)
+        const statIconPath = `./resource/staticon/${power}.png`
+        const position = '+5+705'
+        im(`\\( "${statIconPath}" -interpolate Nearest -filter point -resize 245x -filter box -gravity northwest \\) -geometry ${position} -composite`)
       }
     }
 
@@ -85,7 +84,6 @@ export class LeshyCardGenerator implements CardGenerator {
       const size = '114x215'
       const position = '+41+815'
       im(`\\( -pointsize 0 -size ${size} -background none label:"${health}" -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
-   
     }
 
     // // todo: refactor this behemoth
