@@ -19,6 +19,12 @@ export class LeshyCardGenerator implements CardGenerator {
     const commands: string[] = []
     const im = (cmd: string) => commands.push(cmd);
 
+    const geometryPosition = (x: number, y: number): string => {
+      const firstSign = x > 0 ? '+' : '-'
+      const secondSign = y > 0 ? '+' : '-'
+      return `${firstSign}${Math.abs(x)}${secondSign}${Math.abs(y)}`
+    }
+
     im(`convert ./resource/cards/${card.type}.png`)
     im(`-font ./resource/HEAVYWEIGHT.otf -pointsize 200`)
 
