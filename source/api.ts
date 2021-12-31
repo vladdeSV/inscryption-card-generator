@@ -56,7 +56,8 @@ server.put('/act1/', async (request, reply) => {
     return
   }
 
-  const buffer = await bufferFromCard(card)
+  const leshyCardGenerator = new LeshyCardGenerator()
+  const buffer = leshyCardGenerator.generate(card)
   if (!buffer) {
     reply.code(500)
     reply.send('Unknown error occured when creating image')
