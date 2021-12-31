@@ -158,7 +158,11 @@ export class LeshyCardGenerator implements CardGenerator {
     const command = commands.join(' ')
     console.log('COMMAND:', command);
 
-    return execSync(command)
+    console.time('generation time')
+    const buffer = execSync(command)
+    console.timeEnd('generation time')
+
+    return buffer
   }
 
   generateBack(): Buffer {
