@@ -136,14 +136,15 @@ export class LeshyCardGenerator implements CardGenerator {
       im(`\\( -pointsize 0 -size ${size} -background none label:"${escapedName}" -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
     }
 
-    // if (card.options?.isGolden) {
-    //   im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -geometry +0+0 -compose hardlight -composite`)
+    if (card.options?.isGolden) {
+      im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -geometry +0+0 -compose hardlight -composite`)
 
-    //   // use emission for default portraits
-    //   if (card.portrait && card.portrait !== 'custom') {
-    //     im(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
-    //   }
-    // }
+      // use emission for default portraits
+      if (card.portrait && card.portrait !== 'custom') {
+        const scale = 5.5263
+        im(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
+      }
+    }
 
     // const decals = card.decals
     // if (decals) {
