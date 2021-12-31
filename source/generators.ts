@@ -48,13 +48,13 @@ export class LeshyCardGenerator implements CardGenerator {
 
     const tribes = card.tribes
     if (tribes) {
-      const aligns: string[] = [`-12+3`, `+217+5`, `+444+7`, `+89+451`, `+344+452`,]
+      const aligns: string[] = [geometryPosition(-12, 3), geometryPosition(217, 5), geometryPosition(444, 7), geometryPosition(89, 451), geometryPosition(344, 452)]
 
       for (const [index, tribe] of tribes.entries()) {
         const tribeLocation = `./resource/tribes/${tribe}.png`
         const position = aligns[index]
 
-        im(`\\( "${tribeLocation}" -resize x354 -gravity northwest -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${position} \\) -composite`)
+        im(`\\( ${tribeLocation} -resize x354 -gravity northwest -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${position} \\) -composite`)
       }
     }
 
@@ -64,7 +64,7 @@ export class LeshyCardGenerator implements CardGenerator {
 
       const costPath = `./resource/costs/${amount}${type}.png`
       const position = geometryPosition(32, 110)
-      im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 284x -filter box -gravity east \\) -gravity northeast -geometry ${position} -composite -gravity northwest`)
+      im(`\\( ${costPath} -interpolate Nearest -filter point -resize 284x -filter box -gravity east \\) -gravity northeast -geometry ${position} -composite -gravity northwest`)
     }
 
     const power = card.power
@@ -75,7 +75,7 @@ export class LeshyCardGenerator implements CardGenerator {
 
         // don't show power if power === 0 and card is a terrain card
         if (power > 0 || !card.options?.isTerrain) {
-          im(`\\( -pointsize 0 -size ${size} -background none label:"${power}" -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
+          im(`\\( -pointsize 0 -size ${size} -background none label:${power} -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
         }
       } else {
         const statIconPath = `./resource/staticon/${power}.png`
@@ -90,7 +90,7 @@ export class LeshyCardGenerator implements CardGenerator {
     if (health !== undefined) {
       const size = '114x215'
       const position = geometryPosition(41 - xoffset, 815)
-      im(`\\( -pointsize 0 -size ${size} -background none label:"${health}" -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
+      im(`\\( -pointsize 0 -size ${size} -background none label:${health} -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
     }
 
     // // todo: refactor this behemoth
@@ -101,12 +101,12 @@ export class LeshyCardGenerator implements CardGenerator {
       if (sigilCount === 1) {
         const sigilPath = `./resource/sigils/${sigils[0]}.png`
         const position = geometryPosition(221 + xoffset, 733)
-        im(`\\( "${sigilPath}" -interpolate Nearest -filter point -resize x253 -filter box -gravity northwest -geometry ${position} \\) -composite`)
+        im(`\\( ${sigilPath} -interpolate Nearest -filter point -resize x253 -filter box -gravity northwest -geometry ${position} \\) -composite`)
       } else if (sigilCount === 2) {
         const sigilPath1 = `./resource/sigils/${sigils[0]}.png`
         const sigilPath2 = `./resource/sigils/${sigils[1]}.png`
-        im(`\\( "${sigilPath1}" -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(331 + xoffset, 720)} \\) -composite`)
-        im(`\\( "${sigilPath2}" -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(180 + xoffset, 833)} \\) -composite`)
+        im(`\\( ${sigilPath1} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(331 + xoffset, 720)} \\) -composite`)
+        im(`\\( ${sigilPath2} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(180 + xoffset, 833)} \\) -composite`)
       }
       //    else {
 
@@ -128,10 +128,10 @@ export class LeshyCardGenerator implements CardGenerator {
       const squidTitlePath = `./resource/misc/squid_title.png`
       im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize x152 -filter box -gravity north -geometry +0+20 \\) -composite`)
     } else if (card.name) {
-      const escapedName = card.name.replace(/[\\"]/g, '')
+      const escapedName = card.name.replace(/[\\']/g, '')
       const size = '570x135'
       const position = geometryPosition(0, 28)
-      im(`\\( -pointsize 0 -size ${size} -background none label:"${escapedName}" -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
+      im(`\\( -pointsize 0 -size ${size} -background none label:'${escapedName}' -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
     }
 
     if (card.options?.isGolden) {
@@ -152,7 +152,7 @@ export class LeshyCardGenerator implements CardGenerator {
       }
     }
 
-    im('-') // to stdout
+    im('-') // to stdout (stdoat hehe)
 
     const command = commands.join(' ')
     console.log('COMMAND:', command);
@@ -190,7 +190,6 @@ function validateRequiredFiles(resourcePath: string, requiredFiles: string[]): v
   if (missingFilePaths.length) {
     for (const missingFilePath of missingFilePaths) {
       console.error('ERROR:', 'Missing file', missingFilePath);
-
     }
 
     process.exit(1)
