@@ -126,13 +126,10 @@ export class LeshyCardGenerator implements CardGenerator {
     //   }
     // }
 
-    // if (card.options?.isSquid) {
-    //   const squidTitlePath = `./resource/misc/squid_title.png`
-    //   im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
-    // } else
-    if (card.name) {
-      console.log(card.name);
-
+    if (card.options?.isSquid) {
+      const squidTitlePath = `./resource/misc/squid_title.png`
+      im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize x152 -filter box -gravity north -geometry +0+20 \\) -composite`)
+    } else if (card.name) {
       const escapedName = card.name.replace(/[\\"]/g, '')
       const size = '570x135'
       const position = '+0+28'
