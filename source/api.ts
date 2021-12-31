@@ -1,9 +1,11 @@
 import fastify from 'fastify'
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { presets as cardPresets } from '.';
 import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
 import { Card, CardBack, CardBackType } from './act1/types';
 import { LeshyCardGenerator } from './generators';
+
+const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
 const server = fastify()
 
@@ -16,6 +18,8 @@ server.get('/act1/:creature', async (request, reply) => {
     reply.send(`Unknown id '${creatureId}'`)
     return
   }
+
+  card.name = translations['en'][card.name!]
 
   const leshyCardGenerator = new LeshyCardGenerator()
   const buffer = leshyCardGenerator.generate(card)
