@@ -84,7 +84,7 @@ export class LeshyCardGenerator implements CardGenerator {
     if (health !== undefined) {
       const size = '114x215'
       const position = '+41+815'
-      im(`\\( -pointsize 0 -size ${size} -background none label:"${power}" -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
+      im(`\\( -pointsize 0 -size ${size} -background none label:"${health}" -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
    
     }
 
