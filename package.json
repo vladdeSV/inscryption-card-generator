@@ -7,13 +7,13 @@
   "private": true,
   "scripts": {
     "dev": "yarn build && node .",
-    "build": "yarn esbuild source/index.ts --bundle --minify --sourcemap --platform=node --outfile=./out/index.bundle.js"
+    "build": "yarn esbuild source/index.ts --bundle --minify --platform=node --outfile=./out/index.bundle.js"
   },
   "dependencies": {
     "@types/gm": "^1.18.10",
     "fastify": "^3.24.0",
-    "gm": "^1.23.1",
-    "object-hash": "^2.2.0"
+    "object-hash": "^2.2.0",
+    "runtypes": "^6.5.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",

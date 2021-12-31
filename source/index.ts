@@ -1,258 +1,99 @@
-import { execSync, spawnSync } from 'child_process'
-import fastify from 'fastify'
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
-import { Card } from './cards'
-import objectHash from 'object-hash';
+import { Card } from "./act1/types";
 
-const server = fastify()
+export const presets: { [s: string]: Card } = {
+  
+  "hungry_child": { name: 'hungrychild', type: 'common', decals: ['child'] },
+  "leshy": { name: 'leshy', type: 'rare', decals: ['leshy'] },
+  "gold_nugget": { name: "goldnugget", type: "terrain", portrait: "goldnugget", health: 2, options: { isTerrain: true, isGolden: true } },
+  "golden_pelt": { name: "peltgolden", type: "terrain", health: 3, portrait: "pelt_golden", options: { isTerrain: true, isGolden: true } },
+  // "mini_moon": { type: "common", name: "mini moon", power: 1, health: 9,  sigils: ["allstrike", "squirrelorbit", "reach"], portrait: "moon",  },
+  "adder": { name: "adder", type: "common", power: 1, health: 1, tribes: ["reptile"], sigils: ["deathtouch"], cost: { amount: 2, type: "blood" }, portrait: "adder" },
+  "alpha": { name: "alpha", type: "common", power: 1, health: 2, tribes: ["canine"], sigils: ["buffneighbours"], cost: { amount: 5, type: "bone" }, portrait: "alpha" },
+  "amalgam": { name: "amalgam", type: "rare", power: 3, health: 3, tribes: ["bird", "canine", "hooved", "reptile", "insect"], cost: { amount: 2, type: "blood" }, portrait: "amalgam" },
+  "ant_queen": { name: 'antqueen', type: 'common', power: 'ants', health: 3, cost: { amount: 2, type: 'blood' }, portrait: 'antqueen', tribes: ['insect'], sigils: ['drawant'] },
+  "amoeba": { name: "amoeba", type: "rare", power: 1, health: 2, sigils: ["randomability"], cost: { amount: 2, type: "bone" }, portrait: "amoeba" },
+  "bait_bucket": { name: "baitbucket", type: "terrain", portrait: 'baitbucket', health: 1, decals: ['blood'], options: { isTerrain: true } },
+  "bat": { name: "bat", type: "common", power: 2, health: 1, sigils: ["flying"], cost: { amount: 4, type: "bone" }, portrait: "bat" },
+  "beaver": { name: "beaver", type: "common", power: 1, health: 3, sigils: ["createdams"], cost: { amount: 2, type: "blood" }, portrait: "beaver" },
+  "bee": { name: "bee", type: "common", power: 1, health: 1, tribes: ["insect"], sigils: ["flying"], portrait: "bee" },
+  "beehive": { name: "beehive", type: "common", power: 0, health: 2, tribes: ["insect"], sigils: ["beesonhit"], cost: { amount: 1, type: "blood" }, portrait: "beehive" },
+  "black_goat": { name: "goat", type: "common", power: 0, health: 1, tribes: ["hooved"], sigils: ["tripleblood"], cost: { amount: 1, type: "blood" }, portrait: "goat" },
+  "bloodhound": { name: "bloodhound", type: "common", power: 2, health: 3, tribes: ["canine"], sigils: ["guarddog"], cost: { amount: 2, type: "blood" }, portrait: "bloodhound" },
+  "boulder": { name: "boulder", type: "terrain", portrait: "boulder", health: 5, options: { isTerrain: true } },
+  "bullfrog": { name: "bullfrog", type: "common", power: 1, health: 2, tribes: ["reptile"], sigils: ["reach"], cost: { amount: 1, type: "blood" }, portrait: "bullfrog" },
+  "caged_wolf": { name: "cagedwolf", type: "terrain", portrait: 'cagedwolf', cost: { type: 'blood', amount: 2 }, health: 6, tribes: ['canine'], options: { isTerrain: true } },
+  "cat": { name: "cat", type: "common", power: 0, health: 1, sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "cat" },
+  "child_13": { name: "jerseydevil", type: "rare", power: 0, health: 1, tribes: ["hooved"], sigils: ["sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "jerseydevil_sleeping" },
+  "child_13_awake": { name: "jerseydevil", type: "rare", power: 2, health: 1, tribes: ["hooved"], sigils: ["flying", "sacrificial"], cost: { amount: 1, type: "blood" }, portrait: "jerseydevil" },
+  "chime": { name: "dausbell", type: "terrain", portrait: "dausbell", health: 1, options: { isTerrain: true } },
+  "cockroach": { name: "cockroach", type: "common", power: 1, health: 1, tribes: ["insect"], sigils: ["drawcopyondeath"], cost: { amount: 4, type: "bone" }, portrait: "cockroach" },
+  "corpse_maggots": { name: "maggots", type: "common", power: 1, health: 2, tribes: ["insect"], sigils: ["corpseeater"], cost: { amount: 5, type: "bone" }, portrait: "maggots" },
+  "coyote": { name: "coyote", type: "common", power: 2, health: 1, tribes: ["canine"], cost: { amount: 4, type: "bone" }, portrait: "coyote" },
+  "dam": { name: "dam", type: "terrain", portrait: "dam", health: 2, options: { isTerrain: true } },
+  "elk_fawn": { name: "elkcub", type: "common", power: 1, health: 1, tribes: ["hooved"], sigils: ["evolve_1", "strafe"], cost: { amount: 1, type: "blood" }, portrait: "deercub" },
+  "elk": { name: "elk", type: "common", power: 2, health: 4, tribes: ["hooved"], sigils: ["strafe"], cost: { amount: 2, type: "blood" }, portrait: "deer" },
+  "field_mice": { name: "fieldmouse", type: "common", power: 2, health: 2, sigils: ["drawcopy"], cost: { amount: 2, type: "blood" }, portrait: "fieldmice" },
+  "frozen_opossum": { name: "frozenopossum", type: "terrain", portrait: 'frozen_opossum', power: 0, health: 5, sigils: ['icecube'] },
+  "geck": { name: "geck", type: "rare", power: 1, health: 1, tribes: ["reptile"], portrait: "geck" },
+  "grand_fir": { name: "tree", type: "terrain", portrait: "tree", health: 3, sigils: ["reach"], options: { isTerrain: true } },
+  "great_white": { name: "shark", type: "common", power: 4, health: 2, sigils: ["submerge"], cost: { amount: 3, type: "blood" }, portrait: "shark", decals: ['blood'] },
+  "grizzly": { name: "grizzly", type: "common", power: 4, health: 6, cost: { amount: 3, type: "blood" }, portrait: "grizzly" },
+  "kingfisher": { name: "kingfisher", type: "common", power: 1, health: 1, tribes: ["bird"], sigils: ["submerge", "flying"], cost: { amount: 1, type: "blood" }, portrait: "kingfisher" },
+  "leaping_trap": { name: "trap", type: "terrain", portrait: 'trap', health: 1, sigils: ['steeltrap', 'reach'], options: { isTerrain: true } },
+  "long_elk": { name: 'snelk', type: 'rare', power: 1, health: 2, tribes: ['hooved'], sigils: ['deathtouch', 'strafe'], cost: { amount: 4, type: 'bone' }, decals: ['snelk'] },
+  "magpie": { name: "magpie", type: "common", power: 1, health: 1, tribes: ["bird"], sigils: ["tutor", "flying"], cost: { amount: 2, type: "blood" }, portrait: "magpie" },
+  "mantis_god": { name: "mantisgod", type: "rare", power: 1, health: 1, tribes: ["insect"], sigils: ["tristrike"], cost: { amount: 1, type: "blood" }, portrait: "mantisgod" },
+  "mantis": { name: "mantis", type: "common", power: 1, health: 1, tribes: ["insect"], sigils: ["splitstrike"], cost: { amount: 1, type: "blood" }, portrait: "mantis" },
+  "mole_man": { name: "moleman", type: "rare", power: 0, health: 6, sigils: ["reach", "whackamole"], cost: { amount: 1, type: "blood" }, portrait: "moleman" },
+  "mole": { name: "mole", type: "common", power: 0, health: 4, sigils: ["whackamole"], cost: { amount: 1, type: "blood" }, portrait: "mole" },
+  "moose_buck": { name: "moose", type: "common", power: 3, health: 7, tribes: ["hooved"], sigils: ["strafepush"], cost: { amount: 3, type: "blood" }, portrait: "moose" },
+  "mothman": { name: "mothman_stage3", type: "rare", power: 7, health: 3, tribes: ["insect"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "mothman_3" },
+  "opossum": { name: "opossum", type: "common", power: 1, health: 1, cost: { amount: 2, type: "bone" }, portrait: "opossum" },
+  "ouroboros": { name: "ouroboros", type: "rare", tribes: ["reptile"], sigils: ["drawcopyondeath"], cost: { amount: 2, type: "blood" }, portrait: "ouroboros" },
+  "pack_mule": { name: "mule", type: "common", power: 0, health: 5, sigils: ['strafe'], tribes: ['hooved'], portrait: "mule" },
+  "pack_rat": { name: "packrat", type: "rare", power: 2, health: 2, sigils: ["randomconsumable"], cost: { amount: 2, type: "blood" }, portrait: "packrat" },
+  "porcupine": { name: "porcupine", type: "common", power: 1, health: 2, sigils: ["sharp"], cost: { amount: 1, type: "blood" }, portrait: "porcupine" },
+  "pronghorn": { name: "pronghorn", type: "common", power: 1, health: 3, tribes: ["hooved"], sigils: ["splitstrike", "strafe"], cost: { amount: 2, type: "blood" }, portrait: "pronghorn" },
+  "rabbit_pelt": { name: "pelthare", type: "terrain", health: 1, portrait: "pelt_hare", options: { isTerrain: true } },
+  "rabbit": { name: "rabbit", type: "common", power: 0, health: 1, portrait: "rabbit" },
+  "rat_king": { name: "ratking", type: "common", power: 2, health: 1, sigils: ["quadruplebones"], cost: { amount: 2, type: "blood" }, portrait: "ratking" },
+  "rattler": { name: "rattler", type: "common", power: 3, health: 1, tribes: ["reptile"], cost: { amount: 6, type: "bone" }, portrait: "rattler" },
+  "raven_egg": { name: "ravenegg", type: "common", power: 0, health: 2, tribes: ["bird"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "ravenegg" },
+  "raven": { name: "raven", type: "common", power: 2, health: 3, tribes: ["bird"], sigils: ["flying"], cost: { amount: 2, type: "blood" }, portrait: "raven" },
+  "ring_worm": { name: "ringworm", type: "common", power: 0, health: 1, tribes: ["insect"], cost: { amount: 1, type: "blood" }, portrait: "ringworm" },
+  "river_otter": { name: "otter", type: "common", power: 1, health: 1, sigils: ["submerge"], cost: { amount: 1, type: "blood" }, portrait: "otter" },
+  "river_snapper": { name: "snapper", type: "common", power: 1, health: 6, tribes: ["reptile"], cost: { amount: 2, type: "blood" }, portrait: "turtle" },
+  "skink": { name: "skink", type: "common", power: 1, health: 2, tribes: ["reptile"], sigils: ["tailonhit"], cost: { amount: 1, type: "blood" }, portrait: "skink" },
+  "skunk": { name: "skunk", type: "common", power: 0, health: 3, sigils: ["debuffenemy"], cost: { amount: 1, type: "blood" }, portrait: "skunk" },
+  "snowy_fir": { name: "tree_hologram_snowcovered", type: "terrain", portrait: "tree_snowcovered", health: 4, sigils: ["reach"], options: { isTerrain: true } },
+  "sparrow": { name: "sparrow", type: "common", power: 1, health: 2, tribes: ["bird"], sigils: ["flying"], cost: { amount: 1, type: "blood" }, portrait: "sparrow" },
+  "squid_bell": { name: "squidbell", type: "common", power: 'bell', health: 3, cost: { amount: 2, type: "blood" }, portrait: "squidbell", options: { isSquid: true } },
+  "squid_cards": { name: "squidcards", type: "common", power: 'cardsinhand', health: 1, cost: { amount: 1, type: "blood" }, portrait: "squidcards", options: { isSquid: true } },
+  "squid_mirror": { name: "squidmirror", type: "common", power: 'mirror', health: 3, cost: { amount: 1, type: "blood" }, portrait: "squidmirror", options: { isSquid: true } },
+  "squirrel": { name: "squirrel", type: "common", power: 0, health: 1, portrait: "squirrel" },
+  "strange_frog": { name: "trapfrog", type: "terrain", portrait: 'trapfrog', power: 1, health: 2, cost: { type: 'blood', amount: 1 }, sigils: ["reach"] },
+  "strange_larva": { name: "mothman_stage1", type: "rare", power: 0, health: 3, tribes: ["insect"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "mothman_1" },
+  "strange_pupa": { name: "mothman_stage2", type: "rare", power: 0, health: 3, tribes: ["insect"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "mothman_2" },
+  "stump": { name: "stump", type: "terrain", portrait: "stump", health: 3, options: { isTerrain: true } },
+  "the_daus": { name: "daus", type: "rare", power: 2, health: 2, sigils: ["createbells"], cost: { amount: 2, type: "blood" }, portrait: "daus" },
+  "the_smoke": { name: "smoke", type: "common", power: 0, health: 1, sigils: ["quadruplebones"], portrait: "smoke", decals: ["smoke"] },
+  "undead_cat": { name: "catundead", type: "common", power: 3, health: 6, cost: { amount: 1, type: "blood" }, portrait: "cat_undead" },
+  "urayuli": { name: "urayuli", type: "rare", power: 7, health: 7, cost: { amount: 4, type: "blood" }, portrait: "urayuli" },
+  "turkey_vulture": { name: "vulture", type: "common", power: 3, health: 3, cost: { amount: 8, type: "bone" }, tribes: ['bird'], sigils: ['flying'], portrait: "vulture" },
+  "warren": { name: "warren", type: "terrain", power: 0, health: 2, sigils: ["drawrabbits"], cost: { amount: 1, type: "blood" }, portrait: "warren" },
+  "wolf_cub": { name: "wolfcub", type: "common", power: 1, health: 1, tribes: ["canine"], sigils: ["evolve_1"], cost: { amount: 1, type: "blood" }, portrait: "wolfcub" },
+  "wolf_pelt": { name: "peltwolf", type: "terrain", health: 2, portrait: "pelt_wolf", options: { isTerrain: true } },
+  "wolf": { name: "wolf", type: "common", power: 3, health: 2, tribes: ["canine"], cost: { amount: 2, type: "blood" }, portrait: "wolf" },
+  "worker_ant": { name: 'ant', type: 'common', power: 'ants', health: 2, cost: { amount: 1, type: 'blood' }, portrait: 'ant', tribes: ['insect'] },
 
-server.get('/card', async (request, reply) => {
+  "tail_feathers": { name: 'tail_bird', type: 'common', power: 0, health: 2, portrait: 'bird_tail' },
+  "furry_tail": { name: 'tail_furry', type: 'common', power: 0, health: 2, portrait: 'canine_tail' },
+  "wriggling_leg": { name: 'tail_insect', type: 'common', power: 0, health: 2, portrait: 'insect_tail' },
+  "wriggling_tail": { name: 'skinktail', type: 'common', power: 0, health: 2, portrait: 'skink_tail' },
 
-  const q = (request.query as any)
-  const name = (q.name as string ?? '').toLowerCase()
-  const power = q.power ? Number(q.power) : undefined
-  const health = q.health ? Number(q.health) : undefined
-  const portraitData = q.portraitData;
+  "starvation": { name: 'starvation', type: 'common', sigils: ['preventattack'], portrait: 'starvingman' },
+  "starvation_flying": { name: 'starvation', type: 'common', sigils: ['flying', 'preventattack'], portrait: 'starvingman' },
 
-  const sigils = ((s: string[] | string) => {
-    if (!s) { return [] }
-    if (!Array.isArray(s)) { s = [s] }
-    s = s.filter(x => x)
-    return [...new Set(s)]
-  })(q['sigils[]'])
+  "greater_smoke": { name: "smoke_improved", type: "common", power: 1, health: 3, sigils: ["quadruplebones"], portrait: "smoke_improved", decals: ["smoke"], options: { isEnhanced: true } },
 
-  const tribes = ((s: string[] | string) => {
-    if (!s) { return [] }
-    if (!Array.isArray(s)) { s = [s] }
-    return [...new Set(s)]
-  })(q['tribes[]'])
-
-  const cost = ((s: string | undefined): Card['cost'] => {
-    if (!s) {
-      return undefined
-    }
-
-    const match = s.match(/(\d)(blood|bones?)/)
-    if (!match) {
-      return undefined
-    }
-
-    const costAmount = Number(match[1])
-    const costType = ((i) => {
-      switch (i) {
-        default:
-        case 'blood': return 'blood'
-        case 'bone':
-        case 'bones': return 'bone'
-      }
-    })(match[2])
-
-    return { amount: costAmount, type: costType }
-  })(q.cost)
-
-  const terrain = ((s: unknown): Card['terrain'] => {
-    switch (s) {
-      default:
-      case 'auto': return undefined
-      case 'yes': return true
-      case 'no': return false
-    }
-  })(q.terrain)
-
-  console.log(q);
-
-  const cardType = ((s: unknown): Card['type'] => {
-    switch (s) {
-      default:
-      case 'common': return 'common'
-      case 'rare': return 'rare'
-      case 'terrain': return 'terrain'
-    }
-  })(q.type)
-
-  const decal = q.decal
-  const enhanced = Boolean(q.enhanced)
-
-  const card: Card = {
-    name: name,
-    power: power,
-    health: health,
-    tribes: tribes,
-    sigils: sigils,
-    cost: cost,
-    type: cardType,
-    enhanced: enhanced,
-    terrain: terrain,
-    portrait: ((s: unknown): string | undefined => (typeof s === 'string') ? s : undefined)(q.portrait),
-    decal: decal,
-    extra: {
-      portraitData: portraitData
-    }
-  }
-
-  const opts = {
-    a: q.a,
-    b: q.b,
-    c: q.c,
-    d: q.d,
-  }
-
-  const buffer = generateCard(card, opts)
-
-  reply.type('image/png')
-  reply.header('Content-Disposition', `inline; filename="${card.name.replace(/\s/g, '_')}.png"`)
-  reply.send(buffer)
-
-})
-
-server.listen(8080, (err, address) => {
-  if (err) {
-    console.error(err)
-    process.exit(1)
-  }
-  console.log(`Server listening at ${address}`)
-})
-
-function generateCard(card: Card, opts: any): Buffer {
-  const im = 'convert'
-  const out = 'out.png'
-  const font = './resource/HEAVYWEIGHT.TTF'
-
-  const cardHash = objectHash(card)
-  const cacheCardPath = `./cache/${cardHash}.png`
-
-  if (existsSync(cacheCardPath)) {
-    return readFileSync(cacheCardPath)
-  }
-
-
-  const isTerrainCard = (card: Card): boolean => {
-
-    if (card.terrain !== undefined) {
-      return card.terrain;
-    }
-
-    // if we are here, then auto is set
-    if (card.portrait?.match(/^warren(_eaten[1-3]$)?/) && card.name === 'warren') {
-      return false
-    }
-
-    if (card.type === 'terrain') {
-      return true
-    }
-
-    return false
-  }
-
-  const l = card.name.length
-  const namePointSize = (l > 13) ? 90 : (l > 11 ? 100 : 120)
-  const healthHorizontalOffset = isTerrainCard(card) ? 140 : 60
-
-  // create low-res card
-  execSync(`${im} "./resource/cards/${card.type}.png" -filter Box ${out}`)
-
-  // portrait
-  const portraitOffset = '+0-15'
-  if (card.portrait === 'custom') {
-
-    function hasOwnProperty<X extends {}, Y extends PropertyKey>
-      (obj: X, prop: Y): obj is X & Record<Y, unknown> {
-      return obj.hasOwnProperty(prop)
-    }
-
-    const extraData = card.extra;
-    if (typeof extraData === 'object' && extraData && hasOwnProperty(extraData, 'portraitData')) {
-      if (typeof extraData.portraitData === 'string') {
-        spawnSync(`${im} ${out} \\( - -gravity center -geometry ${portraitOffset} \\) -composite ${out}`, { shell: true, input: Buffer.from(extraData.portraitData, 'base64') })
-      }
-    }
-
-  } else if (!!card.portrait) {
-
-    const a = `./resource/portraits/${card.portrait}.png`
-    const b = `./resource/portraits/emission/${card.portrait}.png`
-
-    if (existsSync(a)) {
-
-      execSync(`${im} ${out} \\( "${a}" -gravity center -geometry ${portraitOffset} \\) -composite ${out}`)
-      if (card.enhanced && existsSync(b)) {
-        execSync(`${im} ${out} \\( "${b}" -gravity center -geometry ${portraitOffset} \\) -composite ${out}`)
-      }
-    }
-  }
-
-
-  // scale card
-  const scale = '538.94%'
-  execSync(`${im} ${out} -filter Box -scale ${scale} ${out}`)
-
-  //card.tribes = ['bird', 'canine', 'hooved', 'reptile', 'insect']
-  if (card.tribes.length) {
-    const tribes = card.tribes
-
-    const aligns = [
-      { g: 'northwest', t: `-11+8` },
-      { g: 'north', t: `-6+8` },
-      { g: 'northeast', t: `-15+8` },
-      { g: 'center', t: `-138+105` },
-      { g: 'center', t: `+125+105` },
-    ]
-
-    for (let i = 0; i < Math.min(tribes.length, 5); i++) {
-      const tribe = tribes[i]
-      const align = aligns[i]
-
-      const tribePath = `./resource/tribes/${tribe}.png`
-      execSync(`${im} ${out} \\( "${tribePath}" -resize 233% -gravity ${align.g} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${align.t} \\) -composite ${out}`)
-    }
-  }
-
-  const sigilCount = card.sigils.length
-  if (sigilCount > 0) {
-    const sigils = card.sigils;
-    for (let i = 0; i < sigilCount; ++i) {
-      const sigil = sigils[i];
-      const sigilPath = `./resource/sigils/${sigil}.png`
-      const xoffset = isTerrainCard(card) ? -70 : -2
-
-      if (sigilCount === 1) {
-        execSync(`${im} ${out} \\( "${sigilPath}" -interpolate Nearest -filter point -resize 495.8248% -filter box -gravity south -geometry +${xoffset}+63 \\) -composite ${out}`)
-      } else {
-        const rotateAmount = 2 * Math.PI / sigilCount
-        const baseRotation = sigilCount === 2 ? 0.63 : Math.PI / 6
-        const dist = sigilCount > 2 ? 80 : 90
-        const scale = sigilCount > 2 ? (sigilCount >= 5 ? 200 : 270) : 370
-        const x = xoffset + dist * Math.cos(baseRotation + rotateAmount * i)
-        const y = 330 - dist * Math.sin(baseRotation + rotateAmount * i) - (sigilCount === 3 ? 15 : 0)
-        const interpOptions = sigilCount < 3 ? '-interpolate Nearest -filter point' : ''
-
-        execSync(`${im} ${out} \\( "${sigilPath}" ${interpOptions} -resize ${scale}% -filter box -gravity center -geometry +${x}+${y} \\) -composite ${out}`)
-      }
-    }
-  }
-
-  if (card.cost) {
-    const { amount, type } = card.cost;
-
-    const costPath = `./resource/costs/${amount}${type}.png`
-    execSync(`${im} ${out} \\( "${costPath}" -interpolate Nearest -filter point -resize 460% -filter box -gravity east -geometry +32-265 \\) -composite ${out}`)
-  }
-
-  // apply text
-  execSync(`${im} ${out} -font ${font} -fill black -pointsize 200 ${card.power !== undefined ? `-gravity southwest -annotate +64+104 "${card.power}"` : ''} ${card.health !== undefined ? `-gravity southeast -annotate +${healthHorizontalOffset}+23 "${card.health}"` : ''} -pointsize ${namePointSize} -gravity center -annotate +0-408 "${card.name}" ${out}`)
-
-
-  if (card.decal) {
-    const decalPath = `./resource/decals/${card.decal}.png`
-    execSync(`${im} ${out} \\( ${decalPath} -filter Box -scale ${scale} \\) -composite ${out}`)
-  }
-
-  const buffer = readFileSync('./out.png')
-
-  if (card.portrait !== 'custom') {
-    writeFileSync(cacheCardPath, buffer)
-  }
-  unlinkSync('./out.png')
-
-  return buffer
 }
