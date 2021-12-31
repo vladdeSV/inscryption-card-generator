@@ -3,6 +3,7 @@ import { writeFileSync } from 'fs';
 import { presets as cardPresets } from '.';
 import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
 import { Card, CardBack, CardBackType } from './act1/types';
+import { LeshyCardGenerator } from './generators';
 
 const server = fastify()
 
@@ -16,7 +17,8 @@ server.get('/act1/:creature', async (request, reply) => {
     return
   }
 
-  const buffer = bufferFromCard(card)
+  const leshyCardGenerator = new LeshyCardGenerator()
+  const buffer = leshyCardGenerator.generate(card)
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name || 'creature').replace(/\s/g, '_')}.png"`)
