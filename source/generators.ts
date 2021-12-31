@@ -43,7 +43,8 @@ export class LeshyCardGenerator implements CardGenerator {
       im(`./resource/cards/borders/${borderName}.png -composite`)
     }
 
-    im(`-filter Box -resize x1050`) // make big
+    im('-filter Box -resize x1050') // make big
+    im('-gravity northwest')
 
     const tribes = card.tribes
     if (tribes) {
