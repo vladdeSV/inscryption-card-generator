@@ -78,10 +78,12 @@ export class LeshyCardGenerator implements CardGenerator {
       }
     }
 
+    const xoffset = isTerrain ? -70 : 0
+
     const health = card.health
     if (health !== undefined) {
       const size = '114x215'
-      const position = '+41+815'
+      const position = geometryPosition(41 - xoffset, 815)
       im(`\\( -pointsize 0 -size ${size} -background none label:"${health}" -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
     }
 
