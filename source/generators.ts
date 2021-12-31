@@ -45,24 +45,17 @@ export class LeshyCardGenerator implements CardGenerator {
 
     im(`-filter Box -resize x1050`) // make big
 
-    // // todo: coud be converted to one command
-    // const tribes = card.tribes
-    // if (tribes) {
-    //   const aligns: { gravity: string, geometry: string }[] = [
-    //     { gravity: 'northwest', geometry: `-11+4` },
-    //     { gravity: 'north', geometry: `-1+4` },
-    //     { gravity: 'northeast', geometry: `-14+4` },
-    //     { gravity: 'center', geometry: `-121+101` },
-    //     { gravity: 'center', geometry: `+125+101` },
-    //   ]
+    const tribes = card.tribes
+    if (tribes) {
+      const aligns: string[] = [`-12+3`, `+217+5`, `+444+7`, `+89+451`, `+344+452`,]
 
-    //   for (const [index, tribe] of tribes.entries()) {
-    //     const tribeLocation = `./resource/tribes/${tribe}.png`
-    //     const { gravity, geometry } = aligns[index]
+      for (const [index, tribe] of tribes.entries()) {
+        const tribeLocation = `./resource/tribes/${tribe}.png`
+        const position = aligns[index]
 
-    //     im(`\\( "${tribeLocation}" -resize 233% -gravity ${gravity} -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${geometry} \\) -composite`)
-    //   }
-    // }
+        im(`\\( "${tribeLocation}" -resize x354 -gravity northwest -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${position} \\) -composite`)
+      }
+    }
 
     const cost = card.cost
     if (cost) {
