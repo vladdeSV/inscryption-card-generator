@@ -129,13 +129,15 @@ export class LeshyCardGenerator implements CardGenerator {
     // if (card.options?.isSquid) {
     //   const squidTitlePath = `./resource/misc/squid_title.png`
     //   im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
-    // } else if (card.name) {
-    //   console.log(card.name);
+    // } else
+    if (card.name) {
+      console.log(card.name);
 
-    //   const escapedName = card.name.replace(/[\\"]/g, '')
-    //   const size = '580x135'
-    //   im(`\\( -pointsize 0 -size ${size} -background none label:"${escapedName}" -trim -gravity center -extent ${size} \\) -gravity north -geometry +0+26 -composite`)
-    // }
+      const escapedName = card.name.replace(/[\\"]/g, '')
+      const size = '570x135'
+      const position = '+0+28'
+      im(`\\( -pointsize 0 -size ${size} -background none label:"${escapedName}" -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
+    }
 
     // if (card.options?.isGolden) {
     //   im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -geometry +0+0 -compose hardlight -composite`)
