@@ -31,11 +31,11 @@ export class LeshyCardGenerator implements CardGenerator {
     const portrait = card.portrait;
     if (portrait) {
       if (portrait === 'custom') {
-        throw new Error('Custom portraits are not available')
+        im(`\\( - -gravity center -geometry +0-15 \\) -composite`)
+      } else {
+        const portraitLocation = `./resource/portraits/${portrait}.png`
+        im(`\\( ${portraitLocation} -gravity center -geometry +0-15 \\) -composite`)
       }
-
-      const portraitLocation = `./resource/portraits/${portrait}.png`
-      im(`\\( '${portraitLocation}' -gravity center -geometry +0-15 \\) -composite`)
     }
 
     if (card.options?.hasBorder) {
@@ -157,8 +157,13 @@ export class LeshyCardGenerator implements CardGenerator {
     const command = commands.join(' ')
     console.log('COMMAND:', command);
 
+    let customPortraitData = undefined
+    if (card.portrait === 'custom' && card.options?.portraitData) {
+      customPortraitData = Buffer.from(card.options.portraitData, 'base64')
+    }
+
     console.time('generation time')
-    const buffer = execSync(command)
+    const buffer = execSync(command, { input: customPortraitData })
     console.timeEnd('generation time')
 
     return buffer
