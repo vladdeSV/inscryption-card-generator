@@ -70,8 +70,12 @@ export class LeshyCardGenerator implements CardGenerator {
     if (power !== undefined) {
       if (typeof power === 'number') {
         const size = '114x215'
-        const position = '+68+729'
-        im(`\\( -pointsize 0 -size ${size} -background none label:"${power}" -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
+        const position = geometryPosition(68, 729)
+
+        // don't show power if power === 0 and card is a terrain card
+        if (power > 0 || !card.options?.isTerrain) {
+          im(`\\( -pointsize 0 -size ${size} -background none label:"${power}" -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
+        }
       } else {
         const statIconPath = `./resource/staticon/${power}.png`
         const position = '+5+705'
