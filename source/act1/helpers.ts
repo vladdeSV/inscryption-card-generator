@@ -22,7 +22,7 @@ function cardFromData(body: any): Card {
     type: body.type,
     name: body.name,
     portrait: body.portrait,
-    health: body.health ? Number(body.health) : undefined,
+    health: body.health !== undefined ? Number(body.health) : undefined,
     power: powerFromInput(body.power),
     cost: body.cost,
     tribes: body.tribes ? [...new Set(arrayify(body.tribes))] : [],
@@ -34,7 +34,8 @@ function cardFromData(body: any): Card {
       isGolden: body.golden,
       hasBorder: body.border,
       portraitData: body.portraitData
-    }
+    },
+    extra: body.extra
   })
 
   if (card.portrait === 'custom') {

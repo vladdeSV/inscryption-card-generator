@@ -1,8 +1,11 @@
 import fastify from 'fastify'
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { presets as cardPresets } from '.';
 import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
 import { Card, CardBack, CardBackType } from './act1/types';
+import { LeshyCardGenerator, PixelProfilgateGenerator } from './generators';
+
+const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
 const server = fastify()
 
@@ -16,7 +19,10 @@ server.get('/act1/:creature', async (request, reply) => {
     return
   }
 
-  const buffer = bufferFromCard(card)
+  card.name = translations['en'][card.name!]
+
+  const leshyCardGenerator = new LeshyCardGenerator()
+  const buffer = leshyCardGenerator.generate(card)
 
   reply.type('image/png')
   reply.header('Content-Disposition', `inline; filename="${(card.name || 'creature').replace(/\s/g, '_')}.png"`)
@@ -50,7 +56,8 @@ server.put('/act1/', async (request, reply) => {
     return
   }
 
-  const buffer = await bufferFromCard(card)
+  const leshyCardGenerator = new LeshyCardGenerator()
+  const buffer = leshyCardGenerator.generate(card)
   if (!buffer) {
     reply.code(500)
     reply.send('Unknown error occured when creating image')

@@ -20,7 +20,7 @@ const BoneCost = Record({
 
 type Cost = Static<typeof Cost>
 const Cost = Union(BloodCost, BoneCost)
-const Decal = Union(Literal('smoke'), Literal('stitched'), Literal('blood'), Literal('child'), Literal('leshy'), Literal('snelk'))
+const Decal = Union(Literal('smoke'), Literal('stitches'), Literal('blood'), Literal('child'), Literal('leshy'), Literal('snelk'))
 const Creature = Union(
   Literal('baitbucket'),
   Literal('boulder'),
@@ -195,6 +195,9 @@ const Card = Record({
     isSquid: Boolean.optional(),
     hasBorder: Boolean.optional(),
     portraitData: String.optional(),
+  }).optional(),
+  extra: Record({
+    talkText: String.optional(),
   }).optional(),
 });
 

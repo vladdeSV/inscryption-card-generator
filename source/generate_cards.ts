@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { presets } from ".";
-import { bufferFromCard } from "./act1/helpers";
 import * as path from 'path'
+import { LeshyCardGenerator } from "./generators";
 
 const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 const locales = Object.keys(translations).filter(x => !['zh-cn', 'zh-tw', 'jp', 'ko'].includes(x))
@@ -30,7 +30,8 @@ for (const locale of locales) {
             continue;
         }
 
-        const buffer = bufferFromCard({ ...card, name: translatedName })
+        const cardGenerator = new LeshyCardGenerator()
+        const buffer = cardGenerator.generate({ ...card, name: translatedName })
 
         let filename = (translatedName ?? name).toLocaleLowerCase(locale).replace(/\s/g, '_')
         while (existsSync(path.join(cardsPath, filename + '.png'))) {

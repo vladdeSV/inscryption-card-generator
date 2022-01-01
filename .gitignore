@@ -6,8 +6,9 @@
 
 # contains copyrighted material, which i am not allowed to share
 /resource
+/resource-pixelprofilgate
 /resource.*.zip
 
 # temp source
 source.bak
-/cards
+/cards*
