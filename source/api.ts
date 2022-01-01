@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { presets as cardPresets } from '.';
 import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
 import { Card, CardBack, CardBackType } from './act1/types';
-import { LeshyCardGenerator } from './generators';
+import { LeshyCardGenerator, PixelProfilgateGenerator } from './generators';
 
 const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 

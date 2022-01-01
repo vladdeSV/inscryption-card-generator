@@ -196,6 +196,9 @@ const Card = Record({
     hasBorder: Boolean.optional(),
     portraitData: String.optional(),
   }).optional(),
+  extra: Record({
+    talkText: String.optional(),
+  }).optional(),
 });
 
 type CardBackType = Static<typeof CardBackType>

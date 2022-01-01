@@ -34,7 +34,8 @@ function cardFromData(body: any): Card {
       isGolden: body.golden,
       hasBorder: body.border,
       portraitData: body.portraitData
-    }
+    },
+    extra: body.extra
   })
 
   if (card.portrait === 'custom') {
