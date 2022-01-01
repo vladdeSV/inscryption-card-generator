@@ -178,6 +178,81 @@ export class LeshyCardGenerator implements CardGenerator {
   }
 }
 
+export class PixelProfilgateGenerator implements CardGenerator {
+  generate(card: Card): Buffer {
+    const commands: string[] = []
+    const im = (cmd: string) => commands.push(cmd);
+
+    const geometryPosition = (x: number, y: number): string => {
+      const firstSign = x > 0 ? '+' : '-'
+      const secondSign = y > 0 ? '+' : '-'
+      return `${firstSign}${Math.abs(x)}${secondSign}${Math.abs(y)}`
+    }
+
+    im(`convert ./resource-pixelprofilgate/cards/${card.type}.png`)
+    im(`-font ./resource/HEAVYWEIGHT.otf -pointsize 80`)
+
+    // todo portrait
+    const portrait = card.portrait
+    if (portrait) {
+      if (portrait !== 'custom') {
+        im('-gravity center')
+        im(`\\( ./resource/portraits/${portrait}.png -resize 70%x \\) -geometry +0-19 -composite`)
+        im('-gravity northwest')
+      }
+    }
+
+    const cost = card.cost
+    if (cost) {
+      im(`./resource-pixelprofilgate/costs/${cost.amount}${cost.type}.png -geometry +60+75 -composite`)
+    }
+
+    im('-filter Box -resize x1050') // make big
+    im('-gravity northwest')
+
+    const health = card.health
+    if (typeof health === 'number') {
+      im(`-draw "text 605,124 '${card.health}'"`)
+    }
+
+    const power = card.power
+    if (typeof power === 'number') {
+      im(`-draw "text 106,607 '${card.power}'"`)
+    }
+
+    const name = card.name
+    if (typeof name === 'string') {
+      im(`-gravity north -draw "text 0,66 '${card.name}'"`)
+    }
+
+    if (typeof card.extra?.talkText === 'string') {
+      const talkText = card.extra.talkText.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"');
+      im(`-pointsize 32 -fill rgb\\(128,78,48\\) -draw "text 66,658 '${talkText}'"`)
+    }
+
+    im(`-gravity northwest -fill black`)
+
+    const sigils = card.sigils ?? []
+    for (const [index, sigil] of sigils.entries()) {
+      const yoffset = 135
+      im(`-pointsize 50 -draw "text 184,${703 + yoffset * index} '${sigil}'"`)
+      im(`-pointsize 32.5 -background none -size 470x caption:"${'this is going to be the sigil\'s text which hopefully wraps'}" -geometry ${geometryPosition(210, 759 + yoffset * index)} -composite`)
+      im(`\\( ./resource/sigils/${sigil}.png -resize 86x86 \\) -geometry ${geometryPosition(73, 710 + yoffset * index)} -composite`)
+    }
+
+    im('-')
+
+    const command = commands.join(' ')
+    console.log('COMMAND:', command);
+
+    return execSync(command)
+  }
+
+  generateBack(): Buffer {
+    throw new Error("Method not implemented.");
+  }
+}
+
 const resourcePath = './resource/'
 const requiredBaseFiles: string[] = [
   './cards/common.png',
