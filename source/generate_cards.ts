@@ -57,6 +57,8 @@ function generateCards(input: { [s: string]: Card }) {
 
             writeFileSync(path.join(cardsPath, filename + '.png'), buffer)
         }
+
+        writeFileSync(path.join(cardsPath, 'back.png'), cardGenerator.generateBack());
     }
 }
 
