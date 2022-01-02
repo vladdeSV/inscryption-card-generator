@@ -66,7 +66,7 @@ class PixelProfilgateGenerator implements CardGenerator {
     const entries: SigilEntry[] = []
 
     if (card.power === 'ants') {
-      entries.push({ name: 'Colony', text: "This card\\'s power is equal to the number of cards with the \\'colony\\' sigil on your side of the field.", sigilId: 'drawant' })
+      entries.push({ name: 'Colony', text: "This card\\'s power is equal to the number of cards with the \\'colony\\' sigil on your side of the field.", sigilId: 'colony' })
     }
 
     entries.push(...(card.sigils ?? []).map(x => this.sigils[x]))
