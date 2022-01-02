@@ -66,7 +66,7 @@ class PixelProfilgateGenerator implements CardGenerator {
     const entries: SigilEntry[] = []
 
     if (card.power === 'ants') {
-      entries.push({ name: 'Colony', text: "This card\\'s power is equal to the number of cards with the \\'colony\\' sigil on your side of the field.", sigilId: 'colony' })
+      entries.push({ name: 'Colony', text: "This card\\'s power is equal to the number of cards with this sigil on your side of the field.", sigilId: 'colony' })
     }
 
     entries.push(...(card.sigils ?? []).map(x => this.sigils[x]))
@@ -75,7 +75,7 @@ class PixelProfilgateGenerator implements CardGenerator {
       im(`-pointsize 50 -draw "text 184,${703 + yoffset * index} '${entry.name}'"`)
       im(`./resource-pixelprofilgate/sigils/${entry.sigilId}.png -geometry ${geometryPosition(56, 691 + yoffset * index)} -composite`)
       if (entry.text) {
-        im(`-pointsize 26 -background none -size 496x caption:"${entry.text}" -geometry ${geometryPosition(184, 759 + yoffset * index)} -composite`)
+        im(`-pointsize 26 -background none -size 490x caption:"${entry.text}" -geometry ${geometryPosition(184, 759 + yoffset * index)} -composite`)
       }
     }
 
@@ -100,7 +100,7 @@ class PixelProfilgateGenerator implements CardGenerator {
     'createdams': { name: 'Dam Builder', text: '', sigilId: 'createdams' },
     'deathtouch': { name: 'Touch of Death', text: 'When this card damages the health of an opposing card, that card perishes.', sigilId: 'deathtouch' },
     'debuffenemy': { name: 'Stinky', text: 'Cards opposing this card have their power reduced by one.', sigilId: 'debuffenemy' },
-    'drawant': { name: 'Ant Spawner', text: '', sigilId: 'drawant' },
+    'drawant': { name: 'Ant Spawner', text: 'When this card is played, its owner draws 1 Ant card.', sigilId: 'drawant' },
     'drawcopy': { name: 'Fecundity', text: '', sigilId: 'drawcopy' },
     'drawcopyondeath': { name: 'Unkillable', text: '', sigilId: 'drawcopyondeath' },
     'drawrabbits': { name: 'Rabbit Hole', text: '', sigilId: 'drawrabbits' },
