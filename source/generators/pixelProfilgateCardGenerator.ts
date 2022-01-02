@@ -28,8 +28,8 @@ class PixelProfilgateGenerator implements CardGenerator {
       if (portrait !== 'custom') {
         im('-gravity center')
         const colorize = card.type === 'terrain' ? '-colorspace gray -fill "#d4c9ab" -tint 100' : ''
-        im(`\\( ./resource-pixelprofilgate/portraits/${portrait}.png ${colorize} \\) -geometry +0-19 -composite`)
-        im('-gravity northwest')
+        im(`\\( ${colorize} ./resource-pixelprofilgate/portraits/${portrait}.png \\) -geometry +0-19 -composite`)
+        im('-gravity northwest -fill black')
       }
     }
 
