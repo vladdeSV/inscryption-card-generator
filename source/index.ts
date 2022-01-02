@@ -18,6 +18,7 @@ export const presets: { [s: string]: Card } = {
   "bee": { name: "bee", type: "common", power: 1, health: 1, tribes: ["insect"], sigils: ["flying"], portrait: "bee" },
   "beehive": { name: "beehive", type: "common", power: 0, health: 2, tribes: ["insect"], sigils: ["beesonhit"], cost: { amount: 1, type: "blood" }, portrait: "beehive" },
   "black_goat": { name: "goat", type: "common", power: 0, health: 1, tribes: ["hooved"], sigils: ["tripleblood"], cost: { amount: 1, type: "blood" }, portrait: "goat" },
+  "black_goat_sexy": { name: "goat", type: "common", power: 0, health: 1, tribes: ["hooved"], sigils: ["tripleblood"], cost: { amount: 1, type: "blood" }, portrait: "goat_sexy" },
   "bloodhound": { name: "bloodhound", type: "common", power: 2, health: 3, tribes: ["canine"], sigils: ["guarddog"], cost: { amount: 2, type: "blood" }, portrait: "bloodhound" },
   "boulder": { name: "boulder", type: "terrain", portrait: "boulder", health: 5, options: { isTerrain: true } },
   "bullfrog": { name: "bullfrog", type: "common", power: 1, health: 2, tribes: ["reptile"], sigils: ["reach"], cost: { amount: 1, type: "blood" }, portrait: "bullfrog" },
