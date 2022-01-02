@@ -130,6 +130,11 @@ class PixelProfilgateGenerator implements CardGenerator {
     'tristrike': { name: 'Trifurcated Strike', text: '', sigilId: 'tristrike' },
     'tutor': { name: 'Hoarder', text: '', sigilId: 'tutor' },
     'whackamole': { name: 'Burrower', text: '', sigilId: 'whackamole' },
+
+    'gainbattery': { name: 'Battery Bearer', text: 'When this card is played, it provides 1 energy cell to its owner.', sigilId: 'gainbattery' },
+    'squirrelstrafe': { name: 'Squirrel Shedder', text: '', sigilId: 'squirrelstrafe' },
+    'bonedigger': { name: 'Bone Digger', text: '', sigilId: 'bonedigger' },
+    'brittle': { name: 'Brittle', text: '', sigilId: 'brittle' },
   }
 }
 
