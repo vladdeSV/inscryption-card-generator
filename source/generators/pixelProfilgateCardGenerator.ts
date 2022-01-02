@@ -73,8 +73,10 @@ class PixelProfilgateGenerator implements CardGenerator {
     for (const [index, entry] of entries.entries()) {
       const yoffset = 135
       im(`-pointsize 50 -draw "text 184,${703 + yoffset * index} '${entry.name}'"`)
-      entry.text && im(`-pointsize 32.5 -background none -size 470x caption:"${entry.text}" -geometry ${geometryPosition(210, 759 + yoffset * index)} -composite`)
-      im(`\\( ./resource/sigils/${entry.sigilId}.png -resize 86x86 \\) -geometry ${geometryPosition(73, 710 + yoffset * index)} -composite`)
+      im(`./resource-pixelprofilgate/sigils/${entry.sigilId}.png -geometry ${geometryPosition(56, 691 + yoffset * index)} -composite`)
+      if (entry.text) {
+        im(`-pointsize 26 -background none -size 496x caption:"${entry.text}" -geometry ${geometryPosition(184, 759 + yoffset * index)} -composite`)
+      }
     }
 
     im('-')
