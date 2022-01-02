@@ -40,7 +40,7 @@ function generateCards(input: { [s: string]: Card }) {
 
             const translatedName = translations[locale][name] as string
 
-            if (translatedName === undefined && !(name === 'leshy' || name === 'hungrychild')) {
+            if (name && !translatedName) {
                 console.error(`ERROR: Missing translation for '${id}'`);
                 continue;
             }
