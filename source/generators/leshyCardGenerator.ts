@@ -21,10 +21,10 @@ class LeshyCardGenerator implements CardGenerator {
     const portrait = card.portrait;
     if (portrait) {
       if (portrait === 'custom') {
-        im(`\\( - -gravity center -geometry +0-15 \\) -composite`)
+        im(`\\( - -gravity center -geometry +1-15 \\) -composite`)
       } else {
         const portraitLocation = `./resource/portraits/${portrait}.png`
-        im(`\\( ${portraitLocation} -gravity center -geometry +0-15 \\) -composite`)
+        im(`\\( ${portraitLocation} -gravity center -geometry +1-15 \\) -composite`)
       }
     }
 
