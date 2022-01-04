@@ -78,7 +78,7 @@ class LeshyCardGenerator implements CardGenerator {
 
           im.parens(
             new IM('')
-              .pointsize(0)
+              .pointsize()
               .size(w, h)
               .background('none')
               .label(power)
@@ -110,7 +110,7 @@ class LeshyCardGenerator implements CardGenerator {
       const h = 215
       im.parens(
         new IM()
-          .pointsize(0)
+          .pointsize()
           .size(w, h)
           .background('none')
           .label(health)
@@ -194,8 +194,20 @@ class LeshyCardGenerator implements CardGenerator {
         position = { x: 4, y: 34 }
       }
 
-      im.parens(new IM().pointsize(0).size(size.w, size.h).background('none').label(escapedName).trim().gravity('center').extent(size.w, size.h).command('-resize 106%x100%\\!')).gravity('north').geometry(position.x, position.y).composite()
-      im.font('./resource/HEAVYWEIGHT.otf')
+      im.parens(
+        new IM()
+          .pointsize()
+          .size(size.w, size.h)
+          .background('none')
+          .label(escapedName)
+          .trim()
+          .gravity('center')
+          .extent(size.w, size.h)
+          .command('-resize 106%x100%\\!')
+      ).gravity('north')
+        .geometry(position.x, position.y)
+        .composite()
+        .font('./resource/HEAVYWEIGHT.otf')
     }
 
     if (card.options?.isGolden) {
