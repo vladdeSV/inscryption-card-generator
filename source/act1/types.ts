@@ -120,6 +120,10 @@ const Creature = Union(
   Literal('warren_eaten3'),
   Literal('wolf'),
   Literal('wolfcub'),
+
+  Literal('stoat_talking'),
+  Literal('stinkbug_talking'),
+  Literal('wolf_talking'),
 )
 
 const Sigil = Union(
