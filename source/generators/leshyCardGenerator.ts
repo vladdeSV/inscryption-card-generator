@@ -184,7 +184,20 @@ class LeshyCardGenerator implements CardGenerator {
   }
 
   generateBack(type: 'common' | 'squirrel' | 'bee' | 'deathcard' = 'common'): Buffer {
-    return execSync(`convert ./resource/cards/backs/${type}.png -filter Box -resize x1050 -`)
+    const commands: string[] = []
+    const im = (cmd: string) => commands.push(cmd);
+
+    im(`convert ./resource/cards/backs/${type}.png`)
+    if (true) {
+      const type = 'common'
+      const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(type)
+      im(`./resource/cards/backs/borders/${borderName}.png -composite`)
+    }
+
+    im('-filter Box -resize x1050')
+    im('-')
+
+    return execSync(commands.join(' '))
   }
 }
 
