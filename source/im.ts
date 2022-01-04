@@ -11,13 +11,19 @@ class IM {
         return this.#join()
     }
 
-    command(unsanitizedInput: string): typeof this {
+    command(unsanitizedInput: string): this {
         this.#commands.push(unsanitizedInput)
 
         return this
     }
 
-    parens(im: typeof this): typeof this {
+    resource(resource: string): this {
+        this.#commands.push(this.#escape(resource))
+
+        return this
+    }
+
+    parens(im: this): this {
         this.#commands.push('\\(')
         this.#commands.push(im.#join())
         this.#commands.push('\\)')
@@ -25,13 +31,13 @@ class IM {
         return this
     }
 
-    composite(): typeof this {
+    composite(): this {
         this.#commands.push('-composite')
 
         return this
     }
 
-    gravity(gravity?: 'northwest' | 'north' | 'northeast' | 'west' | 'center' | 'east' | 'southwest' | 'south' | 'southeast'): typeof this {
+    gravity(gravity?: 'northwest' | 'north' | 'northeast' | 'west' | 'center' | 'east' | 'southwest' | 'south' | 'southeast'): this {
         if (gravity) {
             this.#commands.push('-gravity')
             this.#commands.push(gravity)
@@ -42,21 +48,21 @@ class IM {
         return this
     }
 
-    geometry(x: number, y: number): typeof this {
+    geometry(x: number, y: number): this {
         this.#commands.push('-geometry')
         this.#commands.push(`${x >= 0 ? '+' : '-'}${Math.abs(x)}${y >= 0 ? '+' : '-'}${Math.abs(y)}`)
 
         return this
     }
 
-    size(w: number, h: number): typeof this {
+    size(w: number, h: number): this {
         this.#commands.push('-size')
         this.#commands.push(`${w}x${h}`)
 
         return this
     }
 
-    extent(w: number, h: number): typeof this {
+    extent(w: number, h: number): this {
         this.#commands.push('-extent')
         this.#commands.push(`${w}x${h}`)
 
@@ -64,7 +70,7 @@ class IM {
     }
 
     // todo resize percentage
-    resize(w?: number, h?: number): typeof this {
+    resize(w?: number, h?: number): this {
         if (w || h) {
             this.#commands.push('-resize')
             this.#commands.push(`${w ?? ''}x${h ?? ''}`)
@@ -73,37 +79,67 @@ class IM {
         return this
     }
 
-    background(background: string): typeof this {
-        if (background) {
-            this.#commands.push('-background')
-            this.#commands.push(background)
-        }
+    background(background: string): this {
+        this.#commands.push('-background')
+        this.#commands.push(this.#escape(background))
 
         return this
     }
 
-    trim(): typeof this {
+    trim(): this {
         this.#commands.push('-trim')
 
         return this
     }
 
-    label(input: string | number): typeof this {
+    label(input: string | number): this {
         this.#commands.push(`label:${this.#escape(input)}`)
 
         return this
     }
 
-    font(font: string): typeof this {
+    font(font: string): this {
         this.#commands.push('-font')
         this.#commands.push(this.#escape(font))
 
         return this
     }
 
-    pointsize(size: number): typeof this {
-        this.#commands.push('-pointsize')
-        this.#commands.push(String(size))
+    pointsize(size?: number): this {
+        if (size) {
+            this.#commands.push('-pointsize')
+            this.#commands.push(String(size))
+        } else {
+            this.#commands.push('+pointsize')
+        }
+
+        return this
+    }
+
+    alpha(type: AlphaType): this {
+        this.#commands.push('-alpha')
+        this.#commands.push(type)
+
+        return this
+    }
+
+    interpolate(type: InterpolateType): this {
+        this.#commands.push('-interpolate')
+        this.#commands.push(type)
+
+        return this
+    }
+
+    filter(type: FilterType): this {
+        this.#commands.push('-filter')
+        this.#commands.push(type)
+
+        return this
+    }
+
+    compose(type: ComposeType): this {
+        this.#commands.push('-compose')
+        this.#commands.push(type)
 
         return this
     }
@@ -122,5 +158,10 @@ class IM {
 
     #commands: string[] = []
 }
+
+type FilterType = 'bartlett' | 'blackman' | 'bohman' | 'box' | 'catrom' | 'cosine' | 'cubic' | 'gaussian' | 'hamming' | 'hann' | 'hermite' | 'jinc' | 'kaiser' | 'lagrange' | 'lanczos' | 'lanczos2' | 'lanczos2sharp' | 'lanczosradius' | 'lanczossharp' | 'mitchell' | 'parzen' | 'point' | 'quadratic' | 'robidoux' | 'robidouxsharp' | 'sinc' | 'sincfast' | 'spline' | 'cubicspline' | 'triangle' | 'welch'
+type InterpolateType = 'average' | 'average4' | 'average9' | 'average16' | 'background' | 'bilinear' | 'blend' | 'catrom' | 'integer' | 'mesh' | 'nearest' | 'spline'
+type AlphaType = 'activate' | 'associate' | 'deactivate' | 'disassociate' | 'set' | 'opaque' | 'transparent' | 'extract' | 'copy' | 'shape' | 'remove' | 'background'
+type ComposeType = 'atop' | 'blend' | 'blur' | 'bumpmap' | 'changemask' | 'clear' | 'colorburn' | 'colordodge' | 'colorize' | 'copyalpha' | 'copyblack' | 'copyblue' | 'copy' | 'copycyan' | 'copygreen' | 'copymagenta' | 'copyred' | 'copyyellow' | 'darken' | 'darkenintensity' | 'difference' | 'displace' | 'dissolve' | 'distort' | 'dividedst' | 'dividesrc' | 'dstatop' | 'dst' | 'dstin' | 'dstout' | 'dstover' | 'exclusion' | 'freeze' | 'hardlight' | 'hardmix' | 'hue' | 'in' | 'intensity' | 'interpolate' | 'lightenintensity' | 'lighten' | 'linearburn' | 'lineardodge' | 'linearlight' | 'luminize' | 'mathematics' | 'minusdst' | 'minussrc' | 'modulate' | 'modulusadd' | 'modulussubtract' | 'multiply' | 'negate' | 'none' | 'out' | 'overlay' | 'over' | 'pegtoplight' | 'pinlight' | 'plus' | 'reflect' | 'replace' | 'rmse' | 'saturate' | 'screen' | 'softburn' | 'softdodge' | 'softlight' | 'srcatop' | 'srcin' | 'srcout' | 'srcover' | 'src' | 'stamp' | 'stereo' | 'vividlight' | 'xor'
 
 export { IM }
