@@ -4,7 +4,7 @@ import { CardGenerator } from "./cardGenerator";
 
 class LeshyCardGenerator implements CardGenerator {
 
-  generate(card: Card): Buffer {
+  generate(card: Card, locale: string | undefined = undefined): Buffer {
     const commands: string[] = []
     const im = (cmd: string) => commands.push(cmd);
 
@@ -119,10 +119,27 @@ class LeshyCardGenerator implements CardGenerator {
       const squidTitlePath = `./resource/misc/squid_title.png`
       im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize x152 -filter box -gravity north -geometry +0+20 \\) -composite`)
     } else if (card.name) {
+
       const escapedName = card.name.replace(/[\\']/g, '')
-      const size = '570x135'
-      const position = geometryPosition(0, 28)
+
+      // default for english
+      let size = '570x135'
+      let position = geometryPosition(0, 28)
+
+      if (locale === 'jp') {
+        im('-font ./resource/ShipporiMincho-ExtraBold.ttf')
+
+        size = '570x166'
+        position = geometryPosition(0, 16)
+      }
+
+      if(locale === 'ko') {
+        im('-font ./resource/Stylish-Regular.ttf')
+        position = geometryPosition(4, 34)
+      }
+
       im(`\\( -pointsize 0 -size ${size} -background none label:'${escapedName}' -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
+      im(`-font ./resource/HEAVYWEIGHT.otf`)
     }
 
     if (card.options?.isGolden) {
