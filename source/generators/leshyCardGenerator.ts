@@ -1,50 +1,52 @@
 import { execSync } from "child_process";
 import { Card, CardType } from "../act1/types";
+import { IM } from "../im";
 import { CardGenerator } from "./cardGenerator";
 
 class LeshyCardGenerator implements CardGenerator {
 
   generate(card: Card, locale: string | undefined = undefined): Buffer {
-    const commands: string[] = []
-    const im = (cmd: string) => commands.push(cmd);
+    const im = new IM(`./resource/cards/${card.type}.png`);
 
-    const geometryPosition = (x: number, y: number): string => {
-      const firstSign = x > 0 ? '+' : '-'
-      const secondSign = y > 0 ? '+' : '-'
-      return `${firstSign}${Math.abs(x)}${secondSign}${Math.abs(y)}`
-    }
-
-    im(`convert ./resource/cards/${card.type}.png`)
-    im(`-font ./resource/HEAVYWEIGHT.otf -pointsize 200`)
+    im.font('./resource/HEAVYWEIGHT.otf')
+      .pointsize(200)
 
     const isTerrain = card.options?.isTerrain ?? false
     const portrait = card.portrait;
     if (portrait) {
-      if (portrait === 'custom') {
-        im(`\\( - -gravity center -geometry +1-15 \\) -composite`)
-      } else {
-        const portraitLocation = `./resource/portraits/${portrait}.png`
-        im(`\\( ${portraitLocation} -gravity center -geometry +1-15 \\) -composite`)
-      }
+      im.resource(portrait === 'custom' ? '-' : `./resource/portraits/${portrait}.png`)
+        .gravity('center')
+        .geometry(1, -15)
+        .composite()
     }
 
     if (card.options?.hasBorder) {
       const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
-      im(`./resource/cards/borders/${borderName}.png -composite`)
+      im.resource(`./resource/cards/borders/${borderName}.png`)
+        .composite()
     }
 
-    im('-filter Box -resize x1050') // make big
-    im('-gravity northwest')
+    im.command('-filter Box')
+      .resize(undefined, 1050) // 1050 pixels @ 300dpi = 3.5 inches
+      .gravity('northwest')
 
     const tribes = card.tribes
     if (tribes) {
-      const aligns: string[] = [geometryPosition(-12, 3), geometryPosition(217, 5), geometryPosition(444, 7), geometryPosition(89, 451), geometryPosition(344, 452)]
+      const aligns: [number, number][] = [[-12, 3], [217, 5], [444, 7], [89, 451], [344, 452]]
 
       for (const [index, tribe] of tribes.entries()) {
         const tribeLocation = `./resource/tribes/${tribe}.png`
         const position = aligns[index]
 
-        im(`\\( ${tribeLocation} -resize x354 -gravity northwest -alpha set -background none -channel A -evaluate multiply 0.4 +channel -geometry ${position} \\) -composite`)
+        im.parens(
+          new IM(tribeLocation)
+            .resize(undefined, 354)
+            .gravity('northwest')
+            .alpha('set')
+            .background('none')
+            .command('-channel A -evaluate multiply 0.4 +channel')
+        ).geometry(position[0], position[1])
+          .composite()
       }
     }
 
@@ -53,24 +55,50 @@ class LeshyCardGenerator implements CardGenerator {
       const { amount, type } = cost;
 
       const costPath = `./resource/costs/${amount}${type}.png`
-      const position = geometryPosition(32, 110)
-      im(`\\( ${costPath} -interpolate Nearest -filter point -resize 284x -filter box -gravity east \\) -gravity northeast -geometry ${position} -composite -gravity northwest`)
+      im.parens(
+        new IM(costPath)
+          .interpolate('nearest')
+          .filter('point')
+          .resize(284)
+          .filter('box')
+          .gravity('east')
+      ).gravity('northeast')
+        .geometry(32, 110)
+        .composite()
+        .gravity('northwest')
     }
 
     const power = card.power
     if (power !== undefined) {
       if (typeof power === 'number') {
-        const size = '114x215'
-        const position = geometryPosition(68, 729)
-
         // don't show power if power === 0 and card is a terrain card
         if (power > 0 || !card.options?.isTerrain) {
-          im(`\\( -pointsize 0 -size ${size} -background none label:${power} -gravity east -extent ${size} \\) -gravity northwest -geometry ${position} -composite`)
+          const w = 114
+          const h = 215
+
+          im.parens(
+            new IM('')
+              .pointsize(0)
+              .size(w, h)
+              .background('none')
+              .label(power)
+              .gravity('east')
+              .extent(w, h)
+          ).gravity('northwest')
+            .geometry(68, 729)
+            .composite()
         }
       } else {
         const statIconPath = `./resource/staticon/${power}.png`
-        const position = '+5+705'
-        im(`\\( "${statIconPath}" -interpolate Nearest -filter point -resize 245x -filter box -gravity northwest \\) -geometry ${position} -composite`)
+        im.parens(
+          new IM(statIconPath)
+            .interpolate('nearest')
+            .filter('point')
+            .resize(245)
+            .filter('box')
+            .gravity('northwest')
+        ).geometry(5, 705)
+          .composite()
       }
     }
 
@@ -78,9 +106,19 @@ class LeshyCardGenerator implements CardGenerator {
 
     const health = card.health
     if (health !== undefined) {
-      const size = '114x215'
-      const position = geometryPosition(32 - xoffset, 815)
-      im(`\\( -pointsize 0 -size ${size} -background none label:${health} -gravity east -extent ${size} \\) -gravity northeast -geometry ${position} -composite`)
+      const w = 114
+      const h = 215
+      im.parens(
+        new IM()
+          .pointsize(0)
+          .size(w, h)
+          .background('none')
+          .label(health)
+          .gravity('east')
+          .extent(w, h)
+      ).gravity('northeast')
+        .geometry(32 - xoffset, 815)
+        .composite()
     }
 
     // // todo: refactor this behemoth
@@ -90,13 +128,31 @@ class LeshyCardGenerator implements CardGenerator {
 
       if (sigilCount === 1) {
         const sigilPath = `./resource/sigils/${sigils[0]}.png`
-        const position = geometryPosition(221 + xoffset, 733)
-        im(`\\( ${sigilPath} -interpolate Nearest -filter point -resize x253 -filter box -gravity northwest -geometry ${position} \\) -composite`)
+        im.parens(
+          new IM(sigilPath)
+            .interpolate('nearest')
+            .filter('point')
+            .resize(undefined, 253)
+            .filter('box')
+        ).gravity('northwest')
+          .geometry(221 + xoffset, 733)
+          .composite()
       } else if (sigilCount === 2) {
         const sigilPath1 = `./resource/sigils/${sigils[0]}.png`
         const sigilPath2 = `./resource/sigils/${sigils[1]}.png`
-        im(`\\( ${sigilPath1} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(331 + xoffset, 720)} \\) -composite`)
-        im(`\\( ${sigilPath2} -filter Box -resize x180 -gravity northwest -geometry ${geometryPosition(180 + xoffset, 833)} \\) -composite`)
+        im.parens(new IM(sigilPath1)
+          .filter('box')
+          .resize(undefined, 180)
+        ).gravity('northwest')
+          .geometry(331 + xoffset, 720)
+          .composite()
+
+        im.parens(new IM(sigilPath2)
+          .filter('box')
+          .resize(undefined, 180)
+        ).gravity('northwest')
+          .geometry(180 + xoffset, 833)
+          .composite()
       } else {
 
         throw new Error('Multiple sigils not supported (more than 2 sigils)')
@@ -117,38 +173,49 @@ class LeshyCardGenerator implements CardGenerator {
 
     if (card.options?.isSquid) {
       const squidTitlePath = `./resource/misc/squid_title.png`
-      im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize x152 -filter box -gravity north -geometry +0+20 \\) -composite`)
+      im.parens(new IM(squidTitlePath).interpolate('nearest').filter('point').resize(undefined, 152).filter('box').gravity('north').geometry(0, 20)).composite()
     } else if (card.name) {
 
       const escapedName = card.name.replace(/[\\']/g, '')
 
       // default for english
-      let size = '570x135'
-      let position = geometryPosition(0, 28)
+      let size = { w: 570, h: 135 }
+      let position = { x: 0, y: 28 }
 
       if (locale === 'jp') {
-        im('-font ./resource/ShipporiMincho-ExtraBold.ttf')
+        im.font('./resource/ShipporiMincho-ExtraBold.ttf')
 
-        size = '570x166'
-        position = geometryPosition(0, 16)
+        size = { w: 570, h: 166 }
+        position = { x: 0, y: 16 }
       }
 
-      if(locale === 'ko') {
-        im('-font ./resource/Stylish-Regular.ttf')
-        position = geometryPosition(4, 34)
+      if (locale === 'ko') {
+        im.font('./resource/Stylish-Regular.ttf')
+        position = { x: 4, y: 34 }
       }
 
-      im(`\\( -pointsize 0 -size ${size} -background none label:'${escapedName}' -trim -gravity center -extent ${size} -resize 106%x100%\\! \\) -gravity north -geometry ${position} -composite`)
-      im(`-font ./resource/HEAVYWEIGHT.otf`)
+      im.parens(new IM().pointsize(0).size(size.w, size.h).background('none').label(escapedName).trim().gravity('center').extent(size.w, size.h).command('-resize 106%x100%\\!')).gravity('north').geometry(position.x, position.y).composite()
+      im.font('./resource/HEAVYWEIGHT.otf')
     }
 
     if (card.options?.isGolden) {
-      im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -geometry +0+0 -compose hardlight -composite`)
+      im.parens(
+        new IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
+      ).geometry(0, 0)
+        .compose('hardlight')
+        .composite()
 
       // use emission for default portraits
       if (card.portrait && card.portrait !== 'custom') {
         const scale = 1050 / 190
-        im(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
+        im.parens(
+          new IM(`./resource/portraits/emissions/${card.portrait}.png`)
+            .filter('box')
+            .command(`-resize ${scale * 100}%`)
+            .gravity('center')
+            .geometry(0, 15 * scale)
+        ).compose('overlay')
+          .composite()
       }
     }
 
@@ -156,45 +223,42 @@ class LeshyCardGenerator implements CardGenerator {
     if (decals) {
       for (const decal of decals) {
         const decalPath = `./resource/decals/${decal}.png`
-        im(`\\( ${decalPath} -filter Box -resize x1050 \\) -composite`)
+        im.parens(
+          new IM(decalPath)
+            .filter('box')
+            .resize(undefined, 1050)
+        ).composite()
       }
     }
 
     if (card.options?.isEnhanced && card.portrait !== 'custom') {
       const scale = 1050 / 190
-      im(`\\( ./resource/portraits/emissions/${card.portrait}.png -fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}% -gravity center -geometry -2-${15 * scale} \\) -composite`)
-      im(`\\( ./resource/portraits/emissions/${card.portrait}.png -fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}% -gravity center -geometry -2-${15 * scale} -blur 0x10 \\) -composite`)
+      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(-2, -15 * scale)).composite()
+      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(-2, -15 * scale).command('-blur 0x10')).composite()
     }
-
-    im('-') // to stdout (stdoat hehe)
-
 
     let customPortraitData = undefined
     if (card.portrait === 'custom' && card.options?.portraitData) {
       customPortraitData = Buffer.from(card.options.portraitData, 'base64')
     }
 
-    const command = commands.join(' ')
-    const buffer = execSync(command, { input: customPortraitData })
+    const buffer = execSync(im.build('convert', '-'), { input: customPortraitData })
 
     return buffer
   }
 
   generateBack(type: 'common' | 'squirrel' | 'bee' | 'deathcard' = 'common'): Buffer {
-    const commands: string[] = []
-    const im = (cmd: string) => commands.push(cmd);
+    const im = new IM(`./resource/cards/backs/${type}.png`)
 
-    im(`convert ./resource/cards/backs/${type}.png`)
     if (true) {
       const type = 'common'
       const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(type)
-      im(`./resource/cards/backs/borders/${borderName}.png -composite`)
+      im.resource(`./resource/cards/backs/borders/${borderName}.png`).composite()
     }
 
-    im('-filter Box -resize x1050')
-    im('-')
+    im.filter('box').resize(undefined, 1050)
 
-    return execSync(commands.join(' '))
+    return execSync(im.build('convert', '-'))
   }
 }
 
