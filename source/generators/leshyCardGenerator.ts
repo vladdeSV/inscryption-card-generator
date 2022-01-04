@@ -168,17 +168,14 @@ class LeshyCardGenerator implements CardGenerator {
 
     im('-') // to stdout (stdoat hehe)
 
-    const command = commands.join(' ')
-    console.log('COMMAND:', command);
 
     let customPortraitData = undefined
     if (card.portrait === 'custom' && card.options?.portraitData) {
       customPortraitData = Buffer.from(card.options.portraitData, 'base64')
     }
 
-    console.time('generation time')
+    const command = commands.join(' ')
     const buffer = execSync(command, { input: customPortraitData })
-    console.timeEnd('generation time')
 
     return buffer
   }
