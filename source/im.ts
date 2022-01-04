@@ -1,6 +1,8 @@
 class IM {
-    constructor(resource: string) {
-        this.#commands.push(this.#escape(resource))
+    constructor(resource?: string) {
+        if (resource) {
+            this.#commands.push(this.#escape(resource))
+        }
     }
 
     build(executable: 'convert' | 'magick' | 'mogrify', out: string): string {
