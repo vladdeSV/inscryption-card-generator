@@ -249,8 +249,8 @@ class LeshyCardGenerator implements CardGenerator {
 
     if (card.options?.isEnhanced && card.portrait !== 'custom') {
       const scale = 1050 / 190
-      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(-2, -15 * scale)).composite()
-      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(-2, -15 * scale).command('-blur 0x10')).composite()
+      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale)).composite()
+      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
     }
 
     let customPortraitData = undefined
