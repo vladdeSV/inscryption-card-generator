@@ -77,7 +77,7 @@ class LeshyCardGenerator implements CardGenerator {
           const h = 215
 
           im.parens(
-            new IM('')
+            new IM()
               .pointsize()
               .size(w, h)
               .background('none')
@@ -203,7 +203,7 @@ class LeshyCardGenerator implements CardGenerator {
           .trim()
           .gravity('center')
           .extent(size.w, size.h)
-          .command('-resize 106%x100%\\!')
+          .resizeExt(r => r.scale(106, 100, '!'))
       ).gravity('north')
         .geometry(position.x, position.y)
         .composite()
