@@ -182,16 +182,27 @@ class LeshyCardGenerator implements CardGenerator {
       let size = { w: 570, h: 135 }
       let position = { x: 0, y: 28 }
 
-      if (locale === 'jp') {
-        im.font('./resource/ShipporiMincho-ExtraBold.ttf')
-
-        size = { w: 570, h: 166 }
-        position = { x: 0, y: 16 }
-      }
-
       if (locale === 'ko') {
         im.font('./resource/Stylish-Regular.ttf')
         position = { x: 4, y: 34 }
+      }
+
+      if (locale === 'jp') {
+        size = { w: 570, h: 166 }
+        position = { x: 0, y: 16 }
+        im.font('./resource/ShipporiMincho-ExtraBold.ttf')
+      }
+
+      if (locale === 'zh-cn') {
+        size = { w: 570, h: 166 }
+        position = { x: 0, y: 16 }
+        im.font('./resource/NotoSerifSC-Bold.otf')
+      }
+
+      if (locale === 'zh-tw') {
+        size = { w: 570, h: 166 }
+        position = { x: 0, y: 16 }
+        im.font('./resource/NotoSerifTC-Bold.otf')
       }
 
       im.parens(
