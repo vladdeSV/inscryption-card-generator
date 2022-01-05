@@ -231,14 +231,7 @@ class LeshyCardGenerator implements CardGenerator {
       // use emission for default portraits
       if (card.portrait && card.portrait !== 'custom') {
         const scale = 1050 / 190
-        im.parens(
-          new IM(`./resource/portraits/emissions/${card.portrait}.png`)
-            .filter('box')
-            .command(`-resize ${scale * 100}%`)
-            .gravity('center')
-            .geometry(0, 15 * scale)
-        ).compose('overlay')
-          .composite()
+        im.command(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
       }
     }
 
