@@ -2,6 +2,8 @@ import { Card } from "./act1/types";
 
 export const presets: { [s: string]: Card } = {
 
+  "blank": { type: 'common' },
+
   "stoat_talking": { type: 'common', name: 'stoat', portrait: 'stoat_talking', health: 3, power: 1, cost: { type: 'blood', amount: 1 } },
   "wolf_talking": { type: 'common', name: 'wolf_talking', portrait: 'wolf_talking', health: 2, power: 2, cost: { type: 'blood', amount: 1 }, tribes: ['canine'] },
   "stinkbug_talking": { type: 'common', name: 'stinkbug_talking', portrait: 'stinkbug_talking', health: 2, power: 1, cost: { type: 'bone', amount: 2 }, tribes: ['insect'], sigils: ['debuffenemy'] },
