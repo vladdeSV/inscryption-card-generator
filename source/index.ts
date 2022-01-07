@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { Card } from "./act1/types";
-import { validateIds, generateAct1Cards, generatePdf } from "./generate_pdf";
+import { validateIds, generateAct1Cards, generatePdf } from "./exporters";
 import { LeshyCardGenerator } from "./generators/leshyCardGenerator";
 
 export const presets: { [s: string]: Card } = {
@@ -108,9 +108,10 @@ export const presets: { [s: string]: Card } = {
 
 }
 
-const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
-const locales = Object.keys(translations)
-const cardIds: [string, string, string, string][] = [
+function generateAllPdfs() {
+  const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
+  const locales = Object.keys(translations)
+  const cardIds: [string, string, string, string][] = [
     ['stoat_talking', 'stinkbug_talking', 'wolf_talking', 'blank'],
     ['wolf_cub', 'wolf', 'elk_fawn', 'elk'],
     ['raven_egg', 'raven', 'field_mice', 'beehive'],
@@ -144,13 +145,14 @@ const cardIds: [string, string, string, string][] = [
 
     ['squirrel', 'squirrel', 'squirrel', 'squirrel'],
     ['bee', 'bee', 'bee', 'bee'],
-]
+    ['blank', 'blank', 'blank', 'blank'],
+  ]
 
-validateIds(Object.keys(presets), cardIds.flat(2))
+  validateIds(Object.keys(presets), cardIds.flat(2))
 
-console.log('generating for locales', locales.join(','));
-console.time('everything')
-for (const locale of locales) {
+  console.log('generating for locales', locales.join(','));
+  console.time('everything')
+  for (const locale of locales) {
     const leshy = new LeshyCardGenerator()
 
     console.time('generate cards ' + locale)
@@ -158,5 +160,6 @@ for (const locale of locales) {
     console.timeEnd('generate cards ' + locale)
 
     generatePdf(cardIds, locale)
+  }
+  console.timeEnd('everything')
 }
-console.timeEnd('everything')
