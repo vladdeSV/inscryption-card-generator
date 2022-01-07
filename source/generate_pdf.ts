@@ -175,6 +175,7 @@ const cardIds: [string, string, string, string][] = [
 
 validateIds(Object.keys(presets), cardIds.flat(2))
 
+console.log('generating for locales', locales.join(','));
 console.time('everything')
 for (const locale of locales) {
     const leshy = new LeshyCardGenerator()
