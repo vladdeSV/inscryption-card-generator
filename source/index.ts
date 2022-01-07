@@ -1,4 +1,7 @@
+import { readFileSync } from "fs";
 import { Card } from "./act1/types";
+import { validateIds, generateAct1Cards, generatePdf } from "./generate_pdf";
+import { LeshyCardGenerator } from "./generators/leshyCardGenerator";
 
 export const presets: { [s: string]: Card } = {
 
@@ -104,3 +107,56 @@ export const presets: { [s: string]: Card } = {
   "greater_smoke": { name: "smoke_improved", type: "common", power: 1, health: 3, sigils: ["quadruplebones"], portrait: "smoke_improved", decals: ["smoke"], options: { isEnhanced: true } },
 
 }
+
+const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
+const locales = Object.keys(translations)
+const cardIds: [string, string, string, string][] = [
+    ['stoat_talking', 'stinkbug_talking', 'wolf_talking', 'blank'],
+    ['wolf_cub', 'wolf', 'elk_fawn', 'elk'],
+    ['raven_egg', 'raven', 'field_mice', 'beehive'],
+    ['adder', 'bullfrog', 'cat', 'river_snapper'],
+    ['mantis', 'beaver', 'mole', 'porcupine'],
+    ['pronghorn', 'river_otter', 'rat_king', 'ring_worm'],
+    ['ant_queen', 'worker_ant', 'skunk', 'skink'],
+    ['kingfisher', 'sparrow', 'magpie', 'bloodhound'],
+    ['squid_bell', 'squid_cards', 'squid_mirror', 'black_goat'],
+    ['alpha', 'coyote', 'opossum', 'rattler'],
+    ['corpse_maggots', 'cockroach', 'bat', 'turkey_vulture'],
+    ['warren', 'rabbit', 'rabbit', 'rabbit'],
+    ['tail_feathers', 'furry_tail', 'wriggling_leg', 'wriggling_tail'],
+    ['grizzly', 'great_white', 'moose_buck', 'urayuli'],
+
+    // rare
+    ['geck', 'mole_man', 'pack_rat', 'mantis_god'],
+    ['amalgam', 'amoeba', 'ouroboros', 'the_daus'],
+    ['strange_larva', 'strange_pupa', 'mothman', 'long_elk'],
+    ['child_13', 'child_13_awake', 'black_goat_sexy', 'pack_mule'],
+
+    // terrain
+    ['boulder', 'stump', 'grand_fir', 'snowy_fir'],
+    ['chime', 'chime', 'dam', 'dam'],
+    ['rabbit_pelt', 'wolf_pelt', 'golden_pelt', 'gold_nugget'],
+    ['frozen_opossum', 'leaping_trap', 'bait_bucket', 'strange_frog'],
+
+    // once only
+    ['hungry_child', 'leshy', 'caged_wolf', 'undead_cat'],
+    ['greater_smoke', 'the_smoke', 'starvation', 'starvation_flying'],
+
+    ['squirrel', 'squirrel', 'squirrel', 'squirrel'],
+    ['bee', 'bee', 'bee', 'bee'],
+]
+
+validateIds(Object.keys(presets), cardIds.flat(2))
+
+console.log('generating for locales', locales.join(','));
+console.time('everything')
+for (const locale of locales) {
+    const leshy = new LeshyCardGenerator()
+
+    console.time('generate cards ' + locale)
+    generateAct1Cards(presets, leshy, locale, translations[locale])
+    console.timeEnd('generate cards ' + locale)
+
+    generatePdf(cardIds, locale)
+}
+console.timeEnd('everything')
