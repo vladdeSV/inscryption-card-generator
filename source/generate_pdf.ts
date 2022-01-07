@@ -179,7 +179,11 @@ console.log('generating for locales', locales.join(','));
 console.time('everything')
 for (const locale of locales) {
     const leshy = new LeshyCardGenerator()
+    
+    console.time('generate cards ' + locale)
     generateAct1Cards(presets, leshy, locale, translations[locale])
+    console.timeEnd('generate cards ' + locale)
+
     generatePdf(cardIds, locale)
 }
 console.timeEnd('everything')
