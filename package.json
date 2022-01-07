@@ -1,18 +1,13 @@
 {
   "name": "inscryption-card-generator-api",
-  "version": "1.0.0",
-  "main": "out/index.bundle.js",
   "author": "Vladimirs Nordholm <v@vladde.net>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn build && node .",
-    "build": "yarn esbuild source/index.ts --bundle --minify --platform=node --outfile=./out/index.bundle.js"
+    "generate": "yarn ts-node source/generate_pdf.ts"
   },
   "dependencies": {
-    "@types/gm": "^1.18.10",
     "fastify": "^3.24.0",
-    "object-hash": "^2.2.0",
     "runtypes": "^6.5.0"
   },
   "devDependencies": {
