@@ -20,7 +20,7 @@ class LeshyCardGenerator implements CardGenerator {
         .composite()
     }
 
-    if (card.options?.hasBorder) {
+    if (this.#bordered) {
       const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
       im.resource(`./resource/cards/borders/${borderName}.png`)
         .composite()
@@ -266,7 +266,7 @@ class LeshyCardGenerator implements CardGenerator {
   generateBack(type: 'common' | 'squirrel' | 'bee' | 'deathcard' = 'common'): Buffer {
     const im = new IM(`./resource/cards/backs/${type}.png`)
 
-    if (true) {
+    if (this.#bordered) {
       const type = 'common'
       const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(type)
       im.resource(`./resource/cards/backs/borders/${borderName}.png`).composite()
@@ -276,6 +276,12 @@ class LeshyCardGenerator implements CardGenerator {
 
     return execSync(im.build('convert', '-'))
   }
+
+  setBorderedCards(bordered: boolean) {
+    this.#bordered = bordered
+  }
+
+  #bordered: boolean = false;
 }
 
 export { LeshyCardGenerator }

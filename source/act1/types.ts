@@ -197,7 +197,6 @@ const Card = Record({
     isEnhanced: Boolean.optional(),
     isGolden: Boolean.optional(),
     isSquid: Boolean.optional(),
-    hasBorder: Boolean.optional(),
     portraitData: String.optional(),
   }).optional(),
   extra: Record({
