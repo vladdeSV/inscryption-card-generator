@@ -1,6 +1,6 @@
-import { execSync } from "child_process"
-import { readFileSync } from "fs"
-import { Card, CardBack, CardBackType, CardType, Power } from "./types"
+import { execSync } from 'child_process'
+import { readFileSync } from 'fs'
+import { Card, CardBack, CardBackType, CardType, Power } from './types'
 
 function powerFromInput(input: unknown): number | Power | undefined {
   if (Power.guard(input)) {
@@ -86,14 +86,14 @@ function bufferFromCard(card: Card): Buffer {
   }
 
   // make big
-  im(`-filter Box -resize 674x1024`)
+  im('-filter Box -resize 674x1024')
 
   const aligns: { gravity: string, geometry: string }[] = [
-    { gravity: 'northwest', geometry: `-11+4` },
-    { gravity: 'north', geometry: `-1+4` },
-    { gravity: 'northeast', geometry: `-14+4` },
-    { gravity: 'center', geometry: `-121+101` },
-    { gravity: 'center', geometry: `+125+101` },
+    { gravity: 'northwest', geometry: '-11+4' },
+    { gravity: 'north', geometry: '-1+4' },
+    { gravity: 'northeast', geometry: '-14+4' },
+    { gravity: 'center', geometry: '-121+101' },
+    { gravity: 'center', geometry: '+125+101' },
   ]
 
   // todo: coud be converted to one command
@@ -109,7 +109,7 @@ function bufferFromCard(card: Card): Buffer {
 
   const cost = card.cost
   if (cost) {
-    const { amount, type } = cost;
+    const { amount, type } = cost
 
     const costPath = `./resource/costs/${amount}${type}.png`
     im(`\\( "${costPath}" -interpolate Nearest -filter point -resize 440% -filter box -gravity east -geometry +32-265 \\) -composite`)
@@ -171,10 +171,10 @@ function bufferFromCard(card: Card): Buffer {
   }
 
   if (card.options?.isSquid) {
-    const squidTitlePath = `./resource/misc/squid_title.png`
+    const squidTitlePath = './resource/misc/squid_title.png'
     im(`\\( "${squidTitlePath}" -interpolate Nearest -filter point -resize 530% -filter box -gravity north -geometry +0+19 \\) -composite`)
   } else if (card.name) {
-    console.log(card.name);
+    console.log(card.name)
     
     const unescapedName = card.name //.replace(/[^A-Za-z&'*-./? ]/g, '?')
     const size = '580x135'
@@ -190,7 +190,7 @@ function bufferFromCard(card: Card): Buffer {
   }
 
   if (card.options?.isGolden) {
-    im(`\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -compose hardlight -composite`)
+    im('\\( -clone 0 -fill rgb\\(255,128,0\\) -colorize 75 \\) -compose hardlight -composite')
 
     // use emission for default portraits
     if (card.portrait && card.portrait !== 'custom') {
@@ -224,7 +224,7 @@ function bufferFromCardBack(cardBack: CardBack): Buffer {
   }
 
   // make big
-  im(`-filter Box -resize 674x1024`)
+  im('-filter Box -resize 674x1024')
 
   try {
     const command = commands.map(x => `convert - ${x} -`).join(' | ')

@@ -1,18 +1,18 @@
-import { execSync } from "child_process";
-import { Card, CardType } from "../act1/types";
-import { IM } from "../im";
-import { CardGenerator } from "./cardGenerator";
+import { execSync } from 'child_process'
+import { Card, CardType } from '../act1/types'
+import { IM } from '../im'
+import { CardGenerator } from './cardGenerator'
 
 class LeshyCardGenerator implements CardGenerator {
 
   generate(card: Card, locale: string | undefined = undefined): Buffer {
-    const im = new IM(`./resource/cards/${card.type}.png`);
+    const im = new IM(`./resource/cards/${card.type}.png`)
 
     im.font('./resource/HEAVYWEIGHT.otf')
       .pointsize(200)
 
     const isTerrain = card.options?.isTerrain ?? false
-    const portrait = card.portrait;
+    const portrait = card.portrait
     if (portrait) {
       im.resource(portrait === 'custom' ? '-' : `./resource/portraits/${portrait}.png`)
         .gravity('center')
@@ -52,7 +52,7 @@ class LeshyCardGenerator implements CardGenerator {
 
     const cost = card.cost
     if (cost) {
-      const { amount, type } = cost;
+      const { amount, type } = cost
 
       const costPath = `./resource/costs/${amount}${type}.png`
       im.parens(
@@ -172,7 +172,7 @@ class LeshyCardGenerator implements CardGenerator {
     }
 
     if (card.options?.isSquid) {
-      const squidTitlePath = `./resource/misc/squid_title.png`
+      const squidTitlePath = './resource/misc/squid_title.png'
       im.parens(new IM(squidTitlePath).interpolate('nearest').filter('point').resize(undefined, 152).filter('box').gravity('north').geometry(0, 20)).composite()
     } else if (card.name) {
 
@@ -281,7 +281,7 @@ class LeshyCardGenerator implements CardGenerator {
     this.#bordered = bordered
   }
 
-  #bordered: boolean = false;
+  #bordered = false
 }
 
 export { LeshyCardGenerator }

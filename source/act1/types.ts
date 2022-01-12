@@ -202,7 +202,7 @@ const Card = Record({
   extra: Record({
     talkText: String.optional(),
   }).optional(),
-});
+})
 
 type CardBackType = Static<typeof CardBackType>
 const CardBackType = Union(

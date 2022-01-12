@@ -1,7 +1,7 @@
-import { execSync } from "child_process";
-import { Card } from "../act1/types";
-import { PixelProfilgateCard } from "../pixelprofilgatecards";
-import { CardGenerator } from "./cardGenerator";
+import { execSync } from 'child_process'
+import { Card } from '../act1/types'
+import { PixelProfilgateCard } from '../pixelprofilgatecards'
+import { CardGenerator } from './cardGenerator'
 
 type SigilEntry = {
   name: string,
@@ -12,7 +12,7 @@ type SigilEntry = {
 class PixelProfilgateGenerator implements CardGenerator {
   generate(card: PixelProfilgateCard): Buffer {
     const commands: string[] = []
-    const im = (cmd: string) => commands.push(cmd);
+    const im = (cmd: string) => commands.push(cmd)
 
     const geometryPosition = (x: number, y: number): string => {
       const firstSign = x > 0 ? '+' : '-'
@@ -21,7 +21,7 @@ class PixelProfilgateGenerator implements CardGenerator {
     }
 
     im(`convert ./resource-pixelprofilgate/cards/${card.type}.png`)
-    im(`-font ./resource/HEAVYWEIGHT.otf -pointsize 80`)
+    im('-font ./resource/HEAVYWEIGHT.otf -pointsize 80')
 
     // todo portrait
     const portrait = card.portrait
@@ -58,16 +58,16 @@ class PixelProfilgateGenerator implements CardGenerator {
     }
 
     if (typeof card.extra?.talkText === 'string') {
-      const talkText = card.extra.talkText.replace(/\\'"/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"');
+      const talkText = card.extra.talkText.replace(/\\'"/g, '\\\\').replace(/'/g, '\\\'').replace(/"/g, '\\"')
       im(`-pointsize 32 -fill rgb\\(128,78,48\\) -draw "text 66,658 '${talkText}'"`)
     }
 
-    im(`-gravity northwest -fill black`)
+    im('-gravity northwest -fill black')
 
     const entries: SigilEntry[] = []
 
     if (card.power === 'ants') {
-      entries.push({ name: 'Colony', text: "This card\\'s power is equal to the number of cards with this sigil on your side of the field.", sigilId: 'colony' })
+      entries.push({ name: 'Colony', text: 'This card\\\'s power is equal to the number of cards with this sigil on your side of the field.', sigilId: 'colony' })
     }
 
     entries.push(...(card.sigils ?? []).map(x => this.sigils[x]))
@@ -100,7 +100,7 @@ class PixelProfilgateGenerator implements CardGenerator {
   }
 
   generateBack(): Buffer {
-    return execSync(`convert ./resource-pixelprofilgate/cards/back.png -filter Box -resize x1050 -`)
+    return execSync('convert ./resource-pixelprofilgate/cards/back.png -filter Box -resize x1050 -')
   }
 
   private sigils: { [s: string]: SigilEntry } = {
@@ -120,14 +120,14 @@ class PixelProfilgateGenerator implements CardGenerator {
     'evolve_1': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "{evolve_card}".', sigilId: 'evolve_1' },
     'flying': { name: 'Airborne', text: 'This card attacks the opponent directly instead of the opposing card.', sigilId: 'flying' },
     'guarddog': { name: 'Guardian', text: 'When an opposing card is played opposite of an empty space, this card moves to that space.', sigilId: 'guarddog' },
-    'icecube': { name: 'Frozen Away', text: `When this card perishes, search a "{thaws_card}" and play it on this card's space. This card cannot be sacrificed. `, sigilId: 'icecube' },
+    'icecube': { name: 'Frozen Away', text: 'When this card perishes, search a "{thaws_card}" and play it on this card\'s space. This card cannot be sacrificed. ', sigilId: 'icecube' },
     'preventattack': { name: 'Repulsive', text: 'When an opposing card would damage this card, it does not.', sigilId: 'preventattack' },
     'quadruplebones': { name: 'Bone King', text: 'When this card perishes, it provides 4 Bones instead of 1.', sigilId: 'quadruplebones' },
     'randomability': { name: 'Amorphous', text: 'n/a', sigilId: 'randomability' },
     'randomconsumable': { name: 'Trinket Bearer', text: 'When this card is played, draw 1 card from your deck or side deck.', sigilId: 'randomconsumable' },
     'reach': { name: 'Mighty Leap', text: 'If the opposing card has the Airborne sigil, it attacks this card instead of attacking directly.', sigilId: 'reach' },
     'sacrificial': { name: 'Many Lives', text: 'When this card is sacrificed, it does not perish.', sigilId: 'sacrificial' },
-    'sharp': { name: 'Sharp Quills', text: `When an opposing card damages this card's health, that card is dealt 1 damage.`, sigilId: 'sharp' },
+    'sharp': { name: 'Sharp Quills', text: 'When an opposing card damages this card\'s health, that card is dealt 1 damage.', sigilId: 'sharp' },
     'splitstrike': { name: 'Bifurcated Strike', text: 'This card attacks only the lanes left and right of the opposing space when it attacks.', sigilId: 'splitstrike' },
     'squirrelorbit': { name: 'Tidal Lock', text: 'n/a', sigilId: 'squirrelorbit' },
     'steeltrap': { name: 'Steel Trap', text: 'When this card perishes, the opposing card also perishes.', sigilId: 'steeltrap' },
@@ -135,12 +135,12 @@ class PixelProfilgateGenerator implements CardGenerator {
     'strafepush': { name: 'Hefty', text: 'During your end step, this card shifts to an adjacent lane, pushing cards in the way with it.', sigilId: 'strafepush' },
     'submerge': { name: 'Waterborne', text: 'Attacks targeting this card instead hit the owner of this card directly.', sigilId: 'submerge' },
     'tailonhit': { name: 'Loose Tail', text: 'n/a', sigilId: 'tailonhit' },
-    'tripleblood': { name: 'Worthy Sacrifice', text: `This card is worth 3 Blood when it's sacrificed.`, sigilId: 'tripleblood' },
+    'tripleblood': { name: 'Worthy Sacrifice', text: 'This card is worth 3 Blood when it\'s sacrificed.', sigilId: 'tripleblood' },
     'tristrike': { name: 'Trifurcated Strike', text: 'This card attacks the lanes left and right, as well as the opposing space when it attacks.', sigilId: 'tristrike' },
     'tutor': { name: 'Hoarder', text: 'When this card is played, search any 1 card from your deck to your hand.', sigilId: 'tutor' },
     'whackamole': { name: 'Burrower', text: 'If an opposing card would attack an empty lane, this card moves to that lane to be hit instead.', sigilId: 'whackamole' },
     'gainbattery': { name: 'Battery Bearer', text: 'When this card is played, it provides 1 energy cell to its owner.', sigilId: 'gainbattery' },
-    'squirrelstrafe': { name: 'Squirrel Shedder', text: `During your end step, this card shifts to an adjacent empty lane, playing a "Squirrel" card in this card's previous lane.`, sigilId: 'squirrelstrafe' },
+    'squirrelstrafe': { name: 'Squirrel Shedder', text: 'During your end step, this card shifts to an adjacent empty lane, playing a "Squirrel" card in this card\'s previous lane.', sigilId: 'squirrelstrafe' },
     'bonedigger': { name: 'Bone Digger', text: 'During your end step, this card generates 1 Bone.', sigilId: 'bonedigger' },
     'brittle': { name: 'Brittle', text: 'After this card attacks, this card perishes.', sigilId: 'brittle' },
 

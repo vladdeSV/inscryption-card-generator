@@ -1,16 +1,16 @@
 import fastify from 'fastify'
-import { readFileSync, writeFileSync } from 'fs';
-import { presets as cardPresets } from '.';
-import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers';
-import { Card, CardBack, CardBackType } from './act1/types';
-import { LeshyCardGenerator, PixelProfilgateGenerator } from './generators';
+import { readFileSync, writeFileSync } from 'fs'
+import { presets as cardPresets } from '.'
+import { bufferFromCard, bufferFromCardBack, cardBackFromData, cardFromData } from './act1/helpers'
+import { Card, CardBack, CardBackType } from './act1/types'
+import { LeshyCardGenerator, PixelProfilgateGenerator } from './generators'
 
 const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
 const server = fastify()
 
 server.get('/act1/:creature', async (request, reply) => {
-  const creatureId = request.url.match(/\/act1\/(\w+)/)?.[1] ?? '';
+  const creatureId = request.url.match(/\/act1\/(\w+)/)?.[1] ?? ''
   const card = cardPresets[creatureId]
 
   if (card === undefined) {
@@ -30,7 +30,7 @@ server.get('/act1/:creature', async (request, reply) => {
 })
 
 server.get('/act1/backs/:type', async (request, reply) => {
-  const type = request.url.match(/\/act1\/backs\/(\w+)/)?.[1];
+  const type = request.url.match(/\/act1\/backs\/(\w+)/)?.[1]
 
   if (!CardBackType.guard(type)) {
     reply.code(404)
@@ -47,12 +47,12 @@ server.get('/act1/backs/:type', async (request, reply) => {
 })
 
 server.put('/act1/', async (request, reply) => {
-  let card: Card;
+  let card: Card
   try {
-    card = cardFromData(request.body);
+    card = cardFromData(request.body)
   } catch (e: any) {
     reply.code(422)
-    reply.send(`Error parsing input data`)
+    reply.send('Error parsing input data')
     return
   }
 
@@ -70,12 +70,12 @@ server.put('/act1/', async (request, reply) => {
 })
 
 server.put('/act1/backs/', async (request, reply) => {
-  let cardBack: CardBack;
+  let cardBack: CardBack
   try {
-    cardBack = cardBackFromData(request.body);
+    cardBack = cardBackFromData(request.body)
   } catch (e: any) {
     reply.code(422)
-    reply.send(`Error parsing input data`)
+    reply.send('Error parsing input data')
     return
   }
 
