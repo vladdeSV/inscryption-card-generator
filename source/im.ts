@@ -253,3 +253,4 @@ class ResizeImpl implements Resize {
 }
 
 export { IM }
+export default (resource?: string): IM => new IM(resource)
