@@ -1,4 +1,4 @@
-class IM {
+class ImageMagickCommandBuilder {
   constructor(resource?: string) {
     if (resource) {
       this.#commands.push(this.#escape(resource))
@@ -252,5 +252,5 @@ class ResizeImpl implements Resize {
   #option: string | undefined
 }
 
-export { IM }
-export default (resource?: string): IM => new IM(resource)
+export { ImageMagickCommandBuilder as IM }
+export default (resource?: string): ImageMagickCommandBuilder => new ImageMagickCommandBuilder(resource)
