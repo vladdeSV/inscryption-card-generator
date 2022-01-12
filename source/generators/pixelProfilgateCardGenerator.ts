@@ -1,5 +1,4 @@
 import { execSync } from 'child_process'
-import { Card } from '../act1/types'
 import { PixelProfilgateCard } from '../pixelprofilgatecards'
 import { CardGenerator } from './cardGenerator'
 
