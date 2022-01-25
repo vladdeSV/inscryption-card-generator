@@ -109,15 +109,15 @@ function generatePdf(ids: [string, string, string, string][], locale: string) {
     -draw "line 856.3,0 856.3,2480.3"
     -draw "line 2651.6,0 2651.6,2480.3"
     
-    ${backPathForId(ids[0], locale)} -geometry +142.1+141.7 -composite
-    ${backPathForId(ids[1], locale)} -geometry +142.1+1288.6 -composite
-    ${backPathForId(ids[2], locale)} -geometry +1937+141.7 -composite
-    ${backPathForId(ids[3], locale)} -geometry +1937+1288.6 -composite
+    \\( ${backPathForId(ids[0], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +142.1+141.7 -composite
+    \\( ${backPathForId(ids[1], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +142.1+1288.6 -composite
+    \\( ${backPathForId(ids[2], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +1937+141.7 -composite
+    \\( ${backPathForId(ids[3], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +1937+1288.6 -composite
     
-    ${pathForId(ids[0], locale)} -geometry +879.9+141.7 -composite
-    ${pathForId(ids[1], locale)} -geometry +879.9+1288.6 -composite
-    ${pathForId(ids[2], locale)} -geometry +2675.2+141.7 -composite
-    ${pathForId(ids[3], locale)} -geometry +2675.2+1288.6 -composite
+    \\( ${pathForId(ids[0], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +879.9+141.7 -composite
+    \\( ${pathForId(ids[1], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +879.9+1288.6 -composite
+    \\( ${pathForId(ids[2], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +2675.2+141.7 -composite
+    \\( ${pathForId(ids[3], locale)} -gravity center -crop 691x1050+0+0 +repage \\) +gravity -geometry +2675.2+1288.6 -composite
     
     \\)`.replace(/\n+/g, ' ')).join(' ') + ` pdf/${locale}.pdf`
 
@@ -173,20 +173,22 @@ const cardIds: [string, string, string, string][] = [
   ['bee', 'bee', 'bee', 'bee'],
 ]
 
-validateIds(Object.keys(presets), cardIds.flat(2))
+function prepareBundle(cards: { [s: string]: Card }) {
+  validateIds(Object.keys(cards), cardIds.flat(2))
 
-console.log('generating for locales', locales.join(','))
-console.time('everything')
-for (const locale of locales) {
-  const leshy = new LeshyCardGenerator()
+  console.log('generating for locales', locales.join(','))
+  console.time('everything')
+  for (const locale of locales) {
+    const leshy = new LeshyCardGenerator()
 
-  console.time('generate cards ' + locale)
-  generateAct1Cards(presets, leshy, locale, translations[locale])
-  console.timeEnd('generate cards ' + locale)
+    console.time('generate cards ' + locale)
+    generateAct1Cards(cards, leshy, locale, translations[locale])
+    console.timeEnd('generate cards ' + locale)
 
-  generatePdf(cardIds, locale)
+    generatePdf(cardIds, locale)
+  }
+  console.timeEnd('everything')
 }
-console.timeEnd('everything')
 
 function bundle(locale: string) {
     mkdirSync('./downloads/', { recursive: true })
