@@ -188,4 +188,34 @@ for (const locale of locales) {
 }
 console.timeEnd('everything')
 
-export { validateIds, generateAct1Cards, generatePdf }
+function bundle(locale: string) {
+    mkdirSync('./downloads/', { recursive: true })
+    mkdirSync('./temp/', { recursive: true })
+
+    const revision = ((date: Date) => {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    })(new Date())
+
+    writeFileSync(`./cards/${locale}/readme.english.txt`, `inscryption cards for printing
+revision ${revision}
+
+original assets (c) Daniel Mullins Games
+provided by Vladimirs "vladde" Nordholm
+
+missing cards:
+- the smoke without bone sigil
+- any cards/sigils from "kaycee's mod"
+- some variations of portraits (skink with no tail, scared squirrel, closed leaping trap)
+
+other:
+- porcupine has white dot in image, should be black
+`)
+
+    execSync(`cd ./cards/${locale}/ && zip -r ../../downloads/${locale}.zip border regular readme.english.txt && rm readme.english.txt && cd ../..`)
+    execSync(`cp ./pdf/${locale}.pdf ./downloads/${locale}.pdf`)
+}
+
+export { generateAct1Cards, generatePdf, validateIds, bundle }
