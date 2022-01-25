@@ -20,10 +20,14 @@ class LeshyCardGenerator implements CardGenerator {
         .composite()
     }
 
+    const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
     if (this.#bordered) {
-      const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(card.type)
-      im.resource(`./resource/cards/borders/${borderName}.png`)
+      im.resource(`./resource/cards/borders/${borderName}-full.png`)
+        .gravity('center')
+        .compose('dstover')
         .composite()
+        .gravity()
+        .compose('srcover')
     }
 
     im.command('-filter Box')
@@ -221,6 +225,14 @@ class LeshyCardGenerator implements CardGenerator {
         .font('./resource/HEAVYWEIGHT.otf')
     }
 
+    if (this.#bordered) {
+      im.gravity('center').extent(813, 1172).parens(
+        IM(`./resource/cards/borders/${borderName}-full.png`)
+          .resize(813, 1172)
+          .compose('dstover')
+      ).composite().compose('srcover')
+    }
+
     if (card.options?.isGolden) {
       im.parens(
         IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
@@ -243,7 +255,8 @@ class LeshyCardGenerator implements CardGenerator {
           IM(decalPath)
             .filter('box')
             .resize(undefined, 1050)
-        ).composite()
+        ).gravity('center')
+          .composite()
       }
     }
 
@@ -266,23 +279,33 @@ class LeshyCardGenerator implements CardGenerator {
   generateBack(type: 'common' | 'squirrel' | 'bee' | 'deathcard' = 'common'): Buffer {
     const im = IM(`./resource/cards/backs/${type}.png`)
 
-    if (this.#bordered) {
-      const borderName = ((a: 'common' | 'squirrel' | 'bee' | 'deathcard'): 'common' | 'common_special' => {
-        switch (a) {
-          case 'squirrel':
-          case 'bee':
-          case 'deathcard': {
-            return 'common_special'
-          }
-          case 'common': {
-            return 'common'
-          }
+    const borderName = ((a: 'common' | 'squirrel' | 'bee' | 'deathcard'): 'common' | 'common_special' => {
+      switch (a) {
+        case 'squirrel':
+        case 'bee':
+        case 'deathcard': {
+          return 'common'
         }
-      })(type)
-      im.resource(`./resource/cards/backs/borders/${borderName}.png`).composite()
+        case 'common': {
+          return 'common_special'
+        }
+      }
+    })(type)
+
+    if (this.#bordered) {
+      im.resource(`./resource/cards/backs/borders/${borderName}-full.png`)
+        .compose('dstover')
+        .composite()
+        .compose('srcover')
     }
 
     im.filter('box').resize(undefined, 1050)
+
+    if (this.#bordered) {
+      im.gravity('center').command('-background transparent').extent(813, 1172).parens(
+        IM(`./resource/cards/backs/borders/${borderName}-full.png`).resize(813, 1172).compose('dstover')
+      ).composite().compose('srcover')
+    }
 
     return execSync(im.build('convert', '-'))
   }
