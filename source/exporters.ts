@@ -187,3 +187,5 @@ for (const locale of locales) {
   generatePdf(cardIds, locale)
 }
 console.timeEnd('everything')
+
+export { validateIds, generateAct1Cards, generatePdf }
