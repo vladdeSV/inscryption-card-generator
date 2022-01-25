@@ -267,8 +267,18 @@ class LeshyCardGenerator implements CardGenerator {
     const im = new IM(`./resource/cards/backs/${type}.png`)
 
     if (this.#bordered) {
-      const type = 'common'
-      const borderName = ((a: CardType): 'common' | 'terrain' | 'rare' => a === 'nostat' ? 'common' : a)(type)
+      const borderName = ((a: 'common' | 'squirrel' | 'bee' | 'deathcard'): 'common' | 'common_special' => {
+        switch (a) {
+          case 'squirrel':
+          case 'bee':
+          case 'deathcard': {
+            return 'common_special'
+          }
+          case 'common': {
+            return 'common'
+          }
+        }
+      })(type)
       im.resource(`./resource/cards/backs/borders/${borderName}.png`).composite()
     }
 
