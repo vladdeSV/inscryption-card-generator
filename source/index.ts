@@ -1,8 +1,7 @@
-import { execSync } from "child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { Card } from "./act1/types";
-import { validateIds, generateAct1Cards, generatePdf } from "./exporters";
-import { LeshyCardGenerator } from "./generators/leshyCardGenerator";
+import { readFileSync } from 'fs'
+import { Card } from './act1/types'
+import { validateIds, generateAct1Cards, generatePdf, bundle } from './exporters'
+import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 
 export const presets: { [s: string]: Card } = {
 
@@ -109,8 +108,66 @@ export const presets: { [s: string]: Card } = {
 
 }
 
-export const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
+function foo(): Card[] {
+  const entries = readFileSync('./creatures.txt', 'utf-8').split('\n\n')
+  const cards: Card[] = []
+  for (const entry of entries) {
+    const card: Card = { type: 'common', options: {} }
 
+    if (!card.options) {
+      throw new Error()
+    }
+
+    for (const row of entry.split('\n')) {
+      if (row.startsWith('=====')) {
+        continue
+      }
+
+      if (row.startsWith('Name')) {
+        if (row.match(/Squid(Bell|Cards|Hand)/)) {
+          card.options.isSquid = true
+        }
+      }
+
+      if (row.startsWith('Displayed Name')) {
+        card.name = row.match(/\[(.*?)\]/)![1]
+      }
+
+      if (row.startsWith('Attack')) {
+        const match = row.match(/\[(.*?)\]/g)
+
+        card.power = Number(match![0].replace(/[[\]]/g, ''))
+        card.health = Number(match![1].replace(/[[\]]/g, ''))
+      }
+
+      if (row.startsWith('Appearance Behaviour')) {
+        switch (row.match(/\[.*\]/)![1]) {
+          case 'RareCardBackground': {
+            card.type = 'rare'
+            break
+          }
+          case 'TerrainBackground': {
+            card.type = 'terrain'
+            break
+          }
+          case 'TerrainLayout': {
+            card.options.isTerrain = true
+            break
+
+          }
+          case 'GoldEmission': {
+            card.options.isGolden = true
+            break
+          }
+        }
+      }
+    }
+    cards.push(card)
+  }
+  return cards
+}
+
+export const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
 function generateAllPdfs() {
   const locales = Object.keys(translations)
@@ -153,7 +210,7 @@ function generateAllPdfs() {
 
   validateIds(Object.keys(presets), cardIds.flat(2))
 
-  console.log('generating for locales', locales.join(','));
+  console.log('generating for locales', locales.join(','))
   console.time('everything')
   for (const locale of locales) {
     const leshy = new LeshyCardGenerator()
@@ -163,6 +220,58 @@ function generateAllPdfs() {
     console.timeEnd('generate cards ' + locale)
 
     generatePdf(cardIds, locale)
+
+    console.time('bundle ' + locale)
+    bundle(locale)
+    console.timeEnd('bundle ' + locale)
   }
   console.timeEnd('everything')
 }
+
+// (() => {
+//   const g = new LeshyCardGenerator()
+//   const cards: { [s: string]: Card } = {
+//     'alpha': presets['alpha'],
+//     'gold_nugget': presets['gold_nugget'],
+//     'amalgam': presets['amalgam'],
+//   }
+
+//   generateAct1Cards(cards, g, 'en', translations['en'])
+
+//   generatePdf([['alpha', 'gold_nugget', 'amalgam', 'alpha']], 'en')
+// })()
+
+// generateAllPdfs()
+
+// function generateSelctedAct1Card(ids: string[]) {
+//   const g = new LeshyCardGenerator()
+//   const cards: { [s: string]: Card } = {}
+//   for (const id of ids) {
+//     cards[id] = presets[id]
+//   }
+
+//   generateAct1Cards(cards, g, 'en', translations['en'])
+// }
+
+// const locales = Object.keys(translations)
+// for (const locale of locales) {
+//   bundle(locale)
+// }
+
+// for (const id in presets) {
+//   if (!Object.prototype.hasOwnProperty.call(presets, id)) {
+//     continue
+//   }
+
+//   if(!existsSync(`./cards/en/border/${id}.png`)){
+//     console.log('missing', id);
+//     continue;
+//   }
+  
+//   const card = presets[id];
+//   const leshy = new LeshyCardGenerator();
+//   const buffer = leshy.generatePrintCard(id, card, 'en')
+
+//   mkdirSync('./cards/en/print', { recursive: true })
+//   writeFileSync(`./cards/en/print/${id}.png`, buffer)
+// }
