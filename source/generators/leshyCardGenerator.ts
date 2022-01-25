@@ -1,18 +1,18 @@
-import { execSync } from "child_process";
-import { Card, CardType } from "../act1/types";
-import { IM } from "../im";
-import { CardGenerator } from "./cardGenerator";
+import { execSync } from 'child_process'
+import { Card, CardType } from '../act1/types'
+import IM from '../im'
+import { CardGenerator } from './cardGenerator'
 
 class LeshyCardGenerator implements CardGenerator {
 
   generate(card: Card, locale: string | undefined = undefined): Buffer {
-    const im = new IM(`./resource/cards/${card.type}.png`);
+    const im = IM(`./resource/cards/${card.type}.png`)
 
     im.font('./resource/HEAVYWEIGHT.otf')
       .pointsize(200)
 
     const isTerrain = card.options?.isTerrain ?? false
-    const portrait = card.portrait;
+    const portrait = card.portrait
     if (portrait) {
       im.resource(portrait === 'custom' ? '-' : `./resource/portraits/${portrait}.png`)
         .gravity('center')
@@ -39,7 +39,7 @@ class LeshyCardGenerator implements CardGenerator {
         const position = aligns[index]
 
         im.parens(
-          new IM(tribeLocation)
+          IM(tribeLocation)
             .resize(undefined, 354)
             .gravity('northwest')
             .alpha('set')
@@ -52,11 +52,11 @@ class LeshyCardGenerator implements CardGenerator {
 
     const cost = card.cost
     if (cost) {
-      const { amount, type } = cost;
+      const { amount, type } = cost
 
       const costPath = `./resource/costs/${amount}${type}.png`
       im.parens(
-        new IM(costPath)
+        IM(costPath)
           .interpolate('nearest')
           .filter('point')
           .resize(284)
@@ -77,7 +77,7 @@ class LeshyCardGenerator implements CardGenerator {
           const h = 215
 
           im.parens(
-            new IM()
+            IM()
               .pointsize()
               .size(w, h)
               .background('none')
@@ -91,7 +91,7 @@ class LeshyCardGenerator implements CardGenerator {
       } else {
         const statIconPath = `./resource/staticon/${power}.png`
         im.parens(
-          new IM(statIconPath)
+          IM(statIconPath)
             .interpolate('nearest')
             .filter('point')
             .resize(245)
@@ -109,7 +109,7 @@ class LeshyCardGenerator implements CardGenerator {
       const w = 114
       const h = 215
       im.parens(
-        new IM()
+        IM()
           .pointsize()
           .size(w, h)
           .background('none')
@@ -129,7 +129,7 @@ class LeshyCardGenerator implements CardGenerator {
       if (sigilCount === 1) {
         const sigilPath = `./resource/sigils/${sigils[0]}.png`
         im.parens(
-          new IM(sigilPath)
+          IM(sigilPath)
             .interpolate('nearest')
             .filter('point')
             .resize(undefined, 253)
@@ -140,14 +140,14 @@ class LeshyCardGenerator implements CardGenerator {
       } else if (sigilCount === 2) {
         const sigilPath1 = `./resource/sigils/${sigils[0]}.png`
         const sigilPath2 = `./resource/sigils/${sigils[1]}.png`
-        im.parens(new IM(sigilPath1)
+        im.parens(IM(sigilPath1)
           .filter('box')
           .resize(undefined, 180)
         ).gravity('northwest')
           .geometry(331 + xoffset, 720)
           .composite()
 
-        im.parens(new IM(sigilPath2)
+        im.parens(IM(sigilPath2)
           .filter('box')
           .resize(undefined, 180)
         ).gravity('northwest')
@@ -172,8 +172,8 @@ class LeshyCardGenerator implements CardGenerator {
     }
 
     if (card.options?.isSquid) {
-      const squidTitlePath = `./resource/misc/squid_title.png`
-      im.parens(new IM(squidTitlePath).interpolate('nearest').filter('point').resize(undefined, 152).filter('box').gravity('north').geometry(0, 20)).composite()
+      const squidTitlePath = './resource/misc/squid_title.png'
+      im.parens(IM(squidTitlePath).interpolate('nearest').filter('point').resize(undefined, 152).filter('box').gravity('north').geometry(0, 20)).composite()
     } else if (card.name) {
 
       const escapedName = card.name.replace(/[\\']/g, '')
@@ -206,7 +206,7 @@ class LeshyCardGenerator implements CardGenerator {
       }
 
       im.parens(
-        new IM()
+        IM()
           .pointsize()
           .size(size.w, size.h)
           .background('none')
@@ -223,7 +223,7 @@ class LeshyCardGenerator implements CardGenerator {
 
     if (card.options?.isGolden) {
       im.parens(
-        new IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
+        IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
       ).geometry(0, 0)
         .compose('hardlight')
         .composite()
@@ -240,7 +240,7 @@ class LeshyCardGenerator implements CardGenerator {
       for (const decal of decals) {
         const decalPath = `./resource/decals/${decal}.png`
         im.parens(
-          new IM(decalPath)
+          IM(decalPath)
             .filter('box')
             .resize(undefined, 1050)
         ).composite()
@@ -249,8 +249,8 @@ class LeshyCardGenerator implements CardGenerator {
 
     if (card.options?.isEnhanced && card.portrait !== 'custom') {
       const scale = 1050 / 190
-      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale)).composite()
-      im.parens(new IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
+      im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale)).composite()
+      im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
     }
 
     let customPortraitData = undefined
@@ -264,7 +264,7 @@ class LeshyCardGenerator implements CardGenerator {
   }
 
   generateBack(type: 'common' | 'squirrel' | 'bee' | 'deathcard' = 'common'): Buffer {
-    const im = new IM(`./resource/cards/backs/${type}.png`)
+    const im = IM(`./resource/cards/backs/${type}.png`)
 
     if (this.#bordered) {
       const borderName = ((a: 'common' | 'squirrel' | 'bee' | 'deathcard'): 'common' | 'common_special' => {
@@ -291,7 +291,7 @@ class LeshyCardGenerator implements CardGenerator {
     this.#bordered = bordered
   }
 
-  #bordered: boolean = false;
+  #bordered = false
 }
 
 export { LeshyCardGenerator }

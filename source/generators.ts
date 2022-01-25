@@ -1,5 +1,5 @@
-import { existsSync } from "fs";
-import * as path from "path";
+import { existsSync } from 'fs'
+import * as path from 'path'
 
 const resourcePath = './resource/'
 const requiredBaseFiles: string[] = [
@@ -26,7 +26,7 @@ function validateRequiredFiles(resourcePath: string, requiredFiles: string[]): v
 
   if (missingFilePaths.length) {
     for (const missingFilePath of missingFilePaths) {
-      console.error('ERROR:', 'Missing file', missingFilePath);
+      console.error('ERROR:', 'Missing file', missingFilePath)
     }
 
     process.exit(1)
