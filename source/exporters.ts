@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 
-import { presets } from '.'
+import { presets } from './index'
 import { Card } from './act1/types'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 
@@ -191,17 +191,17 @@ function prepareBundle(cards: { [s: string]: Card }) {
 }
 
 function bundle(locale: string) {
-    mkdirSync('./downloads/', { recursive: true })
-    mkdirSync('./temp/', { recursive: true })
+  mkdirSync('./downloads/', { recursive: true })
+  mkdirSync('./temp/', { recursive: true })
 
-    const revision = ((date: Date) => {
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, '0');
-        const d = String(date.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
-    })(new Date())
+  const revision = ((date: Date) => {
+    const y = date.getFullYear()
+    const m = String(date.getMonth() + 1).padStart(2, '0')
+    const d = String(date.getDate()).padStart(2, '0')
+    return `${y}-${m}-${d}`
+  })(new Date())
 
-    writeFileSync(`./cards/${locale}/readme.english.txt`, `inscryption cards for printing
+  writeFileSync(`./cards/${locale}/readme.english.txt`, `inscryption cards for printing
 revision ${revision}
 
 original assets (c) Daniel Mullins Games
@@ -216,8 +216,8 @@ other:
 - porcupine has white dot in image, should be black
 `)
 
-    execSync(`cd ./cards/${locale}/ && zip -r ../../downloads/${locale}.zip border regular readme.english.txt && rm readme.english.txt && cd ../..`)
-    execSync(`cp ./pdf/${locale}.pdf ./downloads/${locale}.pdf`)
+  execSync(`cd ./cards/${locale}/ && zip -r ../../downloads/${locale}.zip border regular readme.english.txt && rm readme.english.txt && cd ../..`)
+  execSync(`cp ./pdf/${locale}.pdf ./downloads/${locale}.pdf`)
 }
 
 export { generateAct1Cards, generatePdf, validateIds, bundle }

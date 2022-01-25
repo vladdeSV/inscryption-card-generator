@@ -1,4 +1,4 @@
-import { Card, CardBack, CardBackType, CardType, Power } from "./types"
+import { Card, CardBack, CardBackType, CardType, Power } from './types'
 
 function powerFromInput(input: unknown): number | Power | undefined {
   if (Power.guard(input)) {

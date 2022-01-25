@@ -1,9 +1,9 @@
 import fastify from 'fastify'
-import { readFileSync, writeFileSync } from 'fs';
-import { presets as cardPresets } from '.';
-import { cardBackFromData, cardFromData } from './act1/helpers';
-import { Card, CardBack, CardBackType } from './act1/types';
-import { LeshyCardGenerator } from './generators/leshyCardGenerator';
+import { readFileSync, writeFileSync } from 'fs'
+import { presets as cardPresets } from '.'
+import { cardBackFromData, cardFromData } from './act1/helpers'
+import { Card, CardBack, CardBackType } from './act1/types'
+import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 
 const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
@@ -79,7 +79,6 @@ server.put('/act1/backs/', async (request, reply) => {
     reply.send('Error parsing input data')
     return
   }
-
 
   const leshyCardGenerator = new LeshyCardGenerator()
   leshyCardGenerator.setBorderedCards(cardBack.options?.hasBorder ?? false)
