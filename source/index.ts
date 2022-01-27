@@ -108,65 +108,6 @@ export const presets: { [s: string]: Card } = {
 
 }
 
-function foo(): Card[] {
-  const entries = readFileSync('./creatures.txt', 'utf-8').split('\n\n')
-  const cards: Card[] = []
-  for (const entry of entries) {
-    const card: Card = { type: 'common', options: {} }
-
-    if (!card.options) {
-      throw new Error()
-    }
-
-    for (const row of entry.split('\n')) {
-      if (row.startsWith('=====')) {
-        continue
-      }
-
-      if (row.startsWith('Name')) {
-        if (row.match(/Squid(Bell|Cards|Hand)/)) {
-          card.options.isSquid = true
-        }
-      }
-
-      if (row.startsWith('Displayed Name')) {
-        card.name = row.match(/\[(.*?)\]/)![1]
-      }
-
-      if (row.startsWith('Attack')) {
-        const match = row.match(/\[(.*?)\]/g)
-
-        card.power = Number(match![0].replace(/[[\]]/g, ''))
-        card.health = Number(match![1].replace(/[[\]]/g, ''))
-      }
-
-      if (row.startsWith('Appearance Behaviour')) {
-        switch (row.match(/\[.*\]/)![1]) {
-          case 'RareCardBackground': {
-            card.type = 'rare'
-            break
-          }
-          case 'TerrainBackground': {
-            card.type = 'terrain'
-            break
-          }
-          case 'TerrainLayout': {
-            card.options.isTerrain = true
-            break
-
-          }
-          case 'GoldEmission': {
-            card.options.isGolden = true
-            break
-          }
-        }
-      }
-    }
-    cards.push(card)
-  }
-  return cards
-}
-
 export const translations = JSON.parse(readFileSync('./translations.json', 'utf-8'))
 
 function generateAllPdfs() {
