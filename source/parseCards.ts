@@ -33,7 +33,7 @@ interface Card {
 
   // unused
   gemified: boolean,
-  once: boolean,
+  oncePerDeck: boolean,
 }
 
 interface Matcher {
@@ -108,7 +108,7 @@ function foo(textChunk: string): Card {
     {
       regex: /One per deck\? \[(True|False)\]/,
       matcher: (m, c) => {
-        c.once = (m[1] === 'True')
+        c.oncePerDeck = (m[1] === 'True')
       }
     },
     {
@@ -191,10 +191,10 @@ function foo(textChunk: string): Card {
 
     sacrificable: true,
     level: 0,
+    oncePerDeck: false,
 
     // unused
     gemified: false,
-    once: false,
   }
 
   const lines = textChunk.split('\n')
