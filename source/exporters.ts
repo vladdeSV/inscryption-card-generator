@@ -57,7 +57,7 @@ function generateAct1Cards(input: { [s: string]: Card }, cardGenerator: LeshyCar
 
       const translatedName = nameMapping[name] as string ?? name
 
-      if (name && !translatedName) {
+      if (name && !translatedName && locale !== 'blank') {
         console.warn(`WARNING: Missing translation for '${id}'`)
       }
 
