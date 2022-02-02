@@ -10,6 +10,7 @@ class LeshyCardGenerator implements CardGenerator {
 
     im.font('./resource/HEAVYWEIGHT.otf')
       .pointsize(200)
+      .background('none')
 
     const isTerrain = card.options?.isTerrain ?? false
     const portrait = card.portrait
