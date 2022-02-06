@@ -6,6 +6,13 @@ import { execSync } from 'child_process'
 function generateAct1Card(card: Card, res: Resource): Buffer {
   const im = IM()
 
+  const originalCardHeight = 190 // px
+  const fullsizeCardHeight = 1050 // px
+  const v = originalCardHeight / originalCardHeight
+
+  // parts are shifted if having terrain card layout
+  const terrainLayoutXoffset = card.flags.terrain ? -70 : 0
+
   // set up defaults
   im.font(res.get('font', 'default'))
     .pointsize(200)
@@ -15,8 +22,15 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
   // load card
   im.resource(res.get('card', card.type))
 
+  if (card.portrait.type === 'creature') {
+    im.resource(res.get('portrait', card.portrait.id))
+      .gravity('Center')
+      .geometry(1, -15)
+      .composite()
+  }
+
   // resize
-  im.resize(undefined, 1050) // 1050 pixels @ 300dpi = 3.5 inches
+  im.resize(undefined, fullsizeCardHeight) // 1050 pixels @ 300dpi = 3.5 inches
 
   // set default gravity
   im.gravity('NorthWest')
@@ -37,6 +51,7 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
       .composite()
   }
 
+  // card cost
   if (card.cost) {
     const costType = card.cost.type
     if (costType !== 'blood' && costType !== 'bone') {
@@ -59,22 +74,21 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
     im.gravity('NorthWest')
   }
 
-  if (card.health !== undefined) {
-    const w = 114
-    const h = 215
-    const xoffset = card.flags.terrain ? -70 : 0
-    im.parens(
-      IM()
-        .pointsize()
-        .size(w, h)
-        .label(card.health)
-        .gravity('East')
-        .extent(w, h)
-    ).gravity('NorthEast')
-      .geometry(32 - xoffset, 815)
-      .composite()
-  }
+  // health
+  const healthWidth = 114
+  const healthHeight = 215
+  im.parens(
+    IM()
+      .pointsize()
+      .size(healthWidth, healthHeight)
+      .label(card.health)
+      .gravity('East')
+      .extent(healthWidth, healthHeight)
+  ).gravity('NorthEast')
+    .geometry(32 - terrainLayoutXoffset, 815)
+    .composite()
 
+  // special stat icons
   if (card.statIcon !== undefined) {
     im.parens(
       IM(res.get('staticon', card.statIcon))
@@ -104,38 +118,33 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
     }
   }
 
-  if (card.sigils?.length) {
-    const sigilCount = card.sigils.length
-    const xoffset = card.flags.terrain ? -70 : 0
-
-    if (sigilCount === 1) {
-      const sigilPath = `./resource/sigils/${card.sigils[0]}.png`
-      im.parens(
-        IM(sigilPath)
-          .interpolate('Nearest')
-          .filter('Point')
-          .resize(undefined, 253)
-          .filter('Box')
-      ).gravity('NorthWest')
-        .geometry(221 + xoffset, 733)
-        .composite()
-    } else if (sigilCount === 2) {
-      const sigilPath1 = `./resource/sigils/${card.sigils[0]}.png`
-      const sigilPath2 = `./resource/sigils/${card.sigils[1]}.png`
-      im.parens(IM(sigilPath1)
+  if (card.sigils.length === 1) {
+    const sigilPath = res.get('sigil', card.sigils[0])
+    im.parens(
+      IM(sigilPath)
+        .interpolate('Nearest')
+        .filter('Point')
+        .resize(undefined, 253)
         .filter('Box')
-        .resize(undefined, 180)
-      ).gravity('NorthWest')
-        .geometry(331 + xoffset, 720)
-        .composite()
+    ).gravity('NorthWest')
+      .geometry(221 + terrainLayoutXoffset, 733)
+      .composite()
+  } else if (card.sigils.length === 2) {
+    const sigilPath1 = res.get('sigil', card.sigils[0])
+    const sigilPath2 = res.get('sigil', card.sigils[1])
+    im.parens(IM(sigilPath1)
+      .filter('Box')
+      .resize(undefined, 180)
+    ).gravity('NorthWest')
+      .geometry(331 + terrainLayoutXoffset, 720)
+      .composite()
 
-      im.parens(IM(sigilPath2)
-        .filter('Box')
-        .resize(undefined, 180)
-      ).gravity('NorthWest')
-        .geometry(180 + xoffset, 833)
-        .composite()
-    }
+    im.parens(IM(sigilPath2)
+      .filter('Box')
+      .resize(undefined, 180)
+    ).gravity('NorthWest')
+      .geometry(180 + terrainLayoutXoffset, 833)
+      .composite()
   }
 
   if (card.flags.golden) {
@@ -151,6 +160,23 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
     //   im.command(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
     // }
   }
+
+  // decals
+  for (const decal of card.decals) {
+    const decalPath = res.get('decal', decal)
+    im.parens(
+      IM(decalPath)
+        .filter('Box')
+        .resize(undefined, fullsizeCardHeight)
+    ).gravity('Center')
+      .composite()
+  }
+
+  // if (card.flags.isEnhanced && card.portrait !== 'custom') {
+  //   const scale = 1050 / 190
+  //   im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale)).composite()
+  //   im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
+  // }
 
   return execSync(im.build('convert', 'out.png'))
 }
