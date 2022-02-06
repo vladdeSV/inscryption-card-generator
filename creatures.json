@@ -8,7 +8,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -40,7 +40,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -68,7 +68,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -100,7 +100,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -192,7 +192,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -220,7 +220,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -246,7 +246,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -273,7 +273,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -303,7 +303,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -333,7 +333,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -363,7 +363,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "WhackAMole",
@@ -390,7 +390,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "CagedWolf"
@@ -422,7 +422,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -451,7 +451,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -474,7 +474,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -502,7 +502,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -528,7 +528,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -556,7 +556,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -577,7 +577,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -611,7 +611,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -646,7 +646,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -676,7 +676,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -704,7 +704,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -731,7 +731,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -763,7 +763,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -789,7 +789,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -817,7 +817,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable",
@@ -847,7 +847,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -877,7 +877,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -906,7 +906,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable"
@@ -960,7 +960,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -990,7 +990,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1019,7 +1019,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1051,7 +1051,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -1082,7 +1082,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -1116,7 +1116,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -1148,7 +1148,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1176,7 +1176,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -1209,7 +1209,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Evolve"
@@ -1240,7 +1240,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Flying"
@@ -1267,7 +1267,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Strafe",
@@ -1295,7 +1295,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1319,7 +1319,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1345,7 +1345,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable"
@@ -1378,7 +1378,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -1405,7 +1405,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1431,7 +1431,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1460,7 +1460,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -1481,7 +1481,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1507,7 +1507,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1533,7 +1533,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -1563,7 +1563,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1595,7 +1595,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -1622,7 +1622,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1650,7 +1650,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1678,7 +1678,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -1701,7 +1701,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1727,7 +1727,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1753,7 +1753,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -1786,7 +1786,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -1892,7 +1892,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -1917,7 +1917,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -1943,7 +1943,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -1966,7 +1966,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -1987,7 +1987,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2008,7 +2008,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2029,7 +2029,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -2056,7 +2056,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -2084,7 +2084,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -2114,7 +2114,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -2142,7 +2142,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer",
@@ -2178,7 +2178,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2203,7 +2203,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2224,7 +2224,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2248,7 +2248,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach",
@@ -2280,7 +2280,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode"
     ],
@@ -2309,7 +2309,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2337,7 +2337,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2364,7 +2364,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2391,7 +2391,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2418,7 +2418,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2446,7 +2446,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2473,7 +2473,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2499,7 +2499,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2525,7 +2525,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode",
       "TraderOffer"
@@ -2555,7 +2555,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "QuadrupleBones"
@@ -2578,7 +2578,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "QuadrupleBones"
@@ -2601,7 +2601,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2622,7 +2622,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "PreventAttack"
@@ -2645,7 +2645,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "DebuffEnemy",
@@ -2675,7 +2675,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "TalkingCardChooser"
@@ -2702,7 +2702,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach",
@@ -2732,7 +2732,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach",
@@ -2761,7 +2761,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "TalkingCardChooser"
@@ -2790,7 +2790,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -2813,7 +2813,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2834,7 +2834,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ConduitNull"
@@ -2858,7 +2858,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "IceCube"
@@ -2882,7 +2882,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "BountyHunter"
@@ -2907,7 +2907,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2930,7 +2930,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -2953,7 +2953,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2974,7 +2974,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -2995,7 +2995,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Brittle",
@@ -3019,7 +3019,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Sentry",
@@ -3045,7 +3045,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "DrawRandomCardOnDeath"
@@ -3068,7 +3068,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "DrawRandomCardOnDeath",
@@ -3094,7 +3094,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "MoveBeside",
@@ -3120,7 +3120,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -3141,7 +3141,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "WhackAMole"
@@ -3170,7 +3170,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -3197,7 +3197,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable"
@@ -3226,7 +3226,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "Rare",
@@ -3251,7 +3251,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -3277,7 +3277,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "ChoiceNode"
     ],
@@ -3302,7 +3302,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable",
       "GBCPack"
@@ -3328,7 +3328,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPack",
@@ -3353,7 +3353,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode",
@@ -3382,7 +3382,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPlayable",
@@ -3410,7 +3410,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "ChoiceNode",
@@ -3437,7 +3437,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "Rare",
@@ -3464,7 +3464,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -3490,7 +3490,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "DeleteFile"
@@ -3513,7 +3513,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "CellBuffSelf"
@@ -3536,7 +3536,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "CellDrawRandomCardOnDeath"
@@ -3559,7 +3559,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "CellTriStrike"
@@ -3582,7 +3582,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPack",
@@ -3610,7 +3610,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Deathtouch"
@@ -3633,7 +3633,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Strafe"
@@ -3660,7 +3660,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Flying"
@@ -3683,7 +3683,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -3704,7 +3704,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -3725,7 +3725,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemBlue"
@@ -3750,7 +3750,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemGreen"
@@ -3775,7 +3775,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemOrange"
@@ -3800,7 +3800,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "Rare",
@@ -3827,7 +3827,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -3853,7 +3853,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -3879,7 +3879,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ExplodeGems"
@@ -3902,7 +3902,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -3923,7 +3923,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ConduitSpawnGems"
@@ -3946,7 +3946,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ShieldGems"
@@ -3969,7 +3969,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -3995,7 +3995,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ConduitHeal"
@@ -4018,7 +4018,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPack",
@@ -4046,7 +4046,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4071,7 +4071,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4096,7 +4096,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4121,7 +4121,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "ChoiceNode",
@@ -4148,7 +4148,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach",
@@ -4172,7 +4172,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -4198,7 +4198,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPlayable",
@@ -4227,7 +4227,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -4253,7 +4253,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "Rare",
@@ -4280,7 +4280,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -4306,7 +4306,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4331,7 +4331,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemOrange",
@@ -4357,7 +4357,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemBlue",
@@ -4383,7 +4383,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "GainGemGreen",
@@ -4409,7 +4409,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "GBCPack",
@@ -4437,7 +4437,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -4465,7 +4465,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -4491,7 +4491,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "Rare",
@@ -4519,7 +4519,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -4545,7 +4545,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -4569,7 +4569,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random",
       "ChoiceNode"
@@ -4595,7 +4595,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -4626,7 +4626,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable",
       "GBCPack"
@@ -4650,7 +4650,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Transformer",
@@ -4678,7 +4678,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4707,7 +4707,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Transformer"
@@ -4734,7 +4734,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4763,7 +4763,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Transformer",
@@ -4791,7 +4791,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Part3Random"
     ],
@@ -4820,7 +4820,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "BuffEnemy"
@@ -4848,7 +4848,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -4875,7 +4875,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -4901,7 +4901,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ExplodeOnDeath"
@@ -4929,7 +4929,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "ConduitNull"
@@ -4957,7 +4957,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -4985,7 +4985,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "IceCube"
@@ -5013,7 +5013,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [
@@ -5040,7 +5040,7 @@
     "energyCost": 0,
     "temple": "Tech",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "PreventAttack"
@@ -5068,7 +5068,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -5097,7 +5097,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -5125,7 +5125,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -5153,7 +5153,7 @@
     "energyCost": 0,
     "temple": "Nature",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [
       "Reach"
@@ -5182,7 +5182,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5208,7 +5208,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5234,7 +5234,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -5259,7 +5259,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -5286,7 +5286,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5317,7 +5317,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5348,7 +5348,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -5375,7 +5375,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5403,7 +5403,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5432,7 +5432,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable"
@@ -5459,7 +5459,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5485,7 +5485,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5510,7 +5510,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5537,7 +5537,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5563,7 +5563,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -5591,7 +5591,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -5619,7 +5619,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5643,7 +5643,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -5670,7 +5670,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5696,7 +5696,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5726,7 +5726,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5752,7 +5752,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5779,7 +5779,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -5806,7 +5806,7 @@
     "energyCost": 0,
     "temple": "Undead",
     "complexity": "Vanilla",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -5830,7 +5830,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5858,7 +5858,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable"
     ],
@@ -5888,7 +5888,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5916,7 +5916,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -5944,7 +5944,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6000,7 +6000,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6026,7 +6026,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6054,7 +6054,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6082,7 +6082,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable",
@@ -6112,7 +6112,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable",
@@ -6142,7 +6142,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPlayable",
@@ -6173,7 +6173,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -6206,7 +6206,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -6239,7 +6239,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare",
       "GBCPack",
@@ -6272,7 +6272,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6301,7 +6301,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6330,7 +6330,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6359,7 +6359,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Intermediate",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "Rare"
     ],
@@ -6389,7 +6389,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6417,7 +6417,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6445,7 +6445,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6471,7 +6471,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [],
     "abilities": [],
     "appearanceBehaviours": [],
@@ -6494,7 +6494,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPlayable",
       "GBCPack"
@@ -6520,7 +6520,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Simple",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
@@ -6550,7 +6550,7 @@
     "energyCost": 0,
     "temple": "Wizard",
     "complexity": "Advanced",
-    "statIcon": "None",
+    "statIcon": null,
     "metaCategories": [
       "GBCPack",
       "GBCPlayable"
