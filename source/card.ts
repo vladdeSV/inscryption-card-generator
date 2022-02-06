@@ -1,7 +1,10 @@
+export { Card }
+
 interface Card {
   name: string,
+  type: 'common' | 'rare' | 'terrain'
   portrait: Portrait,
-  cost: Cost
+  cost?: Cost
   power: number,
   health: number,
   sigils: Sigil[],
@@ -11,6 +14,7 @@ interface Card {
   flags: {
     golden: boolean,
     terrain: boolean,
+    combined: boolean,
   }
 }
 
