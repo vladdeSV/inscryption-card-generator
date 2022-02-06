@@ -37,7 +37,7 @@ class ImageMagickCommandBuilder {
     return this
   }
 
-  gravity(gravity?: 'northwest' | 'north' | 'northeast' | 'west' | 'center' | 'east' | 'southwest' | 'south' | 'southeast'): this {
+  gravity(gravity?: GravityType): this {
     if (gravity) {
       this.#commands.push('-gravity')
       this.#commands.push(gravity)
@@ -174,6 +174,7 @@ class ImageMagickCommandBuilder {
   #commands: string[] = []
 }
 
+type GravityType = 'None' | 'Center' | 'East' | 'Forget' | 'NorthEast' | 'North' | 'NorthWest' | 'SouthEast' | 'South' | 'SouthWest' | 'West'
 type FilterType = 'Bartlett' | 'Blackman' | 'Bohman' | 'Box' | 'Catrom' | 'Cosine' | 'Cubic' | 'Gaussian' | 'Hamming' | 'Hann' | 'Hermite' | 'Jinc' | 'Kaiser' | 'Lagrange' | 'Lanczos' | 'Lanczos2' | 'Lanczos2Sharp' | 'LanczosRadius' | 'LanczosSharp' | 'Mitchell' | 'Parzen' | 'Point' | 'Quadratic' | 'Robidoux' | 'RobidouxSharp' | 'Sinc' | 'SincFast' | 'Spline' | 'CubicSpline' | 'Triangle' | 'Welch'
 type InterpolateType = 'Average' | 'Average4' | 'Average9' | 'Average16' | 'Background' | 'Bilinear' | 'Blend' | 'Catrom' | 'Integer' | 'Mesh' | 'Nearest' | 'Spline'
 type AlphaType = 'Activate' | 'Associate' | 'Background' | 'Copy' | 'Deactivate' | 'Discrete' | 'Disassociate' | 'Extract' | 'Off' | 'On' | 'Opaque' | 'Remove' | 'Set' | 'Shape' | 'Transparent'
