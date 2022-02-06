@@ -6,6 +6,7 @@ export class Resource {
     this.#path = normalize(sourcePath)
     this.#data = input
 
+    const missingResources: { category: string, id: string, path: string }[] = []
     for (const category in this.#data) {
       if (!Object.prototype.hasOwnProperty.call(this.#data, category)) {
         continue
@@ -21,9 +22,17 @@ export class Resource {
         const fullpath = join(this.#path, path)
 
         if (!existsSync(fullpath)) {
-          throw new Error(`${category} -> ${id} does not exist`)
+          missingResources.push({ category, id, path })
         }
       }
+    }
+
+    if (missingResources.length) {
+      for (const { category, id, path } of missingResources) {
+        console.error(`ERROR: ${category}:${id} '${path}' does not exist`)
+      }
+
+      process.exit(1)
     }
   }
 
