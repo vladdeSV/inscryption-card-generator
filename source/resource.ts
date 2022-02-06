@@ -39,12 +39,14 @@ export class Resource {
   public get(category: string, id: string): string {
     const map = this.#data[category]
     if (map === undefined) {
-      throw new Error(`Unrecognized category '${category}'`)
+      console.error(`Unrecognized category '${category}'`)
+      process.exit(1)
     }
 
     const dest = map[id]
     if (dest === undefined) {
-      throw new Error(`Unrecognized id '${id}'`)
+      console.error(`Unrecognized id '${category}:${id}'`)
+      process.exit(1)
     }
 
     return join(this.#path, dest)
@@ -53,20 +55,3 @@ export class Resource {
   #path: string
   #data: { [s: string]: { [s: string]: string } }
 }
-
-// const res = new Resource('./resource/', {
-//   'card': {
-//     'common': '',
-//     'rare': '',
-//     'terrain': '',
-//   }
-// })
-
-// res.get('card', 'common')
-// res.get('tribe', 'insect')
-// res.get('sigil', 'drawant')
-// res.get('staticon', 'ant')
-// res.get('portrait', 'antqueen')
-// res.get('cost', '2blood')
-// res.get('emission', 'antqueen')
-// res.get('decal', 'smoke')

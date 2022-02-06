@@ -1,20 +1,23 @@
-export { Card }
+export { Card, Sigil }
 
 interface Card {
+  gameId?: string,
   name: string,
   type: 'common' | 'rare' | 'terrain'
-  portrait: Portrait,
+  portrait?: Portrait,
   cost?: Cost
   power: number,
   health: number,
   sigils: Sigil[],
   tribes: ('reptile' | 'canine' | 'bird' | 'hooved' | 'insect')[],
   statIcon?: 'ants' | 'bones' | 'bell' | 'cardsinhand' | 'mirror' | 'greengems',
-  decals: ('snelk' | 'child' | 'leshy' | 'smoke' | 'combined')[],
+  decals: ('snelk' | 'child' | 'leshy' | 'smoke' | 'combined' | 'blood')[],
   flags: {
     golden: boolean,
     terrain: boolean,
     combined: boolean,
+    squid: boolean,
+    enhanced: boolean,
   }
 }
 
@@ -52,7 +55,7 @@ type EnergyCost = {
 }
 type GemCost = {
   type: 'gem',
-  games: ('blue' | 'green' | 'orange')[]
+  gems: ('blue' | 'green' | 'orange')[]
 }
 
 type Sigil = 'deathtouch' | 'buffneighbours' | 'randomability' | 'ant' | 'drawant' | 'flying' | 'createdams' | 'beesonhit' | 'guarddog' | 'reach' | 'whackamole' | 'steeltrap' | 'cagedwolf' | 'sacrificial' | 'cat' | 'drawcopyondeath' | 'createbells' | 'daus' | 'strafe' | 'evolve' | 'drawcopy' | 'tripleblood' | 'submerge' | 'gainbattery' | 'jerseydevil' | 'submergesquid' | 'lammergeier' | 'corpseeater' | 'tutor' | 'splitstrike' | 'tristrike' | 'strafepush' | 'packmule' | 'ouroboros' | 'randomconsumable' | 'sharp' | 'quadruplebones' | 'tailonhit' | 'debuffenemy' | 'bellproximity' | 'cardsinhand' | 'mirror' | 'squirrelstrafe' | 'drawrabbits' | 'allstrike' | 'squirrelorbit' | 'giantcard' | 'giantmoon' | 'randomcard' | 'preventattack' | 'talkingcardchooser' | 'trapspawner' | 'conduitnull' | 'icecube' | 'bountyhunter' | 'brittle' | 'buffenemy' | 'sentry' | 'sniper' | 'drawrandomcardondeath' | 'movebeside' | 'conduitbuffattack' | 'explodeondeath' | 'bombspawner' | 'drawvesselonhit' | 'deletefile' | 'cellbuffself' | 'celldrawrandomcardondeath' | 'celltristrike' | 'gaingemblue' | 'gaingemgreen' | 'gaingemorange' | 'conduitenergy' | 'activatedrandompowerenergy' | 'conduitfactory' | 'explodegems' | 'conduitspawngems' | 'shieldgems' | 'conduitheal' | 'latchexplodeondeath' | 'latchbrittle' | 'latchdeathshield' | 'filesizedamage' | 'activateddealdamage' | 'deathshield' | 'swapstats' | 'gaingemtriple' | 'transformer' | 'activatedenergytobones' | 'activatedstatsup' | 'brokencoinleft' | 'brokencoinright' | 'drawnewhand' | 'skeletonstrafe' | 'bonedigger' | 'doubledeath' | 'gemdependant' | 'activateddrawskeleton' | 'gemsdraw' | 'greenmage' | 'activatedsacrificedrawcards' | 'loot' | 'buffgems' | 'droprubyondeath' | 'activatedstatsupenergy'

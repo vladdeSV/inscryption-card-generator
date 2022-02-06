@@ -2,8 +2,11 @@ import { Resource } from './resource'
 import IM from './im'
 import { Card } from './card'
 import { execSync } from 'child_process'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { convertJsonCard } from './jsoncard'
+import { foo } from './parsecard'
 
-function generateAct1Card(card: Card, res: Resource): Buffer {
+function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
   const im = IM()
 
   const originalCardHeight = 190 // px
@@ -22,7 +25,7 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
   // load card
   im.resource(res.get('card', card.type))
 
-  if (card.portrait.type === 'creature') {
+  if (card.portrait?.type === 'creature') {
     im.resource(res.get('portrait', card.portrait.id))
       .gravity('Center')
       .geometry(1, -15)
@@ -147,6 +150,49 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
       .composite()
   }
 
+  if (card.flags.squid) {
+    const squidTitlePath = res.get('misc', 'squid_title')
+    im.parens(
+      IM(squidTitlePath)
+        .interpolate('Nearest')
+        .filter('Point')
+        .resize(undefined, 152)
+        .filter('Box')
+        .gravity('North')
+        .geometry(0, 20)
+    ).composite()
+  } else if (card.name) {
+    const escapedName = card.name.replace(/[\\']/g, '')
+
+    // default for english
+    let size = { w: 570, h: 135 }
+    let position = { x: 0, y: 28 }
+
+    if (locale === 'ko') {
+      im.font(res.get('font', locale))
+      position = { x: 4, y: 34 }
+    } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
+      size = { w: 570, h: 166 }
+      position = { x: 0, y: 16 }
+      im.font(res.get('font', locale))
+    }
+
+    im.parens(
+      IM()
+        .pointsize()
+        .size(size.w, size.h)
+        .background('None')
+        .label(escapedName)
+        .trim()
+        .gravity('Center')
+        .extent(size.w, size.h)
+        .resizeExt(r => r.scale(106, 100, '!'))
+    ).gravity('North')
+      .geometry(position.x, position.y)
+      .composite()
+      .font(res.get('font', 'default'))
+  }
+
   if (card.flags.golden) {
     im.parens(
       IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
@@ -178,7 +224,7 @@ function generateAct1Card(card: Card, res: Resource): Buffer {
   //   im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
   // }
 
-  return execSync(im.build('convert', 'out.png'))
+  return execSync(im.build('convert', '-'))
 }
 
 type Act1Resource = {
@@ -190,9 +236,11 @@ type Act1Resource = {
   misc: Record<string, string>,
   staticon: Record<'ants' | 'bell' | 'cardsinhand' | 'mirror', string>,
   font: Record<string, string>,
-  sigil: Record<string /* Card['sigils'][number] */, string>
-
+  sigil: Record<string /* Card['sigils'][number] */, string>,
+  portrait: Record<string, string>
+  decal: Record<Card['decals'][number], string>
 }
+
 const act1ResourceMap: Act1Resource = {
   'card': {
     'common': 'cards/common.png',
@@ -216,16 +264,16 @@ const act1ResourceMap: Act1Resource = {
     'blood_2': 'costs/blood2.png',
     'blood_3': 'costs/blood3.png',
     'blood_4': 'costs/blood4.png',
-    'bones_1': 'costs/bone1.png',
-    'bones_2': 'costs/bone2.png',
-    'bones_3': 'costs/bone3.png',
-    'bones_4': 'costs/bone4.png',
-    'bones_5': 'costs/bone5.png',
-    'bones_6': 'costs/bone6.png',
-    'bones_7': 'costs/bone7.png',
-    'bones_8': 'costs/bone8.png',
-    'bones_9': 'costs/bone9.png',
-    'bones_10': 'costs/bone10.png',
+    'bone_1': 'costs/bone1.png',
+    'bone_2': 'costs/bone2.png',
+    'bone_3': 'costs/bone3.png',
+    'bone_4': 'costs/bone4.png',
+    'bone_5': 'costs/bone5.png',
+    'bone_6': 'costs/bone6.png',
+    'bone_7': 'costs/bone7.png',
+    'bone_8': 'costs/bone8.png',
+    'bone_9': 'costs/bone9.png',
+    'bone_10': 'costs/bone10.png',
   },
   'tribe': {
     'bird': 'tribes/bird.png',
@@ -286,30 +334,222 @@ const act1ResourceMap: Act1Resource = {
     'tristrike': 'sigils/tristrike.png',
     'tutor': 'sigils/tutor.png',
     'whackamole': 'sigils/whackamole.png',
+  },
+  'portrait': {
+    'adder': 'portraits/adder.png',
+    'alarmbot': 'portraits/alarmbot.png',
+    'alpha': 'portraits/alpha.png',
+    'amalgam': 'portraits/amalgam.png',
+    'amoeba': 'portraits/amoeba.png',
+    'amoebot': 'portraits/amoebot.png',
+    'ant': 'portraits/ant.png',
+    'antqueen': 'portraits/antqueen.png',
+    'automaton': 'portraits/automaton.png',
+    'badfish': 'portraits/badfish.png',
+    'baitbucket': 'portraits/baitbucket.png',
+    'banshee': 'portraits/banshee.png',
+    'bat': 'portraits/bat.png',
+    'batterybot': 'portraits/batterybot.png',
+    'battransformer_beastmode': 'portraits/battransformer_beastmode.png',
+    'battransformer_botmode': 'portraits/battransformer_botmode.png',
+    'beartransformer_beastmode': 'portraits/beartransformer_beastmode.png',
+    'beartransformer_botmode': 'portraits/beartransformer_botmode.png',
+    'beaver': 'portraits/beaver.png',
+    'bee': 'portraits/bee.png',
+    'beehive': 'portraits/beehive.png',
+    'tail_bird': 'portraits/bird_tail.png',
+    'bloodhound': 'portraits/bloodhound.png',
+    'bolthound': 'portraits/bolthound.png',
+    'bombbot': 'portraits/bombbot.png',
+    'bomblatcher': 'portraits/bomblatcher.png',
+    'bonehound': 'portraits/bonehound.png',
+    'boulder': 'portraits/boulder.png',
+    'brittlelatcher': 'portraits/brittlelatcher.png',
+    'bullfrog': 'portraits/bullfrog.png',
+    'bustedprinter': 'portraits/bustedprinter.png',
+    'cagedwolf': 'portraits/cagedwolf.png',
+    'tail_furry': 'portraits/canine_tail.png',
+    'captivefile': 'portraits/captivefile.png',
+    'cat': 'portraits/cat.png',
+    'catundead': 'portraits/cat_undead.png',
+    'cellbuff': 'portraits/cellbuff.png',
+    'cellgift': 'portraits/cellgift.png',
+    'celltri': 'portraits/celltri.png',
+    'cockroach': 'portraits/cockroach.png',
+    'conduitattack': 'portraits/conduitattack.png',
+    'conduitgems': 'portraits/conduitgems.png',
+    'conduitnull': 'portraits/conduitnull.png',
+    'coyote': 'portraits/coyote.png',
+    'dam': 'portraits/dam.png',
+    'daus': 'portraits/daus.png',
+    'dausbell': 'portraits/dausbell.png',
+    'elk': 'portraits/deer.png',
+    'elkcub': 'portraits/deercub.png',
+    'emptyvessel': 'portraits/emptyvessel.png',
+    'fieldmouse': 'portraits/fieldmice.png',
+    'franknstein': 'portraits/franknstein.png',
+    'frozen_opossum': 'portraits/frozen_opossum.png',
+    'geck': 'portraits/geck.png',
+    'gemexploder': 'portraits/gemexploder.png',
+    'gemripper': 'portraits/gemripper.png',
+    'gemshielder': 'portraits/gemshielder.png',
+    'giftbot': 'portraits/giftbot.png',
+    'goat': 'portraits/goat.png',
+    'goat_sexy': 'portraits/goat_sexy.png',
+    'goldnugget': 'portraits/goldnugget.png',
+    'goodfish': 'portraits/goodfish.png',
+    'gravedigger': 'portraits/gravedigger.png',
+    'grizzly': 'portraits/grizzly.png',
+    'gunnerbot': 'portraits/gunnerbot.png',
+    'tail_insect': 'portraits/insect_tail.png',
+    'insectodrone': 'portraits/insectodrone.png',
+    'jerseydevil': 'portraits/jerseydevil.png',
+    'jerseydevil_sleeping': 'portraits/jerseydevil_sleeping.png',
+    'kingfisher': 'portraits/kingfisher.png',
+    'lammergeier': 'portraits/lammergeier.png',
+    'leapbot': 'portraits/leapbot.png',
+    'librarian': 'portraits/librarian.png',
+    'maggots': 'portraits/maggots.png',
+    'magpie': 'portraits/magpie.png',
+    'mantis': 'portraits/mantis.png',
+    'mantisgod': 'portraits/mantisgod.png',
+    'minecart': 'portraits/minecart.png',
+    'mole': 'portraits/mole.png',
+    'moleman': 'portraits/moleman.png',
+    'moon': 'portraits/moon.png',
+    'moon_portrait': 'portraits/moon_portrait-resources.assets-1751.png',
+    'moose': 'portraits/moose.png',
+    'morefish': 'portraits/morefish.png',
+    'mothman_stage1': 'portraits/mothman_1.png',
+    'mothman_stage2': 'portraits/mothman_2.png',
+    'mothman_stage3': 'portraits/mothman_3.png',
+    'mule': 'portraits/mule.png',
+    'mycobot': 'portraits/mycobot.png',
+    'opossum': 'portraits/opossum.png',
+    'otter': 'portraits/otter.png',
+    'ouroboros': 'portraits/ouroboros.png',
+    'ourobot': 'portraits/ourobot.png',
+    'packrat': 'portraits/packrat.png',
+    'peltgolden': 'portraits/pelt_golden.png',
+    'pelthare': 'portraits/pelt_hare.png',
+    'peltwolf': 'portraits/pelt_wolf.png',
+    'porcupine': 'portraits/porcupine.png',
+    'porcupinetransformer_beastmode': 'portraits/porcupinetransformer_beastmode.png',
+    'porcupinetransformer_botmode': 'portraits/porcupinetransformer_botmode.png',
+    'pronghorn': 'portraits/pronghorn.png',
+    'rabbit': 'portraits/rabbit.png',
+    'ratking': 'portraits/ratking.png',
+    'rattler': 'portraits/rattler.png',
+    'raven': 'portraits/raven.png',
+    'ravenegg': 'portraits/ravenegg.png',
+    'revenant': 'portraits/revenant.png',
+    'ringworm': 'portraits/ringworm.png',
+    'roboskeleton': 'portraits/roboskeleton.png',
+    'sentinel_blue': 'portraits/sentinel_blue.png',
+    'sentinel_green': 'portraits/sentinel_green.png',
+    'sentinel_orange': 'portraits/sentinel_orange.png',
+    'sentrybot': 'portraits/sentrybot.png',
+    'shark': 'portraits/shark.png',
+    'shieldbot': 'portraits/shieldbot.png',
+    'shieldlatcher': 'portraits/shieldlatcher.png',
+    'shutterbug': 'portraits/shutterbug.png',
+    'sinkhole': 'portraits/sinkhole.png',
+    'skeleton': 'portraits/skeleton.png',
+    'skink': 'portraits/skink.png',
+    'skinktail': 'portraits/skink_tail.png',
+    'skink_tailless': 'portraits/skink_tailless.png',
+    'skunk': 'portraits/skunk.png',
+    'smoke': 'portraits/smoke.png',
+    'smoke_improved': 'portraits/smoke_improved.png',
+    'sniper': 'portraits/sniper.png',
+    'sparrow': 'portraits/sparrow.png',
+    'squidbell': 'portraits/squidbell.png',
+    'squidcards': 'portraits/squidcards.png',
+    'squidmirror': 'portraits/squidmirror.png',
+    'squirrel': 'portraits/squirrel.png',
+    'squirrel_scared': 'portraits/squirrel_scared.png',
+    'starvation': 'portraits/starvingman.png',
+    'stinkbug_talking': 'portraits/stinkbug_talking.png',
+    'stoat_talking': 'portraits/stoat_talking.png',
+    'stones': 'portraits/stones.png',
+    'stump': 'portraits/stump.png',
+    'swapbot': 'portraits/swapbot.png',
+    'swapbot_swapped': 'portraits/swapbot_swapped.png',
+    'transformer_adder': 'portraits/transformer_adder.png',
+    'transformer_raven': 'portraits/transformer_raven.png',
+    'transformer_wolf': 'portraits/transformer_wolf.png',
+    'trap': 'portraits/trap.png',
+    'trap_closed': 'portraits/trap_closed.png',
+    'trapfrog': 'portraits/trapfrog.png',
+    'tree': 'portraits/tree.png',
+    'tree_snowcovered': 'portraits/tree_snowcovered.png',
+    'snapper': 'portraits/turtle.png',
+    'urayuli': 'portraits/urayuli.png',
+    'vulture': 'portraits/vulture.png',
+    'warren': 'portraits/warren.png',
+    'warren_eaten1': 'portraits/warren_eaten1.png',
+    'warren_eaten2': 'portraits/warren_eaten2.png',
+    'warren_eaten3': 'portraits/warren_eaten3.png',
+    'wolf': 'portraits/wolf.png',
+    'wolf_talking': 'portraits/wolf_talking.png',
+    'wolfcub': 'portraits/wolfcub.png',
+  },
+  'decal': {
+    'snelk': 'decals/snelk.png',
+    'child': 'decals/child.png',
+    'leshy': 'decals/leshy.png',
+    'smoke': 'decals/smoke.png',
+    'combined': 'decals/combined.png',
+    'blood': 'decals/blood.png'
   }
 }
 
-const testCard: Card = {
-  name: 'adder',
-  type: 'common',
-  health: 1,
-  power: 1,
-  sigils: ['deathtouch'],
-  tribes: ['reptile'],
-  decals: [],
-  portrait: {
-    type: 'creature',
-    id: 'adder',
-  },
-  statIcon: undefined,
-  cost: {
-    type: 'blood',
-    amount: 2,
-  },
-  flags: {
-    combined: false,
-    golden: false,
-    terrain: false,
+const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
+const jsonCards = textChunks.map(foo)
+const cards: Card[] = jsonCards.map(convertJsonCard)
+
+const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
+const act1Cards = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
+for (const card of cards) {
+
+  if (!act1Cards.includes(card.gameId ?? '')) {
+    continue
   }
+
+  if (existsSync('out/cards/' + card.gameId + '.png')) {
+    console.log('skipping', card.gameId)
+
+    continue
+  }
+
+  const translationId = getGameTranslationId(card.gameId)
+  if (translationId) {
+    const name = translations['en'][translationId]
+    if (name === undefined) {
+      console.log('found no translation for', card.gameId)
+    }
+
+    card.name = name ?? '!ERROR'
+  }
+  const buffer = generateAct1Card(card, new Resource('resource', act1ResourceMap), 'en')
+  writeFileSync('out/cards/' + card.gameId + '.png', buffer)
+  console.log('generated', card.gameId)
 }
-generateAct1Card(testCard, new Resource('resource', act1ResourceMap))
+
+function getGameTranslationId(id: string | undefined): string | undefined {
+
+  if (id === 'Stoat_Talking') {
+    id = 'stoat'
+  }
+
+  if (id === 'Smoke_NoBones') {
+    id = 'smoke'
+  }
+
+  if (id === '!DEATHCARD_LESHY') {
+    return undefined
+  }
+
+  return id?.toLowerCase()
+
+}
