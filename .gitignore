@@ -1,17 +1,5 @@
 /node_modules
 /out
 
-#
-/cache
-
 # contains copyrighted material, which i am not allowed to share
 /resource
-/resource-pixelprofilgate
-/resource-handdrawn
-/resource.*.zip
-
-# temp source
-source.bak
-/cards*
-/pdf
-/downloads
