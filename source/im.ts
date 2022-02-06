@@ -5,7 +5,7 @@ class ImageMagickCommandBuilder {
     }
   }
 
-  build(executable: 'convert' | 'magick' | 'mogrify', out: string): string {
+  build(executable: 'convert' | 'magick', out: string): string {
     this.#commands = [executable, ...this.#commands, this.#escape(out)]
 
     return this.#join()
@@ -174,10 +174,10 @@ class ImageMagickCommandBuilder {
   #commands: string[] = []
 }
 
-type FilterType = 'bartlett' | 'blackman' | 'bohman' | 'box' | 'catrom' | 'cosine' | 'cubic' | 'gaussian' | 'hamming' | 'hann' | 'hermite' | 'jinc' | 'kaiser' | 'lagrange' | 'lanczos' | 'lanczos2' | 'lanczos2sharp' | 'lanczosradius' | 'lanczossharp' | 'mitchell' | 'parzen' | 'point' | 'quadratic' | 'robidoux' | 'robidouxsharp' | 'sinc' | 'sincfast' | 'spline' | 'cubicspline' | 'triangle' | 'welch'
-type InterpolateType = 'average' | 'average4' | 'average9' | 'average16' | 'background' | 'bilinear' | 'blend' | 'catrom' | 'integer' | 'mesh' | 'nearest' | 'spline'
-type AlphaType = 'activate' | 'associate' | 'deactivate' | 'disassociate' | 'set' | 'opaque' | 'transparent' | 'extract' | 'copy' | 'shape' | 'remove' | 'background'
-type ComposeType = 'atop' | 'blend' | 'blur' | 'bumpmap' | 'changemask' | 'clear' | 'colorburn' | 'colordodge' | 'colorize' | 'copyalpha' | 'copyblack' | 'copyblue' | 'copy' | 'copycyan' | 'copygreen' | 'copymagenta' | 'copyred' | 'copyyellow' | 'darken' | 'darkenintensity' | 'difference' | 'displace' | 'dissolve' | 'distort' | 'dividedst' | 'dividesrc' | 'dstatop' | 'dst' | 'dstin' | 'dstout' | 'dstover' | 'exclusion' | 'freeze' | 'hardlight' | 'hardmix' | 'hue' | 'in' | 'intensity' | 'interpolate' | 'lightenintensity' | 'lighten' | 'linearburn' | 'lineardodge' | 'linearlight' | 'luminize' | 'mathematics' | 'minusdst' | 'minussrc' | 'modulate' | 'modulusadd' | 'modulussubtract' | 'multiply' | 'negate' | 'none' | 'out' | 'overlay' | 'over' | 'pegtoplight' | 'pinlight' | 'plus' | 'reflect' | 'replace' | 'rmse' | 'saturate' | 'screen' | 'softburn' | 'softdodge' | 'softlight' | 'srcatop' | 'srcin' | 'srcout' | 'srcover' | 'src' | 'stamp' | 'stereo' | 'vividlight' | 'xor'
+type FilterType = 'Bartlett' | 'Blackman' | 'Bohman' | 'Box' | 'Catrom' | 'Cosine' | 'Cubic' | 'Gaussian' | 'Hamming' | 'Hann' | 'Hermite' | 'Jinc' | 'Kaiser' | 'Lagrange' | 'Lanczos' | 'Lanczos2' | 'Lanczos2Sharp' | 'LanczosRadius' | 'LanczosSharp' | 'Mitchell' | 'Parzen' | 'Point' | 'Quadratic' | 'Robidoux' | 'RobidouxSharp' | 'Sinc' | 'SincFast' | 'Spline' | 'CubicSpline' | 'Triangle' | 'Welch'
+type InterpolateType = 'Average' | 'Average4' | 'Average9' | 'Average16' | 'Background' | 'Bilinear' | 'Blend' | 'Catrom' | 'Integer' | 'Mesh' | 'Nearest' | 'Spline'
+type AlphaType = 'Activate' | 'Associate' | 'Background' | 'Copy' | 'Deactivate' | 'Discrete' | 'Disassociate' | 'Extract' | 'Off' | 'On' | 'Opaque' | 'Remove' | 'Set' | 'Shape' | 'Transparent'
+type ComposeType = 'Atop' | 'Blend' | 'Blur' | 'Bumpmap' | 'ChangeMask' | 'Clear' | 'ColorBurn' | 'ColorDodge' | 'Colorize' | 'CopyAlpha' | 'CopyBlack' | 'CopyBlue' | 'Copy' | 'CopyCyan' | 'CopyGreen' | 'CopyMagenta' | 'CopyRed' | 'CopyYellow' | 'Darken' | 'DarkenIntensity' | 'Difference' | 'Displace' | 'Dissolve' | 'Distort' | 'DivideDst' | 'DivideSrc' | 'DstAtop' | 'Dst' | 'DstIn' | 'DstOut' | 'DstOver' | 'Exclusion' | 'Freeze' | 'HardLight' | 'HardMix' | 'Hue' | 'In' | 'Intensity' | 'Interpolate' | 'LightenIntensity' | 'Lighten' | 'LinearBurn' | 'LinearDodge' | 'LinearLight' | 'Luminize' | 'Mathematics' | 'MinusDst' | 'MinusSrc' | 'Modulate' | 'ModulusAdd' | 'ModulusSubtract' | 'Multiply' | 'Negate' | 'None' | 'Out' | 'Overlay' | 'Over' | 'PegtopLight' | 'PinLight' | 'Plus' | 'Reflect' | 'Replace' | 'RMSE' | 'Saturate' | 'Screen' | 'SoftBurn' | 'SoftDodge' | 'SoftLight' | 'SrcAtop' | 'SrcIn' | 'SrcOut' | 'SrcOver' | 'Src' | 'Stamp' | 'Stereo' | 'VividLight' | 'Xor'
 
 interface Resize {
   pixel(w?: number, h?: number, option?: '^' | '!' | '>' | '<'): this
