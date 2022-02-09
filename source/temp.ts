@@ -11,7 +11,7 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
 
   const originalCardHeight = 190 // px
   const fullsizeCardHeight = 1050 // px
-  const v = originalCardHeight / originalCardHeight
+  const scale = fullsizeCardHeight / originalCardHeight
 
   // parts are shifted if having terrain card layout
   const terrainLayoutXoffset = card.flags.terrain ? -70 : 0
@@ -205,7 +205,6 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
 
       try {
         const emissionPath = res.get('emission', card.portrait.id)
-        const scale = 1050 / 190
         im.parens(
           IM(emissionPath)
             .filter('Box')
