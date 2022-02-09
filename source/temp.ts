@@ -575,6 +575,8 @@ const act1ResourceMap: Act1Resource = {
   }
 }
 
+const res = new Resource('resource', act1ResourceMap)
+
 const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
 const jsonCards = textChunks.map(foo)
 const cards: Card[] = jsonCards.map(convertJsonCard)
@@ -602,7 +604,7 @@ for (const card of cards) {
 
     card.name = name ?? '!ERROR'
   }
-  const buffer = generateAct1Card(card, new Resource('resource', act1ResourceMap), 'en')
+  const buffer = generateAct1Card(card, res, 'en')
   writeFileSync('out/cards/' + card.gameId + '.png', buffer)
   console.log('generated', card.gameId)
 }
