@@ -59,6 +59,7 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
     case 'Ants': card.statIcon = 'ants'; break
     case 'Bell': card.statIcon = 'bell'; break
     case 'Mirror': card.statIcon = 'mirror'; break
+    case 'CardsInHand': card.statIcon = 'cardsinhand'; break
     case 'None': card.statIcon = undefined; break
   }
 
