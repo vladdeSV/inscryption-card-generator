@@ -200,11 +200,23 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
       .compose('HardLight')
       .composite()
 
-    // // use emission for default portraits
-    // if (card.portrait && card.portrait !== 'custom') {
-    //   const scale = 1050 / 190
-    //   im.command(`\\( ./resource/portraits/emissions/${card.portrait}.png -filter Box -resize ${scale * 100}% -gravity center -geometry +0-${15 * scale} \\) -compose overlay -composite`)
-    // }
+    // use emission for default portraits
+    if (card.portrait && card.portrait?.type === 'creature') {
+
+      try {
+        const emissionPath = res.get('emission', card.portrait.id)
+        const scale = 1050 / 190
+        im.parens(
+          IM(emissionPath)
+            .filter('Box')
+            .command(`-resize ${scale * 100}%`)
+            .gravity('Center')
+            .geometry(0, -15 * scale)
+        ).compose('Overlay').composite()
+      } catch {
+        // ait dude
+      }
+    }
   }
 
   // decals
