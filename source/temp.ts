@@ -229,11 +229,26 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
       .composite()
   }
 
-  // if (card.flags.isEnhanced && card.portrait !== 'custom') {
-  //   const scale = 1050 / 190
-  //   im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale)).composite()
-  //   im.parens(IM(`./resource/portraits/emissions/${card.portrait}.png`).command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`).gravity('center').geometry(3, -15 * scale).command('-blur 0x10')).composite()
-  // }
+  if (card.flags.enhanced && card.portrait?.type === 'creature') {
+    try {
+      const emissionPath = res.get('emission', card.portrait.id)
+
+      for (const i of [false, true]) {
+        const im2 = IM(emissionPath)
+          .command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`)
+          .gravity('Center')
+          .geometry(3, -15 * scale)
+
+        if (i === true) {
+          im2.command('-blur 0x10')
+        }
+
+        im.parens(im2).composite()
+      }
+    } catch {
+      // ait dude 2
+    }
+  }
 
   return execSync(im.build('convert', '-'))
 }
