@@ -227,6 +227,24 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
   return execSync(im.build('convert', '-'))
 }
 
+function getGameTranslationId(id: string | undefined): string | undefined {
+
+  if (id === 'Stoat_Talking') {
+    id = 'stoat'
+  }
+
+  if (id === 'Smoke_NoBones') {
+    id = 'smoke'
+  }
+
+  if (id === '!DEATHCARD_LESHY') {
+    return undefined
+  }
+
+  return id?.toLowerCase()
+
+}
+
 type Act1Resource = {
   card: Record<Card['type'], string>,
   cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel', string>,
@@ -607,22 +625,4 @@ for (const card of cards) {
   const buffer = generateAct1Card(card, res, 'en')
   writeFileSync('out/cards/' + card.gameId + '.png', buffer)
   console.log('generated', card.gameId)
-}
-
-function getGameTranslationId(id: string | undefined): string | undefined {
-
-  if (id === 'Stoat_Talking') {
-    id = 'stoat'
-  }
-
-  if (id === 'Smoke_NoBones') {
-    id = 'smoke'
-  }
-
-  if (id === '!DEATHCARD_LESHY') {
-    return undefined
-  }
-
-  return id?.toLowerCase()
-
 }
