@@ -12,12 +12,18 @@ interface Card {
   tribes: ('reptile' | 'canine' | 'bird' | 'hooved' | 'insect')[],
   statIcon?: 'ants' | 'bones' | 'bell' | 'cardsinhand' | 'mirror' | 'greengems',
   decals: ('snelk' | 'child' | 'leshy' | 'smoke' | 'combined' | 'blood')[],
+  temple: 'nature' | 'tech' | 'undead' | 'wizard',
   flags: {
     golden: boolean,
     terrain: boolean,
     combined: boolean,
     squid: boolean,
     enhanced: boolean,
+    fused: boolean,
+  }
+  meta: {
+    rare: boolean,
+    terrain: boolean,
   }
 }
 

@@ -12,12 +12,18 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
     portrait: undefined,
     statIcon: undefined,
     cost: undefined,
+    temple: 'nature',
     flags: {
       combined: false,
       golden: false,
       terrain: false,
       squid: false,
       enhanced: false,
+      fused: false,
+    },
+    meta: {
+      rare: false,
+      terrain: false,
     }
   }
 
@@ -30,6 +36,10 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
   card.flags.squid = !!jsonCard.id.match(/Squid(Mirror|Bell|Cards)/)
   card.flags.terrain = jsonCard.appearanceBehaviours.includes('TerrainLayout')
   card.flags.golden = jsonCard.appearanceBehaviours.includes('GoldEmission')
+  card.flags.fused = jsonCard.traits.includes('Fused')
+
+  card.meta.rare = jsonCard.metaCategories.includes('Rare')
+  card.meta.terrain = jsonCard.traits.includes('Terrain')
 
   if (jsonCard.appearanceBehaviours.includes('TerrainBackground')) {
     card.type = 'terrain'
@@ -60,7 +70,6 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
     case 'Bell': card.statIcon = 'bell'; break
     case 'Mirror': card.statIcon = 'mirror'; break
     case 'CardsInHand': card.statIcon = 'cardsinhand'; break
-    case 'None': card.statIcon = undefined; break
   }
 
   for (const tribe of jsonCard.tribes) {
@@ -72,6 +81,13 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
       case 'Reptile': card.tribes.push('reptile'); break
       case 'Squirrel': break
     }
+  }
+
+  switch (jsonCard.temple) {
+    case 'Nature': card.temple = 'nature'; break
+    case 'Tech': card.temple = 'tech'; break
+    case 'Undead': card.temple = 'undead'; break
+    case 'Wizard': card.temple = 'wizard'; break
   }
 
   if (jsonCard.bloodCost != 0) {
@@ -138,9 +154,9 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
       case 'DrawCopy': card.sigils.push('drawcopy'); break
       case 'TripleBlood': card.sigils.push('tripleblood'); break
       case 'Submerge': card.sigils.push('submerge'); break
-      // case 'GainBattery': card.sigils.push('gainbattery'); break
+      case 'GainBattery': card.sigils.push('gainbattery'); break
       // case 'JerseyDevil': card.sigils.push('jerseydevil'); break
-      // case 'SubmergeSquid': card.sigils.push('submergesquid'); break
+      case 'SubmergeSquid': card.sigils.push('submergesquid'); break
       // case 'Lammergeier': card.sigils.push('lammergeier'); break
       case 'CorpseEater': card.sigils.push('corpseeater'); break
       case 'Tutor': card.sigils.push('tutor'); break
@@ -166,60 +182,60 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
       case 'RandomCard': card.sigils.push('randomcard'); break
       case 'PreventAttack': card.sigils.push('preventattack'); break
       // case 'TalkingCardChooser': card.sigils.push('talkingcardchooser'); break
-      // case 'TrapSpawner': card.sigils.push('trapspawner'); break
-      // case 'ConduitNull': card.sigils.push('conduitnull'); break
+      case 'TrapSpawner': card.sigils.push('trapspawner'); break
+      case 'ConduitNull': card.sigils.push('conduitnull'); break
       case 'IceCube': card.sigils.push('icecube'); break
-      // case 'BountyHunter': card.sigils.push('bountyhunter'); break
+      case 'BountyHunter': card.sigils.push('bountyhunter'); break
       case 'Brittle': card.sigils.push('brittle'); break
       case 'BuffEnemy': card.sigils.push('buffenemy'); break
-      // case 'Sentry': card.sigils.push('sentry'); break
-      // case 'Sniper': card.sigils.push('sniper'); break
+      case 'Sentry': card.sigils.push('sentry'); break
+      case 'Sniper': card.sigils.push('sniper'); break
       case 'DrawRandomCardOnDeath': card.sigils.push('drawrandomcardondeath'); break
-      // case 'MoveBeside': card.sigils.push('movebeside'); break
-      // case 'ConduitBuffAttack': card.sigils.push('conduitbuffattack'); break
-      // case 'ExplodeOnDeath': card.sigils.push('explodeondeath'); break
-      // case 'BombSpawner': card.sigils.push('bombspawner'); break
-      // case 'DrawVesselOnHit': card.sigils.push('drawvesselonhit'); break
-      // case 'DeleteFile': card.sigils.push('deletefile'); break
-      // case 'CellBuffSelf': card.sigils.push('cellbuffself'); break
-      // case 'CellDrawRandomCardOnDeath': card.sigils.push('celldrawrandomcardondeath'); break
-      // case 'CellTriStrike': card.sigils.push('celltristrike'); break
-      // case 'GainGemBlue': card.sigils.push('gaingemblue'); break
-      // case 'GainGemGreen': card.sigils.push('gaingemgreen'); break
-      // case 'GainGemOrange': card.sigils.push('gaingemorange'); break
-      // case 'ConduitEnergy': card.sigils.push('conduitenergy'); break
-      // case 'ActivatedRandomPowerEnergy': card.sigils.push('activatedrandompowerenergy'); break
-      // case 'ConduitFactory': card.sigils.push('conduitfactory'); break
-      // case 'ExplodeGems': card.sigils.push('explodegems'); break
-      // case 'ConduitSpawnGems': card.sigils.push('conduitspawngems'); break
-      // case 'ShieldGems': card.sigils.push('shieldgems'); break
-      // case 'ConduitHeal': card.sigils.push('conduitheal'); break
-      // case 'LatchExplodeOnDeath': card.sigils.push('latchexplodeondeath'); break
-      // case 'LatchBrittle': card.sigils.push('latchbrittle'); break
-      // case 'LatchDeathShield': card.sigils.push('latchdeathshield'); break
-      // case 'FileSizeDamage': card.sigils.push('filesizedamage'); break
-      // case 'ActivatedDealDamage': card.sigils.push('activateddealdamage'); break
-      // case 'DeathShield': card.sigils.push('deathshield'); break
-      // case 'SwapStats': card.sigils.push('swapstats'); break
-      // case 'GainGemTriple': card.sigils.push('gaingemtriple'); break
-      // case 'Transformer': card.sigils.push('transformer'); break
-      // case 'ActivatedEnergyToBones': card.sigils.push('activatedenergytobones'); break
-      // case 'ActivatedStatsUp': card.sigils.push('activatedstatsup'); break
-      // case 'BrokenCoinLeft': card.sigils.push('brokencoinleft'); break
-      // case 'BrokenCoinRight': card.sigils.push('brokencoinright'); break
-      // case 'DrawNewHand': card.sigils.push('drawnewhand'); break
-      // case 'SkeletonStrafe': card.sigils.push('skeletonstrafe'); break
-      // case 'BoneDigger': card.sigils.push('bonedigger'); break
-      // case 'DoubleDeath': card.sigils.push('doubledeath'); break
-      // case 'GemDependant': card.sigils.push('gemdependant'); break
-      // case 'ActivatedDrawSkeleton': card.sigils.push('activateddrawskeleton'); break
-      // case 'GemsDraw': card.sigils.push('gemsdraw'); break
-      // case 'GreenMage': card.sigils.push('greenmage'); break
-      // case 'ActivatedSacrificeDrawCards': card.sigils.push('activatedsacrificedrawcards'); break
-      // case 'Loot': card.sigils.push('loot'); break
-      // case 'BuffGems': card.sigils.push('buffgems'); break
-      // case 'DropRubyOnDeath': card.sigils.push('droprubyondeath'); break
-      // case 'ActivatedStatsUpEnergy': card.sigils.push('activatedstatsupenergy'); break
+      case 'MoveBeside': card.sigils.push('movebeside'); break
+      case 'ConduitBuffAttack': card.sigils.push('conduitbuffattack'); break
+      case 'ExplodeOnDeath': card.sigils.push('explodeondeath'); break
+      case 'BombSpawner': card.sigils.push('bombspawner'); break
+      case 'DrawVesselOnHit': card.sigils.push('drawvesselonhit'); break
+      case 'DeleteFile': card.sigils.push('deletefile'); break
+      case 'CellBuffSelf': card.sigils.push('cellbuffself'); break
+      case 'CellDrawRandomCardOnDeath': card.sigils.push('celldrawrandomcardondeath'); break
+      case 'CellTriStrike': card.sigils.push('celltristrike'); break
+      case 'GainGemBlue': card.sigils.push('gaingemblue'); break
+      case 'GainGemGreen': card.sigils.push('gaingemgreen'); break
+      case 'GainGemOrange': card.sigils.push('gaingemorange'); break
+      case 'ConduitEnergy': card.sigils.push('conduitenergy'); break
+      case 'ActivatedRandomPowerEnergy': card.sigils.push('activatedrandompowerenergy'); break
+      case 'ConduitFactory': card.sigils.push('conduitfactory'); break
+      case 'ExplodeGems': card.sigils.push('explodegems'); break
+      case 'ConduitSpawnGems': card.sigils.push('conduitspawngems'); break
+      case 'ShieldGems': card.sigils.push('shieldgems'); break
+      case 'ConduitHeal': card.sigils.push('conduitheal'); break
+      case 'LatchExplodeOnDeath': card.sigils.push('latchexplodeondeath'); break
+      case 'LatchBrittle': card.sigils.push('latchbrittle'); break
+      case 'LatchDeathShield': card.sigils.push('latchdeathshield'); break
+      case 'FileSizeDamage': card.sigils.push('filesizedamage'); break
+      case 'ActivatedDealDamage': card.sigils.push('activateddealdamage'); break
+      case 'DeathShield': card.sigils.push('deathshield'); break
+      case 'SwapStats': card.sigils.push('swapstats'); break
+      case 'GainGemTriple': card.sigils.push('gaingemtriple'); break
+      case 'Transformer': card.sigils.push('transformer'); break
+      case 'ActivatedEnergyToBones': card.sigils.push('activatedenergytobones'); break
+      case 'ActivatedStatsUp': card.sigils.push('activatedstatsup'); break
+      case 'BrokenCoinLeft': card.sigils.push('brokencoinleft'); break
+      case 'BrokenCoinRight': card.sigils.push('brokencoinright'); break
+      case 'DrawNewHand': card.sigils.push('drawnewhand'); break
+      case 'SkeletonStrafe': card.sigils.push('skeletonstrafe'); break
+      case 'BoneDigger': card.sigils.push('bonedigger'); break
+      case 'DoubleDeath': card.sigils.push('doubledeath'); break
+      case 'GemDependant': card.sigils.push('gemdependant'); break
+      case 'ActivatedDrawSkeleton': card.sigils.push('activateddrawskeleton'); break
+      case 'GemsDraw': card.sigils.push('gemsdraw'); break
+      case 'GreenMage': card.sigils.push('greenmage'); break
+      case 'ActivatedSacrificeDrawCards': card.sigils.push('activatedsacrificedrawcards'); break
+      case 'Loot': card.sigils.push('loot'); break
+      case 'BuffGems': card.sigils.push('buffgems'); break
+      case 'DropRubyOnDeath': card.sigils.push('droprubyondeath'); break
+      case 'ActivatedStatsUpEnergy': card.sigils.push('activatedstatsupenergy'); break
     }
   }
 
