@@ -1,275 +1,9 @@
 import { Resource } from './resource'
-import IM from './im'
 import { Card } from './card'
-import { execSync } from 'child_process'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { foo } from './parsecard'
-
-function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
-  const im = IM()
-
-  const originalCardHeight = 190 // px
-  const fullsizeCardHeight = 1050 // px
-  const scale = fullsizeCardHeight / originalCardHeight
-
-  // parts are shifted if having terrain card layout
-  const terrainLayoutXoffset = card.flags.terrain ? -70 : 0
-
-  // set up defaults
-  im.font(res.get('font', 'default'))
-    .pointsize(200)
-    .background('None')
-    .filter('Box')
-
-  // load card
-  im.resource(res.get('card', card.type))
-
-  if (card.portrait?.type === 'creature') {
-    im.resource(res.get('portrait', card.portrait.id))
-      .gravity('Center')
-      .geometry(1, -15)
-      .composite()
-  }
-
-  // resize
-  im.resize(undefined, fullsizeCardHeight) // 1050 pixels @ 300dpi = 3.5 inches
-
-  // set default gravity
-  im.gravity('NorthWest')
-
-  // tribes
-  const tribePositions: [number, number][] = [[-12, 3], [217, 5], [444, 7], [89, 451], [344, 452]]
-  for (const [index, tribe] of card.tribes.entries()) {
-    const tribeLocation = res.get('tribe', tribe)
-    const position = tribePositions[index]
-
-    im.parens(
-      IM(tribeLocation)
-        .resize(undefined, 354)
-        .gravity('NorthWest')
-        .alpha('Set')
-        .command('-channel A -evaluate multiply 0.4 +channel')
-    ).geometry(position[0], position[1])
-      .composite()
-  }
-
-  // card cost
-  if (card.cost) {
-    const costType = card.cost.type
-    if (costType !== 'blood' && costType !== 'bone') {
-      throw new Error(`debug: unsupported cost type '${costType}', remove this error message later`)
-    }
-
-    const { type, amount } = card.cost
-    const costPath = res.get('cost', `${type}_${amount}`)
-    im.parens(
-      IM(costPath)
-        .interpolate('Nearest')
-        .filter('Point')
-        .resize(284)
-        .filter('Box')
-        .gravity('East')
-    ).gravity('NorthEast')
-      .geometry(32, 110)
-      .composite()
-
-    im.gravity('NorthWest')
-  }
-
-  // health
-  const healthWidth = 114
-  const healthHeight = 215
-  im.parens(
-    IM()
-      .pointsize()
-      .size(healthWidth, healthHeight)
-      .label(card.health)
-      .gravity('East')
-      .extent(healthWidth, healthHeight)
-  ).gravity('NorthEast')
-    .geometry(32 - terrainLayoutXoffset, 815)
-    .composite()
-
-  // special stat icons
-  if (card.statIcon !== undefined) {
-    im.parens(
-      IM(res.get('staticon', card.statIcon))
-        .interpolate('Nearest')
-        .filter('Point')
-        .resize(245)
-        .filter('Box')
-        .gravity('NorthWest')
-    ).geometry(5, 705)
-      .composite()
-  } else if (card.power !== undefined) {
-    const drawPower = !(card.power === 0 && card.flags.terrain)
-    if (drawPower) {
-      const w = 114
-      const h = 215
-
-      im.parens(
-        IM()
-          .pointsize()
-          .size(w, h)
-          .gravity('West')
-          .label(card.power)
-          .extent(w, h)
-      ).gravity('NorthWest')
-        .geometry(68, 729)
-        .composite()
-    }
-  }
-
-  if (card.sigils.length === 1) {
-    const sigilPath = res.get('sigil', card.sigils[0])
-    im.parens(
-      IM(sigilPath)
-        .interpolate('Nearest')
-        .filter('Point')
-        .resize(undefined, 253)
-        .filter('Box')
-    ).gravity('NorthWest')
-      .geometry(221 + terrainLayoutXoffset, 733)
-      .composite()
-  } else if (card.sigils.length === 2) {
-    const sigilPath1 = res.get('sigil', card.sigils[0])
-    const sigilPath2 = res.get('sigil', card.sigils[1])
-    im.parens(IM(sigilPath1)
-      .filter('Box')
-      .resize(undefined, 180)
-    ).gravity('NorthWest')
-      .geometry(331 + terrainLayoutXoffset, 720)
-      .composite()
-
-    im.parens(IM(sigilPath2)
-      .filter('Box')
-      .resize(undefined, 180)
-    ).gravity('NorthWest')
-      .geometry(180 + terrainLayoutXoffset, 833)
-      .composite()
-  }
-
-  if (card.flags.squid) {
-    const squidTitlePath = res.get('misc', 'squid_title')
-    im.parens(
-      IM(squidTitlePath)
-        .interpolate('Nearest')
-        .filter('Point')
-        .resize(undefined, 152)
-        .filter('Box')
-        .gravity('North')
-        .geometry(0, 20)
-    ).composite()
-  } else if (card.name) {
-    const escapedName = card.name.replace(/[\\']/g, '')
-
-    // default for english
-    let size = { w: 570, h: 135 }
-    let position = { x: 0, y: 28 }
-
-    if (locale === 'ko') {
-      im.font(res.get('font', locale))
-      position = { x: 4, y: 34 }
-    } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
-      size = { w: 570, h: 166 }
-      position = { x: 0, y: 16 }
-      im.font(res.get('font', locale))
-    }
-
-    im.parens(
-      IM()
-        .pointsize()
-        .size(size.w, size.h)
-        .background('None')
-        .label(escapedName)
-        .trim()
-        .gravity('Center')
-        .extent(size.w, size.h)
-        .resizeExt(r => r.scale(106, 100, '!'))
-    ).gravity('North')
-      .geometry(position.x, position.y)
-      .composite()
-      .font(res.get('font', 'default'))
-  }
-
-  if (card.flags.golden) {
-    im.parens(
-      IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
-    ).geometry(0, 0)
-      .compose('HardLight')
-      .composite()
-
-    // use emission for default portraits
-    if (card.portrait && card.portrait?.type === 'creature') {
-
-      try {
-        const emissionPath = res.get('emission', card.portrait.id)
-        im.parens(
-          IM(emissionPath)
-            .filter('Box')
-            .command(`-resize ${scale * 100}%`)
-            .gravity('Center')
-            .geometry(0, -15 * scale)
-        ).compose('Overlay').composite()
-      } catch {
-        // ait dude
-      }
-    }
-  }
-
-  // decals
-  for (const decal of card.decals) {
-    const decalPath = res.get('decal', decal)
-    im.parens(
-      IM(decalPath)
-        .filter('Box')
-        .resize(undefined, fullsizeCardHeight)
-    ).gravity('Center')
-      .composite()
-  }
-
-  if (card.flags.enhanced && card.portrait?.type === 'creature') {
-    try {
-      const emissionPath = res.get('emission', card.portrait.id)
-
-      for (const i of [false, true]) {
-        const im2 = IM(emissionPath)
-          .command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`)
-          .gravity('Center')
-          .geometry(3, -15 * scale)
-
-        if (i === true) {
-          im2.command('-blur 0x10')
-        }
-
-        im.parens(im2).composite()
-      }
-    } catch {
-      // ait dude 2
-    }
-  }
-
-  return execSync(im.build('convert', '-'))
-}
-
-function getGameTranslationId(id: string | undefined): string | undefined {
-
-  if (id === 'Stoat_Talking') {
-    id = 'stoat'
-  }
-
-  if (id === 'Smoke_NoBones') {
-    id = 'smoke'
-  }
-
-  if (id === '!DEATHCARD_LESHY') {
-    return undefined
-  }
-
-  return id?.toLowerCase()
-
-}
+import { generateAct2Card } from './fns/generateAct2Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
@@ -619,7 +353,266 @@ const act1ResourceMap: Act1Resource = {
   }
 }
 
+const act2ResourceMap = {
+  'card': {
+    'common': 'cards/common.png',
+    'rare': 'cards/rare.png',
+    'terrain': 'cards/terrain.png',
+    'terrain_rare': 'cards/terrain_rare.png',
+  },
+  'cost': {
+    'blood_1': 'costs/blood1.png',
+    'blood_2': 'costs/blood2.png',
+    'blood_3': 'costs/blood3.png',
+    'blood_4': 'costs/blood4.png',
+    'bone_1': 'costs/bone1.png',
+    'bone_2': 'costs/bone2.png',
+    'bone_3': 'costs/bone3.png',
+    'bone_4': 'costs/bone4.png',
+    'bone_5': 'costs/bone5.png',
+    'bone_6': 'costs/bone6.png',
+    'bone_7': 'costs/bone7.png',
+    'bone_8': 'costs/bone8.png',
+    'bone_9': 'costs/bone9.png',
+    'bone_10': 'costs/bone10.png',
+    'bone_11': 'costs/bone11.png',
+    'bone_12': 'costs/bone12.png',
+    'bone_13': 'costs/bone13.png',
+    'energy_1': 'costs/energy1.png',
+    'energy_2': 'costs/energy2.png',
+    'energy_3': 'costs/energy3.png',
+    'energy_4': 'costs/energy4.png',
+    'energy_5': 'costs/energy5.png',
+    'energy_6': 'costs/energy6.png',
+    'mox-b': 'costs/mox-b.png',
+    'mox-bg': 'costs/mox-bg.png',
+    'mox-g': 'costs/mox-g.png',
+    'mox-go': 'costs/mox-go.png',
+    'mox-o': 'costs/mox-o.png',
+    'mox-ob': 'costs/mox-ob.png',
+    'mox-ogb': 'costs/mox-ogb.png',
+  },
+  'portrait': {
+    'ouroboros': 'portraits/ouroboros.png',
+    'adder': 'portraits/adder.png',
+    'skeleton': 'portraits/skeleton.png',
+    'wolfcub': 'portraits/wolfcub.png',
+    'elkcub': 'portraits/elkcub.png',
+
+    'kraken': 'portraits/kraken.png',
+    'squidcards': 'portraits/squidcards.png',
+    'squidmirror': 'portraits/squidmirror.png',
+    'squidbell': 'portraits/squidbell.png',
+    'hrokkall': 'portraits/hrokkall.png',
+    'mantisgod': 'portraits/mantisgod.png',
+    'moleman': 'portraits/moleman.png',
+    'urayuli': 'portraits/urayuli.png',
+    'rabbit': 'portraits/rabbit.png',
+    'squirrel': 'portraits/squirrel.png',
+    'bullfrog': 'portraits/bullfrog.png',
+    'cat': 'portraits/cat.png',
+    'catundead': 'portraits/cat_undead.png',
+    'mole': 'portraits/mole.png',
+    'squirrelball': 'portraits/squirrelball.png',
+    'stoat': 'portraits/stoat.png',
+    'warren': 'portraits/warren.png',
+    'wolf': 'portraits/wolf.png',
+    'bloodhound': 'portraits/bloodhound.png',
+    'elk': 'portraits/elk.png',
+    'fieldmouse': 'portraits/fieldmice.png',
+    'hawk': 'portraits/hawk.png',
+    'raven': 'portraits/raven.png',
+    'salmon': 'portraits/salmon.png',
+    'fieldmouse_fused': 'portraits/fieldmice_fused.png',
+    'grizzly': 'portraits/grizzly.png',
+
+    'sarcophagus': 'portraits/sarcophagus.png',
+    'banshee': 'portraits/banshee.png',
+
+    'abovecurve': 'portraits/abovecurve.png',
+    'automaton': 'portraits/automaton.png',
+    'batterybot': 'portraits/batterybot.png',
+    'bluemage': 'portraits/bluemage.png',
+    'bluemage_fused': 'portraits/bluemage_fused.png',
+    'bolthound': 'portraits/bolthound.png',
+    'bombbot': 'portraits/bombbot.png',
+    'bombmaiden': 'portraits/bombmaiden.png',
+    'bonehound': 'portraits/bonehound.png',
+    'bonelordhorn': 'portraits/bonelordhorn.png',
+    'bonepile': 'portraits/bonepile.png',
+    'burrowingtrap': 'portraits/burrowingtrap.png',
+    'coinleft': 'portraits/coinleft.png',
+    'coinright': 'portraits/coinright.png',
+    'conduitenergy': 'portraits/conduitenergy.png',
+    'conduitfactory': 'portraits/conduitfactory.png',
+    'conduithealer': 'portraits/conduithealer.png',
+    'conduitpower': 'portraits/conduitpower.png',
+    'coyote': 'portraits/coyote.png',
+    'deadhand': 'portraits/deadhand.png',
+    'deadpets': 'portraits/deadpets.png',
+    'draugr': 'portraits/draugr.png',
+    'drownedsoul': 'portraits/drownedsoul.png',
+    'energygunner': 'portraits/energygunner.png',
+    'energyroller': 'portraits/energyroller.png',
+    'family': 'portraits/family.png',
+    'fieldmice': 'portraits/fieldmice.png',
+    'fieldmice_fused': 'portraits/fieldmice_fused.png',
+    'flyingmage': 'portraits/flyingmage.png',
+    'forcemage': 'portraits/forcemage.png',
+    'franknstein': 'portraits/franknstein.png',
+    'gemfiend': 'portraits/gemfiend.png',
+    'gemmodule': 'portraits/gemmodule.png',
+    'ghostship': 'portraits/ghostship.png',
+    'gravedigger': 'portraits/gravedigger.png',
+    'gravedigger_fused': 'portraits/gravedigger_fused.png',
+    'greenmage': 'portraits/greenmage.png',
+    'gunnerbot': 'portraits/gunnerbot.png',
+    'headlesshorseman': 'portraits/headlesshorseman.png',
+    'insectobot': 'portraits/insectobot.png',
+    'inspector': 'portraits/inspector.png',
+    'juniorsage': 'portraits/juniorsage.png',
+    'kingfisher': 'portraits/kingfisher.png',
+    'leapingbot': 'portraits/leapingbot.png',
+    'mageknight': 'portraits/mageknight.png',
+    'magpie': 'portraits/magpie.png',
+    'marrowmage': 'portraits/marrowmage.png',
+    'masterBG': 'portraits/masterBG.png',
+    'masterGO': 'portraits/masterGO.png',
+    'masterOB': 'portraits/masterOB.png',
+    'meatbot': 'portraits/meatbot.png',
+    'melter': 'portraits/melter.png',
+    'minecart': 'portraits/minecart.png',
+    'moxBG': 'portraits/moxBG.png',
+    'moxGO': 'portraits/moxGO.png',
+    'moxOB': 'portraits/moxOB.png',
+    'moxemerald': 'portraits/moxemerald.png',
+    'moxruby': 'portraits/moxruby.png',
+    'moxsapphire': 'portraits/moxsapphire.png',
+    'moxtriple': 'portraits/moxtriple.png',
+    'mummy': 'portraits/mummy.png',
+    'musclemage': 'portraits/musclemage.png',
+    'necromancer': 'portraits/necromancer.png',
+    'nullconduit': 'portraits/nullconduit.png',
+    'opossum': 'portraits/opossum.png',
+    'orangemage': 'portraits/orangemage.png',
+    'practicemage': 'portraits/practicemage.png',
+    'pupil': 'portraits/pupil.png',
+    'revenant': 'portraits/revenant.png',
+    'robomice': 'portraits/robomice.png',
+    'rubygolem': 'portraits/rubygolem.png',
+    'sentrybot': 'portraits/sentrybot.png',
+    'sentrybot_fused': 'portraits/sentrybot_fused.png',
+    'shutterbug': 'portraits/shutterbug.png',
+    'skeletonmage': 'portraits/skeletonmage.png',
+    'sniper': 'portraits/sniper.png',
+    'starvation': 'portraits/starvation.png',
+    'steambot': 'portraits/steambot.png',
+    'stimmage': 'portraits/stimmage.png',
+    'thickbot': 'portraits/thickbot.png',
+    'tombrobber': 'portraits/tombrobber.png',
+    'zombie': 'portraits/zombie.png',
+
+    'mastergoranj': 'portraits/masterGO.png'
+  },
+  'font': {
+    'default': 'fonts/Marksman.otf'
+  },
+  'sigil': {
+    'buffgems': 'sigils/buffgems.png',
+    'deathtouch': 'sigils/deathtouch.png',
+    'doubledeath': 'sigils/doubledeath.png',
+    'drawcopy': 'sigils/drawcopy.png',
+    'drawcopyondeath': 'sigils/drawcopyondeath.png',
+    'drawnewhand': 'sigils/drawnewhand.png',
+    'drawrabbits': 'sigils/drawrabbits.png',
+    'evolve': 'sigils/evolve.png',
+    'flying': 'sigils/flying.png',
+    'guarddog': 'sigils/guarddog.png',
+    'icecube': 'sigils/icecube.png',
+    'loot': 'sigils/loot.png',
+    'preventattack': 'sigils/preventattack.png',
+    'quadruplebones': 'sigils/quadruplebones.png',
+    'reach': 'sigils/reach.png',
+    'sacrificial': 'sigils/sacrificial.png',
+    'sentry': 'sigils/sentry.png',
+    'sharp': 'sigils/sharp.png',
+    'skeletonstrafe': 'sigils/skeletonstrafe.png',
+    'splitstrike': 'sigils/splitstrike.png',
+    'squirrelstrafe': 'sigils/squirrelstrafe.png',
+    'steeltrap': 'sigils/steeltrap.png',
+    'strafe': 'sigils/strafe.png',
+    'strafepush': 'sigils/strafepush.png',
+    'submerge': 'sigils/submerge.png',
+    'submergesquid': 'sigils/submergesquid.png',
+    'tripleblood': 'sigils/tripleblood.png',
+    'tristrike': 'sigils/tristrike.png',
+    'tutor': 'sigils/tutor.png',
+    'whackamole': 'sigils/whackamole.png',
+    'activateddealdamage': 'sigils/activated_dealdamage.png',
+    'activateddicerollbone': 'sigils/activated_dicerollbone.png',
+    'activateddicerollenergy': 'sigils/activated_dicerollenergy.png',
+    'activateddrawskeleton': 'sigils/activated_drawskeleton.png',
+    'activatedenergytobones': 'sigils/activated_energytobones.png',
+    'activatedheal': 'sigils/activated_heal.png',
+    'activatedsacrificedraw': 'sigils/activated_sacrificedraw.png',
+    'activatedstatsup': 'sigils/activated_statsup.png',
+    'activatedstatsupenergy': 'sigils/activated_statsupenergy.png',
+    'bombspawner': 'sigils/bombspawner.png',
+    'bonedigger': 'sigils/bonedigger.png',
+    'brittle': 'sigils/brittle.png',
+    'conduitbuffattack': 'sigils/conduitbuffattack.png',
+    'conduitenergy': 'sigils/conduitenergy.png',
+    'conduithealing': 'sigils/conduithealing.png',
+    'conduitspawner': 'sigils/conduitspawner.png',
+    'droprubyondeath': 'sigils/droprubyondeath.png',
+    'explodeondeath': 'sigils/explodeondeath.png',
+    'gainbattery': 'sigils/gainbattery.png',
+    'gaingemall': 'sigils/gaingem_all.png',
+    'gaingemblue': 'sigils/gaingem_blue.png',
+    'gaingemgreen': 'sigils/gaingem_green.png',
+    'gaingemorange': 'sigils/gaingem_orange.png',
+    'gemdependant': 'sigils/gemdependant.png',
+    'gemsdraw': 'sigils/gemsdraw.png',
+  },
+  'frame': {
+    'nature': 'frames/nature.png',
+    'tech': 'frames/tech.png',
+    'undead': 'frames/undead.png',
+    'wizard': 'frames/wizard.png',
+  },
+  'misc': {
+    'stitches': 'misc/stitches.png',
+    'ability_button': 'misc/activated_ability_button.png',
+  },
+  'staticon': {
+    'ants': 'staticons/ants.png',
+    'bell': 'staticons/bell.png',
+    'cardsinhand': 'staticons/cardsinhand.png',
+    'greengems': 'staticons/greengems.png',
+    'mirror': 'staticons/mirror.png',
+  }
+}
+
+function getGameTranslationId(id: string | undefined): string | undefined {
+
+  if (id === 'Stoat_Talking') {
+    id = 'stoat'
+  }
+
+  if (id === 'Smoke_NoBones') {
+    id = 'smoke'
+  }
+
+  if (id === '!DEATHCARD_LESHY') {
+    return undefined
+  }
+
+  return id?.toLowerCase()
+
+}
+
 const res = new Resource('resource', act1ResourceMap)
+const res2 = new Resource('resource-gbc', act2ResourceMap)
 
 const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
 const jsonCards = textChunks.map(foo)
@@ -627,13 +620,27 @@ const cards: Card[] = jsonCards.map(convertJsonCard)
 
 const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
 const act1Cards = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
+const act2Cards = [
+  'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
+  'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
+  'Wolf', 'Adder', 'Bloodhound', 'Elk', 'FieldMouse', 'Hawk', 'Raven', 'Salmon', 'FieldMouse_Fused', 'Grizzly',
+  'Ouroboros',
+
+  'MasterGoranj',
+
+  'Bonepile', 'TombRobber', 'Necromancer', 'DrownedSoul', 'DeadHand', 'HeadlessHorseman', 'Skeleton', 'Draugr',
+  'Gravedigger', 'Gravedigger_Fused', 'Banshee', 'SkeletonMage', 'Zombie', 'BonelordHorn', 'CoinLeft', 'CoinRight',
+  'Revenant', 'GhostShip', 'Sarcophagus', 'Family', 'FrankNStein', 'DeadPets', 'Bonehound', 'Mummy',
+
+]
+
 for (const card of cards) {
 
-  if (!act1Cards.includes(card.gameId ?? '')) {
+  if (!act2Cards.includes(card.gameId ?? '')) {
     continue
   }
 
-  if (existsSync('out/cards/' + card.gameId + '.png')) {
+  if (existsSync('out/cards2/' + card.gameId + '.png')) {
     console.log('skipping', card.gameId)
 
     continue
@@ -648,7 +655,9 @@ for (const card of cards) {
 
     card.name = name ?? '!ERROR'
   }
-  const buffer = generateAct1Card(card, res, 'en')
-  writeFileSync('out/cards/' + card.gameId + '.png', buffer)
+  const buffer = generateAct2Card(card, res2, 'en')
+  writeFileSync('out/cards2/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png', buffer)
   console.log('generated', card.gameId)
 }
+
+console.log('act 2 cards', act2Cards.length)
