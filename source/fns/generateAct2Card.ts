@@ -136,7 +136,7 @@ function generateAct2Card(card: Card, res: Resource): Buffer {
   }
 
   // black outline onto card
-  im.command('-fill none -stroke rgb\\(2,10,17\\) -strokewidth 1 -draw "rectangle 0,0 41,55"')
+  im.command('-fill none -stroke rgb\\(2,10,17\\) -strokewidth 0 -draw "rectangle 0,0 41,55"')
 
   im.gravity('Center').extent(44, 58)
 
