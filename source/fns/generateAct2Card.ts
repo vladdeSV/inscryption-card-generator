@@ -114,19 +114,17 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
   if (card.sigils.length === 1) {
 
     const sigil = card.sigils[0]
-    let sigilXOffset = 0
     let sigilYOffset = 0
 
     if (sigil.startsWith('conduit')) {
       im.resource(res.get('misc', 'conduit')).gravity('North').geometry(1, 32).composite()
     } else if (sigil.startsWith('activated')) {
-      sigilXOffset = -3
       sigilYOffset = 2
       im.resource(res.get('misc', 'ability_button')).gravity('NorthWest').geometry(8, 31).composite()
     }
 
     if (sigil !== 'conduitnull') {
-      im.resource(res.get('sigil', sigil)).gravity('North').geometry(0 + sigilXOffset, 31 + sigilYOffset).composite()
+      im.resource(res.get('sigil', sigil)).gravity('North').geometry(0, 31 + sigilYOffset).composite()
     }
   } else if (card.sigils.length >= 2) {
     im.gravity('NorthWest')
