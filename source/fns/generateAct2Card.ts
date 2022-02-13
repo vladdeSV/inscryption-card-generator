@@ -107,22 +107,21 @@ function generateAct2Card(card: Card, res: Resource): Buffer {
 
   // sigils
   if (card.sigils.length === 1) {
-    im.gravity('NorthWest')
 
     const sigil = card.sigils[0]
     let sigilXOffset = 0
     let sigilYOffset = 0
 
     if (sigil.startsWith('conduit')) {
-      im.resource(res.get('misc', 'conduit')).gravity('North').geometry(1, 32).composite().gravity('NorthWest')
+      im.resource(res.get('misc', 'conduit')).gravity('North').geometry(1, 32).composite()
     } else if (sigil.startsWith('activated')) {
       sigilXOffset = -3
       sigilYOffset = 2
-      im.resource(res.get('misc', 'ability_button')).geometry(8, 31).composite()
+      im.resource(res.get('misc', 'ability_button')).gravity('NorthWest').geometry(8, 31).composite()
     }
 
     if (sigil !== 'conduitnull') {
-      im.resource(res.get('sigil', sigil)).geometry(13 + sigilXOffset, 31 + sigilYOffset).composite()
+      im.resource(res.get('sigil', sigil)).gravity('North').geometry(0 + sigilXOffset, 31 + sigilYOffset).composite()
     }
   } else if (card.sigils.length >= 2) {
     im.gravity('NorthWest')
@@ -138,6 +137,7 @@ function generateAct2Card(card: Card, res: Resource): Buffer {
   // black outline onto card
   im.command('-fill none -stroke rgb\\(2,10,17\\) -strokewidth 0 -draw "rectangle 0,0 41,55"')
 
+  // increase size for all cards, to account for frame
   im.gravity('Center').extent(44, 58)
 
   // frame
