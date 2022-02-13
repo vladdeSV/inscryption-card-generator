@@ -2,7 +2,7 @@ import { Resource } from './resource'
 import { Card } from './card'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
-import { foo } from './parsecard'
+import { CreatureId, foo } from './parsecard'
 import { generateAct2Card } from './fns/generateAct2Card'
 
 type Act1Resource = {
@@ -443,16 +443,16 @@ const act2ResourceMap = {
     'burrowingtrap': 'portraits/burrowingtrap.png',
     'coinleft': 'portraits/coinleft.png',
     'coinright': 'portraits/coinright.png',
-    'conduitenergy': 'portraits/conduitenergy.png',
-    'conduitfactory': 'portraits/conduitfactory.png',
-    'conduithealer': 'portraits/conduithealer.png',
-    'conduitpower': 'portraits/conduitpower.png',
+    'energyconduit': 'portraits/conduitenergy.png',
+    'factoryconduit': 'portraits/conduitfactory.png',
+    'healerconduit': 'portraits/conduithealer.png',
+    'attackconduit': 'portraits/conduitpower.png',
     'coyote': 'portraits/coyote.png',
     'deadhand': 'portraits/deadhand.png',
     'deadpets': 'portraits/deadpets.png',
     'draugr': 'portraits/draugr.png',
     'drownedsoul': 'portraits/drownedsoul.png',
-    'energygunner': 'portraits/energygunner.png',
+    'plasmagunner': 'portraits/energygunner.png',
     'energyroller': 'portraits/energyroller.png',
     'family': 'portraits/family.png',
     'fieldmice': 'portraits/fieldmice.png',
@@ -461,30 +461,30 @@ const act2ResourceMap = {
     'forcemage': 'portraits/forcemage.png',
     'franknstein': 'portraits/franknstein.png',
     'gemfiend': 'portraits/gemfiend.png',
-    'gemmodule': 'portraits/gemmodule.png',
+    'techmoxtriple': 'portraits/gemmodule.png',
     'ghostship': 'portraits/ghostship.png',
     'gravedigger': 'portraits/gravedigger.png',
     'gravedigger_fused': 'portraits/gravedigger_fused.png',
     'greenmage': 'portraits/greenmage.png',
-    'gunnerbot': 'portraits/gunnerbot.png',
+    'closerbot': 'portraits/gunnerbot.png',
     'headlesshorseman': 'portraits/headlesshorseman.png',
-    'insectobot': 'portraits/insectobot.png',
+    'insectodrone': 'portraits/insectobot.png',
     'inspector': 'portraits/inspector.png',
     'juniorsage': 'portraits/juniorsage.png',
     'kingfisher': 'portraits/kingfisher.png',
-    'leapingbot': 'portraits/leapingbot.png',
+    'leapbot': 'portraits/leapingbot.png',
     'mageknight': 'portraits/mageknight.png',
     'magpie': 'portraits/magpie.png',
     'marrowmage': 'portraits/marrowmage.png',
-    'masterBG': 'portraits/masterBG.png',
-    'masterGO': 'portraits/masterGO.png',
-    'masterOB': 'portraits/masterOB.png',
+    'masterbleene': 'portraits/masterBG.png',
+    'mastergoranj': 'portraits/masterGO.png',
+    'masterorlu': 'portraits/masterOB.png',
     'meatbot': 'portraits/meatbot.png',
     'melter': 'portraits/melter.png',
     'minecart': 'portraits/minecart.png',
-    'moxBG': 'portraits/moxBG.png',
-    'moxGO': 'portraits/moxGO.png',
-    'moxOB': 'portraits/moxOB.png',
+    'moxdualbg': 'portraits/moxBG.png',
+    'moxdualgo': 'portraits/moxGO.png',
+    'moxdualob': 'portraits/moxOB.png',
     'moxemerald': 'portraits/moxemerald.png',
     'moxruby': 'portraits/moxruby.png',
     'moxsapphire': 'portraits/moxsapphire.png',
@@ -511,8 +511,6 @@ const act2ResourceMap = {
     'thickbot': 'portraits/thickbot.png',
     'tombrobber': 'portraits/tombrobber.png',
     'zombie': 'portraits/zombie.png',
-
-    'mastergoranj': 'portraits/masterGO.png'
   },
   'font': {
     'default': 'fonts/Marksman.otf'
@@ -549,12 +547,12 @@ const act2ResourceMap = {
     'tutor': 'sigils/tutor.png',
     'whackamole': 'sigils/whackamole.png',
     'activateddealdamage': 'sigils/activated_dealdamage.png',
-    'activateddicerollbone': 'sigils/activated_dicerollbone.png',
-    'activateddicerollenergy': 'sigils/activated_dicerollenergy.png',
+    'activatedrandompowerbone': 'sigils/activated_dicerollbone.png',
+    'activatedrandompowerenergy': 'sigils/activated_dicerollenergy.png',
     'activateddrawskeleton': 'sigils/activated_drawskeleton.png',
     'activatedenergytobones': 'sigils/activated_energytobones.png',
     'activatedheal': 'sigils/activated_heal.png',
-    'activatedsacrificedraw': 'sigils/activated_sacrificedraw.png',
+    'activatedsacrificedrawcards': 'sigils/activated_sacrificedraw.png',
     'activatedstatsup': 'sigils/activated_statsup.png',
     'activatedstatsupenergy': 'sigils/activated_statsupenergy.png',
     'bombspawner': 'sigils/bombspawner.png',
@@ -567,7 +565,7 @@ const act2ResourceMap = {
     'droprubyondeath': 'sigils/droprubyondeath.png',
     'explodeondeath': 'sigils/explodeondeath.png',
     'gainbattery': 'sigils/gainbattery.png',
-    'gaingemall': 'sigils/gaingem_all.png',
+    'gaingemtriple': 'sigils/gaingem_all.png',
     'gaingemblue': 'sigils/gaingem_blue.png',
     'gaingemgreen': 'sigils/gaingem_green.png',
     'gaingemorange': 'sigils/gaingem_orange.png',
@@ -583,6 +581,7 @@ const act2ResourceMap = {
   'misc': {
     'stitches': 'misc/stitches.png',
     'ability_button': 'misc/activated_ability_button.png',
+    'conduit': 'misc/conduit.png',
   },
   'staticon': {
     'ants': 'staticons/ants.png',
@@ -619,24 +618,31 @@ const jsonCards = textChunks.map(foo)
 const cards: Card[] = jsonCards.map(convertJsonCard)
 
 const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
-const act1Cards = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
-const act2Cards = [
+const act1Cards: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
+const act2Cards: CreatureId[] = [
   'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
   'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
   'Wolf', 'Adder', 'Bloodhound', 'Elk', 'FieldMouse', 'Hawk', 'Raven', 'Salmon', 'FieldMouse_Fused', 'Grizzly',
   'Ouroboros',
 
-  'MasterGoranj',
-
   'Bonepile', 'TombRobber', 'Necromancer', 'DrownedSoul', 'DeadHand', 'HeadlessHorseman', 'Skeleton', 'Draugr',
   'Gravedigger', 'Gravedigger_Fused', 'Banshee', 'SkeletonMage', 'Zombie', 'BonelordHorn', 'CoinLeft', 'CoinRight',
   'Revenant', 'GhostShip', 'Sarcophagus', 'Family', 'FrankNStein', 'DeadPets', 'Bonehound', 'Mummy',
 
+  'PlasmaGunner', 'AboveCurve', 'EnergyConduit', 'TechMoxTriple', 'BombMaiden', 'Shutterbug', 'LeapBot', 'NullConduit',
+  'SentryBot', 'SentryBot_Fused', 'MineCart', 'AttackConduit', 'BatteryBot', 'EnergyRoller', 'Insectodrone', 'RoboMice',
+  'Thickbot', 'BoltHound', 'CloserBot', 'Steambot',
+
+  'MasterGoranj', 'MoxDualBG', 'MoxDualGO', 'MoxDualOB', 'MasterBleene', 'MasterGoranj', 'MasterOrlu', 'MoxEmerald',
+  'MoxRuby', 'MoxSapphire', 'Pupil', 'MarrowMage', 'GreenMage', 'JuniorSage', 'MuscleMage', 'StimMage', 'MageKnight',
+  'OrangeMage', 'PracticeMage', 'RubyGolem', 'BlueMage', 'BlueMage_Fused', 'ForceMage', 'GemFiend', 'FlyingMage',
+
+  'Starvation', 'BurrowingTrap', 'Kingfisher', 'Opossum', 'Coyote', 'MoxTriple',
 ]
 
 for (const card of cards) {
 
-  if (!act2Cards.includes(card.gameId ?? '')) {
+  if (!act2Cards.includes(card.gameId as CreatureId ?? '')) {
     continue
   }
 
@@ -646,16 +652,17 @@ for (const card of cards) {
     continue
   }
 
-  const translationId = getGameTranslationId(card.gameId)
-  if (translationId) {
-    const name = translations['en'][translationId]
-    if (name === undefined) {
-      console.log('found no translation for', card.gameId)
-    }
+  // const translationId = getGameTranslationId(card.gameId)
+  // if (translationId) {
+  //   const name = translations['en'][translationId]
+  //   if (name === undefined) {
+  //     console.log('found no translation for', card.gameId)
+  //   }
 
-    card.name = name ?? '!ERROR'
-  }
-  const buffer = generateAct2Card(card, res2, 'en')
+  //   card.name = name ?? '!ERROR'
+  // }
+
+  const buffer = generateAct2Card(card, res2)
   writeFileSync('out/cards2/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png', buffer)
   console.log('generated', card.gameId)
 }

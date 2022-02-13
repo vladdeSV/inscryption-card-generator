@@ -5,7 +5,7 @@ import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
-function generateAct2Card(card: Card, res: Resource, locale: string): Buffer {
+function generateAct2Card(card: Card, res: Resource): Buffer {
   const im = IM()
 
   // const originalCardHeight = 56 // px, size: 42x56
@@ -59,7 +59,7 @@ function generateAct2Card(card: Card, res: Resource, locale: string): Buffer {
     if (costType === 'blood' || costType === 'bone' || costType === 'energy') {
       const { type, amount } = card.cost
       const costPath = res.get('cost', `${type}_${amount}`)
-      im.resource(costPath)
+      im.resource(costPath).composite()
     }
 
     if (costType === 'gem') {
@@ -97,11 +97,9 @@ function generateAct2Card(card: Card, res: Resource, locale: string): Buffer {
 
       const gemCostResourceId = getGemCostResourceId(card.cost.gems)
       if (gemCostResourceId !== undefined) {
-        im.resource(res.get('cost', gemCostResourceId))
+        im.resource(res.get('cost', gemCostResourceId)).composite()
       }
     }
-
-    im.composite()
   }
 
   // health
@@ -112,17 +110,20 @@ function generateAct2Card(card: Card, res: Resource, locale: string): Buffer {
     im.gravity('NorthWest')
 
     const sigil = card.sigils[0]
-    const isActivatedSigil = sigil.startsWith('activated')
     let sigilXOffset = 0
     let sigilYOffset = 0
 
-    if (isActivatedSigil) {
+    if (sigil.startsWith('conduit')) {
+      im.resource(res.get('misc', 'conduit')).gravity('North').geometry(1, 32).composite().gravity('NorthWest')
+    } else if (sigil.startsWith('activated')) {
       sigilXOffset = -3
       sigilYOffset = 2
       im.resource(res.get('misc', 'ability_button')).geometry(8, 31).composite()
     }
 
-    im.resource(res.get('sigil', sigil)).geometry(13 + sigilXOffset, 31 + sigilYOffset).composite()
+    if (sigil !== 'conduitnull') {
+      im.resource(res.get('sigil', sigil)).geometry(13 + sigilXOffset, 31 + sigilYOffset).composite()
+    }
   } else if (card.sigils.length >= 2) {
     im.gravity('NorthWest')
     im.resource(res.get('sigil', card.sigils[0])).geometry(4, 31).composite()
@@ -133,6 +134,9 @@ function generateAct2Card(card: Card, res: Resource, locale: string): Buffer {
   if (card.flags.fused) {
     im.gravity('Center').resource(res.get('misc', 'stitches')).composite()
   }
+
+  // black outline onto card
+  im.command('-fill none -stroke rgb\\(2,10,17\\) -strokewidth 1 -draw "rectangle 0,0 41,55"')
 
   im.gravity('Center').extent(44, 58)
 

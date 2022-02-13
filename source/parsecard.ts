@@ -213,3 +213,5 @@ export function foo(textChunk: string): Card {
 
   return card
 }
+
+export { CreatureId }
