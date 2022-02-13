@@ -83,6 +83,9 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
           case 0b100: {
             return 'mox-o'
           }
+          case 0b011: {
+            return 'mox-bg'
+          }
           case 0b101: {
             return 'mox-ob'
           }
