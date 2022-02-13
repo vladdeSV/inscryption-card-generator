@@ -14,7 +14,6 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
     cost: undefined,
     temple: 'nature',
     flags: {
-      combined: false,
       golden: false,
       terrain: false,
       squid: false,
@@ -31,7 +30,6 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
   card.power = jsonCard.power
   card.health = jsonCard.health
 
-  card.flags.combined = false
   card.flags.enhanced = ['Smoke_Improved'].includes(jsonCard.id)
   card.flags.squid = !!jsonCard.id.match(/Squid(Mirror|Bell|Cards)/)
   card.flags.terrain = jsonCard.appearanceBehaviours.includes('TerrainLayout')

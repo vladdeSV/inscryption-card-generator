@@ -16,7 +16,6 @@ interface Card {
   flags: {
     golden: boolean,
     terrain: boolean,
-    combined: boolean,
     squid: boolean,
     enhanced: boolean,
     fused: boolean,
