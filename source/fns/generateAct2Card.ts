@@ -145,6 +145,22 @@ function generateAct2Card(card: Card, res: Resource): Buffer {
     im.gravity('NorthWest').resource(res.get('frame', card.temple)).geometry(0, 0).composite()
   }
 
+  // scanlines
+  const tileableScanline = IM()
+    .command('-stroke black')
+    .size(1, 2)
+    .command('xc:transparent')
+    .command('-draw "rectangle 0,0 0,0"')
+
+  const scanlines = IM()
+    .parens(tileableScanline)
+    .command('-write mpr:tile +delete -size 100x100 tile:mpr:tile')
+    .command('-channel A -evaluate multiply 0.1 +channel')
+
+  im.parens(scanlines)
+    .compose('Atop')
+    .composite()
+
   // resize
   im.resize(undefined, fullsizeCardHeight) // 1050 pixels @ 300dpi = 3.5 inches
 
