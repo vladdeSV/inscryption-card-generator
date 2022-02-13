@@ -3,7 +3,7 @@ import { Card } from './card'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { CreatureId, foo } from './parsecard'
-import { generateAct2Card } from './fns/generateAct2Card'
+import { generateAct2Card, Npc } from './fns/generateAct2Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
@@ -589,6 +589,21 @@ const act2ResourceMap = {
     'cardsinhand': 'staticons/cardsinhand.png',
     'greengems': 'staticons/greengems.png',
     'mirror': 'staticons/mirror.png',
+  },
+  'npc': {
+    'angler': 'npcs/angler.png',
+    'bluewizard': 'npcs/bluewizard.png',
+    'briar': 'npcs/briar.png',
+    'dredger': 'npcs/dredger.png',
+    'dummy': 'npcs/dummy.png',
+    'greenwizard': 'npcs/greenwizard.png',
+    'inspector': 'npcs/inspector.png',
+    'orangewizard': 'npcs/orangewizard.png',
+    'prospector': 'npcs/prospector.png',
+    'royal': 'npcs/royal.png',
+    'sawyer': 'npcs/sawyer.png',
+    'melter': 'npcs/smelter.png',
+    'trapper': 'npcs/trapper.png',
   }
 }
 

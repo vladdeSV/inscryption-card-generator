@@ -1,11 +1,13 @@
-export { generateAct2Card }
+export { generateAct2Card, Npc }
 
 import { Resource } from '../resource'
 import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
-function generateAct2Card(card: Card, res: Resource): Buffer {
+type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper'
+
+function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
   const im = IM()
 
   // const originalCardHeight = 56 // px, size: 42x56
@@ -136,6 +138,11 @@ function generateAct2Card(card: Card, res: Resource): Buffer {
 
   // black outline onto card
   im.command('-fill none -stroke rgb\\(2,10,17\\) -strokewidth 0 -draw "rectangle 0,0 41,55"')
+
+  // npc
+  if (card.npc) {
+    im.resource(res.get('npc', card.npc)).composite()
+  }
 
   // increase size for all cards, to account for frame
   im.gravity('Center').extent(44, 58)
