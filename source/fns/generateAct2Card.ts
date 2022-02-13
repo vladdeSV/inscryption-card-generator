@@ -40,6 +40,7 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
   // load card
   im.resource(res.get('card', cardType))
 
+  // portrait
   if (card.portrait?.type === 'creature') {
     im.gravity('NorthWest')
       .resource(res.get('portrait', card.portrait.id))
