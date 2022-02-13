@@ -633,8 +633,8 @@ const jsonCards = textChunks.map(foo)
 const cards: Card[] = jsonCards.map(convertJsonCard)
 
 const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
-const act1Cards: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
-const act2Cards: CreatureId[] = [
+const act1CreatureIds: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
+const act2CreatureIds: CreatureId[] = [
   'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
   'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
   'Wolf', 'Adder', 'Bloodhound', 'Elk', 'FieldMouse', 'Hawk', 'Raven', 'Salmon', 'FieldMouse_Fused', 'Grizzly',
@@ -655,11 +655,143 @@ const act2Cards: CreatureId[] = [
   'Starvation', 'BurrowingTrap', 'Kingfisher', 'Opossum', 'Coyote', 'MoxTriple',
 ]
 
-for (const card of cards) {
+const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as CreatureId ?? ''))
+const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as CreatureId ?? ''))
 
-  if (!act2Cards.includes(card.gameId as CreatureId ?? '')) {
-    continue
-  }
+const templateCard: Card = {
+  name: '',
+  type: 'common',
+  health: 0,
+  power: 0,
+  temple: 'nature',
+  decals: [],
+  flags: {
+    enhanced: false,
+    fused: false,
+    golden: false,
+    squid: false,
+    terrain: false,
+  },
+  meta: {
+    rare: false,
+    terrain: false,
+  },
+  sigils: [],
+  tribes: [],
+  gameId: '',
+}
+
+const act2Npcs: (Card & { npc: Npc })[] = [
+  {
+    ...templateCard,
+    gameId: 'angler',
+    npc: 'angler',
+    name: 'The Angler',
+    power: 2,
+    health: 2,
+    sigils: ['submerge']
+  },
+  {
+    ...templateCard,
+    gameId: 'bluewizard',
+    npc: 'bluewizard',
+    name: 'The Lonely Wizard'
+  },
+  {
+    ...templateCard,
+    gameId: 'briar',
+    npc: 'briar',
+    name: 'Briar',
+    power: 1,
+    health: 1,
+    sigils: []
+  },
+  {
+    ...templateCard,
+    gameId: 'dredger',
+    npc: 'dredger',
+    name: 'The Dredger',
+    power: 3,
+    health: 3,
+    sigils: ['submerge',]
+  },
+  {
+    ...templateCard,
+    gameId: 'dummy',
+    npc: 'dummy',
+    name: 'Dummy',
+    power: 0,
+    health: 2,
+    sigils: [/*practice*/]
+  },
+  {
+    ...templateCard,
+    gameId: 'greenwizard',
+    npc: 'greenwizard',
+    name: 'Goobert',
+    power: 1,
+    health: 1,
+    sigils: []
+  },
+  {
+    ...templateCard,
+    gameId: 'inspector',
+    npc: 'inspector',
+    name: 'Inspector',
+    power: 1,
+    health: 1,
+    sigils: ['tutor']
+  },
+  {
+    ...templateCard,
+    gameId: 'orangewizard',
+    npc: 'orangewizard',
+    name: 'The Pike Mage',
+    power: 1,
+    health: 1,
+    sigils: ['guarddog']
+  },
+  {
+    ...templateCard,
+    gameId: 'royal',
+    npc: 'royal',
+    name: 'Royal Dominguez',
+    power: 3,
+    health: 3,
+    sigils: [/*ship*/]
+  },
+  {
+    ...templateCard,
+    gameId: 'sawyer',
+    npc: 'sawyer',
+    name: 'Sawyer Patel',
+    power: 2,
+    health: 2,
+    sigils: ['guarddog']
+  },
+  {
+    ...templateCard,
+    gameId: 'melter',
+    npc: 'melter',
+    name: 'Melter',
+    power: 2,
+    health: 2,
+    sigils: ['icecube']
+  },
+  {
+    ...templateCard,
+    gameId: 'trapper',
+    npc: 'trapper',
+    name: 'The Trapper',
+    power: 3,
+    health: 3,
+    sigils: ['steeltrap']
+  },
+]
+
+act2Cards.push(...act2Npcs)
+
+for (const card of act2Cards) {
 
   if (existsSync('out/cards2/' + card.gameId + '.png')) {
     console.log('skipping', card.gameId)
@@ -667,15 +799,15 @@ for (const card of cards) {
     continue
   }
 
-  // const translationId = getGameTranslationId(card.gameId)
-  // if (translationId) {
-  //   const name = translations['en'][translationId]
-  //   if (name === undefined) {
-  //     console.log('found no translation for', card.gameId)
-  //   }
+  const translationId = getGameTranslationId(card.gameId)
+  if (translationId) {
+    const name = translations['en'][translationId]
+    if (name === undefined) {
+      console.log('found no translation for', card.gameId)
+    }
 
-  //   card.name = name ?? '!ERROR'
-  // }
+    card.name = name ?? '!MISSING_TRANSLATION'
+  }
 
   const buffer = generateAct2Card(card, res2)
   writeFileSync('out/cards2/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png', buffer)
