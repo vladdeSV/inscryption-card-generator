@@ -200,7 +200,6 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
 
     // use emission for default portraits
     if (card.portrait && card.portrait?.type === 'creature') {
-
       try {
         const emissionPath = res.get('emission', card.portrait.id)
         im.parens(

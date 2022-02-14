@@ -791,9 +791,9 @@ const act2Npcs: (Card & { npc: Npc })[] = [
 
 act2Cards.push(...act2Npcs)
 
-for (const card of act2Cards) {
-
-  if (existsSync('out/cards2/' + card.gameId + '.png')) {
+for (const card of act1Cards) {
+  const filepath = 'out/cards/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png'
+  if (existsSync(filepath)) {
     console.log('skipping', card.gameId)
 
     continue
@@ -809,8 +809,9 @@ for (const card of act2Cards) {
     card.name = name ?? '!MISSING_TRANSLATION'
   }
 
-  const buffer = generateAct2Card(card, res2)
-  writeFileSync('out/cards2/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png', buffer)
+  const buffer = generateAct1Card(card, res, 'en')
+  // const buffer = generateAct2Card(card, res)
+  writeFileSync(filepath, buffer)
   console.log('generated', card.gameId)
 }
 
