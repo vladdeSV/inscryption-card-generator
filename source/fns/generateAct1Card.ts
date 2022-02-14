@@ -184,7 +184,7 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
         .trim()
         .gravity('Center')
         .extent(size.w, size.h)
-        .resizeExt(r => r.scale(106, 100, '!'))
+        .resizeExt(g => g.scale(106, 100).flag('!'))
     ).gravity('North')
       .geometry(position.x, position.y)
       .composite()
