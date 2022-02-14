@@ -40,7 +40,7 @@ class ImageMagickCommandBuilder {
   gravity(gravity?: GravityType): this {
     if (gravity) {
       this.#commands.push('-gravity')
-      this.#commands.push(gravity)
+      this.#commands.push(this.#escape(gravity))
     } else {
       this.#commands.push('+gravity')
     }
@@ -50,21 +50,21 @@ class ImageMagickCommandBuilder {
 
   geometry(x: number, y: number): this {
     this.#commands.push('-geometry')
-    this.#commands.push(`${x >= 0 ? '+' : '-'}${Math.abs(x)}${y >= 0 ? '+' : '-'}${Math.abs(y)}`)
+    this.#commands.push(this.#escape(new Geometry().offset(x, y).toString()))
 
     return this
   }
 
   size(w: number, h: number): this {
     this.#commands.push('-size')
-    this.#commands.push(`${w}x${h}`)
+    this.#commands.push(this.#escape(new Geometry().size(w, h).toString()))
 
     return this
   }
 
   extent(w: number, h: number): this {
     this.#commands.push('-extent')
-    this.#commands.push(`${w}x${h}`)
+    this.#commands.push(this.#escape(new Geometry().size(w, h).toString()))
 
     return this
   }
@@ -72,7 +72,7 @@ class ImageMagickCommandBuilder {
   resize(w?: number, h?: number): this {
     if (w || h) {
       this.#commands.push('-resize')
-      this.#commands.push(`${w ?? ''}x${h ?? ''}`)
+      this.#commands.push(this.#escape(new Geometry().size(w, h).toString()))
     }
 
     return this
@@ -116,7 +116,7 @@ class ImageMagickCommandBuilder {
   pointsize(size?: number): this {
     if (size) {
       this.#commands.push('-pointsize')
-      this.#commands.push(String(size))
+      this.#commands.push(this.#escape(size))
     } else {
       this.#commands.push('+pointsize')
     }
@@ -126,28 +126,28 @@ class ImageMagickCommandBuilder {
 
   alpha(type: AlphaType): this {
     this.#commands.push('-alpha')
-    this.#commands.push(type)
+    this.#commands.push(this.#escape(type))
 
     return this
   }
 
   interpolate(type: InterpolateType): this {
     this.#commands.push('-interpolate')
-    this.#commands.push(type)
+    this.#commands.push(this.#escape(type))
 
     return this
   }
 
   filter(type: FilterType): this {
     this.#commands.push('-filter')
-    this.#commands.push(type)
+    this.#commands.push(this.#escape(type))
 
     return this
   }
 
   compose(type: ComposeType): this {
     this.#commands.push('-compose')
-    this.#commands.push(type)
+    this.#commands.push(this.#escape(type))
 
     return this
   }
