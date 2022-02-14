@@ -4,6 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { CreatureId, foo } from './parsecard'
 import { generateAct2Card, Npc } from './fns/generateAct2Card'
+import { generateAct1Card } from './fns/generateAct1Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
