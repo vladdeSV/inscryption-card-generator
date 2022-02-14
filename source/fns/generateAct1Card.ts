@@ -134,18 +134,17 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
   } else if (card.sigils.length === 2) {
     const sigilPath1 = res.get('sigil', card.sigils[0])
     const sigilPath2 = res.get('sigil', card.sigils[1])
-    im.parens(IM(sigilPath1)
-      .filter('Box')
-      .resize(undefined, 180)
-    ).gravity('NorthWest')
-      .geometry(331 + terrainLayoutXoffset, 720)
+
+    im.filter('Box')
+
+    im.parens(IM(sigilPath1).resize(undefined, 180))
+      .gravity('NorthWest')
+      .geometry(180 + terrainLayoutXoffset, 833)
       .composite()
 
-    im.parens(IM(sigilPath2)
-      .filter('Box')
-      .resize(undefined, 180)
-    ).gravity('NorthWest')
-      .geometry(180 + terrainLayoutXoffset, 833)
+    im.parens(IM(sigilPath2).resize(undefined, 180))
+      .gravity('NorthWest')
+      .geometry(331 + terrainLayoutXoffset, 720)
       .composite()
   }
 
