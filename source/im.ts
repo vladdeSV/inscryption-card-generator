@@ -78,18 +78,11 @@ class ImageMagickCommandBuilder {
     return this
   }
 
-  resizeExt(fn: (r: Resize) => Resize): this {
-    const resize = new ResizeImpl()
-    const out = fn(resize)
+  resizeExt(fn: (g: Geometry) => Geometry): this {
+    const geometry = fn(new Geometry())
 
-    if (resize !== out) {
-      throw new Error('Must not return custom geometry object')
-    }
-
-    if (resize.valid()) {
-      this.#commands.push('-resize')
-      this.#commands.push(resize.toString())
-    }
+    this.#commands.push('-resize')
+    this.#commands.push(this.#escape(geometry.toString()))
 
     return this
   }
@@ -159,12 +152,20 @@ class ImageMagickCommandBuilder {
     return this
   }
 
-  #escape(input: string | number): string {
-    if (typeof input === 'number') {
-      return String(input)
+  // expose escape method.
+  sanitize(input: unknown) {
+    return this.#escape(input)
+  }
+
+  #escape(data: unknown): string {
+    const input = String(data)
+
+    // if single safe word, return it
+    if (input.match(/^[\w+-]+$/)) {
+      return input
     }
 
-    return `'${input.replace(/\\/g, ' \\\\').replace(/'/, '\\\'')}'`
+    return `'${input.replace(/\\/g, '\\\\').replace(/'/, '\\\'')}'`
   }
 
   #join(): string {
@@ -180,77 +181,166 @@ type InterpolateType = 'Average' | 'Average4' | 'Average9' | 'Average16' | 'Back
 type AlphaType = 'Activate' | 'Associate' | 'Background' | 'Copy' | 'Deactivate' | 'Discrete' | 'Disassociate' | 'Extract' | 'Off' | 'On' | 'Opaque' | 'Remove' | 'Set' | 'Shape' | 'Transparent'
 type ComposeType = 'Atop' | 'Blend' | 'Blur' | 'Bumpmap' | 'ChangeMask' | 'Clear' | 'ColorBurn' | 'ColorDodge' | 'Colorize' | 'CopyAlpha' | 'CopyBlack' | 'CopyBlue' | 'Copy' | 'CopyCyan' | 'CopyGreen' | 'CopyMagenta' | 'CopyRed' | 'CopyYellow' | 'Darken' | 'DarkenIntensity' | 'Difference' | 'Displace' | 'Dissolve' | 'Distort' | 'DivideDst' | 'DivideSrc' | 'DstAtop' | 'Dst' | 'DstIn' | 'DstOut' | 'DstOver' | 'Exclusion' | 'Freeze' | 'HardLight' | 'HardMix' | 'Hue' | 'In' | 'Intensity' | 'Interpolate' | 'LightenIntensity' | 'Lighten' | 'LinearBurn' | 'LinearDodge' | 'LinearLight' | 'Luminize' | 'Mathematics' | 'MinusDst' | 'MinusSrc' | 'Modulate' | 'ModulusAdd' | 'ModulusSubtract' | 'Multiply' | 'Negate' | 'None' | 'Out' | 'Overlay' | 'Over' | 'PegtopLight' | 'PinLight' | 'Plus' | 'Reflect' | 'Replace' | 'RMSE' | 'Saturate' | 'Screen' | 'SoftBurn' | 'SoftDodge' | 'SoftLight' | 'SrcAtop' | 'SrcIn' | 'SrcOut' | 'SrcOver' | 'Src' | 'Stamp' | 'Stereo' | 'VividLight' | 'Xor'
 
-interface Resize {
-  pixel(w?: number, h?: number, option?: '^' | '!' | '>' | '<'): this
-  scale(x?: number, y?: number, option?: '!'): this
-  ratio(a: number, b: number, option?: '^' | '#'): this
-  area(a: number): this
+class Geometry {
 
-  toString(): string
-}
-
-class ResizeImpl implements Resize {
-  pixel(w?: number, h?: number, option?: '^' | '!' | '>' | '<'): this {
-    this.#a = w
-    this.#b = h
-    this.#type = 'pixel'
-    this.#option = option
+  offset(x: number, y: number): this
+  offset(): this
+  offset(x?: number, y?: number): this {
+    if (x === undefined && y === undefined) {
+      this.#offset = undefined
+    } else if (typeof x === 'number' && typeof y === 'number') {
+      this.#offset = { x: Number(x), y: Number(y) }
+    } else {
+      throw Error(`Invalid parameters for offset '${x},${y}'`)
+    }
 
     return this
   }
 
-  scale(x?: number, y?: number): this {
-    this.#a = x
-    this.#b = y
-    this.#type = 'scale'
-    this.#option = undefined
+  flag(flag: '^' | '!' | '<' | '>' | '#'): this {
+    const availableFlags = ['^', '!', '<', '>', '#']
+
+    if (!availableFlags.includes(flag)) {
+      throw new Error(`Invalid flag '${flag}'`)
+    }
 
     return this
   }
 
-  ratio(a: number, b: number, option?: '^' | '#'): this {
-    this.#a = a
-    this.#b = b
-    this.#type = 'ratio'
-    this.#option = option
+  size(w: number | undefined, h: number | undefined): this
+  size(): this
+  size(w?: number | undefined, h?: number | undefined): this {
+    // special case, setting both width and height to undefined resets size
+    // todo(vladde): should this be the case?
+    if (w === undefined && h === undefined) {
+      this.#data = undefined
+      return this
+    }
+
+    const data: GeometrySizeData = {
+      type: 'size',
+      width: w === undefined ? undefined : Number(w),
+      height: h === undefined ? undefined : Number(h),
+    }
+    this.#data = data
 
     return this
   }
 
-  area(a: number): this {
-    this.#a = a
-    this.#b = undefined
-    this.#type = 'area'
-    this.#option = undefined
+  scale(x: number, y?: number): this {
+    const data: GeometryScaleData = {
+      type: 'scale',
+      x: Number(x),
+      y: y === undefined ? undefined : Number(y),
+    }
+    this.#data = data
+
+    return this
+  }
+
+  ratio(x: number, y: number): this {
+    const data: GeometryRatioData = {
+      type: 'ratio',
+      x: Number(x),
+      y: Number(y),
+    }
+    this.#data = data
+
+    return this
+  }
+
+  area(area: number): this {
+    const data: GeometryAreaData = {
+      type: 'area',
+      area: Number(area),
+    }
+
+    this.#data = data
 
     return this
   }
 
   toString(): string {
-    switch (this.#type) {
-      case 'pixel': {
-        return `${this.#a ?? ''}x${this.#b ?? ''}${('\\' + this.#option) ?? ''}`
+    const parts: string[] = []
+
+    switch (this.#data?.type) {
+      case 'size': {
+        const { width, height } = this.#data
+        const w = width === undefined ? '' : Number(width)
+        const h = height === undefined ? '' : Number(height)
+
+        parts.push(`${w}x${h}`)
+        break
       }
       case 'scale': {
-        return `${(this.#a + '%') ?? ''}x${(this.#b + '%') ?? ''}`
+        const { x, y } = this.#data
+        const percentageString = [x, y]
+          .filter(n => typeof n === 'number')
+          .map(n => `${Number(n)}%`)
+          .join('x')
+
+        parts.push(percentageString)
+        break
       }
       case 'ratio': {
-        return `${this.#a}:${this.#b}${('\\' + this.#option) ?? ''}`
+        const { x, y } = this.#data
+
+        parts.push(`${Number(x)}:${Number(y)}`)
+        break
       }
       case 'area': {
-        return `${this.#a}@`
+        const area = this.#data.area
+
+        parts.push(`${Number(area)}@`)
+        break
       }
     }
+
+    if (this.#flag) {
+      const flag = this.#flag
+      const availableFlags = ['^', '!', '<', '>', '#']
+
+      if (!availableFlags.includes(flag)) {
+        throw new Error(`Invalid flag '${flag}'`)
+      }
+
+      parts.push(flag)
+    }
+
+    if (this.#offset) {
+      const { x, y } = this.#offset
+      const formatOffsetNumber = (n: number) => (n >= 0 ? '+' : '-') + Math.abs(n)
+
+      parts.push(`${formatOffsetNumber(x)}${formatOffsetNumber(y)}`)
+    }
+
+    return parts.join()
   }
 
-  valid(): boolean {
-    return this.#a !== undefined || this.#b !== undefined
-  }
+  #data?: GeometryData = undefined
+  #offset?: { x: number, y: number }
+  #flag?: '^' | '!' | '<' | '>' | '#'
+}
 
-  #a: number | undefined
-  #b: number | undefined
-  #type: 'pixel' | 'scale' | 'ratio' | 'area' = 'pixel'
-  #option: string | undefined
+type GeometryData = GeometrySizeData | GeometryScaleData | GeometryRatioData | GeometryAreaData
+type GeometrySizeData = {
+  type: 'size',
+  width: number | undefined,
+  height: number | undefined,
+}
+type GeometryScaleData = {
+  type: 'scale',
+  x: number,
+  y: number | undefined,
+}
+type GeometryRatioData = {
+  type: 'ratio',
+  x: number,
+  y: number,
+}
+type GeometryAreaData = {
+  type: 'area',
+  area: number,
 }
 
 export { ImageMagickCommandBuilder as IM }
