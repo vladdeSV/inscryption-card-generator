@@ -7,7 +7,6 @@
     "generate": "yarn ts-node source/generate_pdf.ts"
   },
   "dependencies": {
-    "fastify": "^3.24.0",
     "runtypes": "^6.5.0"
   },
   "devDependencies": {
