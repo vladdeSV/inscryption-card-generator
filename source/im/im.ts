@@ -343,5 +343,34 @@ type GeometryAreaData = {
   area: number,
 }
 
+// const provider: [number, number, string | undefined][] = [
+//   [10, 10, '+10+10'],
+//   [-10, 10, '-10+10'],
+//   [-0, 0, '+0+0'],
+//   [5, -5, '+5-5'],
+//   [5, -5, '+5-5'],
+
+//   [10, '10' as any, undefined],
+//   [-10, '10' as any, undefined],
+//   [-0, '0' as any, undefined],
+//   [5, '-5' as any, undefined],
+//   [5, '-5' as any, undefined],
+// ]
+
+// for (const p of provider) {
+//   try {
+//     if (new Geometry().offset(p[0], p[1]).toString() !== p[2]) {
+//       throw p
+//     }
+//   } catch (e: unknown) {
+//     if (p[2] !== undefined) {
+//       throw p
+//     }
+//   }
+// }
+
+// const im = new ImageMagickCommandBuilder()
+// im.resizeExt((g: any): GeometryData => g.size())
+
 export { ImageMagickCommandBuilder as IM }
 export default (resource?: string): ImageMagickCommandBuilder => new ImageMagickCommandBuilder(resource)

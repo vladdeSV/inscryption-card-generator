@@ -1,7 +1,7 @@
 export { generateAct1Card }
 
 import { Resource } from '../resource'
-import IM from '../im'
+import IM from '../im/im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
