@@ -1,3 +1,5 @@
+import { Geometry } from './geometry'
+
 export { ImageMagickCommandBuilder }
 
 class ImageMagickCommandBuilder {

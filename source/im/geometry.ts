@@ -1,3 +1,5 @@
+export { Geometry }
+
 class Geometry {
   offset(x: number, y: number): this
   offset(): this
