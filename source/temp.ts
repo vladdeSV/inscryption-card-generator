@@ -196,8 +196,6 @@ const act1ResourceMap: Act1Resource = {
     'minecart': 'portraits/minecart.png',
     'mole': 'portraits/mole.png',
     'moleman': 'portraits/moleman.png',
-    'moon': 'portraits/moon.png',
-    'moon_portrait': 'portraits/moon_portrait-resources.assets-1751.png',
     'moose': 'portraits/moose.png',
     'morefish': 'portraits/morefish.png',
     'mothman_stage1': 'portraits/mothman_1.png',
