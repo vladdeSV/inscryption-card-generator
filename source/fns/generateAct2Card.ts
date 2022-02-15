@@ -1,7 +1,7 @@
 export { generateAct2Card, Npc }
 
 import { Resource } from '../resource'
-import IM from '../im/im'
+import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
