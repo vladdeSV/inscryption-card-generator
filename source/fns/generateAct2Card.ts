@@ -154,6 +154,11 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
     im.gravity('NorthWest').resource(res.get('frame', card.temple)).geometry(0, 0).composite()
   }
 
+  // if (isBorder) {
+  const extraSize = 12
+  im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
+  // }
+
   // scanlines
   const tileableScanline = IM()
     .command('-stroke black')
