@@ -259,3 +259,16 @@ function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' 
 
   return execSync(im.build('convert', '-'))
 }
+
+function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource): Buffer {
+  const im = IM()
+  im.resource(res.get('cardboon', boon))
+    .background('None')
+    .gravity('Center')
+    .filter('Box')
+    .resize(undefined, 1050)
+    .parens(IM(res.get('boon', boon)).resize(284))
+    .composite()
+
+  return execSync(im.build('convert', '-'))
+}
