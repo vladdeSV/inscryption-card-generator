@@ -1,25 +1,27 @@
 import { Geometry } from './geometry'
 
-describe('geometry', () => {
-  test('offset', () => {
-    const provider: [number, number, string][] = [
-      [0, 0, '+0+0'],
-      [-0, -0, '+0+0'],
-      [13, 15, '+13+15'],
-      [-7, 130, '-7+130'],
-      [-32, -44, '-32-44'],
-      [-12.34, 3.45, '-12.34+3.45'],
-    ]
+const validOffsets: [number, number, string][] = [
+  [0, 0, '+0+0'],
+  [-0, -0, '+0+0'],
+  [13, 15, '+13+15'],
+  [-7, 130, '-7+130'],
+  [-32, -44, '-32-44'],
+  [-12.34, 3.45, '-12.34+3.45'],
+]
 
-    for (const data of provider) {
-      expect(new Geometry().offset(data[0], data[1]).toString()).toStrictEqual(data[2])
-    }
+describe.each(validOffsets)('valid offset', (x, y, result) => {
+  test(`with values ${x},${y} to equal '${result}'`, () => {
 
-    expect(new Geometry().offset().toString()).toStrictEqual('')
-    expect(() => new Geometry().offset('1' as any, '1' as any)).toThrowError()
-    expect(() => new Geometry().offset('1' as any, undefined as any)).toThrowError()
+    expect(new Geometry().offset(x, y).toString()).toStrictEqual(result)
+
+    // expect(new Geometry().offset().toString()).toStrictEqual('')
+    // expect(() => new Geometry().offset('1' as any, '1' as any)).toThrowError()
+    // expect(() => new Geometry().offset('1' as any, undefined as any)).toThrowError()
   })
 
+})
+
+describe('geometry misc', () => {
   test('size', () => {
     const provider: [number | undefined, number | undefined, string][] = [
       [0, 0, '0x0'],
