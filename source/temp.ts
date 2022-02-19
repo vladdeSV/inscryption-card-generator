@@ -4,7 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { CreatureId, foo } from './parsecard'
 import { generateAct2Card, Npc } from './fns/generateAct2Card'
-import { generateAct1Card } from './fns/generateAct1Card'
+import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card } from './fns/generateAct1Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
@@ -809,28 +809,58 @@ const act2Npcs: (Card & { npc: Npc })[] = [
 
 act2Cards.push(...act2Npcs)
 
-for (const card of act1Cards) {
-  const filepath = 'out/cards/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png'
-  if (existsSync(filepath)) {
-    console.log('skipping', card.gameId)
+function generateAct1Cards() {
+  for (const card of act1Cards) {
+    const filepath = 'out/cards/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', card.gameId)
 
-    continue
-  }
-
-  const translationId = getGameTranslationId(card.gameId)
-  if (translationId) {
-    const name = translations['en'][translationId]
-    if (name === undefined) {
-      console.log('found no translation for', card.gameId)
+      continue
     }
 
-    card.name = name ?? '!MISSING_TRANSLATION'
-  }
+    const translationId = getGameTranslationId(card.gameId)
+    if (translationId) {
+      const name = translations['en'][translationId]
+      if (name === undefined) {
+        console.log('found no translation for', card.gameId)
+      }
 
-  const buffer = generateAct1Card(card, res, 'en')
-  // const buffer = generateAct2Card(card, res)
-  writeFileSync(filepath, buffer)
-  console.log('generated', card.gameId)
+      card.name = name ?? '!MISSING_TRANSLATION'
+    }
+
+    const buffer = generateAct1Card(card, res, 'en')
+    // const buffer = generateAct2Card(card, res)
+    writeFileSync(filepath, buffer)
+    console.log('generated', card.gameId)
+  }
 }
 
-console.log('act 2 cards', act2Cards.length)
+function generateAct1BackCards() {
+  for (const backCardId of ['bee', 'common', 'deathcard', 'squirrel', 'submerge'] as const) {
+    const filepath = 'out/cards1back/' + backCardId + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', backCardId)
+
+      continue
+    }
+
+    const buffer = generateAct1BackCard(backCardId, res,)
+    writeFileSync(filepath, buffer)
+    console.log('generated', backCardId)
+  }
+}
+
+function generateAct1BoonCards() {
+  for (const boonId of ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'] as const) {
+    const filepath = 'out/cards1boons/' + boonId + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', boonId)
+
+      continue
+    }
+
+    const buffer = generateAct1BoonCard(boonId, res,)
+    writeFileSync(filepath, buffer)
+    console.log('generated', boonId)
+  }
+}
