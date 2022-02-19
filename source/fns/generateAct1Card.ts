@@ -1,11 +1,11 @@
-export { generateAct1Card, generateAct1BackCard, generateAct1BoonCard }
+export { generateAct1Card, generateAct1BackCard, generateAct1BoonCard, generateAct1RewardCard, generateAct1TrialCard, generateAct1TarotCard }
 
 import { Resource } from '../resource'
 import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
-function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
+function generateAct1Card(card: Card, res: Resource, locale: string, options: { border?: boolean } = {}): Buffer {
   const im = IM()
 
   const originalCardHeight = 190 // px
@@ -191,6 +191,17 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
       .font(res.get('font', 'default'))
   }
 
+  if (options.border) {
+    // const backgroundPath = res.get('cardbackground', type)
+    // const background = IM(backgroundPath).resize(813, 1172)
+    // im.gravity('Center')
+    //   .extent(813, 1172)
+    //   .parens(background)
+    //   .compose('DstOver')
+    //   .composite()
+    //   .compose('SrcOver')
+  }
+
   if (card.flags.golden) {
     im.parens(
       IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
@@ -250,25 +261,99 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource): Buffer {
+function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardback', type))
     .background('None')
+    .gravity('Center')
     .filter('Box')
-    .resize(undefined, 1050)
+
+  if (options.border) {
+    const backgroundName = type === 'common' ? 'special' : 'common'
+
+    im.extent(147, 212)
+      .resource(res.get('cardbackground', backgroundName))
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
+  }
 
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource): Buffer {
+function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardboon', boon))
     .background('None')
     .gravity('Center')
     .filter('Box')
-    .resize(undefined, 1050)
-    .parens(IM(res.get('boon', boon)).resize(284))
+
+  if (options.border) {
+    im.extent(147, 212)
+      .resource(res.get('cardbackground', 'common'))
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
+  }
+
+  im.resizeExt(g => g.scale(1050 / 190 * 100))
+
+  im.parens(IM(res.get('boon', boon)).resize(284))
     .composite()
+
+  return execSync(im.build('convert', '-'))
+}
+
+function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', res: Resource, options: { border?: boolean } = {}): Buffer {
+  const im = IM()
+  im.resource(res.get('cardreward', type))
+    .background('None')
+    .gravity('Center')
+    .filter('Box')
+
+  if (options.border) {
+    im.extent(147, 212)
+      .resource(res.get('cardbackground', 'common'))
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
+  }
+
+  return execSync(im.build('convert', '-'))
+}
+
+function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', res: Resource, options: { border?: boolean } = {}): Buffer {
+  const im = IM()
+  im.resource(res.get('cardtrial', type))
+    .background('None')
+    .gravity('Center')
+    .filter('Box')
+
+  if (options.border) {
+    im.extent(147, 212)
+      .resource(res.get('cardbackground', 'common'))
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
+  }
+
+  return execSync(im.build('convert', '-'))
+}
+
+function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower', res: Resource, options: { border?: boolean } = {}): Buffer {
+  const im = IM()
+  im.resource(res.get('cardtarot', type))
+    .background('None')
+    .gravity('Center')
+    .filter('Box')
+
+  if (options.border) {
+    im.extent(147, 212)
+      .resource(res.get('cardbackground', 'common'))
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
+  }
 
   return execSync(im.build('convert', '-'))
 }

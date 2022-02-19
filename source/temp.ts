@@ -4,13 +4,16 @@ import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { CreatureId, foo } from './parsecard'
 import { generateAct2Card, Npc } from './fns/generateAct2Card'
-import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card } from './fns/generateAct1Card'
+import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
   cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', string>,
   cardbackground: Record<'common' | 'rare' | 'special' | 'terrain', string>,
   cardboon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
+  cardreward: Record<'1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', string>,
+  cardtrial: Record<'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', string>,
+  cardtarot: Record<'death' | 'devil' | 'empress' | 'fool' | 'tower', string>,
   cost: Record<string, string>,
   boon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
   tribe: Record<Card['tribes'][number], string>,
@@ -49,6 +52,38 @@ const act1ResourceMap: Act1Resource = {
     'startinggoat': 'cardboons/startinggoat.png',
     'startingtrees': 'cardboons/startingtrees.png',
     'tutordraw': 'cardboons/tutordraw.png',
+  },
+  'cardreward': {
+    '1blood': 'cardrewards/1blood.png',
+    '2blood': 'cardrewards/2blood.png',
+    '3blood': 'cardrewards/3blood.png',
+    'bird': 'cardrewards/bird.png',
+    'bones': 'cardrewards/bones.png',
+    'canine': 'cardrewards/canine.png',
+    'hooved': 'cardrewards/hooved.png',
+    'insect': 'cardrewards/insect.png',
+    'reptile': 'cardrewards/reptile.png',
+  },
+  'cardtrial': {
+    'abilities': 'cardtrials/abilities.png',
+    'blood': 'cardtrials/blood.png',
+    'bones': 'cardtrials/bones.png',
+    'flying': 'cardtrials/flying.png',
+    'pelts': 'cardtrials/pelts.png',
+    'power': 'cardtrials/power.png',
+    'rare': 'cardtrials/rare.png',
+    'ring': 'cardtrials/ring.png',
+    'strafe': 'cardtrials/strafe.png',
+    'submerge': 'cardtrials/submerge.png',
+    'toughness': 'cardtrials/toughness.png',
+    'tribes': 'cardtrials/tribes.png',
+  },
+  'cardtarot': {
+    'death': 'cardtarots/death.png',
+    'devil': 'cardtarots/devil.png',
+    'empress': 'cardtarots/empress.png',
+    'fool': 'cardtarots/fool.png',
+    'tower': 'cardtarots/tower.png',
   },
   'boon': {
     'doubledraw': 'boons/doubledraw.png',
@@ -711,7 +746,7 @@ function generateAct1BackCards() {
       continue
     }
 
-    const buffer = generateAct1BackCard(backCardId, res,)
+    const buffer = generateAct1BackCard(backCardId, res, { border: true })
     writeFileSync(filepath, buffer)
     console.log('generated', backCardId)
   }
@@ -719,15 +754,60 @@ function generateAct1BackCards() {
 
 function generateAct1BoonCards() {
   for (const boonId of ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'] as const) {
-    const filepath = 'out/cards1boons/' + boonId + '.png'
+    const filepath = 'out/cards1boon/' + boonId + '.png'
     if (existsSync(filepath)) {
       console.log('skipping', boonId)
 
       continue
     }
 
-    const buffer = generateAct1BoonCard(boonId, res,)
+    const buffer = generateAct1BoonCard(boonId, res, { border: true })
     writeFileSync(filepath, buffer)
     console.log('generated', boonId)
+  }
+}
+
+function generateAct1RewardCards() {
+  for (const rewardCardId of ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'] as const) {
+    const filepath = 'out/cards1reward/' + rewardCardId + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', rewardCardId)
+
+      continue
+    }
+
+    const buffer = generateAct1RewardCard(rewardCardId, res, { border: true })
+    writeFileSync(filepath, buffer)
+    console.log('generated', rewardCardId)
+  }
+}
+
+function generateAct1TrialCards() {
+  for (const trialCardId of ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'] as const) {
+    const filepath = 'out/cards1trial/' + trialCardId + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', trialCardId)
+
+      continue
+    }
+
+    const buffer = generateAct1TrialCard(trialCardId, res, { border: true })
+    writeFileSync(filepath, buffer)
+    console.log('generated', trialCardId)
+  }
+}
+
+function generateAct1TarotCards() {
+  for (const tarotCardId of ['death', 'devil', 'empress', 'fool', 'tower'] as const) {
+    const filepath = 'out/cards1tarot/' + tarotCardId + '.png'
+    if (existsSync(filepath)) {
+      console.log('skipping', tarotCardId)
+
+      continue
+    }
+
+    const buffer = generateAct1TarotCard(tarotCardId, res, { border: true })
+    writeFileSync(filepath, buffer)
+    console.log('generated', tarotCardId)
   }
 }
