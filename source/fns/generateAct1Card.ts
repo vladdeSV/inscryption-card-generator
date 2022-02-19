@@ -1,4 +1,4 @@
-export { generateAct1Card }
+export { generateAct1Card, generateAct1BackCard, generateAct1BoonCard }
 
 import { Resource } from '../resource'
 import IM from '../im'
@@ -246,6 +246,16 @@ function generateAct1Card(card: Card, res: Resource, locale: string): Buffer {
       // ait dude 2
     }
   }
+
+  return execSync(im.build('convert', '-'))
+}
+
+function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource): Buffer {
+  const im = IM()
+  im.resource(res.get('cardback', type))
+    .background('None')
+    .filter('Box')
+    .resize(undefined, 1050)
 
   return execSync(im.build('convert', '-'))
 }

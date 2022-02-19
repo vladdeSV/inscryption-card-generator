@@ -8,7 +8,7 @@ import { generateAct1Card } from './fns/generateAct1Card'
 
 type Act1Resource = {
   card: Record<Card['type'], string>,
-  cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel', string>,
+  cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', string>,
   cardbackground: Record<'common' | 'rare' | 'special' | 'terrain', string>,
   cost: Record<string, string>,
   tribe: Record<Card['tribes'][number], string>,
@@ -32,6 +32,7 @@ const act1ResourceMap: Act1Resource = {
     'common': 'cardbacks/common.png',
     'deathcard': 'cardbacks/deathcard.png',
     'squirrel': 'cardbacks/squirrel.png',
+    'submerge': 'cardbacks/submerge.png',
   },
   'cardbackground': {
     'common': 'cardbackgrounds/common.png',
