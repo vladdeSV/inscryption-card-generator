@@ -55,8 +55,12 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
     card.decals.push('snelk')
   }
 
-  if (jsonCard.id.match(/Smoke(_Improved|_NoBones)?/)) {
+  if (jsonCard.id.match(/^Smoke_NoBones$/)) {
     card.decals.push('smoke')
+  }
+
+  if (jsonCard.id.match(/^Smoke(_Improved)?$/)) {
+    card.decals.push('smoke_abilityhole')
   }
 
   if (jsonCard.id === '!DEATHCARD_LESHY') {
