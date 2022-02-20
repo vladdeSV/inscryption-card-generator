@@ -193,14 +193,14 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   }
 
   if (options.border) {
-    // const backgroundPath = res.get('cardbackground', type)
-    // const background = IM(backgroundPath).resize(813, 1172)
-    // im.gravity('Center')
-    //   .extent(813, 1172)
-    //   .parens(background)
-    //   .compose('DstOver')
-    //   .composite()
-    //   .compose('SrcOver')
+    const backgroundPath = res.get('cardbackground', (card.type === 'rare') ? 'rare' : (card.type === 'terrain' ? 'terrain' : 'common'))
+    const background = IM(backgroundPath).resize(813, 1172)
+    im.gravity('Center')
+      .extent(813, 1172)
+      .parens(background)
+      .compose('DstOver')
+      .composite()
+      .compose('SrcOver')
   }
 
   if (card.flags.golden) {
