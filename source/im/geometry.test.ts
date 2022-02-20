@@ -52,7 +52,8 @@ describe('geometry misc', () => {
     }
   })
 
-  test('size with flag', () => {
-    expect(new Geometry().toString()).toStrictEqual('')
+  test('geometry with flag', () => {
+    expect(new Geometry().size(100, 100).flag('!').toString()).toStrictEqual('100x100\\!')
+    expect(new Geometry().scale(130, 90).flag('^').toString()).toStrictEqual('130%x90%\\^')
   })
 })

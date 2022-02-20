@@ -134,7 +134,7 @@ class Geometry {
       parts.push(`${formatOffsetNumber(x)}${formatOffsetNumber(y)}`)
     }
 
-    return parts.join()
+    return parts.join('')
   }
 
   #data?: GeometryData = undefined
