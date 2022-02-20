@@ -5,12 +5,12 @@ import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
+const originalCardHeight = 190 // px
+const fullsizeCardHeight = 1050 // px
+const scale = fullsizeCardHeight / originalCardHeight
+
 function generateAct1Card(card: Card, res: Resource, options: { border?: boolean, locale?: string } = {}): Buffer {
   const im = IM()
-
-  const originalCardHeight = 190 // px
-  const fullsizeCardHeight = 1050 // px
-  const scale = fullsizeCardHeight / originalCardHeight
 
   // parts are shifted if having terrain card layout
   const terrainLayoutXoffset = card.flags.terrain ? -70 : 0
@@ -279,6 +279,8 @@ function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' 
       .compose('SrcOver')
   }
 
+  im.resizeExt(g => g.scale(scale * 100))
+
   return execSync(im.build('convert', '-'))
 }
 
@@ -297,7 +299,7 @@ function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'start
       .compose('SrcOver')
   }
 
-  im.resizeExt(g => g.scale(1050 / 190 * 100))
+  im.resizeExt(g => g.scale(scale * 100))
 
   im.parens(IM(res.get('boon', boon)).resize(284))
     .composite()
@@ -320,6 +322,8 @@ function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' |
       .compose('SrcOver')
   }
 
+  im.resizeExt(g => g.scale(scale * 100))
+
   return execSync(im.build('convert', '-'))
 }
 
@@ -338,6 +342,8 @@ function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' 
       .compose('SrcOver')
   }
 
+  im.resizeExt(g => g.scale(scale * 100))
+
   return execSync(im.build('convert', '-'))
 }
 
@@ -355,6 +361,8 @@ function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 't
       .composite()
       .compose('SrcOver')
   }
+
+  im.resizeExt(g => g.scale(scale * 100))
 
   return execSync(im.build('convert', '-'))
 }
