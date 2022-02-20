@@ -36,6 +36,10 @@ export class Resource {
     }
   }
 
+  public has(category: string, id: string): boolean {
+    return this.#data[category]?.[id] !== undefined
+  }
+
   public get(category: string, id: string): string {
     const map = this.#data[category]
     if (map === undefined) {
