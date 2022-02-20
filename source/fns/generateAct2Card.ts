@@ -1,18 +1,19 @@
-export { generateAct2Card, Npc }
+export { generateAct2Card, generateAct2NpcCard, Npc }
 
 import { Resource } from '../resource'
 import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
+import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 
 type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper'
 
-function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
+const originalCardHeight = 56 // px, size: 42x56
+const fullsizeCardHeight = 1050 // px
+const scale = fullsizeCardHeight / originalCardHeight
 
-  const originalCardHeight = 56 // px, size: 42x56
-  const fullsizeCardHeight = 1050 // px
-  const scale = fullsizeCardHeight / originalCardHeight
+function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { border?: boolean, scanlines?: boolean } = {}): Buffer {
+  const im = IM()
 
   // set up defaults
   im.font(res.get('font', 'default'))
@@ -154,12 +155,30 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
     im.gravity('NorthWest').resource(res.get('frame', card.temple)).geometry(0, 0).composite()
   }
 
+  // border
   if (options.border) {
-    const extraSize = 12
-    im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
+    extendedBorder(im)
   }
 
   // scanlines
+  if (options.scanlines) {
+    scanlines(im)
+  }
+
+  // resize
+  im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
+
+  return execSync(im.build('convert', '-'))
+}
+
+function extendedBorder(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
+  const extraSize = 12
+  im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
+
+  return im
+}
+
+function scanlines(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
   const tileableScanline = IM()
     .command('-stroke black')
     .size(1, 2)
@@ -174,6 +193,29 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
   im.parens(scanlines)
     .compose('Atop')
     .composite()
+
+  return im
+}
+
+function generateAct2NpcCard(npc: Npc, res: Resource, options: { border?: boolean, scanlines?: boolean } = {}) {
+  // npc
+  const im = IM(res.get('npc', npc))
+    .gravity('Center')
+    .background('None')
+    .filter('Box')
+
+  // increase size to match regular cards
+  im.extent(44, 58)
+
+  // border
+  if (options.border) {
+    extendedBorder(im)
+  }
+
+  // scanlines
+  if (options.scanlines) {
+    scanlines(im)
+  }
 
   // resize
   im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
