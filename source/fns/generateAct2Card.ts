@@ -7,7 +7,7 @@ import { execSync } from 'child_process'
 
 type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper'
 
-function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
+function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { border?: boolean } = {}): Buffer {
   const im = IM()
 
   const originalCardHeight = 56 // px, size: 42x56
@@ -154,10 +154,10 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
     im.gravity('NorthWest').resource(res.get('frame', card.temple)).geometry(0, 0).composite()
   }
 
-  // if (isBorder) {
-  const extraSize = 12
-  im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
-  // }
+  if (options.border) {
+    const extraSize = 12
+    im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
+  }
 
   // scanlines
   const tileableScanline = IM()
