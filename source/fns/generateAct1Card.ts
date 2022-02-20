@@ -5,7 +5,7 @@ import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 
-function generateAct1Card(card: Card, res: Resource, locale: string, options: { border?: boolean } = {}): Buffer {
+function generateAct1Card(card: Card, res: Resource, options: { border?: boolean, locale?: string } = {}): Buffer {
   const im = IM()
 
   const originalCardHeight = 190 // px
@@ -166,6 +166,7 @@ function generateAct1Card(card: Card, res: Resource, locale: string, options: { 
     let size = { w: 570, h: 135 }
     let position = { x: 0, y: 28 }
 
+    const locale = options.locale
     if (locale === 'ko') {
       im.font(res.get('font', locale))
       position = { x: 4, y: 34 }
