@@ -124,7 +124,7 @@ class Geometry {
         throw new Error(`Invalid flag '${flag}'`)
       }
 
-      parts.push('\\' + flag)
+      parts.push(flag)
     }
 
     if (this.#offset) {

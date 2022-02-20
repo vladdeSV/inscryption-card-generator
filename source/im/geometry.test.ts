@@ -43,7 +43,7 @@ describe('geometry misc', () => {
   test('flag', () => {
     const validFlags = ['!', '<', '^', '>', '#']
     for (const flag of validFlags) {
-      expect(new Geometry().flag(flag as any).toString()).toStrictEqual('\\' + flag)
+      expect(new Geometry().flag(flag as any).toString()).toStrictEqual(flag)
     }
 
     const invalidFlags = ['!<', '@', '>>', 1]
@@ -53,7 +53,7 @@ describe('geometry misc', () => {
   })
 
   test('geometry with flag', () => {
-    expect(new Geometry().size(100, 100).flag('!').toString()).toStrictEqual('100x100\\!')
-    expect(new Geometry().scale(130, 90).flag('^').toString()).toStrictEqual('130%x90%\\^')
+    expect(new Geometry().size(100, 100).flag('!').toString()).toStrictEqual('100x100!')
+    expect(new Geometry().scale(130, 90).flag('^').toString()).toStrictEqual('130%x90%^')
   })
 })
