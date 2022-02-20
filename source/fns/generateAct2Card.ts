@@ -10,9 +10,9 @@ type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizar
 function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
   const im = IM()
 
-  // const originalCardHeight = 56 // px, size: 42x56
+  const originalCardHeight = 56 // px, size: 42x56
   const fullsizeCardHeight = 1050 // px
-  // const scale = fullsizeCardHeight / originalCardHeight
+  const scale = fullsizeCardHeight / originalCardHeight
 
   // set up defaults
   im.font(res.get('font', 'default'))
@@ -176,7 +176,7 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource): Buffer {
     .composite()
 
   // resize
-  im.resize(undefined, fullsizeCardHeight) // 1050 pixels @ 300dpi = 3.5 inches
+  im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
 
   return execSync(im.build('convert', '-'))
 }
