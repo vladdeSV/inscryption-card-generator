@@ -1,9 +1,10 @@
 import { Resource } from './resource'
 import { Card } from './card'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { convertJsonCard } from './jsoncard'
 import { CreatureId, foo } from './parsecard'
-import { generateAct2Card, Npc } from './fns/generateAct2Card'
+import * as path from 'path'
+import { generateAct2BackCard, generateAct2Card, generateAct2NpcCard, Npc } from './fns/generateAct2Card'
 import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
 
 type Act1Resource = {
@@ -716,103 +717,73 @@ const act2CreatureIds: CreatureId[] = [
 const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as CreatureId ?? ''))
 const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as CreatureId ?? ''))
 
-function generateAct1Cards() {
-  for (const card of act1Cards) {
-    const filepath = 'out/cards/' + ((card.portrait?.type === 'creature') ? card.portrait.id : card.gameId) + '.png'
+act1Cards.forEach(card => {
+  const translationId = getGameTranslationId(card.gameId)
+  if (translationId) {
+    const name = translations['en'][translationId]
+    if (name === undefined) {
+      console.log('found no translation for', card.gameId)
+    }
+
+    card.name = name ?? 'MISSING_TRANSLATION'
+  }
+
+  if (card.gameId === '!DEATHCARD_LESHY') {
+    card.meta.rare = true
+    card.type = 'rare'
+  }
+})
+
+function slask<T>(folderName: string, fn: (t: T, r: Resource, opts: any) => Buffer, arr: T[], res: Resource, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
+  const folderpath = path.join('out', folderName)
+  mkdirSync(folderpath, { recursive: true })
+
+  for (const id of arr) {
+    const filename = filenameGenerator(id) ?? id
+    const filepath = path.join(folderpath, filename + '.png')
     if (existsSync(filepath)) {
-      console.log('skipping', card.gameId)
+      console.log('skipping', `${folderName}/${filename}`)
 
       continue
     }
 
-    const translationId = getGameTranslationId(card.gameId)
-    if (translationId) {
-      const name = translations['en'][translationId]
-      if (name === undefined) {
-        console.log('found no translation for', card.gameId)
-      }
-
-      card.name = name ?? '!MISSING_TRANSLATION'
-    }
-
-    const buffer = generateAct1Card(card, res, 'en')
-    // const buffer = generateAct2Card(card, res)
+    const buffer = fn(id, res, options)
     writeFileSync(filepath, buffer)
-    console.log('generated', card.gameId)
+    console.log('generated', `${folderName}/${filename}`)
   }
 }
 
-function generateAct1BackCards() {
-  for (const backCardId of ['bee', 'common', 'deathcard', 'squirrel', 'submerge'] as const) {
-    const filepath = 'out/cards1back/' + backCardId + '.png'
-    if (existsSync(filepath)) {
-      console.log('skipping', backCardId)
+for (const border of [true, false]) {
+  const toplevelName = `act1_${border ? 'border' : 'noborder'}`
+  slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
+  slask(toplevelName + '/boons', generateAct1BoonCard, ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'], res, { border: border })
+  slask(toplevelName + '/rewards', generateAct1RewardCard, ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'], res, { border: border })
+  slask(toplevelName + '/trials', generateAct1TrialCard, ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'], res, { border: border })
+  slask(toplevelName + '/tarots', generateAct1TarotCard, ['death', 'devil', 'empress', 'fool', 'tower'], res, { border: border })
+  slask(toplevelName, generateAct1Card, act1Cards, res, { border: border }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
+}
 
-      continue
-    }
-
-    const buffer = generateAct1BackCard(backCardId, res, { border: true })
-    writeFileSync(filepath, buffer)
-    console.log('generated', backCardId)
+for (const useScanline of [true, false]) {
+  for (const border of [true, false]) {
+    const toplevelName = `act2_${border ? 'border' : 'noborder'}_${useScanline ? 'scanline' : 'noscanline'}`
+    slask(toplevelName, generateAct2Card, act2Cards, res2, { border: border, scanlines: useScanline }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
+    slask(toplevelName + '/npc', generateAct2NpcCard, ['angler', 'bluewizard', 'briar', 'dredger', 'dummy', 'greenwizard', 'inspector', 'orangewizard', 'royal', 'sawyer', 'melter', 'trapper'], res2, { border: border, scanlines: useScanline })
+    slask(toplevelName + '/backs', generateAct2BackCard, ['common', 'submerged'], res2, { border: border, scanlines: useScanline })
   }
 }
 
-function generateAct1BoonCards() {
-  for (const boonId of ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'] as const) {
-    const filepath = 'out/cards1boon/' + boonId + '.png'
-    if (existsSync(filepath)) {
-      console.log('skipping', boonId)
-
-      continue
-    }
-
-    const buffer = generateAct1BoonCard(boonId, res, { border: true })
-    writeFileSync(filepath, buffer)
-    console.log('generated', boonId)
-  }
+const template: Card = {
+  name: '',
+  type: 'common',
+  cost: undefined,
+  power: 0,
+  health: 0,
+  sigils: [],
+  tribes: [],
+  temple: 'nature',
+  decals: [],
+  flags: { enhanced: false, fused: false, golden: false, squid: false, terrain: false },
+  meta: { rare: false, terrain: false }
 }
 
-function generateAct1RewardCards() {
-  for (const rewardCardId of ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'] as const) {
-    const filepath = 'out/cards1reward/' + rewardCardId + '.png'
-    if (existsSync(filepath)) {
-      console.log('skipping', rewardCardId)
-
-      continue
-    }
-
-    const buffer = generateAct1RewardCard(rewardCardId, res, { border: true })
-    writeFileSync(filepath, buffer)
-    console.log('generated', rewardCardId)
-  }
-}
-
-function generateAct1TrialCards() {
-  for (const trialCardId of ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'] as const) {
-    const filepath = 'out/cards1trial/' + trialCardId + '.png'
-    if (existsSync(filepath)) {
-      console.log('skipping', trialCardId)
-
-      continue
-    }
-
-    const buffer = generateAct1TrialCard(trialCardId, res, { border: true })
-    writeFileSync(filepath, buffer)
-    console.log('generated', trialCardId)
-  }
-}
-
-function generateAct1TarotCards() {
-  for (const tarotCardId of ['death', 'devil', 'empress', 'fool', 'tower'] as const) {
-    const filepath = 'out/cards1tarot/' + tarotCardId + '.png'
-    if (existsSync(filepath)) {
-      console.log('skipping', tarotCardId)
-
-      continue
-    }
-
-    const buffer = generateAct1TarotCard(tarotCardId, res, { border: true })
-    writeFileSync(filepath, buffer)
-    console.log('generated', tarotCardId)
-  }
-}
+// writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: false, locale: 'en' }))
