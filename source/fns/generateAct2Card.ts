@@ -197,6 +197,32 @@ function scanlines(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
   return im
 }
 
+function generateAct2BackCard(type: 'common' | 'submerged', res: Resource, options: { border?: boolean, scanlines?: boolean } = {}) {
+  // npc
+  const im = IM(res.get('cardback', type))
+    .gravity('Center')
+    .background('None')
+    .filter('Box')
+
+  // increase size to match regular cards
+  im.extent(44, 58)
+
+  // border
+  if (options.border) {
+    extendedBorder(im)
+  }
+
+  // scanlines
+  if (options.scanlines) {
+    scanlines(im)
+  }
+
+  // resize
+  im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
+
+  return execSync(im.build('convert', '-'))
+}
+
 function generateAct2NpcCard(npc: Npc, res: Resource, options: { border?: boolean, scanlines?: boolean } = {}) {
   // npc
   const im = IM(res.get('npc', npc))
