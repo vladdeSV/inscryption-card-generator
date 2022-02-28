@@ -401,6 +401,7 @@ const act1ResourceMap: Act1Resource = {
     'child': 'decals/child.png',
     'leshy': 'decals/leshy.png',
     'smoke': 'decals/smoke.png',
+    'smoke_abilityhole': 'decals/smoke_abilityhole.png',
     'combined': 'decals/combined.png',
     'blood': 'decals/blood.png'
   }
@@ -412,6 +413,10 @@ const act2ResourceMap = {
     'rare': 'cards/rare.png',
     'terrain': 'cards/terrain.png',
     'terrain_rare': 'cards/terrain_rare.png',
+  },
+  'cardback': {
+    'common': 'cardbacks/common.png',
+    'submerged': 'cardbacks/submerged.png',
   },
   'cost': {
     'blood_1': 'costs/blood1.png',
