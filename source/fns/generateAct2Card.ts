@@ -1,4 +1,4 @@
-export { generateAct2Card, generateAct2NpcCard, Npc }
+export { generateAct2Card, generateAct2BackCard, generateAct2NpcCard, Npc }
 
 import { Resource } from '../resource'
 import IM from '../im'
