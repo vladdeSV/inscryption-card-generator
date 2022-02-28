@@ -166,7 +166,7 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
   }
 
   // resize
-  im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
+  im.resizeExt(g => g.scale(scale * 100))
 
   return execSync(im.build('convert', '-'))
 }
