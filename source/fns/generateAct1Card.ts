@@ -24,9 +24,34 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   // load card
   im.resource(res.get('card', card.type))
 
-  if (card.portrait?.type === 'creature') {
-    im.resource(res.get('portrait', card.portrait.id))
-      .gravity('Center')
+  if (card.portrait?.type) {
+    switch (card.portrait?.type) {
+      case 'creature': {
+        im.resource(res.get('portrait', card.portrait.id))
+        break
+      }
+      case 'custom': {
+        im.resource('-')
+        break
+      }
+      case 'deathcard': {
+        const data = card.portrait.data
+        const dc = IM(res.get('deathcard', 'base'))
+          .gravity('NorthWest')
+          .resource(res.get('deathcard', `head_${data.headType}`)).composite()
+          .resource(res.get('deathcard', `mouth_${data.mouthIndex + 1}`)).geometry(40, 68).composite()
+          .resource(res.get('deathcard', `eyes_${data.eyesIndex + 1}`)).geometry(40, 46).composite()
+
+        if (data.lostEye) {
+          dc.parens(IM().command('xc:black[17x17]').geometry(40, 46)).composite()
+        }
+
+        im.parens(dc)
+        break
+      }
+    }
+
+    im.gravity('Center')
       .geometry(1, -15)
       .composite()
   }
