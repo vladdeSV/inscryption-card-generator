@@ -721,8 +721,8 @@ function getGameTranslationId(id: string | undefined): string | undefined {
 
 }
 
-const res = new Resource('resource', act1ResourceMap)
-const res2 = new Resource('resource-gbc', act2ResourceMap)
+export const res = new Resource('resource', act1ResourceMap)
+export const res2 = new Resource('resource-gbc', act2ResourceMap)
 
 const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
 const jsonCards = textChunks.map(foo)
