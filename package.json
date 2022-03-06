@@ -7,7 +7,7 @@
     "generate": "yarn ts-node source/generate_pdf.ts"
   },
   "dependencies": {
-    "runtypes": "^6.5.0"
+    "runtypes": "^6.5.1"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
