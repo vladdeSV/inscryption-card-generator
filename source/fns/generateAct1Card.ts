@@ -47,6 +47,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
           .resource(res.get('deathcard', `eyes_${data.eyesIndex + 1}`)).geometry(40, 46).composite()
 
         if (data.lostEye) {
+          // draw black box over left-side eye
           dc.parens(IM().command('xc:black[17x17]').geometry(40, 46)).composite()
         }
 
