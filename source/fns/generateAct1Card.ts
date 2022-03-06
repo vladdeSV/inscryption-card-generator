@@ -258,6 +258,11 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
     }
   }
 
+  // special case, as combined cards have multiple decals
+  if (card.flags.fused) {
+    card.decals.push('fungus', 'blood', 'stitches')
+  }
+
   // decals
   for (const decal of card.decals) {
     const decalPath = res.get('decal', decal)

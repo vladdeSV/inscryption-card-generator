@@ -11,7 +11,7 @@ interface Card {
   sigils: Sigil[],
   tribes: ('reptile' | 'canine' | 'bird' | 'hooved' | 'insect')[],
   statIcon?: 'ants' | 'bones' | 'bell' | 'cardsinhand' | 'mirror' | 'greengems',
-  decals: ('snelk' | 'child' | 'leshy' | 'smoke' | 'smoke_abilityhole' | 'combined' | 'blood')[],
+  decals: ('snelk' | 'child' | 'leshy' | 'smoke' | 'smoke_abilityhole' | 'stitches' | 'blood' | 'fungus' | 'paint')[],
   temple: 'nature' | 'tech' | 'undead' | 'wizard',
   flags: {
     golden: boolean,

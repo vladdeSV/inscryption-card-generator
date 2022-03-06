@@ -427,8 +427,10 @@ const act1ResourceMap: Act1Resource = {
     'leshy': 'decals/leshy.png',
     'smoke': 'decals/smoke.png',
     'smoke_abilityhole': 'decals/smoke_abilityhole.png',
-    'combined': 'decals/combined.png',
-    'blood': 'decals/blood.png'
+    'stitches': 'decals/stitches.png',
+    'blood': 'decals/blood.png',
+    'fungus': 'decals/fungus.png',
+    'paint': 'decals/paint_1.png',
   }
 }
 
