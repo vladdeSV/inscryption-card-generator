@@ -113,6 +113,11 @@ const Sigil = Union(
   Literal('activatedstatsupenergy')
 )
 
+const CardType = Union(Literal('common'), Literal('rare'), Literal('terrain'))
+const Tribe = Union(Literal('reptile'), Literal('canine'), Literal('bird'), Literal('hooved'), Literal('insect'))
+const StatIcon = Union(Literal('ants'), Literal('bones'), Literal('bell'), Literal('cardsinhand'), Literal('mirror'), Literal('greengems'))
+const Decal = Union(Literal('snelk'), Literal('child'), Literal('leshy'), Literal('smoke'), Literal('smoke_abilityhole'), Literal('stitches'), Literal('blood'), Literal('fungus'), Literal('paint'))
+const Temple = Union(Literal('nature'), Literal('tech'), Literal('undead'), Literal('wizard'))
 const CreatureId = Union(
   Literal('adder'),
   Literal('alpha'),
@@ -403,16 +408,16 @@ const Cost = Union(BloodCost, BoneCost, EnergyCost, GemCost)
 const Card = Record({
   gameId: String.optional(),
   name: String,
-  type: Union(Literal('common'), Literal('rare'), Literal('terrain')),
+  type: CardType,
   portrait: Portrait.optional(),
   cost: Cost.optional(),
   power: Number,
   health: Number,
   sigils: Array(Sigil),
-  tribes: Array(Union(Literal('reptile'), Literal('canine'), Literal('bird'), Literal('hooved'), Literal('insect'))),
-  statIcon: Union(Literal('ants'), Literal('bones'), Literal('bell'), Literal('cardsinhand'), Literal('mirror'), Literal('greengems')).optional(),
-  decals: Array(Union(Literal('snelk'), Literal('child'), Literal('leshy'), Literal('smoke'), Literal('smoke_abilityhole'), Literal('stitches'), Literal('blood'), Literal('fungus'), Literal('paint'))),
-  temple: Union(Literal('nature'), Literal('tech'), Literal('undead'), Literal('wizard')),
+  tribes: Array(Tribe),
+  statIcon: StatIcon.optional(),
+  decals: Array(Decal),
+  temple: Temple,
   flags: Record({
     golden: Boolean,
     terrain: Boolean,
