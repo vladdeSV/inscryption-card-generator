@@ -4,6 +4,7 @@ import { Resource } from '../resource'
 import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
+import { getGemCostResourceId } from './helpers'
 
 const originalCardHeight = 190 // px
 const fullsizeCardHeight = 1050 // px
@@ -86,24 +87,33 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   // card cost
   if (card.cost) {
     const costType = card.cost.type
-    if (costType !== 'blood' && costType !== 'bone') {
+    let costPath: string | undefined = undefined
+    if (costType === 'blood' || costType === 'bone') {
+      const { type, amount } = card.cost
+      costPath = res.get('cost', `${type}_${amount}`)
+    } else if (costType === 'gem') {
+      const a = getGemCostResourceId(card.cost.gems)
+      if (a) {
+        costPath = res.get('cost', a)
+      }
+    } else {
       throw new Error(`debug: unsupported cost type '${costType}', remove this error message later`)
     }
 
-    const { type, amount } = card.cost
-    const costPath = res.get('cost', `${type}_${amount}`)
-    im.parens(
-      IM(costPath)
-        .interpolate('Nearest')
-        .filter('Point')
-        .resize(284)
-        .filter('Box')
-        .gravity('East')
-    ).gravity('NorthEast')
-      .geometry(32, 110)
-      .composite()
+    if (costPath) {
+      im.parens(
+        IM(costPath)
+          .interpolate('Nearest')
+          .filter('Point')
+          .resize(284)
+          .filter('Box')
+          .gravity('East')
+      ).gravity('NorthEast')
+        .geometry(32, 110)
+        .composite()
 
-    im.gravity('NorthWest')
+      im.gravity('NorthWest')
+    }
   }
 
   // health

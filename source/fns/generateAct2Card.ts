@@ -5,6 +5,7 @@ import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 import { ImageMagickCommandBuilder } from '../im/commandBuilder'
+import { getGemCostResourceId } from './helpers'
 
 type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper'
 
@@ -67,41 +68,6 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
     }
 
     if (costType === 'gem') {
-
-      const getGemCostResourceId = (gems: ('orange' | 'green' | 'blue')[]): 'mox-b' | 'mox-bg' | 'mox-g' | 'mox-go' | 'mox-o' | 'mox-ob' | 'mox-ogb' | undefined => {
-        let ogb = 0b000
-        for (const gem of gems) {
-          const costMap = { 'orange': 0b100, 'green': 0b010, 'blue': 0b001 }
-          ogb |= costMap[gem]
-        }
-
-        switch (ogb) {
-          case 0b001: {
-            return 'mox-b'
-          }
-          case 0b010: {
-            return 'mox-g'
-          }
-          case 0b100: {
-            return 'mox-o'
-          }
-          case 0b011: {
-            return 'mox-bg'
-          }
-          case 0b101: {
-            return 'mox-ob'
-          }
-          case 0b110: {
-            return 'mox-go'
-          }
-          case 0b111: {
-            return 'mox-ogb'
-          }
-        }
-
-        return undefined
-      }
-
       const gemCostResourceId = getGemCostResourceId(card.cost.gems)
       if (gemCostResourceId !== undefined) {
         im.resource(res.get('cost', gemCostResourceId)).composite()

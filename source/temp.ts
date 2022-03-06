@@ -110,6 +110,13 @@ const act1ResourceMap: Act1Resource = {
     'bone_8': 'costs/bone8.png',
     'bone_9': 'costs/bone9.png',
     'bone_10': 'costs/bone10.png',
+    'mox-b': 'costs/mox-b.png',
+    'mox-g': 'costs/mox-g.png',
+    'mox-o': 'costs/mox-o.png',
+    'mox-bg': 'costs/mox-bg.png',
+    'mox-ob': 'costs/mox-ob.png',
+    'mox-go': 'costs/mox-go.png',
+    'mox-ogb': 'costs/mox-ogb.png',
   },
   'deathcard': {
     'base': 'deathcards/base.png',
