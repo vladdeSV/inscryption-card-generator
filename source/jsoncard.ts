@@ -19,6 +19,8 @@ export function convertJsonCard(jsonCard: JsonCard): Card {
       squid: false,
       enhanced: false,
       fused: false,
+      hideHealth: false,
+      hidePower: false,
     },
     meta: {
       rare: false,

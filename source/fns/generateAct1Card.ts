@@ -106,18 +106,20 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   }
 
   // health
-  const healthWidth = 114
-  const healthHeight = 215
-  im.parens(
-    IM()
-      .pointsize()
-      .size(healthWidth, healthHeight)
-      .label(card.health)
-      .gravity('East')
-      .extent(healthWidth, healthHeight)
-  ).gravity('NorthEast')
-    .geometry(32 - terrainLayoutXoffset, 815)
-    .composite()
+  if (!card.flags.hideHealth) {
+    const healthWidth = 114
+    const healthHeight = 215
+    im.parens(
+      IM()
+        .pointsize()
+        .size(healthWidth, healthHeight)
+        .label(card.health)
+        .gravity('East')
+        .extent(healthWidth, healthHeight)
+    ).gravity('NorthEast')
+      .geometry(32 - terrainLayoutXoffset, 815)
+      .composite()
+  }
 
   // special stat icons
   if (card.statIcon !== undefined) {
@@ -131,7 +133,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
     ).geometry(5, 705)
       .composite()
   } else if (card.power !== undefined) {
-    const drawPower = !(card.power === 0 && card.flags.terrain)
+    const drawPower = !(card.power === 0 && card.flags.terrain || card.flags.hidePower)
     if (drawPower) {
       const w = 114
       const h = 215

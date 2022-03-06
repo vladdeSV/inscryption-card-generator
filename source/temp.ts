@@ -841,7 +841,7 @@ const template: Card = {
   tribes: [],
   temple: 'nature',
   decals: [],
-  flags: { enhanced: false, fused: false, golden: false, squid: false, terrain: false },
+  flags: { enhanced: false, fused: false, golden: false, squid: false, terrain: false, hidePower: false, hideHealth: false },
   meta: { rare: false, terrain: false }
 }
 

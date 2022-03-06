@@ -19,6 +19,8 @@ interface Card {
     squid: boolean,
     enhanced: boolean,
     fused: boolean,
+    hidePower: boolean,
+    hideHealth: boolean,
   }
   meta: {
     rare: boolean,
@@ -26,7 +28,7 @@ interface Card {
   }
 }
 
-type Portrait = CreaturePortrait | DeathcardPortrait | CustomPortrait
+type Portrait = CreaturePortrait | DeathcardPortrait | CustomPortrait | ResourcePortrait
 type CreaturePortrait = {
   type: 'creature',
   id: CreatureId
