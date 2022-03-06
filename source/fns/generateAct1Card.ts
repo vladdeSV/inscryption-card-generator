@@ -26,6 +26,10 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
 
   if (card.portrait?.type) {
     switch (card.portrait?.type) {
+      case 'resource': {
+        im.resource(res.get('portrait', card.portrait.resourceId))
+        break
+      }
       case 'creature': {
         im.resource(res.get('portrait', card.portrait.id))
         break

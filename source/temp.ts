@@ -247,7 +247,7 @@ const act1ResourceMap: Act1Resource = {
     'emptyvessel': 'portraits/emptyvessel.png',
     'fieldmouse': 'portraits/fieldmice.png',
     'franknstein': 'portraits/franknstein.png',
-    'frozen_opossum': 'portraits/frozen_opossum.png',
+    'frozenopossum': 'portraits/frozen_opossum.png',
     'geck': 'portraits/geck.png',
     'gemexploder': 'portraits/gemexploder.png',
     'gemripper': 'portraits/gemripper.png',
@@ -704,6 +704,10 @@ function getGameTranslationId(id: string | undefined): string | undefined {
     return undefined
   }
 
+  if (id === '') {
+    return undefined
+  }
+
   return id?.toLowerCase()
 
 }
@@ -716,7 +720,7 @@ const jsonCards = textChunks.map(foo)
 const cards: Card[] = jsonCards.map(convertJsonCard)
 
 const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
-const act1CreatureIds: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking']
+const act1CreatureIds: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Boulder', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking', 'FrozenOpossum', 'Tree_SnowCovered', 'Tree', 'Stump']
 const act2CreatureIds: CreatureId[] = [
   'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
   'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
@@ -741,15 +745,35 @@ const act2CreatureIds: CreatureId[] = [
 const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as CreatureId ?? ''))
 const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as CreatureId ?? ''))
 
+const getCard = (gameId: string) => cards.filter(card => card.gameId === gameId)[0]
+
+const starvation = getCard('Starvation')
+starvation.flags.hideHealth = true
+starvation.flags.hidePower = true
+
+act1Cards.push({
+  ...getCard('Goat'),
+  portrait: {
+    type: 'resource',
+    resourceId: 'goat_sexy'
+  }
+})
+
 act1Cards.forEach(card => {
-  const translationId = getGameTranslationId(card.gameId)
+  let gameId = card.gameId
+
+  if (gameId === 'Tree_SnowCovered') {
+    gameId = 'Tree_Hologram_SnowCovered'
+  }
+
+  const translationId = getGameTranslationId(gameId)
   if (translationId) {
     const name = translations['en'][translationId]
     if (name === undefined) {
       console.log('found no translation for', card.gameId)
     }
 
-    card.name = name ?? 'MISSING_TRANSLATION'
+    card.name = name
   }
 
   if (card.gameId === '!DEATHCARD_LESHY') {
@@ -778,13 +802,24 @@ function slask<T>(folderName: string, fn: (t: T, r: Resource, opts: any) => Buff
 }
 
 for (const border of [true, false]) {
-  const toplevelName = `act1_${border ? 'border' : 'noborder'}`
+  const toplevelName = `act1/${border ? 'border' : 'regular'}`
   slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
   slask(toplevelName + '/boons', generateAct1BoonCard, ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'], res, { border: border })
   slask(toplevelName + '/rewards', generateAct1RewardCard, ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'], res, { border: border })
   slask(toplevelName + '/trials', generateAct1TrialCard, ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'], res, { border: border })
   slask(toplevelName + '/tarots', generateAct1TarotCard, ['death', 'devil', 'empress', 'fool', 'tower'], res, { border: border })
-  slask(toplevelName, generateAct1Card, act1Cards, res, { border: border }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
+  slask(toplevelName, generateAct1Card, act1Cards, res, { border: border }, (card: Card) => {
+
+    if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'goat_sexy') {
+      return 'goat_sexy'
+    }
+
+    if (card.portrait?.type === 'creature') {
+      return card.portrait.id
+    }
+
+    return card.gameId
+  })
 }
 
 for (const useScanline of [true, false]) {

@@ -44,6 +44,10 @@ type CustomPortrait = {
   type: 'custom',
   data: Buffer,
 }
+type ResourcePortrait = {
+  type: 'resource',
+  resourceId: string,
+}
 
 type Cost = BloodCost | BoneCost | EnergyCost | GemCost
 type BloodCost = {
