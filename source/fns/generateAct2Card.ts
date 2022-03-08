@@ -7,7 +7,7 @@ import { execSync } from 'child_process'
 import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 import { getGemCostResourceId } from './helpers'
 
-type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper'
+type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper' | 'prospector'
 
 const originalCardHeight = 56 // px, size: 42x56
 const fullsizeCardHeight = 1050 // px

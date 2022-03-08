@@ -835,7 +835,7 @@ for (const useScanline of [true, false]) {
   for (const border of [true, false]) {
     const toplevelName = `act2/${useScanline ? 'scanline' : 'plain'}/${border ? 'border' : 'regular'}`
     slask(toplevelName, generateAct2Card, act2Cards, res2, { border: border, scanlines: useScanline }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
-    slask(toplevelName + '/npc', generateAct2NpcCard, ['angler', 'bluewizard', 'briar', 'dredger', 'dummy', 'greenwizard', 'inspector', 'orangewizard', 'royal', 'sawyer', 'melter', 'trapper'], res2, { border: border, scanlines: useScanline })
+    slask(toplevelName + '/npc', generateAct2NpcCard, ['angler', 'bluewizard', 'briar', 'dredger', 'dummy', 'greenwizard', 'inspector', 'orangewizard', 'royal', 'sawyer', 'melter', 'trapper', 'prospector'], res2, { border: border, scanlines: useScanline })
     slask(toplevelName + '/backs', generateAct2BackCard, ['common', 'submerged'], res2, { border: border, scanlines: useScanline })
   }
 }
