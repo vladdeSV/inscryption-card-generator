@@ -653,7 +653,7 @@ const act2ResourceMap = {
     'conduitbuffattack': 'sigils/conduitbuffattack.png',
     'conduitenergy': 'sigils/conduitenergy.png',
     'conduithealing': 'sigils/conduithealing.png',
-    'conduitspawner': 'sigils/conduitspawner.png',
+    'conduitfactory': 'sigils/conduitspawner.png',
     'droprubyondeath': 'sigils/droprubyondeath.png',
     'explodeondeath': 'sigils/explodeondeath.png',
     'gainbattery': 'sigils/gainbattery.png',
