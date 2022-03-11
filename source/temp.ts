@@ -742,7 +742,7 @@ const act2CreatureIds: CreatureId[] = [
 
   'PlasmaGunner', 'AboveCurve', 'EnergyConduit', 'TechMoxTriple', 'BombMaiden', 'Shutterbug', 'LeapBot', 'NullConduit',
   'SentryBot', 'SentryBot_Fused', 'MineCart', 'AttackConduit', 'BatteryBot', 'EnergyRoller', 'Insectodrone', 'RoboMice',
-  'Thickbot', 'BoltHound', 'CloserBot', 'Steambot', 'MeatBot', 'Automaton', 'FactoryConduit',
+  'Thickbot', 'BoltHound', 'CloserBot', 'Steambot', 'MeatBot', 'Automaton', 'FactoryConduit', 'Bombbot',
 
   'MoxDualBG', 'MoxDualGO', 'MoxDualOB', 'MasterBleene', 'MasterGoranj', 'MasterOrlu', 'MoxEmerald',
   'MoxRuby', 'MoxSapphire', 'Pupil', 'MarrowMage', 'GreenMage', 'JuniorSage', 'MuscleMage', 'StimMage', 'MageKnight',
