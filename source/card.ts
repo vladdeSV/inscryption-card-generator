@@ -1,6 +1,7 @@
 import { Static, Record, Array, Literal, Union, String, Number, Boolean, InstanceOf } from 'runtypes'
 
 export { Card, Sigil }
+export { Tribe, StatIcon, Decal, Temple, CreatureId }
 
 type Sigil = Static<typeof Sigil>
 type Card = Static<typeof Card>
@@ -379,7 +380,10 @@ const DeathcardPortrait = Record({
 })
 const CustomPortrait = Record({
   type: Literal('custom'),
-  data: InstanceOf(Buffer),
+  data: Record({
+    common: InstanceOf(Buffer).optional(),
+    gbc: InstanceOf(Buffer).optional(),
+  })
 })
 const ResourcePortrait = Record({
   type: Literal('resource'),

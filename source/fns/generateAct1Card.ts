@@ -306,7 +306,12 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
     }
   }
 
-  return execSync(im.build('convert', '-'))
+  const opts: { input?: Buffer } = {}
+  if (card.portrait?.type === 'custom') {
+    opts.input = card.portrait.data.common
+  }
+
+  return execSync(im.build('convert', '-'), opts)
 }
 
 function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource, options: { border?: boolean } = {}): Buffer {
