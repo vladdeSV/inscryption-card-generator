@@ -389,11 +389,11 @@ const Portrait = Union(CreaturePortrait, DeathcardPortrait, CustomPortrait, Reso
 
 const BloodCost = Record({
   type: Literal('blood'),
-  amount: Number.withConstraint(n => [0, 1, 2, 3, 4].includes(n)),
+  amount: Number.withConstraint(n => [1, 2, 3, 4].includes(n)),
 })
 const BoneCost = Record({
   type: Literal('bone'),
-  amount: Number.withConstraint(n => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].includes(n)),
+  amount: Number.withConstraint(n => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].includes(n)),
 })
 const EnergyCost = Record({
   type: Literal('energy'),

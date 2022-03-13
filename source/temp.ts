@@ -810,6 +810,7 @@ function slask<T>(folderName: string, fn: (t: T, r: Resource, opts: any) => Buff
   }
 }
 
+/*
 for (const border of [true, false]) {
   const toplevelName = `act1/${border ? 'border' : 'regular'}`
   slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
@@ -839,6 +840,7 @@ for (const useScanline of [true, false]) {
     slask(toplevelName + '/backs', generateAct2BackCard, ['common', 'submerged'], res2, { border: border, scanlines: useScanline })
   }
 }
+*/
 
 const template: Card = {
   name: '',
