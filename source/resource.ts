@@ -32,7 +32,7 @@ export class Resource {
         console.error(`ERROR: ${category}:${id} '${path}' does not exist`)
       }
 
-      process.exit(1)
+      throw ''
     }
   }
 
@@ -44,13 +44,13 @@ export class Resource {
     const map = this.#data[category]
     if (map === undefined) {
       console.error(`Unrecognized category '${category}'`)
-      process.exit(1)
+      throw ''
     }
 
     const dest = map[id]
     if (dest === undefined) {
       console.error(`Unrecognized id '${category}:${id}'`)
-      process.exit(1)
+      throw ''
     }
 
     return join(this.#path, dest)
