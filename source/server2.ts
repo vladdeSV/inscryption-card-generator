@@ -171,12 +171,20 @@ server.post('/api/card/:act/', (request, reply) => {
   }
 
   const data = ((act) => {
-    if (act === 'leshy') {
-      return generateAct1Card(foo, res, { border: !!query2.border, locale: query2.locale ?? 'en' })
-    } else {
-      return generateAct2Card(foo, res2, { border: query2.border !== undefined, scanlines: query2.scanline !== undefined })
+    try {
+      if (act === 'leshy') {
+        return generateAct1Card(foo, res, { border: query2.border !== undefined, locale: query2.locale ?? 'en' })
+      } else {
+        return generateAct2Card(foo, res2, { border: query2.border !== undefined, scanlines: query2.scanline !== undefined })
+      }
+    } catch {
+      return undefined
     }
   })(act)
+
+  if (data === undefined) {
+    reply.status(422).send({ error: 'Could not generate card with provided data' })
+  }
 
   reply
     .status(201)
@@ -184,7 +192,7 @@ server.post('/api/card/:act/', (request, reply) => {
     .send(data)
 })
 
-server.get('/', (request, reply) => {
+server.get('/', (_, reply) => {
   reply.status(200).send('OK')
 })
 server.listen(8080, (err, address) => {
