@@ -3,9 +3,9 @@
 // -> 422
 
 import express from 'express'
-import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean } from 'runtypes'
+import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { generateAct1Card } from './fns/generateAct1Card'
-import { Card, Tribe, StatIcon, Temple, Sigil, } from './card'
+import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, } from './card'
 import { res, res2 } from './temp'
 import { generateAct2Card } from './fns/generateAct2Card'
 import { Resource } from './resource'
@@ -30,8 +30,13 @@ const ApiCard = RRecord({
   golden: Boolean,
   squid: Boolean,
   fused: Boolean,
-  portraitCommon: String.optional(),
-  portraitGbc: String.optional(),
+  portrait: Record({
+    type: Literal('custom'),
+    data: Record({
+      common: String.optional(),
+      gbc: String.optional(),
+    })
+  }).optional()
 })
 
 const templateApiCard: ApiCard = {
@@ -90,6 +95,17 @@ function convertApiDataToCard(input: ApiCard): Card {
     type = 'rare'
   }
 
+  let portrait: Portrait | undefined = undefined
+  if (input.portrait?.type === 'custom') {
+    portrait = {
+      type: 'custom',
+      data: {
+        common: input.portrait.data.common ? Buffer.from(input.portrait.data.common.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
+        gbc: input.portrait.data.gbc ? Buffer.from(input.portrait.data.gbc.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
+      }
+    }
+  }
+
   const card: Card = {
     type: type,
     name: input.name,
@@ -101,6 +117,7 @@ function convertApiDataToCard(input: ApiCard): Card {
     tribes: input.tribes,
     decals: input.decals,
     cost: cost,
+    portrait: portrait,
     meta: {
       terrain: input.terrain,
       rare: input.rare,

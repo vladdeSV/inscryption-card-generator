@@ -1,10 +1,11 @@
 import { Static, Record, Array, Literal, Union, String, Number, Boolean, InstanceOf } from 'runtypes'
 
 export { Card, Sigil }
-export { Tribe, StatIcon, Decal, Temple, CreatureId }
+export { Tribe, StatIcon, Decal, Temple, CreatureId, Portrait }
 
 type Sigil = Static<typeof Sigil>
 type Card = Static<typeof Card>
+type Portrait = Static<typeof Portrait>
 
 const Sigil = Union(
   Literal('deathtouch'),
