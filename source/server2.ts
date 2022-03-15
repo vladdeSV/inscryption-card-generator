@@ -2,12 +2,13 @@
 // -> 400
 // -> 422
 
-import fastify from 'fastify'
+import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean } from 'runtypes'
 import { generateAct1Card } from './fns/generateAct1Card'
 import { Card, Tribe, StatIcon, Temple, Sigil, } from './card'
 import { res, res2 } from './temp'
 import { generateAct2Card } from './fns/generateAct2Card'
+import { Resource } from './resource'
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -29,13 +30,8 @@ const ApiCard = RRecord({
   golden: Boolean,
   squid: Boolean,
   fused: Boolean,
-})
-
-// act: Union(Literal('leshy'), Literal('gbc')),
-const Meta = RRecord({
-  locale: String.optional(),
-  border: String.optional(),
-  scanline: String.optional(),
+  portraitCommon: String.optional(),
+  portraitGbc: String.optional(),
 })
 
 const templateApiCard: ApiCard = {
@@ -57,15 +53,6 @@ const templateApiCard: ApiCard = {
   golden: false,
   squid: false,
   fused: false,
-}
-
-const server = fastify()
-
-function assertIsObject(obj: unknown): asserts obj is Record<string, unknown> {
-  const isObj = typeof obj === 'object' && !!obj
-  if (!isObj) {
-    throw 'wtf'
-  }
 }
 
 function convertApiDataToCard(input: ApiCard): Card {
@@ -132,74 +119,62 @@ function convertApiDataToCard(input: ApiCard): Card {
   return card
 }
 
+const server = express()
+server.use(express.json())
+
 server.options('/api/card/*/', (_, reply) => {
-  reply.header('Access-Control-Allow-Origin', '*')
-  reply.header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-  reply.header('Access-Control-Allow-Headers', 'Origin, Content-Type')
-  reply.send()
+  reply.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    .header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    .header('Access-Control-Allow-Headers', 'Origin, Content-Type')
+    .send()
 })
 
-// request.params :act
-// request.query ?foo&bar
-server.post('/api/card/:act/', (request, reply) => {
-  reply.header('Access-Control-Allow-Origin', '*')
+server.post('/api/card/:id/', (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-  const { params, query, body } = request
+  const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
+  if (actValidation.success === false) {
+    reply.status(404)
+    reply.send({ error: 'Invalid act', invalid: request.params.id })
+    return
+  }
+  const act = actValidation.value
 
-  let query2
-  try {
-    assertIsObject(params)
-    assertIsObject(body)
-    query2 = Meta.check(query)
-  } catch (e: unknown) {
-    reply.status(500).send({ error: 'Could not parse data', message: e })
+  const border = request.query.border !== undefined
+  const scanline = request.query.scanline !== undefined
+  const locale = request.query.locale ?? 'en'
+
+  const apiCardValidation = ApiCard.validate({ ...templateApiCard, ...request.body })
+  if (apiCardValidation.success === false) {
+    reply.status(400)
+    reply.send({ error: 'Invalid properties', invalid: Object.keys(apiCardValidation.details ?? { '<SERVER ERROR>': '' }) })
     return
   }
 
-  const act = params?.act
-  if (!(act === 'leshy' as const || act === 'gbc' as const)) {
-    reply.status(422).send({ error: `Invalid path '${act ?? '<empty>'}'` })
-    return
-  }
+  const card = convertApiDataToCard(apiCardValidation.value)
+  const options = { border, scanlines: scanline, locale }
 
-  let foo
-  try {
-    foo = convertApiDataToCard(ApiCard.check({ ...templateApiCard, ...body }))
-  } catch (e: unknown) {
-    reply.status(400).send(JSON.stringify({ error: 'Invalid input' }))
-    return
-  }
-
-  const data = ((act) => {
-    try {
-      if (act === 'leshy') {
-        return generateAct1Card(foo, res, { border: query2.border !== undefined, locale: query2.locale ?? 'en' })
-      } else {
-        return generateAct2Card(foo, res2, { border: query2.border !== undefined, scanlines: query2.scanline !== undefined })
-      }
-    } catch {
-      return undefined
+  const generator = ((act): { resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Buffer } => {
+    switch (act) {
+      case 'leshy': return { resource: res, fn: generateAct1Card }
+      case 'gbc': return { resource: res2, fn: generateAct2Card }
     }
   })(act)
 
-  if (data === undefined) {
-    reply.status(422).send({ error: 'Could not generate card with provided data' })
-  }
+  try {
+    const buffer = generator.fn(card, generator.resource, options)
+    reply.status(201)
+    reply.type('image/png')
+    reply.send(buffer)
 
-  reply
-    .status(201)
-    .type('image/png')
-    .send(data)
+    return
+  } catch {
+    reply.status(422)
+    reply.send({ error: 'Unprocessable data' })
+
+    return
+  }
 })
 
-server.get('/', (_, reply) => {
-  reply.status(200).send('OK')
-})
-server.listen(8080, (err, address) => {
-  if (err) {
-    0
-    console.error(err)
-    process.exit(1)
-  }
-  console.log(`Server listening at ${address}`)
-})
+server.get('/', (_, reply) => reply.status(200).send('OK'))
+server.listen(8080, () => console.log('Server running'))

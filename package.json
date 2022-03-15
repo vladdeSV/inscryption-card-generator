@@ -7,10 +7,11 @@
     "generate": "yarn ts-node source/generate_pdf.ts"
   },
   "dependencies": {
-    "fastify": "^3.27.2",
+    "express": "^4.17.3",
     "runtypes": "^6.5.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
