@@ -5,7 +5,7 @@
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { generateAct1Card } from './fns/generateAct1Card'
-import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, } from './card'
+import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
 import { res, res2 } from './temp'
 import { generateAct2Card } from './fns/generateAct2Card'
 import { Resource } from './resource'
@@ -30,21 +30,28 @@ const ApiCard = RRecord({
   golden: Boolean,
   squid: Boolean,
   fused: Boolean,
-  portrait: Union(Record({
-    type: Literal('custom'),
-    data: Record({
-      common: String.optional(),
-      gbc: String.optional(),
+  portrait: Union(
+    Record({
+      type: Literal('custom'),
+      data: Record({
+        common: String.optional(),
+        gbc: String.optional(),
+      })
+    }),
+    Record({
+      type: Literal('deathcard'),
+      data: Record({
+        head: Union(Literal('chief'), Literal('enchantress'), Literal('gravedigger'), Literal('prospector'), Literal('robot'), Literal('settlerman'), Literal('settlerwoman'), Literal('wildling')),
+        eyes: Number,
+        mouth: Number,
+        lostEye: Boolean,
+      })
+    }),
+    Record({
+      type: Literal('creature'),
+      creature: CreatureId,
     })
-  }), Record({
-    type: Literal('deathcard'),
-    data: Record({
-      head: Union(Literal('chief'), Literal('enchantress'), Literal('gravedigger'), Literal('prospector'), Literal('robot'), Literal('settlerman'), Literal('settlerwoman'), Literal('wildling')),
-      eyes: Number,
-      mouth: Number,
-      lostEye: Boolean,
-    })
-  })).optional()
+  ).optional()
 })
 
 const templateApiCard: ApiCard = {
@@ -121,6 +128,11 @@ function convertApiDataToCard(input: ApiCard): Card {
         mouthIndex: input.portrait.data.mouth,
         lostEye: input.portrait.data.lostEye,
       }
+    }
+  } else if (input.portrait?.type === 'creature') {
+    portrait = {
+      type: 'creature',
+      id: input.portrait.creature,
     }
   }
 
