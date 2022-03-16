@@ -30,13 +30,21 @@ const ApiCard = RRecord({
   golden: Boolean,
   squid: Boolean,
   fused: Boolean,
-  portrait: Record({
+  portrait: Union(Record({
     type: Literal('custom'),
     data: Record({
       common: String.optional(),
       gbc: String.optional(),
     })
-  }).optional()
+  }), Record({
+    type: Literal('deathcard'),
+    data: Record({
+      head: Union(Literal('chief'), Literal('enchantress'), Literal('gravedigger'), Literal('prospector'), Literal('robot'), Literal('settlerman'), Literal('settlerwoman'), Literal('wildling')),
+      eyes: Number,
+      mouth: Number,
+      lostEye: Boolean,
+    })
+  })).optional()
 })
 
 const templateApiCard: ApiCard = {
@@ -102,6 +110,16 @@ function convertApiDataToCard(input: ApiCard): Card {
       data: {
         common: input.portrait.data.common ? Buffer.from(input.portrait.data.common.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
         gbc: input.portrait.data.gbc ? Buffer.from(input.portrait.data.gbc.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
+      }
+    }
+  } else if (input.portrait?.type === 'deathcard') {
+    portrait = {
+      type: 'deathcard',
+      data: {
+        headType: input.portrait.data.head,
+        eyesIndex: input.portrait.data.eyes,
+        mouthIndex: input.portrait.data.mouth,
+        lostEye: input.portrait.data.lostEye,
       }
     }
   }
