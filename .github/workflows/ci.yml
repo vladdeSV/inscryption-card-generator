@@ -30,7 +30,7 @@ jobs:
     - name: (test) validate server running
       run: [[ "$(curl -s localhost:80)" = "OK" ]]
     - name: (test) check generate act 1 card
-      run: [[ "$(curl -s -o /dev/null -w "%{http_code}" -d '{}' -X POST localhost:8080/api/card/leshy/)" = "201" ]]
+      run: [[ "$(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/)" = "201" ]]
     - name: stop all container
       run: docker stop $(docker ps -a -q)
 
