@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SERVER_IP: ${{ secrets.SERVER_IP }}
+      SERVER_KEYSCAN: ${{ secrets.SERVER_KEYSCAN }}
     steps:
     - name: checkout code
       uses: actions/checkout@v2
@@ -35,6 +38,28 @@ jobs:
       run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
     - name: stop all container
       run: docker stop $(docker ps -a -q)
+
+    - name: export docker image
+      run: docker save inscryption-card-generator > inscryption-card-generator.tar
+    - name: compress image
+      run: gzip inscryption-card-generator.tar
+
+    - name: init ssh agent
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+    - name: add server to known hosts
+      run: echo "$SERVER_IP ssh-rsa $SERVER_KEYSCAN" >> ~/.ssh/known_hosts
+
+    - name: upload artifact
+      run: scp inscryption-card-generator.tar "ci@$SERVER:/home/ci/"
+    - name: remove previous image
+      run: ssh ci@$SERVER_IP "docker stop inscryption-card-generator && docker image rm inscryption-card-generator"
+    - name: import container and remove artifact
+      run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -d inscryption-card-generator.tar.gz && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
+    - name: run container
+      run: docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
+        
 
 # todo: for later
 # - name: export docker image
