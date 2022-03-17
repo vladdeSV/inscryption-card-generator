@@ -6,10 +6,6 @@ on:
     - feature/ci
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-    - run: which gpg openssl
   build:
     runs-on: ubuntu-latest
     env:
