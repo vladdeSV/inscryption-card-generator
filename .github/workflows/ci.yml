@@ -26,7 +26,7 @@ jobs:
     - name: build & bundle
       run: yarn build
     - name: extract resources
-      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xzf
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
     - name: build docker image
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     - name: run docker image
