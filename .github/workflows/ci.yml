@@ -27,6 +27,8 @@ jobs:
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     - name: run docker image
       run: docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
+    - name: wait for server to start (guess)
+      run: sleep 10
     - name: validate server running
       run: curl localhost:8080
     - name: check generate act 1 card
