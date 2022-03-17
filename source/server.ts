@@ -224,4 +224,9 @@ server.post('/api/card/:id/', (request, reply) => {
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK'))
-server.listen(8080, () => console.log('Server running'))
+const a = server.listen(8080, () => {
+  console.log('Server running')
+  setTimeout(() => {
+    a.close()
+  }, 10000)
+})
