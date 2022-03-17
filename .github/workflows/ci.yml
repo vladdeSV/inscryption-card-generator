@@ -31,8 +31,6 @@ jobs:
       run: sleep 10
     - name: validate server running
       run: curl localhost:8080
-    - name: temp; check output act 1 card
-      run: curl -d '{}' -X POST localhost:8080/api/card/leshy/
     - name: check generate act 1 card
       run: curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/
     - name: stop all container
