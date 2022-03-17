@@ -34,6 +34,8 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: docker-image
-      - name: debug
-        run: ls -la
+      - name: load docker image
+        run: docker load -o inscryption-card-generator.tar inscryption-card-generator
+      - name: run docker image
+        run: docker run -d --rm inscryption-card-generator
     
