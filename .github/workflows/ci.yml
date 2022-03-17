@@ -22,11 +22,13 @@ jobs:
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     - name: export docker image
       run: docker save inscryption-card-generator > inscryption-card-generator.tar
+    - name: compress image
+      run: gzip inscryption-card-generator.tar
     - name: save docker image as artifact
       uses: actions/upload-artifact@v2
       with:
         name: docker-image
-        path: inscryption-card-generator.tar
+        path: inscryption-card-generator.tar.gz
   debug:
     runs-on: ubuntu-latest
     needs: [build]
@@ -34,6 +36,8 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: docker-image
+      - name: decompress image
+        run: gzip -d inscryption-card-generator.tar.gz
       - name: load docker image
         run: docker load -i inscryption-card-generator.tar
       - name: run docker image
