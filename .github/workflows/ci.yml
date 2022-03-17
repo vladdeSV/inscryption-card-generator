@@ -19,7 +19,7 @@ jobs:
     - name: build & bundle
       run: yarn build
     - name: build docker image
-      run: docker build . --file Dockerfile --tag inscryption-card-generator:$(date +%s)
+      run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     - name: export docker image
       run: docker save inscryption-card-generator > inscryption-card-generator.tar
     - name: save docker image as artifact
@@ -37,4 +37,4 @@ jobs:
       - name: load docker image
         run: docker load -i inscryption-card-generator.tar
       - name: run docker image
-        run: docker run -d --rm inscryption-card-generator
+        run: docker run -d --rm inscryption-card-generator:ci
