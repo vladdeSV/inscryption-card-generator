@@ -215,9 +215,9 @@ server.post('/api/card/:id/', (request, reply) => {
     reply.send(buffer)
 
     return
-  } catch {
+  } catch (e) {
     reply.status(422)
-    reply.send({ error: 'Unprocessable data' })
+    reply.send({ error: 'Unprocessable data', message: e })
 
     return
   }

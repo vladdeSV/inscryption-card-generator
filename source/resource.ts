@@ -44,13 +44,13 @@ export class Resource {
     const map = this.#data[category]
     if (map === undefined) {
       console.error(`Unrecognized category '${category}'`)
-      throw ''
+      throw `Unrecognized category '${category}'`
     }
 
     const dest = map[id]
     if (dest === undefined) {
       console.error(`Unrecognized id '${category}:${id}'`)
-      throw ''
+      throw `Unrecognized id '${category}:${id}'`
     }
 
     return join(this.#path, dest)
