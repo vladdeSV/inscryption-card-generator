@@ -20,5 +20,20 @@ jobs:
       run: yarn build
     - name: build docker image
       run: docker build . --file Dockerfile --tag inscryption-card-generator:$(date +%s)
-    - name: debug
-      run: docker images
+    - name: export docker image
+      run: docker save inscryption-card-generator > inscryption-card-generator.tar
+    - name: save docker image as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: inscryption-card-generator.tar
+  debug:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: docker-image
+      - name: debug
+        run: ls -la
+    
