@@ -1,0 +1,22 @@
+name: build+deploy
+
+on:
+  push:
+    branches:
+    - patch/v3
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '17.x'
+    - name: install dependencies
+      run: yarn install --frozen-lockfile
+    - name: build & bundle
+      run: yarn build
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag inscryption-card-generator:$(date +%s)
