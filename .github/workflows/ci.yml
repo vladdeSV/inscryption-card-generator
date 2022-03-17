@@ -27,8 +27,8 @@ jobs:
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     - name: run docker image
       run: docker run --rm -d -p 80:8080 inscryption-card-generator:ci
-    - run: [[ "$(curl -s localhost:80)" = "OK" ]]
-    - run: [[ "$(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/)" = "201" ]]
+    - run: curl localhost:80
+    - run: curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/
     - name: stop all container
       run: docker stop $(docker ps -a -q)
 
