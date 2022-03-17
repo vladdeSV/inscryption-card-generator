@@ -35,7 +35,6 @@ jobs:
         with:
           name: docker-image
       - name: load docker image
-        run: docker load -o inscryption-card-generator.tar inscryption-card-generator
+        run: docker load -i inscryption-card-generator.tar inscryption-card-generator
       - name: run docker image
         run: docker run -d --rm inscryption-card-generator
-    
