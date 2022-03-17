@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "generate": "yarn ts-node source/generate_pdf.ts"
+    "build": "yarn esbuild source/server.ts --outfile=build/bundle.js --platform=node --bundle --minify"
   },
   "dependencies": {
     "express": "^4.17.3",
