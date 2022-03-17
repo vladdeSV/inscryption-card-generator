@@ -52,7 +52,7 @@ jobs:
       run: echo "$SERVER_IP ssh-rsa $SERVER_KEYSCAN" >> ~/.ssh/known_hosts
 
     - name: upload artifact
-      run: scp inscryption-card-generator.tar "ci@$SERVER_IP:/home/ci/"
+      run: scp inscryption-card-generator.tar.gz "ci@$SERVER_IP:/home/ci/"
     - name: remove previous image
       run: ssh ci@$SERVER_IP "docker stop inscryption-card-generator && docker image rm inscryption-card-generator"
     - name: import container and remove artifact
