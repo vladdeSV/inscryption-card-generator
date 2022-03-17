@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
     steps:
     - name: checkout code
       uses: actions/checkout@v2
@@ -22,6 +20,8 @@ jobs:
     - name: build & bundle
       run: yarn build
     - name: extract resources
+      env:
+        ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
       run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
     - name: build docker image
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
@@ -33,7 +33,6 @@ jobs:
       run: if [ $(curl -s localhost:8080) != "OK" ]; then exit 1; fi
     - name: check generate act 1 card
       run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
-       
     - name: stop all container
       run: docker stop $(docker ps -a -q)
 
