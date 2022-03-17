@@ -1,3 +1,5 @@
 FROM node:17.7-slim
-COPY ["./build/bundle.js", "resource", "resource-gbc", "./"]
+COPY ["./build/bundle.js", "./"]
+COPY ["resource", "resource"]
+COPY ["resource-gbc", "resource-gbc"]
 CMD ["node", "./bundle.js"]
