@@ -54,6 +54,7 @@ jobs:
         path: inscryption-card-generator.tar.gz.gpg
 
   test-local-docker:
+    runs-on: ubuntu-latest
     needs: [build]
     steps:
     - name: download docker image
@@ -78,7 +79,8 @@ jobs:
       run: docker stop $(docker ps -a -q)
 
   deploy:
-    needs: [build, test, test-local-docker]
+    runs-on: ubuntu-latest
+    needs: [test-local-docker]
     env:
       SERVER_IP: ${{ secrets.SERVER_IP }}
       SERVER_KEYSCAN: ${{ secrets.SERVER_KEYSCAN }}
