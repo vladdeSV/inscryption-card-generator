@@ -55,8 +55,8 @@ jobs:
       run: scp inscryption-card-generator.tar.gz "ci@$SERVER_IP:/home/ci/"
     - name: remove previous image
       run: |
-        ssh ci@$SERVER_IP "docker stop inscryption-card-generator || echo No container running. Skipping..."
-        ssh ci@$SERVER_IP "docker image rm inscryption-card-generator || No previous image exists. Skipping..."
+        ssh ci@$SERVER_IP "docker stop inscryption-card-generator || echo 'No container running. Skipping...'"
+        ssh ci@$SERVER_IP "docker image rm inscryption-card-generator || echo 'No previous image exists. Skipping...'"
     - name: import container and remove artifact
       run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -d inscryption-card-generator.tar.gz && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
     - name: run container
