@@ -6,7 +6,7 @@ on:
     - feature/ci
 
 jobs:
-  tests:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: checkout code
