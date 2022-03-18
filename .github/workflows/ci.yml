@@ -69,13 +69,13 @@ jobs:
       run: docker load -i inscryption-card-generator.tar
     - name: run containers
       run: |
-        docker run --rm -d -p 80:8080 inscryption-card-generator:ci
+        docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
     - name: wait for server to start (guess)
       run: sleep 5
     - name: validate server running
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost) != 200 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
     - name: check generate act 1 card
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost/api/card/leshy/) != 201 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
     - name: stop all container
       run: docker stop $(docker ps -a -q)
 
