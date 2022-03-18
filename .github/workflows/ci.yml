@@ -3,7 +3,7 @@ name: build+deploy
 on:
   push:
     branches:
-    - patch/v3
+    - main
 
 jobs:
   test:
