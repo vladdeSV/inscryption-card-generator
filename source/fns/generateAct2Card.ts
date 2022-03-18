@@ -43,11 +43,16 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
   im.resource(res.get('card', cardType))
 
   // portrait
-  if (card.portrait?.type === 'creature') {
+  if (card.portrait) {
     im.gravity('NorthWest')
-      .resource(res.get('portrait', card.portrait.id))
-      .geometry(1, 1)
-      .composite()
+
+    if (card.portrait.type === 'creature') {
+      im.parens(IM().resource(res.get('portrait', card.portrait.id)))
+    } else if (card.portrait.type === 'custom' && card.portrait.data.gbc) {
+      im.parens(IM().resource('-'))
+    }
+
+    im.geometry(1, 1).composite()
   }
 
   // staticon or power
@@ -134,7 +139,12 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
   // resize
   im.resizeExt(g => g.scale(scale * 100))
 
-  return execSync(im.build('convert', '-'))
+  const opts: { input?: Buffer } = {}
+  if (card.portrait?.type === 'custom') {
+    opts.input = card.portrait.data.gbc
+  }
+
+  return execSync(im.build('convert', '-'), opts)
 }
 
 function extendedBorder(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
