@@ -4,18 +4,23 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "generate": "yarn ts-node source/generate_pdf.ts"
+    "build": "yarn esbuild source/server.ts --outfile=build/bundle.js --platform=node --bundle --minify"
   },
   "dependencies": {
-    "fastify": "^3.24.0",
-    "runtypes": "^6.5.0"
+    "express": "^4.17.3",
+    "runtypes": "^6.5.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
     "esbuild": "^0.14.1",
     "eslint": "^8.6.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   }

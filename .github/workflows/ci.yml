@@ -1,0 +1,111 @@
+name: build+deploy
+
+on:
+  push:
+    branches:
+    - patch/v3
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    - name: install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '17.x'
+    - name: install dependencies
+      run: yarn install --frozen-lockfile
+    - name: build & bundle
+      run: yarn jest
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    - name: install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '17.x'
+    - name: install dependencies
+      run: yarn install --frozen-lockfile
+    - name: build & bundle
+      run: yarn build
+    - name: extract resources
+      env:
+        ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
+    - name: build docker image
+      run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
+    - name: export docker image
+      run: docker save inscryption-card-generator > inscryption-card-generator.tar
+    - name: compress image
+      run: gzip inscryption-card-generator.tar
+    - name: encrypt docker image
+      env:
+        ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -c inscryption-card-generator.tar.gz
+    - name: archive encrypted compressed docker image
+      uses: actions/upload-artifact@v3
+      with:
+        name: encrypted-compressed-docker-image
+        path: inscryption-card-generator.tar.gz.gpg
+
+  test-local-docker:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+    - name: download docker image
+      uses: actions/download-artifact@v3
+      with:
+        name: encrypted-compressed-docker-image
+    - name: decrypt and decompress docker image
+      env:
+        ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d inscryption-card-generator.tar.gz.gpg | gzip -d > inscryption-card-generator.tar
+    - name: load docker image
+      run: docker load -i inscryption-card-generator.tar
+    - name: run docker image
+      run: docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
+    - name: wait for server to start (guess)
+      run: sleep 10
+    - name: validate server running
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
+    - name: check generate act 1 card
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
+    - name: stop all container
+      run: docker stop $(docker ps -a -q)
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test-local-docker, test]
+    env:
+      SERVER_IP: ${{ secrets.SERVER_IP }}
+      SERVER_KEYSCAN: ${{ secrets.SERVER_KEYSCAN }}
+    steps:
+    - name: init ssh agent
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+    - name: add server to known hosts
+      run: echo "$SERVER_IP ssh-rsa $SERVER_KEYSCAN" >> ~/.ssh/known_hosts
+    - name: download docker image
+      uses: actions/download-artifact@v3
+      with:
+        name: encrypted-compressed-docker-image
+    - name: decrypt and decompress docker image
+      env:
+        ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d inscryption-card-generator.tar.gz.gpg > inscryption-card-generator.tar.gz
+    - name: upload artifact
+      run: scp inscryption-card-generator.tar.gz "ci@$SERVER_IP:/home/ci/"
+    - name: remove previous image
+      run: |
+        ssh ci@$SERVER_IP 'docker stop $(docker ps -a -q) || echo "No container running. Skipping..."'
+        ssh ci@$SERVER_IP "docker image rm inscryption-card-generator || echo 'No previous image exists. Skipping...'"
+    - name: import container and remove artifact
+      run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -d inscryption-card-generator.tar.gz && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
+    - name: run container
+      run: ssh ci@$SERVER_IP "docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
