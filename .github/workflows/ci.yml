@@ -80,7 +80,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [test-local-docker]
+    needs: [test-local-docker, test]
     env:
       SERVER_IP: ${{ secrets.SERVER_IP }}
       SERVER_KEYSCAN: ${{ secrets.SERVER_KEYSCAN }}
