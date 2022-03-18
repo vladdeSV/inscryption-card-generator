@@ -98,7 +98,7 @@ jobs:
     - name: decrypt and decompress docker image
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
-      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d inscryption-card-generator.tar.gz.gpg
+      run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d inscryption-card-generator.tar.gz.gpg > inscryption-card-generator.tar.gz
     - name: upload artifact
       run: scp inscryption-card-generator.tar.gz "ci@$SERVER_IP:/home/ci/"
     - name: remove previous image
