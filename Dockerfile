@@ -11,6 +11,5 @@ RUN apt install -y imagemagick nginx
 
 # copy nginx conf
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN service nginx start
 
-CMD node ./bundle.js
+CMD service nginx start && node ./bundle.js
