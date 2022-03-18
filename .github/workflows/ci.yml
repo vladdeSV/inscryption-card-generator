@@ -69,13 +69,13 @@ jobs:
       run: docker load -i inscryption-card-generator.tar
     - name: run containers
       run: |
-        docker run --rm -d -p 80:80 -p 4001:8080 inscryption-card-generator:ci
+        docker run --rm -d -p 80:80 inscryption-card-generator:ci
     - name: wait for server to start (guess)
       run: sleep 10
     - name: validate server running
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:80) != 200 ]; then exit 1; fi
     - name: check generate act 1 card
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:80/api/card/leshy/) != 201 ]; then exit 1; fi
     - name: stop all container
       run: docker stop $(docker ps -a -q)
 
@@ -109,4 +109,4 @@ jobs:
     - name: import container and remove artifact
       run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -d inscryption-card-generator.tar.gz && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
     - name: run containers
-      run: ssh ci@$SERVER_IP "docker run --rm -d -p 80:80 -p 4001:8080 inscryption-card-generator:ci"
+      run: ssh ci@$SERVER_IP "docker run --rm -d -p 80:80 inscryption-card-generator:ci"
