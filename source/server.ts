@@ -224,4 +224,4 @@ server.post('/api/card/:id/', (request, reply) => {
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK'))
-server.listen(8080, () => console.log('Server running'))
+server.listen(8080, '127.0.0.1', () => console.log('Server running'))
