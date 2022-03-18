@@ -7,9 +7,6 @@ COPY resource-gbc resource-gbc
 
 # install dependencies
 RUN apt update
-RUN apt install -y imagemagick nginx
-
-# copy nginx conf
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN apt install -y imagemagick
 
 CMD service nginx start && node ./bundle.js
