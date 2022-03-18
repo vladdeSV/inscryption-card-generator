@@ -6,7 +6,7 @@ on:
     - feature/ci
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     - name: checkout code
       uses: actions/checkout@v2
