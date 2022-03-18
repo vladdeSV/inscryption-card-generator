@@ -18,6 +18,7 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: build & bundle
       run: yarn jest
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +52,7 @@ jobs:
         name: encrypted-compressed-docker-image
         path: inscryption-card-generator.tar.gz.gpg
 
-  test local docker:
+  test-local-docker:
     needs: [build]
     steps:
     - name: download docker image
@@ -76,7 +77,7 @@ jobs:
       run: docker stop $(docker ps -a -q)
 
   deploy:
-    needs: [build, test, test local docker]
+    needs: [build, test, test-local-docker]
     env:
       SERVER_IP: ${{ secrets.SERVER_IP }}
       SERVER_KEYSCAN: ${{ secrets.SERVER_KEYSCAN }}
