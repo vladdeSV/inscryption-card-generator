@@ -170,14 +170,14 @@ const server = express()
 server.use(express.json())
 
 server.options('/api/card/*/', (_, reply) => {
-  reply.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  reply.header('Access-Control-Allow-Origin', '*')
     .header('Access-Control-Allow-Methods', 'POST, OPTIONS')
     .header('Access-Control-Allow-Headers', 'Origin, Content-Type')
     .send()
 })
 
 server.post('/api/card/:id/', (request, reply) => {
-  reply.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  reply.header('Access-Control-Allow-Origin', '*')
 
   const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
   if (actValidation.success === false) {
