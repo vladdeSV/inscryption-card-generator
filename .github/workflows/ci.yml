@@ -28,6 +28,8 @@ jobs:
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
       run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
+    - name: download imagemagick binary
+      run: curl https://download.imagemagick.org/ImageMagick/download/binaries/magick -o magick
     - name: build docker image
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     
