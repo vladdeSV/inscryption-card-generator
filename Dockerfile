@@ -8,5 +8,6 @@ COPY magick /usr/local/bin
 
 # alias for magick
 RUN ln -s /usr/local/bin/magick /usr/local/bin/convert
+RUN PATH=/usr/local/bin:$PATH
 
 CMD node ./bundle.js
