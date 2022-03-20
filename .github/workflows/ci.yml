@@ -111,6 +111,8 @@ jobs:
       run: ssh ci@$SERVER_IP "docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
 
   cleanup:
+    runs-on: ubuntu-latest
+    needs: [deploy]
     if: always()
     steps:
       - name: remove artifact
