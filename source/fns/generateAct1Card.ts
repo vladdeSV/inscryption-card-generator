@@ -163,7 +163,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   }
 
   if (card.sigils.length === 1) {
-    const sigilPath = res.get('sigil', card.sigils[0])
+    const sigilPath = res.has('sigil', card.sigils[0]) ? res.get('sigil', card.sigils[0]) : res.get('sigil', 'missing')
     im.parens(
       IM(sigilPath)
         .interpolate('Nearest')
@@ -174,8 +174,8 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
       .geometry(221 + terrainLayoutXoffset, 733)
       .composite()
   } else if (card.sigils.length === 2) {
-    const sigilPath1 = res.get('sigil', card.sigils[0])
-    const sigilPath2 = res.get('sigil', card.sigils[1])
+    const sigilPath1 = res.has('sigil', card.sigils[0]) ? res.get('sigil', card.sigils[0]) : res.get('sigil', 'missing')
+    const sigilPath2 = res.has('sigil', card.sigils[1]) ? res.get('sigil', card.sigils[1]) : res.get('sigil', 'missing')
 
     im.filter('Box')
 

@@ -97,12 +97,12 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
     }
 
     if (sigil !== 'conduitnull') {
-      im.resource(res.get('sigil', sigil)).gravity('North').geometry(0, 31 + sigilYOffset).composite()
+      im.resource(res.get('sigil', sigil, 'missing')).gravity('North').geometry(0, 31 + sigilYOffset).composite()
     }
   } else if (card.sigils.length >= 2) {
     im.gravity('NorthWest')
-    im.resource(res.get('sigil', card.sigils[0])).geometry(4, 31).composite()
-    im.resource(res.get('sigil', card.sigils[1])).geometry(22, 31).composite()
+    im.resource(res.get('sigil', card.sigils[0], 'missing')).geometry(4, 31).composite()
+    im.resource(res.get('sigil', card.sigils[1], 'missing')).geometry(22, 31).composite()
   }
 
   // fused
