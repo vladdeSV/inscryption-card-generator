@@ -9,4 +9,4 @@ COPY resource-gbc resource-gbc
 RUN apt update
 RUN apt install -y imagemagick
 
-CMD export NODE_ENV=production; node ./bundle.js
+CMD node ./bundle.js
