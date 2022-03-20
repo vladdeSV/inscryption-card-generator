@@ -40,13 +40,13 @@ export class Resource {
     return this.#data[category]?.[id] !== undefined
   }
 
-  public get(category: string, id: string): string {
+  public get(category: string, id: string, defaultResourceId?: string): string {
     const map = this.#data[category]
     if (map === undefined) {
       throw `Unrecognized category '${category}'`
     }
 
-    const dest = map[id]
+    const dest = map[id] ?? (defaultResourceId ? map[defaultResourceId] : undefined)
     if (dest === undefined) {
       throw `Unrecognized id '${category}:${id}'`
     }
