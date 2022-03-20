@@ -224,4 +224,9 @@ server.post('/api/card/:id/', (request, reply) => {
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK'))
-server.listen(8080, () => console.log('Server running'))
+
+if (process.env.NODE_ENV === 'development') {
+  server.listen(8080, () => console.log('Server running (development mode, allow requests from anywhere)'))
+} else {
+  server.listen(8080, 'localhost', () => console.log('Server running (host: localhost)'))
+}
