@@ -33,14 +33,12 @@ jobs:
     
     - name: run docker image
       run: docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
-    - name: (test) install nginx and proxy_pass 80:8080
-      run: sudo echo "server { listen 80; location / { proxy_pass http://127.0.0.1:8080; } }" > /etc/nginx/sites-available/default && sudo service nginx restart
     - name: wait for server to start (guess)
       run: sleep 10
     - name: validate server running
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost) != 200 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
     - name: check generate act 1 card
-      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost/api/card/leshy/) != 201 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
     - name: stop all container
       run: docker stop $(docker ps -a -q)
     - name: export docker image
