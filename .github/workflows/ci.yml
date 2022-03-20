@@ -117,4 +117,5 @@ jobs:
     steps:
       - name: remove artifact
         uses: geekyeggo/delete-artifact@v1
-        with: encrypted-compressed-docker-image
+        with:
+          name: encrypted-compressed-docker-image
