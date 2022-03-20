@@ -34,7 +34,7 @@ jobs:
     - name: run docker image
       run: docker run --rm -d -p 8080:8080 inscryption-card-generator:ci
     - name: (test) install nginx and proxy_pass 80:8080
-      run: sudo echo "server { listen 80; location / { proxy_pass http://127.0.0.1:8080; } }" > /etc/nginx/sites-enabled/host.conf && sudo service nginx start
+      run: sudo mkdir -p /etc/nginx/sites-enabled/ && ls -la /etc/nginx/sites-enabled/ && sudo echo "server { listen 80; location / { proxy_pass http://127.0.0.1:8080; } }" > /etc/nginx/sites-enabled/host.conf && sudo service nginx start
     - name: wait for server to start (guess)
       run: sleep 10
     - name: validate server running
