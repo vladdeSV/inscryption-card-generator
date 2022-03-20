@@ -52,6 +52,7 @@ jobs:
       with:
         name: encrypted-compressed-docker-image
         path: inscryption-card-generator.tar.gz.gpg
+        retention-days: 1
 
   test-local-docker:
     runs-on: ubuntu-latest
