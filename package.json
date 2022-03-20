@@ -4,7 +4,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "yarn esbuild source/server.ts --outfile=build/bundle.js --platform=node --bundle --minify"
+    "build": "yarn esbuild source/server.ts --outfile=build/bundle.js --platform=node --bundle --minify",
+    "encrypt-resources": "tar -cz resource resource-gbc | gpg -co resources.tar.gz.gpg",
+    "decrypt-resources": "gpg -d resources.tar.gz.gpg | tar -xz"
   },
   "dependencies": {
     "express": "^4.17.3",
