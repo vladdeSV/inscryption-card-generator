@@ -111,7 +111,7 @@ function convertApiDataToCard(input: ApiCard): Card {
   }
 
   let portrait: Portrait | undefined = undefined
-  if (input.portrait?.type === 'custom') {
+  if (input.portrait?.type === 'custom' && (input.portrait.data.common || input.portrait.data.gbc)) {
     portrait = {
       type: 'custom',
       data: {
