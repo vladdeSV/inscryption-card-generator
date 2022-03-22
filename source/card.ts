@@ -473,8 +473,8 @@ const DeathcardPortrait = Record({
   type: Literal('deathcard'),
   data: Record({
     headType: Union(Literal('chief'), Literal('enchantress'), Literal('gravedigger'), Literal('prospector'), Literal('robot'), Literal('settlerman'), Literal('settlerwoman'), Literal('wildling')),
-    mouthIndex: Number.withConstraint(n => [0, 1, 2, 3, 4, 5].includes(n)),
     eyesIndex: Number.withConstraint(n => [0, 1, 2, 3, 4, 5].includes(n)),
+    mouthIndex: Number.withConstraint(n => [0, 1, 2, 3, 4, 5].includes(n)),
     lostEye: Boolean,
   })
 })
