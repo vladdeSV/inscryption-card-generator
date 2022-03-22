@@ -97,7 +97,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
         costPath = res.get('cost', a)
       }
     } else {
-      throw new Error(`debug: unsupported cost type '${costType}', remove this error message later`)
+      // throw new Error(`debug: unsupported cost type '${costType}', remove this error message later`)
     }
 
     if (costPath) {
