@@ -41,9 +41,9 @@ describe('geometry misc', () => {
   })
 
   test('flag', () => {
-    const validFlags = ['!', '<', '^', '>', '#']
+    const validFlags = ['!', '<', '^', '>', '#'] as const
     for (const flag of validFlags) {
-      expect(new Geometry().flag(flag as any).toString()).toStrictEqual(flag)
+      expect(new Geometry().flag(flag).toString()).toStrictEqual(flag)
     }
 
     const invalidFlags = ['!<', '@', '>>', 1]
