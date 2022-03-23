@@ -36,7 +36,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
         break
       }
       case 'custom': {
-        im.resource('-')
+        im.parens(IM('-').resizeExt(g => g.size(114, 94).flag('>')))
         break
       }
       case 'deathcard': {

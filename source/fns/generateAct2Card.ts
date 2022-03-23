@@ -48,11 +48,18 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
 
     if (card.portrait.type === 'creature') {
       im.parens(IM().resource(res.get('portrait', card.portrait.id)))
+        .geometry(1, 1)
     } else if (card.portrait.type === 'custom' && card.portrait.data.gbc) {
-      im.parens(IM().resource('-'))
+      im.parens(
+        IM('-')
+          .filter('Point')
+          .gravity('North')
+          .interpolate('Nearest')
+          .resizeExt(g => g.size(41, 28).flag('>'))
+      ).geometry(0, 1)
     }
 
-    im.geometry(1, 1).composite()
+    im.composite()
   }
 
   // staticon or power
