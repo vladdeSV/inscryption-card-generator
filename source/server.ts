@@ -167,7 +167,7 @@ function convertApiDataToCard(input: ApiCard): Card {
 }
 
 const server = express()
-server.use(express.json())
+server.use(express.json({ limit: 2 * 10e6 }))
 
 server.options('/api/card/*/', (_, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
