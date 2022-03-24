@@ -1,14 +1,13 @@
 import { Resource } from './resource'
-import { Card } from './card'
+import { Card, CreatureId, StatIcon } from './card'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
-import { convertJsonCard } from './jsoncard'
-import { CreatureId, foo } from './parsecard'
 import * as path from 'path'
 import { generateAct2BackCard, generateAct2Card, generateAct2NpcCard, Npc } from './fns/generateAct2Card'
 import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
+import { convertJldrCard, JldrCreature, CreatureId as JldrCreatureId } from './jldrcard'
 
-type Act1Resource = {
-  card: Record<Card['type'], string>,
+export type Act1Resource = {
+  card: Record<'common' | 'rare' | 'terrain', string>,
   cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', string>,
   cardbackground: Record<'common' | 'rare' | 'special' | 'terrain', string>,
   cardboon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
@@ -18,14 +17,14 @@ type Act1Resource = {
   cost: Record<string, string>,
   boon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
   deathcard: Record<string, string>,
-  tribe: Record<Card['tribes'][number], string>,
+  tribe: Record<Exclude<Card['tribes'][number], 'squirrel'>, string>,
   misc: Record<string, string>,
-  staticon: Record<'ants' | 'bell' | 'cardsinhand' | 'mirror', string>,
+  staticon: Record<Exclude<StatIcon, 'greengems'>, string>,
   font: Record<string, string>,
   sigil: Record<string /* Card['sigils'][number] */, string>,
   portrait: Record<string, string>
   emission: Record<string, string>
-  decal: Record<Card['decals'][number], string>
+  decal: Record<string, string>
 }
 
 const act1ResourceMap: Act1Resource = {
@@ -156,6 +155,9 @@ const act1ResourceMap: Act1Resource = {
     'bell': 'staticons/bell.png',
     'cardsinhand': 'staticons/cardsinhand.png',
     'mirror': 'staticons/mirror.png',
+
+    'bones': 'missing_sigil.png',
+    'sacrificesthisturn': 'missing_sigil.png',
   },
   'font': {
     'default': 'fonts/HEAVYWEIGHT.otf',
@@ -784,13 +786,18 @@ function getGameTranslationId(id: string | undefined): string | undefined {
 export const res = new Resource('resource', act1ResourceMap)
 export const res2 = new Resource('resource-gbc', act2ResourceMap)
 
-const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
-const jsonCards = textChunks.map(foo)
-const cards: Card[] = jsonCards.map(convertJsonCard)
+const creatures = JSON.parse(readFileSync('creatures.json', 'utf-8'))
 
-const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
-const act1CreatureIds: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Boulder', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking', 'FrozenOpossum', 'Tree_SnowCovered', 'Tree', 'Stump']
-const act2CreatureIds: CreatureId[] = [
+if (!Array.isArray(creatures)) {
+  throw 'creatures not array'
+}
+
+const jldrCreatures = creatures.map(JldrCreature.check)
+// const cards: Card[] = jldrCreatures.map(convertJldrCard)
+
+// const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
+const act1CreatureIds: JldrCreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Boulder', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking', 'FrozenOpossum', 'Tree_SnowCovered', 'Tree', 'Stump']
+const act2CreatureIds: JldrCreatureId[] = [
   'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
   'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
   'Wolf', 'Adder', 'Bloodhound', 'Elk', 'FieldMouse', 'Hawk', 'Raven', 'Salmon', 'FieldMouse_Fused', 'Grizzly',
@@ -811,64 +818,65 @@ const act2CreatureIds: CreatureId[] = [
   'Starvation', 'BurrowingTrap', 'Kingfisher', 'Opossum', 'Coyote', 'MoxTriple',
 ]
 
-const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as CreatureId ?? ''))
-const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as CreatureId ?? ''))
+const specifiedCreatureIds = [...act1CreatureIds, ...act2CreatureIds]
+console.log('missing creature ids', jldrCreatures.map(x => x.name).filter(id => !specifiedCreatureIds.includes(id)))
 
-const getCard = (gameId: string) => cards.filter(card => card.gameId === gameId)[0]
+// const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as JldrCreatureId ?? ''))
+// const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as JldrCreatureId ?? ''))
 
-const starvation = getCard('Starvation')
-starvation.flags.hideHealth = true
-starvation.flags.hidePower = true
+// const getCard = (gameId: string) => cards.filter(card => card.gameId === gameId)[0]
 
-act1Cards.push({
-  ...getCard('Goat'),
-  portrait: {
-    type: 'resource',
-    resourceId: 'goat_sexy'
-  }
-})
+// const starvation = getCard('Starvation')
+// starvation.flags.hidePowerAndHealth = true
 
-act1Cards.forEach(card => {
-  let gameId = card.gameId
+// act1Cards.push({
+//   ...getCard('Goat'),
+//   portrait: {
+//     type: 'resource',
+//     resourceId: 'goat_sexy'
+//   }
+// })
 
-  if (gameId === 'Tree_SnowCovered') {
-    gameId = 'Tree_Hologram_SnowCovered'
-  }
+// act1Cards.forEach(card => {
+//   let gameId = card.gameId
 
-  const translationId = getGameTranslationId(gameId)
-  if (translationId) {
-    const name = translations['en'][translationId]
-    if (name === undefined) {
-      console.log('found no translation for', card.gameId)
-    }
+//   if (gameId === 'Tree_SnowCovered') {
+//     gameId = 'Tree_Hologram_SnowCovered'
+//   }
 
-    card.name = name
-  }
+//   const translationId = getGameTranslationId(gameId)
+//   if (translationId) {
+//     const name = translations['en'][translationId]
+//     if (name === undefined) {
+//       console.log('found no translation for', card.gameId)
+//     }
 
-  if (card.gameId === '!DEATHCARD_LESHY') {
-    card.meta.rare = true
-    card.type = 'rare'
-  }
-})
+//     card.name = name
+//   }
 
-function slask<T>(folderName: string, fn: (t: T, r: Resource, opts: any) => Buffer, arr: T[], res: Resource, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
-  const folderpath = path.join('out', folderName)
-  mkdirSync(folderpath, { recursive: true })
+//   if (card.gameId === '!DEATHCARD_LESHY') {
+//     card.flags.rare = true
+//   }
+// })
 
-  for (const id of arr) {
-    const filename = filenameGenerator(id) ?? id
-    const filepath = path.join(folderpath, filename + '.png')
-    if (existsSync(filepath)) {
-      console.log('skipping', `${folderName}/${filename}`)
+// function slask<T, T2>(folderName: string, fn: (t: T, r: Resource<T2>, opts: any) => Buffer, arr: T[], res: Resource<T2>, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
+//   const folderpath = path.join('out', folderName)
+//   mkdirSync(folderpath, { recursive: true })
 
-      continue
-    }
+//   for (const id of arr) {
+//     const filename = filenameGenerator(id) ?? id
+//     const filepath = path.join(folderpath, filename + '.png')
+//     if (existsSync(filepath)) {
+//       console.log('skipping', `${folderName}/${filename}`)
 
-    const buffer = fn(id, res, options)
-    writeFileSync(filepath, buffer)
-    console.log('generated', `${folderName}/${filename}`)
-  }
-}
+//       continue
+//     }
+
+//     const buffer = fn(id, res, options)
+//     writeFileSync(filepath, buffer)
+//     console.log('generated', `${folderName}/${filename}`)
+//   }
+// }
 
 /*
 for (const border of [true, false]) {
@@ -904,16 +912,13 @@ for (const useScanline of [true, false]) {
 
 const template: Card = {
   name: '',
-  type: 'common',
   cost: undefined,
   power: 0,
   health: 0,
   sigils: [],
   tribes: [],
   temple: 'nature',
-  decals: [],
-  flags: { enhanced: false, fused: false, golden: false, squid: false, terrain: false, hidePower: false, hideHealth: false },
-  meta: { rare: false, terrain: false }
+  flags: { smoke: false, blood: false, golden: false, rare: false, terrain: false, terrainLayout: false, squid: false, enhanced: false, redEmission: false, fused: false, paint: false, hidePowerAndHealth: false },
 }
 
-// writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: false, locale: 'en' }))
+writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: true, locale: 'en' }))
