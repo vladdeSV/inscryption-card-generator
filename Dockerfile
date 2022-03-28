@@ -5,8 +5,8 @@ COPY build/bundle.js creatures.txt translations.json ./
 COPY resource resource
 COPY resource-gbc resource-gbc
 
-# install dependencies
-RUN apt update
-RUN apt install -y imagemagick
+# install correct version of imagemagick
+RUN apt update && apt install -y wget
+RUN t=$(mktemp) && wget 'https://dist.1-2.dev/imei.sh' -qO "$t" && bash "$t" && rm "$t"
 
 CMD node ./bundle.js
