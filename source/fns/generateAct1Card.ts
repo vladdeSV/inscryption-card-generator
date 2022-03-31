@@ -81,7 +81,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
 
   // tribes
   const tribePositions: [number, number][] = [[-12, 3], [217, 5], [444, 7], [89, 451], [344, 452]]
-  for (const [index, tribe] of card.tribes.entries()) {
+  for (const [index, tribe] of card.tribes.filter(tribe => tribe !== 'squirrel').entries()) {
     const tribeLocation = res.get('tribe', tribe)
     const position = tribePositions[index]
 
