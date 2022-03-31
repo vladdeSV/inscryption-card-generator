@@ -1,7 +1,7 @@
 import { existsSync } from 'fs'
 import { normalize, join } from 'path'
 
-export class Resource<T extends { [s: string]: { [s: string]: string } }> {
+export class Resource<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
   constructor(sourcePath: string, input: T) {
     this.#path = normalize(sourcePath)
     this.#data = input
