@@ -1,0 +1,8125 @@
+[
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "BountyHunter"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "Big Hunter",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!BOUNTYHUNTER_BASE",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!BUILDACARD_BASE",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 99,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!CORRUPTED",
+    "displayedName": "!CORRUPTED",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "Greater Shade",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!DEATHCARD_BASE",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!DEATHCARD_LESHY",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!DEATHCARD_PIXEL_BASE",
+    "displayedName": "Amalgam",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!DEATHCARD_VICTORY",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait",
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!FRIENDCARD_BASE",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Giant",
+      "Uncuttable"
+    ],
+    "specialAbilities": [
+      "GiantCard",
+      "GiantMoon"
+    ],
+    "abilities": [
+      "Reach",
+      "AllStrike",
+      "SquirrelOrbit"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 40,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!GIANTCARD_MOON",
+    "displayedName": "The Moon",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "GiantAnimatedPortrait",
+      "MoonParticleEffects"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Giant",
+      "Uncuttable"
+    ],
+    "specialAbilities": [
+      "GiantCard",
+      "GiantShip"
+    ],
+    "abilities": [
+      "Reach",
+      "AllStrike",
+      "MadeOfStone"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 80,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!GIANTCARD_SHIP",
+    "displayedName": "The Limoncello",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": [
+      "GiantAnimatedPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitNull"
+    ],
+    "defaultEvolutionName": "",
+    "iceCubeName": "MeatBot",
+    "flipPortraitForStrafe": false,
+    "energyCost": 4,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!INSPECTOR",
+    "displayedName": "Inspector",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "IceCube"
+    ],
+    "defaultEvolutionName": "",
+    "iceCubeName": "MeatBot",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!MELTER",
+    "displayedName": "Melter",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 0,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!MYCOCARD_BASE",
+    "displayedName": "Mycobot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 9,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "!MYCO_OLD_DATA",
+    "displayedName": "9182344890109280129",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 9,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [
+      "RandomCard"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "!STATIC!GLITCH",
+    "displayedName": "",
+    "description": "01100100 01100101 01100101 01110000 01100010 01100101 01101110 01100101 01100001 01110100 01101000",
+    "hideAttackAndHealth": true,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "StaticGlitch"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 4,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "AboveCurve",
+    "displayedName": "Curve Hopper",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [
+      "KillsSurvivors"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Deathtouch"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Adder",
+    "displayedName": "Adder",
+    "description": "The caustic Adder. Damage from its poison bite is always lethal.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BuffEnemy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "AlarmBot",
+    "displayedName": "Alarm Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BuffNeighbours"
+    ],
+    "defaultEvolutionName": "Omega",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Alpha",
+    "displayedName": "Alpha",
+    "description": "The venerable Alpha. Its courage emboldens the creatures that stand beside it.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird",
+      "Canine",
+      "Hooved",
+      "Reptile",
+      "Insect",
+      "Squirrel"
+    ],
+    "traits": [
+      "Ant"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Amalgam",
+    "displayedName": "Amalgam",
+    "description": "Canine. Hooved. Reptilian. Feathered. Insectoid. The Amalgam is all.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "RandomAbility"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Amoeba",
+    "displayedName": "Amoeba",
+    "description": "The amorphous Amoeba. Its sigils are ever changing.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "RandomAbility"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Amoebot",
+    "displayedName": "Amoebot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle",
+      "BuffEnemy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Angler_Fish_Bad",
+    "displayedName": "Bad Fish",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Sentry",
+      "Sharp",
+      "Sniper",
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Angler_Fish_Good",
+    "displayedName": "Good Fish",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawRandomCardOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Angler_Fish_More",
+    "displayedName": "More Fish",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "TalkingCardChooser"
+    ],
+    "abilities": [
+      "DrawRandomCardOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": true,
+    "name": "Angler_Talking",
+    "displayedName": "Fishbot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "BuffEnemy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "AnnoyTower",
+    "displayedName": "Annoy FM",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Ants",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Ant"
+    ],
+    "specialAbilities": [
+      "Ant"
+    ],
+    "abilities": [],
+    "evolveIntoName": "AntQueen",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Ant",
+    "displayedName": "Worker Ant",
+    "description": "Ah, the diligent Ant. Its strength is proportionate to the size of its colony.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Ants",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Ant"
+    ],
+    "specialAbilities": [
+      "Ant"
+    ],
+    "abilities": [
+      "Flying"
+    ],
+    "evolveIntoName": "AntQueen",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "AntFlying",
+    "displayedName": "Flying Ant",
+    "description": "The Flying Ant. Its diligence is matched only by its grounded cousin.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Ants",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Ant"
+    ],
+    "specialAbilities": [
+      "Ant"
+    ],
+    "abilities": [
+      "DrawAnt"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "AntQueen",
+    "displayedName": "Ant Queen",
+    "description": "The Regal Ant Queen. She births a new Ant once played.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Squirrel"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "AquaSquirrel",
+    "displayedName": "Aquasquirrel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitBuffAttack"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "AttackConduit",
+    "displayedName": "Buff Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Automaton",
+    "displayedName": "Automaton",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "BaitBucket",
+    "displayedName": "Bait Bucket",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout",
+      "AlternatingBloodDecal"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Banshee",
+    "displayedName": "Banshee",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Blind"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Bat",
+    "displayedName": "Bat",
+    "description": "The meddlesome Bat. A minor terror.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode",
+      "GBCPlayable",
+      "GBCPack",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GainBattery"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "BatteryBot",
+    "displayedName": "Energy Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "CreateDams"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 4,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Beaver",
+    "displayedName": "Beaver",
+    "description": "The industrious Beaver. When played it constructs Dams adjacent to it.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Bee",
+    "displayedName": "Bee",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Structure"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "BeesOnHit"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Beehive",
+    "displayedName": "Beehive",
+    "description": "The inviolable Beehive. When it is attacked you will draw a Bee.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GuardDog"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Bloodhound",
+    "displayedName": "Bloodhound",
+    "description": "The dauntless Bloodhound. It leaps to oppose new creatures when they are played.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GemsDraw"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "BlueMage",
+    "displayedName": "Blue Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Fused"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GemsDraw",
+      "GemsDraw"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "BlueMage_Fused",
+    "displayedName": "Blue Sporemage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "TalkingCardChooser"
+    ],
+    "abilities": [
+      "MoveBeside"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": true,
+    "name": "BlueMage_Talking",
+    "displayedName": "Lonely Wizbot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPlayable",
+      "GBCPack",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GuardDog"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "BoltHound",
+    "displayedName": "Bolthound",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BombSpawner"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "BombMaiden",
+    "displayedName": "Mrs. Bomb",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "ChoiceNode",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ExplodeOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Bombbot",
+    "displayedName": "Explode Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GuardDog"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 7,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Bonehound",
+    "displayedName": "Bonehound",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedEnergyToBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 3,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "BonelordHorn",
+    "displayedName": "Bone Lord's Horn",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedStatsUp"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Bonepile",
+    "displayedName": "Bone Heap",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Boulder",
+    "displayedName": "Boulder",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 6,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "BridgeRailing",
+    "displayedName": "Bridge Rails",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "ExplodeOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "BrokenBot",
+    "displayedName": "Broken Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "BrokenEgg",
+    "displayedName": "Broken Egg",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "StrafeSwap"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Bull",
+    "displayedName": "Wild Bull",
+    "description": "The reckless Wild Bull. Anything in its path is flung over its ponderous skull.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Bullfrog",
+    "displayedName": "Bullfrog",
+    "description": "The watchful Bullfrog. It leaps in the way of attacking flyers.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Blind",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "WhackAMole",
+      "SteelTrap"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "BurrowingTrap",
+    "displayedName": "Burrowing Trap",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawVesselOnHit"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "BustedPrinter",
+    "displayedName": "Busted 3D Printer",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Deathtouch"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CXformerAdder",
+    "displayedName": "ADD3R",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe"
+    ],
+    "evolveIntoName": "Moose",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CXformerElk",
+    "displayedName": "3LK",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CXformerRaven",
+    "displayedName": "RAV3N",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "CXformerWolf",
+    "displayedName": "W07F",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [
+      "Structure",
+      "Terrain",
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [
+      "CagedWolf"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 6,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": true,
+    "name": "CagedWolf",
+    "displayedName": "Caged Wolf",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DeleteFile"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CaptiveFile",
+    "displayedName": "Captive File",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 9,
+    "bloodCost": 1,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "CardMergeStones",
+    "displayedName": "The Stones",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "Cat"
+    ],
+    "abilities": [
+      "Sacrificial"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Cat",
+    "displayedName": "Cat",
+    "description": "The undying Cat. Sacrificing the poor beast does not kill it.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Undead"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 6,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CatUndead",
+    "displayedName": "Undead Cat",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "CellBuffSelf"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "CellBuff",
+    "displayedName": "Tough Cell",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "CellDrawRandomCardOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "CellGift",
+    "displayedName": "Kind Cell",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "CellTriStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 4,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "CellTri",
+    "displayedName": "Splinter Cell",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPack",
+      "GBCPlayable",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SplitStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "CloserBot",
+    "displayedName": "Double Gunner",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawCopyOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Cockroach",
+    "displayedName": "Cockroach",
+    "description": "The unkillable Cockroach. It returns to your hand after dying.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "BrokenCoinLeft"
+    ],
+    "abilities": [
+      "Sharp"
+    ],
+    "evolveIntoName": "Mummy",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 3,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "CoinLeft",
+    "displayedName": "Broken Obol",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "BrokenCoinRight"
+    ],
+    "abilities": [
+      "QuadrupleBones"
+    ],
+    "evolveIntoName": "Mummy",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 3,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "CoinRight",
+    "displayedName": "Broken Obol",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitNull"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "ConduitTower",
+    "displayedName": "Conduit Tower",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Coyote",
+    "displayedName": "Coyote",
+    "description": "The meager Coyote. But what did you expect for only four bones?",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "CreateEgg"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Cuckoo",
+    "displayedName": "Cuckoo",
+    "description": "That infanticidal Cuckoo... It chokes up the board with the broken eggs of its victims.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "DUMMY_5-5",
+    "displayedName": "",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 5,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "God Dam",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Dam",
+    "displayedName": "Dam",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [
+      "Daus"
+    ],
+    "abilities": [
+      "CreateBells"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Daus",
+    "displayedName": "The Daus",
+    "description": "That filthy feral hog... It becomes incensed when its chimes are struck.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "DausBell",
+    "displayedName": "Chime",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawNewHand"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 5,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "DeadHand",
+    "displayedName": "Dead Hand",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "TripleBlood",
+      "Sacrificial"
+    ],
+    "defaultEvolutionName": "",
+    "iceCubeName": "Skeleton",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 6,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "DeadPets",
+    "displayedName": "Pharaoh's Pets",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "DeadTree",
+    "displayedName": "Dead Tree",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "DefaultTail",
+    "displayedName": "Tail",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DoubleStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 5,
+    "bloodCost": 3,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "DireWolf",
+    "displayedName": "Dire Wolf",
+    "description": "The unrelenting Dire Wolf. Those lucky enough to survive its first attack may expect another...",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BoneDigger",
+      "Evolve"
+    ],
+    "evolveIntoName": "DireWolf",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "DireWolfCub",
+    "displayedName": "Dire Wolf Pup",
+    "description": "The loyal Dire Wolf Pup. The bone it digs up will be the first of many to meet its teeth.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "IceCube"
+    ],
+    "defaultEvolutionName": "",
+    "iceCubeName": "Skeleton",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 1,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Draugr",
+    "displayedName": "Draugr",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge",
+      "Deathtouch"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "DrownedSoul",
+    "displayedName": "Drowned Soul",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe"
+    ],
+    "evolveIntoName": "Moose",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 4,
+    "bloodCost": 2,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Elk",
+    "displayedName": "Elk",
+    "description": "The flighty Elk. It moves after attacking.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe",
+      "Evolve"
+    ],
+    "evolveIntoName": "Elk",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "ElkCub",
+    "displayedName": "Elk Fawn",
+    "description": "The nascent Fawn. It quickly grows into an Elk.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "EmptyVessel",
+    "displayedName": "Empty Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemBlue"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "EmptyVessel_BlueGem",
+    "displayedName": "Sapphire Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemGreen"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "EmptyVessel_GreenGem",
+    "displayedName": "Emerald Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemOrange"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "EmptyVessel_OrangeGem",
+    "displayedName": "Ruby Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitEnergy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "EnergyConduit",
+    "displayedName": "Energy Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedRandomPowerEnergy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "EnergyRoller",
+    "displayedName": "Gamblobot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitFactory"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "FactoryConduit",
+    "displayedName": "Factory Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "QuadrupleBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Family",
+    "displayedName": "The Walkers",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "FeedsStoat"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawCopy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "FieldMouse",
+    "displayedName": "Field Mice",
+    "description": "Hm. The licentious Field Mice. You will draw a copy when they are played.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Fused"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawCopy",
+      "DrawCopy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "FieldMouse_Fused",
+    "displayedName": "Spore Mice",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "FlyingMage",
+    "displayedName": "Hover Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "PreventAttack"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "ForceMage",
+    "displayedName": "Force Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "iceCubeName": "Skeleton",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 5,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "FrankNStein",
+    "displayedName": "Frank & Stein",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "IceCube"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "FrozenOpossum",
+    "displayedName": "Frozen Opossum",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Geck",
+    "displayedName": "Geck",
+    "description": "The uninspiring Geck. Perhaps you can find a use for it?",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ExplodeGems"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "GemExploder",
+    "displayedName": "Gem Detonator",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GemDependant"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "GemFiend",
+    "displayedName": "Gem Fiend",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "GemRipper",
+    "displayedName": "Gembound Ripper",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ShieldGems"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "GemShielder",
+    "displayedName": "Gem Guardian",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitSpawnGems"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "GemsConduit",
+    "displayedName": "Gems Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge",
+      "SkeletonStrafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "GhostShip",
+    "displayedName": "Ghost Ship",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawRandomCardOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "GiftBot",
+    "displayedName": "Gift Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [
+      "Goat"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "TripleBlood"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Goat",
+    "displayedName": "Black Goat",
+    "description": "The apotheosized Goat. The truest offering. Sacrificing it grants three blood.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "SexyGoat"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "GoldNugget",
+    "displayedName": "Gold Nugget",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "GoldEmission",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BoneDigger"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 1,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Gravedigger",
+    "displayedName": "Gravedigger",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Fused"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "BoneDigger",
+      "BoneDigger"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 1,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Gravedigger_Fused",
+    "displayedName": "Sporedigger",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Green"
+    ],
+    "specialStatIcon": "GreenGems",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "GreenMage"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "GreenMage",
+    "displayedName": "Green Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 6,
+    "bloodCost": 3,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Grizzly",
+    "displayedName": "Grizzly",
+    "description": "The monstrous Grizzly. Its form speaks enough of its efficacy.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 4,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Hawk",
+    "displayedName": "Hawk",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "Strafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 13,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "HeadlessHorseman",
+    "displayedName": "Headless Horseman",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 5,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitHeal"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "HealerConduit",
+    "displayedName": "Heal Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GainAttackOnKill"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 5,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Hodag",
+    "displayedName": "Hodag",
+    "description": "The hellacious Hodag! Its ever-rising power does not fall after a battle.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge",
+      "GainBattery"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Hrokkall",
+    "displayedName": "Hrokkall",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird",
+      "Canine",
+      "Hooved",
+      "Reptile",
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SplitStrike",
+      "TriStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 1,
+    "tailName": "SkinkTail",
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Hydra",
+    "displayedName": "Hydra",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "HydraEgg"
+    ],
+    "defaultEvolutionName": "Extra Curious Egg",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 1,
+    "tailName": "SkinkTail",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "HydraEgg",
+    "displayedName": "Curious Egg",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground",
+      "DynamicPortrait",
+      "DefaultEmission"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "Shapeshifter"
+    ],
+    "abilities": [
+      "PreventAttack"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "Ijiraq",
+    "displayedName": "Ijiraq",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 4,
+    "appearanceBehaviour": [
+      "RareCardBackground",
+      "RedEmission"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach",
+      "WhackAMole"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 6,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Ijiraq_UnlockScreen",
+    "displayedName": "Mole Man?",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPack",
+      "GBCPlayable",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Insectodrone",
+    "displayedName": "Insectodrone",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [
+      "JerseyDevil"
+    ],
+    "abilities": [
+      "Sacrificial"
+    ],
+    "defaultEvolutionName": "Child 14",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "JerseyDevil",
+    "displayedName": "Child 13",
+    "description": "Poor abandoned child. It does not die when sacrificed... but do you have the heart to try?",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Green"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "JuniorSage",
+    "displayedName": "Junior Sage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "Submerge"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Kingfisher",
+    "displayedName": "Kingfisher",
+    "description": "The adept Kingfisher. A slippery hunter.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SubmergeSquid"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Kraken",
+    "displayedName": "Great Kraken",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Bones",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [
+      "Lammergeier"
+    ],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 4,
+    "bloodCost": 3,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Lammergeier",
+    "displayedName": "Lammergeier",
+    "description": "The voracious Lammergeier. Its power scales in proportion to your Bones.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "LatchExplodeOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "LatcherBomb",
+    "displayedName": "Bomb Latcher",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "LatchBrittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "LatcherBrittle",
+    "displayedName": "Skel-e-latcher",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "LatchDeathShield"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "LatcherShield",
+    "displayedName": "Shield Latcher",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "ChoiceNode",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "LeapBot",
+    "displayedName": "L33pB0t",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach",
+      "FileSizeDamage"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Librarian",
+    "displayedName": "Librarian",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Lice"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "DoubleStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 4,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Lice",
+    "displayedName": "Pelt Lice",
+    "description": "The underestimated Pelt Lice. An inescapable aspect of the fur trade.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GemDependant"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "MageKnight",
+    "displayedName": "Mage Knight",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "Blind"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "CorpseEater"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 5,
+    "tailName": "Tail_Insect",
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Maggots",
+    "displayedName": "Corpse Maggots",
+    "description": "The inevitable maggot. They will lurch forth from your hand when your creatures are killed.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "Tutor"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Magpie",
+    "displayedName": "Magpie",
+    "description": "The covetous Magpie. It can fetch any card in your deck.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SplitStrike"
+    ],
+    "evolveIntoName": "MantisGod",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Mantis",
+    "displayedName": "Mantis",
+    "description": "The fervid Mantis. Its prying claws strike both to the left and right.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "TriStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Insect",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MantisGod",
+    "displayedName": "Mantis God",
+    "description": "The holy Mantis God. A perfect incarnation of terror.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Green"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedStatsUp"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MarrowMage",
+    "displayedName": "Gourmage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [
+      "Green",
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedSacrificeDrawCards"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MasterBleene",
+    "displayedName": "Master Bleene",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [
+      "Green",
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GemDependant"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 6,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MasterGoranj",
+    "displayedName": "Master Goranj",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [
+      "Orange",
+      "Blue"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "Loot"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MasterOrlu",
+    "displayedName": "Master Orlu",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Morsel"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "tailName": "Tail_Insect",
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MealWorm",
+    "displayedName": "Mealworm",
+    "description": "The delectable Mealworm. Does your mouth not water at the sight?",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "TripleBlood"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "MeatBot",
+    "displayedName": "M3atB0t",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPlayable",
+      "ChoiceNode",
+      "ChoiceNode",
+      "GBCPack"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MineCart",
+    "displayedName": "49er",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Blind"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "WhackAMole"
+    ],
+    "evolveIntoName": "MoleMan",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 4,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Mole",
+    "displayedName": "Mole",
+    "description": "The omnipresent Mole. It burrows and emerges to block any landborn attacker.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Blind"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "WhackAMole",
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 6,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MoleMan",
+    "displayedName": "Mole Man",
+    "description": "The stalwart Mole Man. The ultimate defense.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Blind"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "WhackAMole",
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 8,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MoleSeaman",
+    "displayedName": "Mole Seaman",
+    "description": "The stalwart Mole Man. The ultimate defense.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "WhackAMole"
+    ],
+    "evolveIntoName": "MoleMan",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Mole_Telegrapher",
+    "displayedName": "Mole",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "StrafePush"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 7,
+    "bloodCost": 3,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Moose",
+    "displayedName": "Moose Buck",
+    "description": "The regal Moose. The creatures of the wild make way for it.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Evolve"
+    ],
+    "evolveIntoName": "Mothman_Stage2",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Mothman_Stage1",
+    "displayedName": "Strange Larva",
+    "description": "A largely unimpressive specimen.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Evolve"
+    ],
+    "evolveIntoName": "Mothman_Stage3",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Mothman_Stage2",
+    "displayedName": "Strange Pupa",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "Final Form",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Mothman_Stage3",
+    "displayedName": "Mothman",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 7,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemBlue",
+      "GainGemGreen"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MoxDualBG",
+    "displayedName": "Bleene's Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemGreen",
+      "GainGemOrange"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MoxDualGO",
+    "displayedName": "Goranj's Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemOrange",
+      "GainGemBlue"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MoxDualOB",
+    "displayedName": "Orlu's Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemGreen"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "MoxEmerald",
+    "displayedName": "Emerald Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemOrange"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "MoxRuby",
+    "displayedName": "Ruby Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemBlue"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "MoxSapphire",
+    "displayedName": "Sapphire Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain",
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemTriple"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 9,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "MoxTriple",
+    "displayedName": "Magnus Mox",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DeathShield"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "SkinkTail",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MudTurtle",
+    "displayedName": "Mud Turtle",
+    "description": "The adamantine Mud Turtle. Its shell can stop any attack... once.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [
+      "Uncuttable"
+    ],
+    "specialAbilities": [
+      "PackMule"
+    ],
+    "abilities": [
+      "Strafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Mule",
+    "displayedName": "Pack Mule",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 8,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Mummy",
+    "displayedName": "Mummy Lord",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "evolveIntoName": "MoleMan",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 4,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Mummy_Telegrapher",
+    "displayedName": "Mummy Lord",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 3,
+    "appearanceBehaviour": [
+      "DynamicPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Green"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "StrafePush"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "MuscleMage",
+    "displayedName": "Muscle Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DoubleDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 3,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Necromancer",
+    "displayedName": "Necromancer",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ConduitNull"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "NullConduit",
+    "displayedName": "Null Conduit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "Awesome Opossum",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Opossum",
+    "displayedName": "Opossum",
+    "description": "The resourceful Opossum. A small creature for a small price.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "BuffGems"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "OrangeMage",
+    "displayedName": "Orange Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Otter",
+    "displayedName": "River Otter",
+    "description": "Ah, the elusive Otter. It submerges itself during my turn.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [
+      "SatisfiesRingTrial"
+    ],
+    "specialAbilities": [
+      "Ouroboros"
+    ],
+    "abilities": [
+      "DrawCopyOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "SkinkTail",
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": true,
+    "name": "Ouroboros",
+    "displayedName": "Ouroboros",
+    "description": "The eternal serpent. Death strengthens it [c:bR]forever[c:].",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "Ouroboros"
+    ],
+    "abilities": [
+      "DrawCopyOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "tailName": "SkinkTail",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": true,
+    "name": "Ouroboros_Part3",
+    "displayedName": "Ourobot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "RandomConsumable"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "PackRat",
+    "displayedName": "Pack Rat",
+    "description": "The prudent Pack Rat. Never doubt the utility of a well stocked pack.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Pelt"
+    ],
+    "specialAbilities": [
+      "SpawnLice"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "PeltGolden",
+    "displayedName": "Golden Pelt",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "GoldEmission",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Pelt"
+    ],
+    "specialAbilities": [
+      "SpawnLice"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "PeltHare",
+    "displayedName": "Rabbit Pelt",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Pelt"
+    ],
+    "specialAbilities": [
+      "SpawnLice"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "PeltWolf",
+    "displayedName": "Wolf Pelt",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedDealDamage"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "PlasmaGunner",
+    "displayedName": "Plasma Jimmy",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Sharp"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Porcupine",
+    "displayedName": "Porcupine",
+    "description": "The ornery Porcupine. Sharp quills await those who dare attack it.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "PracticeMage",
+    "displayedName": "Practice Wizard",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "PracticeMageSmall",
+    "displayedName": "Practice Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe",
+      "SplitStrike"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Pronghorn",
+    "displayedName": "Pronghorn",
+    "description": "The sadistic Pronghorn. Woe be to those that meet the end of its antlers.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GemDependant"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Pupil",
+    "displayedName": "Mage Pupil",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Rabbit",
+    "displayedName": "Rabbit",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "OpponentBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Raccoon",
+    "displayedName": "Raccoon",
+    "description": "The thieving Raccoon! It gathers the bones of my creatures for you.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "QuadrupleBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "RatKing",
+    "displayedName": "Rat King",
+    "description": "The tragic Rat King. When their tangled bodies become corpses you will gain four bones.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 6,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Rattler",
+    "displayedName": "Rattler",
+    "description": "The nefarious Rattler. A brittle creature... once past its monstrous fangs.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Raven",
+    "displayedName": "Raven",
+    "description": "The conniving Raven. A blight upon the skies.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Evolve"
+    ],
+    "evolveIntoName": "Raven",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "RavenEgg",
+    "displayedName": "Raven Egg",
+    "description": "A nascent Raven. It is no less conniving in its incubation.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "SacrificesThisTurn",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [
+      "SacrificesThisTurn"
+    ],
+    "abilities": [
+      "Strafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "RedHart",
+    "displayedName": "Red Hart",
+    "description": "The bloodthirsty Red Hart. Its power grows as blood is spilled...",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 3,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Revenant",
+    "displayedName": "Revenant",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "SatisfiesRingTrial",
+      "KillsSurvivors",
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": true,
+    "name": "RingWorm",
+    "displayedName": "Ring Worm",
+    "description": "The underappreciated Ring Worm. Its value is not readily apparent...",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawCopy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 4,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "RoboMice",
+    "displayedName": "Steel Mice",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "RoboSkeleton",
+    "displayedName": "ExeSkeleton",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Orange"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "DropRubyOnDeath"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "RubyGolem",
+    "displayedName": "Ruby Golem",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge",
+      "Strafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Salmon",
+    "displayedName": "Salmon",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Evolve"
+    ],
+    "evolveIntoName": "Mummy",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Sarcophagus",
+    "displayedName": "Sarcophagus",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemOrange",
+      "GainGemGreen"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "SentinelBlue",
+    "displayedName": "Goranj's Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemBlue",
+      "GainGemOrange"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "SentinelGreen",
+    "displayedName": "Orlu's Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemGreen",
+      "GainGemBlue"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 2,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "SentinelOrange",
+    "displayedName": "Bleene's Vessel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "GBCPack",
+      "GBCPlayable",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Sentry"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SentryBot",
+    "displayedName": "Sentry Drone",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Fused"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Sentry",
+      "Sentry"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 1,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SentryBot_Fused",
+    "displayedName": "Sentry Spore",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge"
+    ],
+    "defaultEvolutionName": "Greater White",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 3,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Shark",
+    "displayedName": "Great White",
+    "description": "The tyrannical Great White. The master of the deep.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 4,
+    "appearanceBehaviour": [
+      "AlternatingBloodDecal"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DeathShield"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Shieldbot",
+    "displayedName": "Shieldbot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "Rare",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Deathtouch",
+      "Sentry"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Shutterbug",
+    "displayedName": "Shutterbug",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Skeleton",
+    "displayedName": "Skeleton",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle",
+      "GemDependant"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "SkeletonMage",
+    "displayedName": "Skelemagus",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 4,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying",
+      "Brittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SkeletonParrot",
+    "displayedName": "Zombie Parrot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Brittle"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SkeletonPirate",
+    "displayedName": "Skeleton Crew",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "TailOnHit"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "SkinkTail",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Skink",
+    "displayedName": "Skink",
+    "description": "The tenacious Skink. It moves over when attacked, leaving its tail behind.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "SkinkTail",
+    "displayedName": "Wriggling Tail",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DebuffEnemy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": true,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Skunk",
+    "displayedName": "Skunk",
+    "description": "The reviled Skunk. Its stench reduces the strength of the enemy.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "QuadrupleBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Smoke",
+    "displayedName": "The Smoke",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "QuadrupleBones"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Smoke_Improved",
+    "displayedName": "Greater Smoke",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Smoke_NoBones",
+    "displayedName": "The Smoke",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 6,
+    "bloodCost": 2,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Snapper",
+    "displayedName": "River Snapper",
+    "description": "The stalwart Snapper. A near impenetrable defense.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [
+      "KillsSurvivors"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Strafe",
+      "Deathtouch"
+    ],
+    "defaultEvolutionName": "Longer Elk",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 4,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": true,
+    "name": "Snelk",
+    "displayedName": "Long Elk",
+    "description": "I have no words for this freak of nature.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "AddSnelkDecals",
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Hooved"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "Longer Elk",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Snelk_Neck",
+    "displayedName": "Vertebrae",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Sniper"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Sniper",
+    "displayedName": "Sniper Bot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Bird",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Sparrow",
+    "displayedName": "Sparrow",
+    "description": "The meek Sparrow. An inexpensive, if feeble, flying creature.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Bell",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "BellProximity"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 2,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SquidBell",
+    "displayedName": "Bell Tentacle",
+    "description": "Hm. I don't recall making that one...",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "CardsInHand",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "CardsInHand"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SquidCards",
+    "displayedName": "Hand Tentacle",
+    "description": "Did I do that?",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "Mirror",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [
+      "Mirror"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SquidMirror",
+    "displayedName": "Mirror Tentacle",
+    "description": "I'm... Actually I'm not sure what that is.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Squirrel"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Squirrel",
+    "displayedName": "Squirrel",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SquirrelStrafe"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SquirrelBall",
+    "displayedName": "Squirrel Ball",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "PreventAttack"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Starvation",
+    "displayedName": "Starvation",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Steambot",
+    "displayedName": "Steambot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [
+      "Green"
+    ],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedStatsUpEnergy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "StimMage",
+    "displayedName": "Stim Mage",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Wizard",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Insect"
+    ],
+    "traits": [
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [
+      "TalkingCardChooser"
+    ],
+    "abilities": [
+      "DebuffEnemy"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": true,
+    "name": "Stinkbug_Talking",
+    "displayedName": "Stinkbug",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "AnimatedPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Stoat",
+    "displayedName": "Stoat",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [
+      "TalkingCardChooser"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 1,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": true,
+    "name": "Stoat_Talking",
+    "displayedName": "Stoat",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "AnimatedPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Stump",
+    "displayedName": "Stump",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Part3Random",
+      "ChoiceNode"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "SwapStats"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "SwapBot",
+    "displayedName": "Swapbot",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Submerge",
+      "Evolve"
+    ],
+    "evolveIntoName": "Bullfrog",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "SkinkTail",
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Tadpole",
+    "displayedName": "Tadpole",
+    "description": "Ha! The wimpish Tadpole. Its future as a Bullfrog is meager compensation.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tail_Bird",
+    "displayedName": "Tail Feathers",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tail_Furry",
+    "displayedName": "Furry Tail",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tail_Insect",
+    "displayedName": "Wriggling Leg",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Gem"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "GainGemTriple"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "TechMoxTriple",
+    "displayedName": "Mox Module",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable",
+      "GBCPack"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Thickbot",
+    "displayedName": "Thick Droid",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "ActivatedDrawSkeleton"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "TombRobber",
+    "displayedName": "Tomb Robber",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "PreventAttack"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 5,
+    "bloodCost": 0,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "TombStone",
+    "displayedName": "Tombstone",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach",
+      "SteelTrap"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Trap",
+    "displayedName": "Leaping Trap",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Reptile"
+    ],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [
+      "TrapSpawner"
+    ],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "TrapFrog",
+    "displayedName": "Strange Frog",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": [
+      "TerrainBackground"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Tree",
+    "displayedName": "Grand Fir",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tree_Hologram",
+    "displayedName": "Ancient Fir",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tree_Hologram_SnowCovered",
+    "displayedName": "Snowy Fir",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "HologramPortrait"
+    ]
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [
+      "Structure",
+      "Terrain"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Reach"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Tree_SnowCovered",
+    "displayedName": "Snowy Fir",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": [
+      "TerrainBackground",
+      "TerrainLayout"
+    ]
+  },
+  {
+    "metaCategories": [
+      "Rare",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 7,
+    "bloodCost": 4,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Urayuli",
+    "displayedName": "Urayuli",
+    "description": "This level of brutish strength needs no explanation...",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 7,
+    "appearanceBehaviour": [
+      "RareCardBackground"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Bird"
+    ],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Flying"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 8,
+    "tailName": "Tail_Bird",
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Simple",
+    "onePerDeck": false,
+    "name": "Vulture",
+    "displayedName": "Turkey Vulture",
+    "description": "The pernicious Vulture. A tyrant of the skies.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "DrawRabbits"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "Warren",
+    "displayedName": "Warren",
+    "description": "The bountiful Warren. It spawns a rabbit when it is played.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [
+      "Wolf"
+    ],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 2,
+    "bloodCost": 2,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Wolf",
+    "displayedName": "Wolf",
+    "description": "The proud Wolf. A vicious contender.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 3,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "GBCPack",
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [
+      "Wolf"
+    ],
+    "specialAbilities": [],
+    "abilities": [
+      "Evolve"
+    ],
+    "evolveIntoName": "Wolf",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "tailName": "Tail_Furry",
+    "baseHealth": 1,
+    "bloodCost": 1,
+    "cardComplexity": "Intermediate",
+    "onePerDeck": false,
+    "name": "WolfCub",
+    "displayedName": "Wolf Cub",
+    "description": "The young Wolf Cub. It grows into a Wolf after a single turn.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [
+      "Canine"
+    ],
+    "traits": [
+      "DeathcardCreationNonOption"
+    ],
+    "specialAbilities": [
+      "TalkingCardChooser"
+    ],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 1,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": true,
+    "name": "Wolf_Talking",
+    "displayedName": "Stunted Wolf",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 2,
+    "appearanceBehaviour": [
+      "AnimatedPortrait"
+    ]
+  },
+  {
+    "metaCategories": [
+      "ChoiceNode",
+      "TraderOffer",
+      "AscensionUnlock"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "GainAttackOnKill"
+    ],
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 5,
+    "tailName": "Tail_Furry",
+    "baseHealth": 3,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "Wolverine",
+    "displayedName": "Wolverine",
+    "description": "The relentless Wolverine. Its hunger only grows greater as it kills.",
+    "hideAttackAndHealth": false,
+    "temple": "Nature",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer",
+      "Flying"
+    ],
+    "evolveIntoName": "XformerBatBot",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerBatBeast",
+    "displayedName": "S0N1A",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer"
+    ],
+    "evolveIntoName": "XformerBatBeast",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 3,
+    "bonesCost": 0,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerBatBot",
+    "displayedName": "S0N1A",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer"
+    ],
+    "evolveIntoName": "XformerGrizzlyBot",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerGrizzlyBeast",
+    "displayedName": "GR1ZZ",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 4,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer"
+    ],
+    "evolveIntoName": "XformerGrizzlyBeast",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 6,
+    "bonesCost": 0,
+    "baseHealth": 4,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerGrizzlyBot",
+    "displayedName": "GR1ZZ",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 0,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer",
+      "Sharp"
+    ],
+    "evolveIntoName": "XformerPorcupineBot",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerPorcupineBeast",
+    "displayedName": "QU177",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "Part3Random"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [
+      "Transformer"
+    ],
+    "evolveIntoName": "XformerPorcupineBeast",
+    "evolveTurns": 1,
+    "defaultEvolutionName": "",
+    "flipPortraitForStrafe": false,
+    "energyCost": 5,
+    "bonesCost": 0,
+    "baseHealth": 2,
+    "bloodCost": 0,
+    "cardComplexity": "Advanced",
+    "onePerDeck": false,
+    "name": "XformerPorcupineBot",
+    "displayedName": "QU177",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Tech",
+    "baseAttack": 2,
+    "appearanceBehaviour": []
+  },
+  {
+    "metaCategories": [
+      "GBCPlayable"
+    ],
+    "gemsCost": [],
+    "specialStatIcon": "None",
+    "tribes": [],
+    "traits": [],
+    "specialAbilities": [],
+    "abilities": [],
+    "defaultEvolutionName": "",
+    "iceCubeName": "Skeleton",
+    "flipPortraitForStrafe": false,
+    "energyCost": 0,
+    "bonesCost": 2,
+    "baseHealth": 1,
+    "bloodCost": 0,
+    "cardComplexity": "Vanilla",
+    "onePerDeck": false,
+    "name": "Zombie",
+    "displayedName": "Zombie",
+    "description": "",
+    "hideAttackAndHealth": false,
+    "temple": "Undead",
+    "baseAttack": 1,
+    "appearanceBehaviour": []
+  }
+]

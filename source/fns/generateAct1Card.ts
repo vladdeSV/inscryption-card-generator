@@ -5,12 +5,13 @@ import IM from '../im'
 import { Card } from '../card'
 import { execSync } from 'child_process'
 import { getGemCostResourceId } from './helpers'
+import { Act1Resource } from '../temp'
 
 const originalCardHeight = 190 // px
 const fullsizeCardHeight = 1050 // px
 const scale = fullsizeCardHeight / originalCardHeight
 
-function generateAct1Card(card: Card, res: Resource, options: { border?: boolean, locale?: string } = {}): Buffer {
+function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { border?: boolean, locale?: string } = {}): Buffer {
   const im = IM()
 
   // parts are shifted if having terrain card layout
@@ -22,8 +23,18 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
     .background('None')
     .filter('Box')
 
+  let type: 'common' | 'rare' | 'terrain' = 'common'
+
+  if (card.flags.terrain) {
+    type = 'terrain'
+  }
+
+  if (card.flags.rare) {
+    type = 'rare'
+  }
+
   // load card
-  im.resource(res.get('card', card.type))
+  im.resource(res.get('card', type))
 
   if (card.portrait?.type) {
     switch (card.portrait?.type) {
@@ -70,7 +81,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
 
   // tribes
   const tribePositions: [number, number][] = [[-12, 3], [217, 5], [444, 7], [89, 451], [344, 452]]
-  for (const [index, tribe] of card.tribes.entries()) {
+  for (const [index, tribe] of card.tribes.filter(tribe => tribe !== 'squirrel').entries()) {
     const tribeLocation = res.get('tribe', tribe)
     const position = tribePositions[index]
 
@@ -117,7 +128,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   }
 
   // health
-  if (!card.flags.hideHealth) {
+  if (!card.flags.hidePowerAndHealth) {
     const healthWidth = 114
     const healthHeight = 215
     im.parens(
@@ -144,7 +155,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
     ).geometry(5, 705)
       .composite()
   } else if (card.power !== undefined) {
-    const drawPower = !(card.power === 0 && card.flags.terrain || card.flags.hidePower)
+    const drawPower = !(card.power === 0 && card.flags.terrain || card.flags.hidePowerAndHealth)
     if (drawPower) {
       const w = 114
       const h = 215
@@ -235,7 +246,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   }
 
   if (options.border) {
-    const backgroundPath = res.get('cardbackground', (card.type === 'rare') ? 'rare' : (card.type === 'terrain' ? 'terrain' : 'common'))
+    const backgroundPath = res.get('cardbackground', (type === 'rare') ? 'rare' : (type === 'terrain' ? 'terrain' : 'common'))
     const background = IM(backgroundPath).resize(813, 1172)
     im.gravity('Center')
       .extent(813, 1172)
@@ -254,7 +265,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
 
     // use emission for default portraits
     if (card.portrait && card.portrait?.type === 'creature') {
-      try {
+      if (res.has('emission', card.portrait.id)) {
         const emissionPath = res.get('emission', card.portrait.id)
         im.parens(
           IM(emissionPath)
@@ -263,19 +274,22 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
             .gravity('Center')
             .geometry(0, -15 * scale)
         ).compose('Overlay').composite()
-      } catch {
-        // ait dude
       }
     }
   }
 
+  const decals: string[] = []
   // special case, as combined cards have multiple decals
   if (card.flags.fused) {
-    card.decals.push('fungus', 'blood', 'stitches')
+    decals.push('fungus', 'blood', 'stitches')
+  }
+
+  if (card.flags.smoke) {
+    decals.push('smoke')
   }
 
   // decals
-  for (const decal of card.decals) {
+  for (const decal of decals) {
     const decalPath = res.get('decal', decal)
     im.parens(
       IM(decalPath)
@@ -314,7 +328,7 @@ function generateAct1Card(card: Card, res: Resource, options: { border?: boolean
   return execSync(im.build('convert', '-'), opts)
 }
 
-function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource, options: { border?: boolean } = {}): Buffer {
+function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardback', type))
     .background('None')
@@ -336,7 +350,7 @@ function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' 
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource, options: { border?: boolean } = {}): Buffer {
+function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardboon', boon))
     .background('None')
@@ -359,7 +373,7 @@ function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'start
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', res: Resource, options: { border?: boolean } = {}): Buffer {
+function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardreward', type))
     .background('None')
@@ -379,7 +393,7 @@ function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' |
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', res: Resource, options: { border?: boolean } = {}): Buffer {
+function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardtrial', type))
     .background('None')
@@ -399,7 +413,7 @@ function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' 
   return execSync(im.build('convert', '-'))
 }
 
-function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower', res: Resource, options: { border?: boolean } = {}): Buffer {
+function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
   const im = IM()
   im.resource(res.get('cardtarot', type))
     .background('None')

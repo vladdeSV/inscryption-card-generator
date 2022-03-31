@@ -1,14 +1,13 @@
 import { Resource } from './resource'
-import { Card } from './card'
+import { Card, CreatureId, StatIcon } from './card'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
-import { convertJsonCard } from './jsoncard'
-import { CreatureId, foo } from './parsecard'
 import * as path from 'path'
 import { generateAct2BackCard, generateAct2Card, generateAct2NpcCard, Npc } from './fns/generateAct2Card'
 import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
+import { convertJldrCard, JldrCreature, CreatureId as JldrCreatureId } from './jldrcard'
 
-type Act1Resource = {
-  card: Record<Card['type'], string>,
+export type Act1Resource = {
+  card: Record<'common' | 'rare' | 'terrain', string>,
   cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', string>,
   cardbackground: Record<'common' | 'rare' | 'special' | 'terrain', string>,
   cardboon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
@@ -18,14 +17,14 @@ type Act1Resource = {
   cost: Record<string, string>,
   boon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
   deathcard: Record<string, string>,
-  tribe: Record<Card['tribes'][number], string>,
+  tribe: Record<Exclude<Card['tribes'][number], 'squirrel'>, string>,
   misc: Record<string, string>,
-  staticon: Record<'ants' | 'bell' | 'cardsinhand' | 'mirror', string>,
+  staticon: Record<Exclude<StatIcon, 'greengems'>, string>,
   font: Record<string, string>,
   sigil: Record<string /* Card['sigils'][number] */, string>,
   portrait: Record<string, string>
   emission: Record<string, string>
-  decal: Record<Card['decals'][number], string>
+  decal: Record<string, string>
 }
 
 const act1ResourceMap: Act1Resource = {
@@ -156,6 +155,8 @@ const act1ResourceMap: Act1Resource = {
     'bell': 'staticons/bell.png',
     'cardsinhand': 'staticons/cardsinhand.png',
     'mirror': 'staticons/mirror.png',
+    'bones': 'staticons/bones.png',
+    'sacrificesthisturn': 'staticons/sacrifices.png',
   },
   'font': {
     'default': 'fonts/HEAVYWEIGHT.otf',
@@ -165,74 +166,53 @@ const act1ResourceMap: Act1Resource = {
     'zh-tw': 'fonts/NotoSerifTC-Bold.otf',
   },
   'sigil': {
-    'missing': 'missing_sigil.png',
-
+    'missing': 'sigils/missing.png',
     'allstrike': 'sigils/allstrike.png',
-    'beesonhit': 'sigils/beesonhit.png',
-    'buffneighbours': 'sigils/buffneighbours.png',
-    'corpseeater': 'sigils/corpseeater.png',
-    'createbells': 'sigils/createbells.png',
-    'createdams': 'sigils/createdams.png',
-    'deathtouch': 'sigils/deathtouch.png',
-    'debuffenemy': 'sigils/debuffenemy.png',
-    'drawant': 'sigils/drawant.png',
-    'drawcopy': 'sigils/drawcopy.png',
-    'drawcopyondeath': 'sigils/drawcopyondeath.png',
-    'drawrabbits': 'sigils/drawrabbits.png',
-    'drawrandomcardondeath': 'sigils/drawrandomcardondeath.png',
-    'evolve': 'sigils/evolve_1.png',
-    'flying': 'sigils/flying.png',
-    'guarddog': 'sigils/guarddog.png',
-    'icecube': 'sigils/icecube.png',
-    'preventattack': 'sigils/preventattack.png',
-    'quadruplebones': 'sigils/quadruplebones.png',
-    'randomability': 'sigils/randomability.png',
-    'randomconsumable': 'sigils/randomconsumable.png',
-    'reach': 'sigils/reach.png',
-    'sacrificial': 'sigils/sacrificial.png',
-    'sharp': 'sigils/sharp.png',
-    'splitstrike': 'sigils/splitstrike.png',
-    'squirrelorbit': 'sigils/squirrelorbit.png',
-    'steeltrap': 'sigils/steeltrap.png',
-    'strafe': 'sigils/strafe.png',
-    'strafepush': 'sigils/strafepush.png',
-    'submerge': 'sigils/submerge.png',
-    'tailonhit': 'sigils/tailonhit.png',
-    'tripleblood': 'sigils/tripleblood.png',
-    'tristrike': 'sigils/tristrike.png',
-    'tutor': 'sigils/tutor.png',
-    'whackamole': 'sigils/whackamole.png',
-
     'apparition': 'sigils/apparition.png',
-    'banding': 'sigils/banding.png',
+    'beesonhit': 'sigils/beesonhit.png',
     'bloodguzzler': 'sigils/bloodguzzler.png',
     'bonedigger': 'sigils/bonedigger.png',
     'brittle': 'sigils/brittle.png',
     'buffenemy': 'sigils/buffenemy.png',
     'buffenemy_opponent': 'sigils/buffenemy_opponent.png',
     'buffgems': 'sigils/buffgems.png',
+    'buffneighbours': 'sigils/buffneighbours.png',
     'cellbuffself': 'sigils/cellbuffself.png',
     'celldrawrandomcardondeath': 'sigils/celldrawrandomcardondeath.png',
     'celltristrike': 'sigils/celltristrike.png',
     'conduitbuffattack': 'sigils/conduitbuffattack.png',
     'conduitnull': 'sigils/conduitnull.png',
     'conduitspawngems': 'sigils/conduitspawngems.png',
+    'corpseeater': 'sigils/corpseeater.png',
+    'createbells': 'sigils/createbells.png',
+    'createdams': 'sigils/createdams.png',
     'createegg': 'sigils/createegg.png',
     'deathshield': 'sigils/deathshield.png',
+    'deathtouch': 'sigils/deathtouch.png',
+    'debuffenemy': 'sigils/debuffenemy.png',
     'deletefile': 'sigils/deletefile.png',
     'doublestrike': 'sigils/doublestrike.png',
+    'drawant': 'sigils/drawant.png',
+    'drawcopy': 'sigils/drawcopy.png',
+    'drawcopyondeath': 'sigils/drawcopyondeath.png',
+    'drawrabbits': 'sigils/drawrabbits.png',
     'drawrabbits_old': 'sigils/drawrabbits_old.png',
+    'drawrandomcardondeath': 'sigils/drawrandomcardondeath.png',
     'drawvesselonhit': 'sigils/drawvesselonhit.png',
     'droprubyondeath': 'sigils/droprubyondeath.png',
     'edaxioarms': 'sigils/edaxioarms.png',
     'edaxiohead': 'sigils/edaxiohead.png',
     'edaxiolegs': 'sigils/edaxiolegs.png',
     'edaxiotorso': 'sigils/edaxiotorso.png',
+    'evolve': 'sigils/evolve.png',
+    'evolve_1': 'sigils/evolve_1.png',
+    'evolve_2': 'sigils/evolve_2.png',
+    'evolve_3': 'sigils/evolve_3.png',
     'explodegems': 'sigils/explodegems.png',
     'explodeondeath': 'sigils/explodeondeath.png',
     'explodingcorpse': 'sigils/explodingcorpse.png',
     'filesizedamage': 'sigils/filesizedamage.png',
-    'filler': 'sigils/filler.png',
+    'flying': 'sigils/flying.png',
     'gainattackonkill': 'sigils/gainattackonkill.png',
     'gainbattery': 'sigils/gainbattery.png',
     'gaingemblue': 'sigils/gaingemblue.png',
@@ -240,8 +220,10 @@ const act1ResourceMap: Act1Resource = {
     'gaingemorange': 'sigils/gaingemorange.png',
     'gemdependant': 'sigils/gemdependant.png',
     'gemsdraw': 'sigils/gemsdraw.png',
+    'guarddog': 'sigils/guarddog.png',
     'haunter': 'sigils/haunter.png',
     'hydraegg': 'sigils/hydraegg.png',
+    'icecube': 'sigils/icecube.png',
     'latchbrittle': 'sigils/latchbrittle.png',
     'latchdeathshield': 'sigils/latchdeathshield.png',
     'latchexplodeondeath': 'sigils/latchexplodeondeath.png',
@@ -250,242 +232,316 @@ const act1ResourceMap: Act1Resource = {
     'movebeside': 'sigils/movebeside.png',
     'opponentbones': 'sigils/opponentbones.png',
     'permadeath': 'sigils/permadeath.png',
+    'preventattack': 'sigils/preventattack.png',
+    'quadruplebones': 'sigils/quadruplebones.png',
+    'randomability': 'sigils/randomability.png',
+    'randomconsumable': 'sigils/randomconsumable.png',
+    'reach': 'sigils/reach.png',
+    'sacrificial': 'sigils/sacrificial.png',
     'sentry': 'sigils/sentry.png',
+    'sharp': 'sigils/sharp.png',
     'shieldgems': 'sigils/shieldgems.png',
     'sinkhole': 'sigils/sinkhole.png',
-    'skulduggery': 'sigils/skulduggery.png',
     'sniper': 'sigils/sniper.png',
+    'splitstrike': 'sigils/splitstrike.png',
+    'squirrelorbit': 'sigils/squirrelorbit.png',
+    'steeltrap': 'sigils/steeltrap.png',
+    'strafe': 'sigils/strafe.png',
+    'strafepush': 'sigils/strafepush.png',
     'strafeswap': 'sigils/strafeswap.png',
+    'submerge': 'sigils/submerge.png',
+    'submergesquid': 'sigils/submergesquid.png',
     'swapstats': 'sigils/swapstats.png',
+    'tailonhit': 'sigils/tailonhit.png',
     'transformer': 'sigils/transformer.png',
+    'tripleblood': 'sigils/tripleblood.png',
+    'tristrike': 'sigils/tristrike.png',
+    'tutor': 'sigils/tutor.png',
     'virtualreality': 'sigils/virtualreality.png',
+    'whackamole': 'sigils/whackamole.png',
   },
   'portrait': {
-    'adder': 'portraits/adder.png',
-    'alarmbot': 'portraits/alarmbot.png',
-    'alpha': 'portraits/alpha.png',
-    'amalgam': 'portraits/amalgam.png',
-    'amoeba': 'portraits/amoeba.png',
-    'amoebot': 'portraits/amoebot.png',
-    'ant': 'portraits/ant.png',
-    'antqueen': 'portraits/antqueen.png',
-    'automaton': 'portraits/automaton.png',
-    'badfish': 'portraits/badfish.png',
-    'baitbucket': 'portraits/baitbucket.png',
-    'banshee': 'portraits/banshee.png',
-    'bat': 'portraits/bat.png',
-    'batterybot': 'portraits/batterybot.png',
-    'battransformer_beastmode': 'portraits/battransformer_beastmode.png',
-    'battransformer_botmode': 'portraits/battransformer_botmode.png',
-    'beartransformer_beastmode': 'portraits/beartransformer_beastmode.png',
-    'beartransformer_botmode': 'portraits/beartransformer_botmode.png',
-    'beaver': 'portraits/beaver.png',
-    'bee': 'portraits/bee.png',
-    'beehive': 'portraits/beehive.png',
-    'tail_bird': 'portraits/bird_tail.png',
-    'bloodhound': 'portraits/bloodhound.png',
-    'bolthound': 'portraits/bolthound.png',
-    'bombbot': 'portraits/bombbot.png',
-    'bomblatcher': 'portraits/bomblatcher.png',
-    'bonehound': 'portraits/bonehound.png',
-    'boulder': 'portraits/boulder.png',
-    'brittlelatcher': 'portraits/brittlelatcher.png',
-    'bullfrog': 'portraits/bullfrog.png',
-    'bustedprinter': 'portraits/bustedprinter.png',
-    'cagedwolf': 'portraits/cagedwolf.png',
-    'tail_furry': 'portraits/canine_tail.png',
-    'captivefile': 'portraits/captivefile.png',
-    'cat': 'portraits/cat.png',
-    'catundead': 'portraits/cat_undead.png',
-    'cellbuff': 'portraits/cellbuff.png',
-    'cellgift': 'portraits/cellgift.png',
-    'celltri': 'portraits/celltri.png',
-    'cockroach': 'portraits/cockroach.png',
-    'conduitattack': 'portraits/conduitattack.png',
-    'conduitgems': 'portraits/conduitgems.png',
-    'conduitnull': 'portraits/conduitnull.png',
-    'coyote': 'portraits/coyote.png',
-    'dam': 'portraits/dam.png',
-    'daus': 'portraits/daus.png',
-    'dausbell': 'portraits/dausbell.png',
-    'elk': 'portraits/deer.png',
-    'elkcub': 'portraits/deercub.png',
-    'emptyvessel': 'portraits/emptyvessel.png',
-    'fieldmouse': 'portraits/fieldmice.png',
-    'franknstein': 'portraits/franknstein.png',
-    'frozenopossum': 'portraits/frozen_opossum.png',
-    'geck': 'portraits/geck.png',
-    'gemexploder': 'portraits/gemexploder.png',
-    'gemripper': 'portraits/gemripper.png',
-    'gemshielder': 'portraits/gemshielder.png',
-    'giftbot': 'portraits/giftbot.png',
-    'goat': 'portraits/goat.png',
-    'goat_sexy': 'portraits/goat_sexy.png',
-    'goldnugget': 'portraits/goldnugget.png',
-    'goodfish': 'portraits/goodfish.png',
-    'gravedigger': 'portraits/gravedigger.png',
-    'grizzly': 'portraits/grizzly.png',
-    'gunnerbot': 'portraits/gunnerbot.png',
-    'tail_insect': 'portraits/insect_tail.png',
-    'insectodrone': 'portraits/insectodrone.png',
-    'jerseydevil': 'portraits/jerseydevil.png',
-    'jerseydevil_sleeping': 'portraits/jerseydevil_sleeping.png',
-    'kingfisher': 'portraits/kingfisher.png',
-    'lammergeier': 'portraits/lammergeier.png',
-    'leapbot': 'portraits/leapbot.png',
-    'librarian': 'portraits/librarian.png',
-    'maggots': 'portraits/maggots.png',
-    'magpie': 'portraits/magpie.png',
-    'mantis': 'portraits/mantis.png',
-    'mantisgod': 'portraits/mantisgod.png',
-    'minecart': 'portraits/minecart.png',
-    'mole': 'portraits/mole.png',
-    'moleman': 'portraits/moleman.png',
-    'moose': 'portraits/moose.png',
-    'morefish': 'portraits/morefish.png',
-    'mothman_stage1': 'portraits/mothman_1.png',
-    'mothman_stage2': 'portraits/mothman_2.png',
-    'mothman_stage3': 'portraits/mothman_3.png',
-    'mule': 'portraits/mule.png',
-    'mycobot': 'portraits/mycobot.png',
-    'opossum': 'portraits/opossum.png',
-    'otter': 'portraits/otter.png',
-    'ouroboros': 'portraits/ouroboros.png',
-    'ourobot': 'portraits/ourobot.png',
-    'packrat': 'portraits/packrat.png',
-    'peltgolden': 'portraits/pelt_golden.png',
-    'pelthare': 'portraits/pelt_hare.png',
-    'peltwolf': 'portraits/pelt_wolf.png',
-    'porcupine': 'portraits/porcupine.png',
-    'porcupinetransformer_beastmode': 'portraits/porcupinetransformer_beastmode.png',
-    'porcupinetransformer_botmode': 'portraits/porcupinetransformer_botmode.png',
-    'pronghorn': 'portraits/pronghorn.png',
-    'rabbit': 'portraits/rabbit.png',
-    'ratking': 'portraits/ratking.png',
-    'rattler': 'portraits/rattler.png',
-    'raven': 'portraits/raven.png',
-    'ravenegg': 'portraits/ravenegg.png',
-    'revenant': 'portraits/revenant.png',
-    'ringworm': 'portraits/ringworm.png',
-    'roboskeleton': 'portraits/roboskeleton.png',
-    'sentinel_blue': 'portraits/sentinel_blue.png',
-    'sentinel_green': 'portraits/sentinel_green.png',
-    'sentinel_orange': 'portraits/sentinel_orange.png',
-    'sentrybot': 'portraits/sentrybot.png',
-    'shark': 'portraits/shark.png',
-    'shieldbot': 'portraits/shieldbot.png',
-    'shieldlatcher': 'portraits/shieldlatcher.png',
-    'shutterbug': 'portraits/shutterbug.png',
-    'sinkhole': 'portraits/sinkhole.png',
-    'skeleton': 'portraits/skeleton.png',
-    'skink': 'portraits/skink.png',
-    'skinktail': 'portraits/skink_tail.png',
-    'skink_tailless': 'portraits/skink_tailless.png',
-    'skunk': 'portraits/skunk.png',
-    'smoke': 'portraits/smoke.png',
-    'smoke_improved': 'portraits/smoke_improved.png',
-    'sniper': 'portraits/sniper.png',
-    'sparrow': 'portraits/sparrow.png',
-    'squidbell': 'portraits/squidbell.png',
-    'squidcards': 'portraits/squidcards.png',
-    'squidmirror': 'portraits/squidmirror.png',
-    'squirrel': 'portraits/squirrel.png',
-    'squirrel_scared': 'portraits/squirrel_scared.png',
-    'starvation': 'portraits/starvingman.png',
-    'stinkbug_talking': 'portraits/stinkbug_talking.png',
-    'stoat_talking': 'portraits/stoat_talking.png',
-    'stones': 'portraits/stones.png',
-    'stump': 'portraits/stump.png',
-    'swapbot': 'portraits/swapbot.png',
-    'swapbot_swapped': 'portraits/swapbot_swapped.png',
-    'transformer_adder': 'portraits/transformer_adder.png',
-    'transformer_raven': 'portraits/transformer_raven.png',
-    'transformer_wolf': 'portraits/transformer_wolf.png',
-    'trap': 'portraits/trap.png',
-    'trap_closed': 'portraits/trap_closed.png',
-    'trapfrog': 'portraits/trapfrog.png',
-    'tree': 'portraits/tree.png',
-    'tree_snowcovered': 'portraits/tree_snowcovered.png',
-    'snapper': 'portraits/turtle.png',
-    'urayuli': 'portraits/urayuli.png',
-    'vulture': 'portraits/vulture.png',
-    'warren': 'portraits/warren.png',
-    'warren_eaten1': 'portraits/warren_eaten1.png',
-    'warren_eaten2': 'portraits/warren_eaten2.png',
-    'warren_eaten3': 'portraits/warren_eaten3.png',
-    'wolf': 'portraits/wolf.png',
-    'wolf_talking': 'portraits/wolf_talking.png',
-    'wolfcub': 'portraits/wolfcub.png',
+    'banshee': 'portraits/grimora/banshee.png',
+    'bonehound': 'portraits/grimora/bonehound.png',
+    'franknstein': 'portraits/grimora/franknstein.png',
+    'gravedigger': 'portraits/grimora/gravedigger.png',
+    'revenant': 'portraits/grimora/revenant.png',
+    'skeleton': 'portraits/grimora/skeleton.png',
+    'adder': 'portraits/leshy/adder.png',
+    'alpha': 'portraits/leshy/alpha.png',
+    'amalgam': 'portraits/leshy/amalgam.png',
+    'amoeba': 'portraits/leshy/amoeba.png',
+    'ant': 'portraits/leshy/ant.png',
+    'antflying': 'portraits/leshy/antflying.png',
+    'antqueen': 'portraits/leshy/antqueen.png',
+    'aquasquirrel': 'portraits/leshy/aquasquirrel.png',
+    'baitbucket': 'portraits/leshy/baitbucket.png',
+    'bat': 'portraits/leshy/bat.png',
+    'beaver': 'portraits/leshy/beaver.png',
+    'bee': 'portraits/leshy/bee.png',
+    'beehive': 'portraits/leshy/beehive.png',
+    'bird_tail': 'portraits/leshy/bird_tail.png',
+    'bloodhound': 'portraits/leshy/bloodhound.png',
+    'boulder': 'portraits/leshy/boulder.png',
+    'brokenegg': 'portraits/leshy/brokenegg.png',
+    'bull': 'portraits/leshy/bull.png',
+    'bullfrog': 'portraits/leshy/bullfrog.png',
+    'cagedwolf': 'portraits/leshy/cagedwolf.png',
+    'canine_tail': 'portraits/leshy/canine_tail.png',
+    'cat': 'portraits/leshy/cat.png',
+    'cat_undead': 'portraits/leshy/cat_undead.png',
+    'cockroach': 'portraits/leshy/cockroach.png',
+    'coyote': 'portraits/leshy/coyote.png',
+    'cuckoo': 'portraits/leshy/cuckoo.png',
+    'dam': 'portraits/leshy/dam.png',
+    'daus': 'portraits/leshy/daus.png',
+    'dausbell': 'portraits/leshy/dausbell.png',
+    'deer': 'portraits/leshy/deer.png',
+    'deercub': 'portraits/leshy/deercub.png',
+    'direwolf': 'portraits/leshy/direwolf.png',
+    'direwolfcub': 'portraits/leshy/direwolfcub.png',
+    'fieldmice': 'portraits/leshy/fieldmice.png',
+    'frozen_opossum': 'portraits/leshy/frozen_opossum.png',
+    'geck': 'portraits/leshy/geck.png',
+    'goat': 'portraits/leshy/goat.png',
+    'goat_sexy': 'portraits/leshy/goat_sexy.png',
+    'goldnugget': 'portraits/leshy/goldnugget.png',
+    'grizzly': 'portraits/leshy/grizzly.png',
+    'hodag': 'portraits/leshy/hodag.png',
+    'hunterhare': 'portraits/leshy/hunterhare.png',
+    'hydra': 'portraits/leshy/hydra.png',
+    'hydraegg': 'portraits/leshy/hydraegg.png',
+    'hydraegg_light': 'portraits/leshy/hydraegg_light.png',
+    'ijiraq': 'portraits/leshy/ijiraq.png',
+    'insect_tail': 'portraits/leshy/insect_tail.png',
+    'jerseydevil_flying': 'portraits/leshy/jerseydevil.png',
+    'jerseydevil': 'portraits/leshy/jerseydevil_sleeping.png',
+    'kingfisher': 'portraits/leshy/kingfisher.png',
+    'kraken': 'portraits/leshy/kraken.png',
+    'lammergeier': 'portraits/leshy/lammergeier.png',
+    'lice': 'portraits/leshy/lice.png',
+    'maggots': 'portraits/leshy/maggots.png',
+    'magpie': 'portraits/leshy/magpie.png',
+    'mantis': 'portraits/leshy/mantis.png',
+    'mantisgod': 'portraits/leshy/mantisgod.png',
+    'mealworm': 'portraits/leshy/mealworm.png',
+    'mole': 'portraits/leshy/mole.png',
+    'moleman': 'portraits/leshy/moleman.png',
+    'moleseaman': 'portraits/leshy/moleseaman.png',
+    'moose': 'portraits/leshy/moose.png',
+    'mothman_1': 'portraits/leshy/mothman_1.png',
+    'mothman_2': 'portraits/leshy/mothman_2.png',
+    'mothman_3': 'portraits/leshy/mothman_3.png',
+    'mudturtle': 'portraits/leshy/mudturtle.png',
+    'mudturtle_shelled': 'portraits/leshy/mudturtle_shelled.png',
+    'mule': 'portraits/leshy/mule.png',
+    'opossum': 'portraits/leshy/opossum.png',
+    'otter': 'portraits/leshy/otter.png',
+    'ouroboros': 'portraits/leshy/ouroboros.png',
+    'packrat': 'portraits/leshy/packrat.png',
+    'pelt_golden': 'portraits/leshy/pelt_golden.png',
+    'pelt_hare': 'portraits/leshy/pelt_hare.png',
+    'pelt_wolf': 'portraits/leshy/pelt_wolf.png',
+    'porcupine': 'portraits/leshy/porcupine.png',
+    'pronghorn': 'portraits/leshy/pronghorn.png',
+    'rabbit': 'portraits/leshy/rabbit.png',
+    'raccoon': 'portraits/leshy/raccoon.png',
+    'ratking': 'portraits/leshy/ratking.png',
+    'rattler': 'portraits/leshy/rattler.png',
+    'raven': 'portraits/leshy/raven.png',
+    'ravenegg': 'portraits/leshy/ravenegg.png',
+    'redhart': 'portraits/leshy/redhart.png',
+    'ringworm': 'portraits/leshy/ringworm.png',
+    'shark': 'portraits/leshy/shark.png',
+    'sinkhole': 'portraits/leshy/sinkhole.png',
+    'skeletonparrot': 'portraits/leshy/skeletonparrot.png',
+    'skeletonpirate': 'portraits/leshy/skeletonpirate.png',
+    'skink': 'portraits/leshy/skink.png',
+    'skink_tail': 'portraits/leshy/skink_tail.png',
+    'skink_tailless': 'portraits/leshy/skink_tailless.png',
+    'skunk': 'portraits/leshy/skunk.png',
+    'smoke': 'portraits/leshy/smoke.png',
+    'smoke_improved': 'portraits/leshy/smoke_improved.png',
+    'sparrow': 'portraits/leshy/sparrow.png',
+    'squidbell': 'portraits/leshy/squidbell.png',
+    'squidcards': 'portraits/leshy/squidcards.png',
+    'squidmirror': 'portraits/leshy/squidmirror.png',
+    'squirrel': 'portraits/leshy/squirrel.png',
+    'squirrel_scared': 'portraits/leshy/squirrel_scared.png',
+    'starvingman': 'portraits/leshy/starvingman.png',
+    'stoat': 'portraits/leshy/stoat.png',
+    'stoat_bloated': 'portraits/leshy/stoat_bloated.png',
+    'stones': 'portraits/leshy/stones.png',
+    'stump': 'portraits/leshy/stump.png',
+    'tadpole': 'portraits/leshy/tadpole.png',
+    'trap': 'portraits/leshy/trap.png',
+    'trapfrog': 'portraits/leshy/trapfrog.png',
+    'trap_closed': 'portraits/leshy/trap_closed.png',
+    'tree': 'portraits/leshy/tree.png',
+    'tree_snowcovered': 'portraits/leshy/tree_snowcovered.png',
+    'turtle': 'portraits/leshy/turtle.png',
+    'urayuli': 'portraits/leshy/urayuli.png',
+    'vulture': 'portraits/leshy/vulture.png',
+    'warren': 'portraits/leshy/warren.png',
+    'warren_eaten1': 'portraits/leshy/warren_eaten1.png',
+    'warren_eaten2': 'portraits/leshy/warren_eaten2.png',
+    'warren_eaten3': 'portraits/leshy/warren_eaten3.png',
+    'wolf': 'portraits/leshy/wolf.png',
+    'wolfcub': 'portraits/leshy/wolfcub.png',
+    'wolverine': 'portraits/leshy/wolverine.png',
+    'bluemage': 'portraits/magnificus/bluemage.png',
+    'emeraldmox': 'portraits/magnificus/emeraldmox.png',
+    'gemfiend': 'portraits/magnificus/gemfiend.png',
+    'juniorsage': 'portraits/magnificus/juniorsage.png',
+    'orangemage': 'portraits/magnificus/orangemage.png',
+    'practicemage': 'portraits/magnificus/practicemage.png',
+    'rubygolem': 'portraits/magnificus/rubygolem.png',
+    'rubymox': 'portraits/magnificus/rubymox.png',
+    'sapphiremox': 'portraits/magnificus/sapphiremox.png',
+    'alarmbot': 'portraits/p03/alarmbot.png',
+    'amoebot': 'portraits/p03/amoebot.png',
+    'automaton': 'portraits/p03/automaton.png',
+    'badfish': 'portraits/p03/badfish.png',
+    'batterybot': 'portraits/p03/batterybot.png',
+    'battransformer_beastmode': 'portraits/p03/battransformer_beastmode.png',
+    'battransformer_botmode': 'portraits/p03/battransformer_botmode.png',
+    'beartransformer_beastmode': 'portraits/p03/beartransformer_beastmode.png',
+    'beartransformer_botmode': 'portraits/p03/beartransformer_botmode.png',
+    'bolthound': 'portraits/p03/bolthound.png',
+    'bombbot': 'portraits/p03/bombbot.png',
+    'bomblatcher': 'portraits/p03/bomblatcher.png',
+    'brittlelatcher': 'portraits/p03/brittlelatcher.png',
+    'bustedprinter': 'portraits/p03/bustedprinter.png',
+    'captivefile': 'portraits/p03/captivefile.png',
+    'cellbuff': 'portraits/p03/cellbuff.png',
+    'cellgift': 'portraits/p03/cellgift.png',
+    'celltri': 'portraits/p03/celltri.png',
+    'conduitattack': 'portraits/p03/conduitattack.png',
+    'conduitgems': 'portraits/p03/conduitgems.png',
+    'conduitnull': 'portraits/p03/conduitnull.png',
+    'emptyvessel': 'portraits/p03/emptyvessel.png',
+    'emptyvessel_gem_blue': 'portraits/p03/emptyvessel_gem_blue.png',
+    'emptyvessel_gem_green': 'portraits/p03/emptyvessel_gem_green.png',
+    'emptyvessel_gem_orange': 'portraits/p03/emptyvessel_gem_orange.png',
+    'gemexploder': 'portraits/p03/gemexploder.png',
+    'gemripper': 'portraits/p03/gemripper.png',
+    'gemshielder': 'portraits/p03/gemshielder.png',
+    'giftbot': 'portraits/p03/giftbot.png',
+    'goodfish': 'portraits/p03/goodfish.png',
+    'gunnerbot': 'portraits/p03/gunnerbot.png',
+    'insectodrone': 'portraits/p03/insectodrone.png',
+    'leapbot': 'portraits/p03/leapbot.png',
+    'librarian': 'portraits/p03/librarian.png',
+    'minecart': 'portraits/p03/minecart.png',
+    'morefish': 'portraits/p03/morefish.png',
+    'mycobot': 'portraits/p03/mycobot.png',
+    'ourobot': 'portraits/p03/ourobot.png',
+    'porcupinetransformer_beastmode': 'portraits/p03/porcupinetransformer_beastmode.png',
+    'porcupinetransformer_botmode': 'portraits/p03/porcupinetransformer_botmode.png',
+    'roboskeleton': 'portraits/p03/roboskeleton.png',
+    'sentinel_blue': 'portraits/p03/sentinel_blue.png',
+    'sentinel_green': 'portraits/p03/sentinel_green.png',
+    'sentinel_orange': 'portraits/p03/sentinel_orange.png',
+    'sentrybot': 'portraits/p03/sentrybot.png',
+    'shieldbot': 'portraits/p03/shieldbot.png',
+    'shieldlatcher': 'portraits/p03/shieldlatcher.png',
+    'shutterbug': 'portraits/p03/shutterbug.png',
+    'sniper': 'portraits/p03/sniper.png',
+    'swapbot': 'portraits/p03/swapbot.png',
+    'swapbot_swapped': 'portraits/p03/swapbot_swapped.png',
+    'transformer_adder': 'portraits/p03/transformer_adder.png',
+    'transformer_raven': 'portraits/p03/transformer_raven.png',
+    'transformer_wolf': 'portraits/p03/transformer_wolf.png',
   },
   'emission': {
-    'adder': 'emissions/adder.png',
-    'alpha': 'emissions/alpha.png',
-    'amalgam': 'emissions/amalgam.png',
-    'amoeba': 'emissions/amoeba.png',
-    'ant': 'emissions/ant.png',
-    'antqueen': 'emissions/antqueen.png',
-    'banshee': 'emissions/banshee.png',
-    'bat': 'emissions/bat.png',
-    'beaver': 'emissions/beaver.png',
-    'bee': 'emissions/bee.png',
-    'beehive': 'emissions/beehive.png',
-    'bloodhound': 'emissions/bloodhound.png',
-    'bonehound': 'emissions/bonehound.png',
-    'bullfrog': 'emissions/bullfrog.png',
-    'cagedwolf': 'emissions/cagedwolf.png',
-    'cat': 'emissions/cat.png',
-    'cockroach': 'emissions/cockroach.png',
-    'coyote': 'emissions/coyote.png',
-    'elk': 'emissions/deer.png',
-    'elkcub': 'emissions/deercub.png',
-    'fieldmouse': 'emissions/fieldmice.png',
-    'franknstein': 'emissions/franknstein.png',
-    'geck': 'emissions/geck.png',
-    'goat': 'emissions/goat.png',
-    'goldnugget': 'emissions/goldnugget.png',
-    'gravedigger': 'emissions/gravedigger.png',
-    'grizzly': 'emissions/grizzly.png',
-    'kingfisher': 'emissions/kingfisher.png',
-    'lammergeier': 'emissions/lammergeier.png',
-    'maggots': 'emissions/maggots.png',
-    'magpie': 'emissions/magpie.png',
-    'mantis': 'emissions/mantis.png',
-    'mantisgod': 'emissions/mantisgod.png',
-    'mole': 'emissions/mole.png',
-    'moleman': 'emissions/moleman.png',
-    'moose': 'emissions/moose.png',
-    'opossum': 'emissions/opossum.png',
-    'otter': 'emissions/otter.png',
-    'packrat': 'emissions/packrat.png',
-    'peltgolden': 'emissions/pelt_golden.png',
-    'porcupine': 'emissions/porcupine.png',
-    'pronghorn': 'emissions/pronghorn.png',
-    'rabbit': 'emissions/rabbit.png',
-    'ratking': 'emissions/ratking.png',
-    'rattler': 'emissions/rattler.png',
-    'raven': 'emissions/raven.png',
-    'ravenegg': 'emissions/ravenegg.png',
-    'revenant': 'emissions/revenant.png',
-    'ringworm': 'emissions/ringworm.png',
-    'shark': 'emissions/shark.png',
-    'skeleton': 'emissions/skeleton.png',
-    'skink': 'emissions/skink.png',
-    'skink_tailless': 'emissions/skink_tailless.png',
-    'skunk': 'emissions/skunk.png',
-    'smoke_improved': 'emissions/smoke_improved.png',
-    'sparrow': 'emissions/sparrow.png',
-    'squidbell': 'emissions/squidbell.png',
-    'squidmirror': 'emissions/squidmirror.png',
-    'squirrel': 'emissions/squirrel.png',
-    'stinkbug_talking': 'emissions/stinkbug_talking.png',
-    'stoat_talking': 'emissions/stoat_talking.png',
-    'snapper': 'emissions/turtle.png',
-    'urayuli': 'emissions/urayuli.png',
-    'vulture': 'emissions/vulture.png',
-    'warren': 'emissions/warren.png',
-    'wolf': 'emissions/wolf.png',
-    'wolf_talking': 'emissions/wolf_talking.png',
-    'wolfcub': 'emissions/wolfcub.png',
+    'banshee': 'emissions/grimora/banshee.png',
+    'bonehound': 'emissions/grimora/bonehound.png',
+    'franknstein': 'emissions/grimora/franknstein.png',
+    'gravedigger': 'emissions/grimora/gravedigger.png',
+    'revenant': 'emissions/grimora/revenant.png',
+    'skeleton': 'emissions/grimora/skeleton.png',
+    'adder': 'emissions/leshy/adder.png',
+    'alpha': 'emissions/leshy/alpha.png',
+    'amalgam': 'emissions/leshy/amalgam.png',
+    'amoeba': 'emissions/leshy/amoeba.png',
+    'ant': 'emissions/leshy/ant.png',
+    'antflying': 'emissions/leshy/antflying.png',
+    'antqueen': 'emissions/leshy/antqueen.png',
+    'bat': 'emissions/leshy/bat.png',
+    'beaver': 'emissions/leshy/beaver.png',
+    'bee': 'emissions/leshy/bee.png',
+    'beehive': 'emissions/leshy/beehive.png',
+    'bloodhound': 'emissions/leshy/bloodhound.png',
+    'bull': 'emissions/leshy/bull.png',
+    'bullfrog': 'emissions/leshy/bullfrog.png',
+    'cagedwolf': 'emissions/leshy/cagedwolf.png',
+    'cat': 'emissions/leshy/cat.png',
+    'cockroach': 'emissions/leshy/cockroach.png',
+    'coyote': 'emissions/leshy/coyote.png',
+    'cuckoo': 'emissions/leshy/cuckoo.png',
+    'daus': 'emissions/leshy/daus.png',
+    'deer': 'emissions/leshy/deer.png',
+    'deercub': 'emissions/leshy/deercub.png',
+    'direwolf': 'emissions/leshy/direwolf.png',
+    'direwolfcub': 'emissions/leshy/direwolfcub.png',
+    'fieldmice': 'emissions/leshy/fieldmice.png',
+    'geck': 'emissions/leshy/geck.png',
+    'goat': 'emissions/leshy/goat.png',
+    'goldnugget': 'emissions/leshy/goldnugget.png',
+    'grizzly': 'emissions/leshy/grizzly.png',
+    'hodag': 'emissions/leshy/hodag.png',
+    'hydra': 'emissions/leshy/hydra.png',
+    'ijiraq': 'emissions/leshy/ijiraq.png',
+    'jerseydevil': 'emissions/leshy/jerseydevil.png',
+    'kingfisher': 'emissions/leshy/kingfisher.png',
+    'kraken': 'emissions/leshy/kraken.png',
+    'lammergeier': 'emissions/leshy/lammergeier.png',
+    'lice': 'emissions/leshy/lice.png',
+    'maggots': 'emissions/leshy/maggots.png',
+    'magpie': 'emissions/leshy/magpie.png',
+    'mantis': 'emissions/leshy/mantis.png',
+    'mantisgod': 'emissions/leshy/mantisgod.png',
+    'mealworm': 'emissions/leshy/mealworm.png',
+    'mole': 'emissions/leshy/mole.png',
+    'moleman': 'emissions/leshy/moleman.png',
+    'moose': 'emissions/leshy/moose.png',
+    'mothman_3': 'emissions/leshy/mothman_3.png',
+    'mudturtle': 'emissions/leshy/mudturtle.png',
+    'mudturtle_shelled': 'emissions/leshy/mudturtle_shelled.png',
+    'opossum': 'emissions/leshy/opossum.png',
+    'otter': 'emissions/leshy/otter.png',
+    'ouroboros': 'emissions/leshy/ouroboros.png',
+    'packrat': 'emissions/leshy/packrat.png',
+    'pelt_golden': 'emissions/leshy/pelt_golden.png',
+    'porcupine': 'emissions/leshy/porcupine.png',
+    'pronghorn': 'emissions/leshy/pronghorn.png',
+    'rabbit': 'emissions/leshy/rabbit.png',
+    'raccoon': 'emissions/leshy/raccoon.png',
+    'ratking': 'emissions/leshy/ratking.png',
+    'rattler': 'emissions/leshy/rattler.png',
+    'raven': 'emissions/leshy/raven.png',
+    'ravenegg': 'emissions/leshy/ravenegg.png',
+    'redhart': 'emissions/leshy/redhart.png',
+    'ringworm': 'emissions/leshy/ringworm.png',
+    'shark': 'emissions/leshy/shark.png',
+    'skink': 'emissions/leshy/skink.png',
+    'skink_tailless': 'emissions/leshy/skink_tailless.png',
+    'skunk': 'emissions/leshy/skunk.png',
+    'smoke_improved': 'emissions/leshy/smoke_improved.png',
+    'sparrow': 'emissions/leshy/sparrow.png',
+    'squidbell': 'emissions/leshy/squidbell.png',
+    'squidmirror': 'emissions/leshy/squidmirror.png',
+    'squirrel': 'emissions/leshy/squirrel.png',
+    'stoat': 'emissions/leshy/stoat.png',
+    'stoat_bloated': 'emissions/leshy/stoat_bloated.png',
+    'tadpole': 'emissions/leshy/tadpole.png',
+    'turtle': 'emissions/leshy/turtle.png',
+    'urayuli': 'emissions/leshy/urayuli.png',
+    'vulture': 'emissions/leshy/vulture.png',
+    'warren': 'emissions/leshy/warren.png',
+    'wolf': 'emissions/leshy/wolf.png',
+    'wolfcub': 'emissions/leshy/wolfcub.png',
+    'wolverine': 'emissions/leshy/wolverine.png',
   },
   'decal': {
     'snelk': 'decals/snelk.png',
@@ -784,13 +840,18 @@ function getGameTranslationId(id: string | undefined): string | undefined {
 export const res = new Resource('resource', act1ResourceMap)
 export const res2 = new Resource('resource-gbc', act2ResourceMap)
 
-const textChunks = readFileSync('./creatures.txt', 'utf-8').trim().split('---').map(x => x.trim())
-const jsonCards = textChunks.map(foo)
-const cards: Card[] = jsonCards.map(convertJsonCard)
+const creatures = JSON.parse(readFileSync('creatures.json', 'utf-8'))
+
+if (!Array.isArray(creatures)) {
+  throw 'creatures not array'
+}
+
+const jldrCreatures = creatures.map(JldrCreature.check)
+const cards: Card[] = jldrCreatures.map(convertJldrCard)
 
 const translations = JSON.parse(readFileSync('translations.json', 'utf-8'))
-const act1CreatureIds: CreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Boulder', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking', 'FrozenOpossum', 'Tree_SnowCovered', 'Tree', 'Stump']
-const act2CreatureIds: CreatureId[] = [
+const act1CreatureIds: JldrCreatureId[] = ['Adder', 'Alpha', 'Amalgam', 'Amoeba', 'Ant', 'AntQueen', 'Bat', 'Beaver', 'Bee', 'Beehive', 'Bloodhound', 'Boulder', 'Bullfrog', 'CagedWolf', 'Cat', 'CatUndead', 'Cockroach', 'Coyote', 'Daus', 'Elk', 'ElkCub', 'FieldMouse', 'Geck', 'Goat', 'Grizzly', 'JerseyDevil', 'Kingfisher', 'Maggots', 'Magpie', 'Mantis', 'MantisGod', 'Mole', 'MoleMan', 'Moose', 'Mothman_Stage1', 'Mothman_Stage2', 'Mothman_Stage3', 'Mule', 'Opossum', 'Otter', 'Ouroboros', 'PackRat', 'Porcupine', 'Pronghorn', 'Rabbit', 'RatKing', 'Rattler', 'Raven', 'RavenEgg', 'Shark', 'Skink', 'SkinkTail', 'Skunk', 'Snapper', 'Snelk', 'Sparrow', 'SquidBell', 'SquidCards', 'SquidMirror', 'Squirrel', 'Tail_Bird', 'Tail_Furry', 'Tail_Insect', 'Urayuli', 'Vulture', 'Warren', 'Wolf', 'WolfCub', '!DEATHCARD_LESHY', 'BaitBucket', 'Dam', 'DausBell', 'GoldNugget', 'PeltGolden', 'PeltHare', 'PeltWolf', 'RingWorm', 'Smoke', 'Smoke_Improved', 'Smoke_NoBones', 'Starvation', 'Stinkbug_Talking', 'Stoat_Talking', 'Trap', 'TrapFrog', 'Wolf_Talking', 'FrozenOpossum', 'Tree_SnowCovered', 'Tree', 'Stump']
+const act2CreatureIds: JldrCreatureId[] = [
   'Kraken', 'SquidCards', 'SquidMirror', 'SquidBell', 'Hrokkall', 'MantisGod', 'MoleMan', 'Urayuli', 'Rabbit',
   'Squirrel', 'Bullfrog', 'Cat', 'CatUndead', 'ElkCub', 'Mole', 'SquirrelBall', 'Stoat', 'Warren', 'WolfCub',
   'Wolf', 'Adder', 'Bloodhound', 'Elk', 'FieldMouse', 'Hawk', 'Raven', 'Salmon', 'FieldMouse_Fused', 'Grizzly',
@@ -811,16 +872,12 @@ const act2CreatureIds: CreatureId[] = [
   'Starvation', 'BurrowingTrap', 'Kingfisher', 'Opossum', 'Coyote', 'MoxTriple',
 ]
 
-const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as CreatureId ?? ''))
-const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as CreatureId ?? ''))
+const specifiedCreatureIds = [...act1CreatureIds, ...act2CreatureIds]
+console.log('missing creature ids', jldrCreatures.map(x => x.name).filter(id => !specifiedCreatureIds.includes(id)))
 
 const getCard = (gameId: string) => cards.filter(card => card.gameId === gameId)[0]
 
-const starvation = getCard('Starvation')
-starvation.flags.hideHealth = true
-starvation.flags.hidePower = true
-
-act1Cards.push({
+cards.push({
   ...getCard('Goat'),
   portrait: {
     type: 'resource',
@@ -828,7 +885,26 @@ act1Cards.push({
   }
 })
 
-act1Cards.forEach(card => {
+cards.push({
+  ...getCard('JerseyDevil'),
+  portrait: {
+    type: 'resource',
+    resourceId: 'jerseydevil_flying'
+  },
+  power: 2,
+  sigils: [
+    'sacrificial',
+    'flying',
+  ]
+})
+
+const act1Cards = cards.filter(card => act1CreatureIds.includes(card.gameId as JldrCreatureId ?? ''))
+const act2Cards = cards.filter(card => act2CreatureIds.includes(card.gameId as JldrCreatureId ?? ''))
+
+const starvation = getCard('Starvation')
+starvation.flags.hidePowerAndHealth = true
+
+cards.forEach(card => {
   let gameId = card.gameId
 
   if (gameId === 'Tree_SnowCovered') {
@@ -846,42 +922,50 @@ act1Cards.forEach(card => {
   }
 
   if (card.gameId === '!DEATHCARD_LESHY') {
-    card.meta.rare = true
-    card.type = 'rare'
+    card.flags.rare = true
   }
 })
 
-function slask<T>(folderName: string, fn: (t: T, r: Resource, opts: any) => Buffer, arr: T[], res: Resource, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
+function slask<T, T2 extends { [s: string]: { [s: string]: string } }>(folderName: string, fn: (t: T, r: Resource<T2>, opts: any) => Buffer, arr: T[], res: Resource<T2>, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
   const folderpath = path.join('out', folderName)
   mkdirSync(folderpath, { recursive: true })
 
   for (const id of arr) {
-    const filename = filenameGenerator(id) ?? id
-    const filepath = path.join(folderpath, filename + '.png')
-    if (existsSync(filepath)) {
-      console.log('skipping', `${folderName}/${filename}`)
+    try {
+      const filename = filenameGenerator(id) ?? id
+      const filepath = path.join(folderpath, filename + '.png')
+      if (existsSync(filepath)) {
+        // console.log('skipping', `${folderName}/${filename}`)
 
-      continue
+        continue
+      }
+
+      const buffer = fn(id, res, options)
+      writeFileSync(filepath, buffer)
+      // console.log('generated', `${folderName}/${filename}`)
+    } catch (e) {
+      // const gameId = (id as any).gameId.toLowerCase()
+      // console.log(gameId, translations['en'][gameId])
+      console.error(filenameGenerator(id), '//', e)
     }
-
-    const buffer = fn(id, res, options)
-    writeFileSync(filepath, buffer)
-    console.log('generated', `${folderName}/${filename}`)
   }
 }
 
-/*
-for (const border of [true, false]) {
+for (const border of [true/* , false */]) {
   const toplevelName = `act1/${border ? 'border' : 'regular'}`
   slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
   slask(toplevelName + '/boons', generateAct1BoonCard, ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'], res, { border: border })
   slask(toplevelName + '/rewards', generateAct1RewardCard, ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'], res, { border: border })
   slask(toplevelName + '/trials', generateAct1TrialCard, ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'], res, { border: border })
   slask(toplevelName + '/tarots', generateAct1TarotCard, ['death', 'devil', 'empress', 'fool', 'tower'], res, { border: border })
-  slask(toplevelName, generateAct1Card, act1Cards, res, { border: border }, (card: Card) => {
+  slask(toplevelName, generateAct1Card, cards, res, { border: border }, (card: Card) => {
 
     if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'goat_sexy') {
       return 'goat_sexy'
+    }
+
+    if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'jerseydevil_flying') {
+      return 'jerseydevil_flying'
     }
 
     if (card.portrait?.type === 'creature') {
@@ -892,28 +976,24 @@ for (const border of [true, false]) {
   })
 }
 
-for (const useScanline of [true, false]) {
-  for (const border of [true, false]) {
-    const toplevelName = `act2/${useScanline ? 'scanline' : 'plain'}/${border ? 'border' : 'regular'}`
-    slask(toplevelName, generateAct2Card, act2Cards, res2, { border: border, scanlines: useScanline }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
-    slask(toplevelName + '/npc', generateAct2NpcCard, ['angler', 'bluewizard', 'briar', 'dredger', 'dummy', 'greenwizard', 'inspector', 'orangewizard', 'royal', 'sawyer', 'melter', 'trapper', 'prospector'], res2, { border: border, scanlines: useScanline })
-    slask(toplevelName + '/backs', generateAct2BackCard, ['common', 'submerged'], res2, { border: border, scanlines: useScanline })
-  }
-}
-*/
+// for (const useScanline of [true, false]) {
+//   for (const border of [true, false]) {
+//     const toplevelName = `act2/${useScanline ? 'scanline' : 'plain'}/${border ? 'border' : 'regular'}`
+//     slask(toplevelName, generateAct2Card, act2Cards, res2, { border: border, scanlines: useScanline }, (card: Card) => (card.portrait?.type === 'creature') ? card.portrait.id : card.gameId)
+//     slask(toplevelName + '/npc', generateAct2NpcCard, ['angler', 'bluewizard', 'briar', 'dredger', 'dummy', 'greenwizard', 'inspector', 'orangewizard', 'royal', 'sawyer', 'melter', 'trapper', 'prospector'], res2, { border: border, scanlines: useScanline })
+//     slask(toplevelName + '/backs', generateAct2BackCard, ['common', 'submerged'], res2, { border: border, scanlines: useScanline })
+//   }
+// }
 
-const template: Card = {
-  name: '',
-  type: 'common',
-  cost: undefined,
-  power: 0,
-  health: 0,
-  sigils: [],
-  tribes: [],
-  temple: 'nature',
-  decals: [],
-  flags: { enhanced: false, fused: false, golden: false, squid: false, terrain: false, hidePower: false, hideHealth: false },
-  meta: { rare: false, terrain: false }
-}
+// const template: Card = {
+//   name: '',
+//   cost: undefined,
+//   power: 0,
+//   health: 0,
+//   sigils: [],
+//   tribes: [],
+//   temple: 'nature',
+//   flags: { smoke: false, blood: false, golden: false, rare: false, terrain: false, terrainLayout: false, squid: false, enhanced: false, redEmission: false, fused: false, paint: false, hidePowerAndHealth: false },
+// }
 
-// writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: false, locale: 'en' }))
+// writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: true, locale: 'en' }))
