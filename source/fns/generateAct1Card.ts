@@ -265,7 +265,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
 
     // use emission for default portraits
     if (card.portrait && card.portrait?.type === 'creature') {
-      try {
+      if (res.has('emission', card.portrait.id)) {
         const emissionPath = res.get('emission', card.portrait.id)
         im.parens(
           IM(emissionPath)
@@ -274,8 +274,6 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
             .gravity('Center')
             .geometry(0, -15 * scale)
         ).compose('Overlay').composite()
-      } catch {
-        // ait dude
       }
     }
   }
