@@ -284,6 +284,10 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
     decals.push('fungus', 'blood', 'stitches')
   }
 
+  if (card.flags.smoke) {
+    decals.push('smoke')
+  }
+
   // decals
   for (const decal of decals) {
     const decalPath = res.get('decal', decal)
