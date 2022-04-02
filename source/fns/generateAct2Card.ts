@@ -25,14 +25,14 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
     .filter('Box')
 
   const cardType = ((card: Card): 'common' | 'rare' | 'terrain' | 'terrain_rare' => {
-    if (card.meta.terrain) {
-      if (card.meta.rare) {
+    if (card.flags.terrain) {
+      if (card.flags.rare) {
         return 'terrain_rare'
       }
       return 'terrain'
     }
 
-    if (card.meta.rare) {
+    if (card.flags.rare) {
       return 'rare'
     }
 
@@ -129,7 +129,7 @@ function generateAct2Card(card: Card & { npc?: Npc }, res: Resource, options: { 
   im.gravity('Center').extent(44, 58)
 
   // frame
-  if (card.meta.rare) {
+  if (card.flags.rare) {
     im.gravity('NorthWest').resource(res.get('frame', card.temple)).geometry(0, 0).composite()
   }
 
