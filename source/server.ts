@@ -30,6 +30,12 @@ const ApiCard = RRecord({
   golden: Boolean,
   squid: Boolean,
   fused: Boolean,
+  smoke: Boolean,
+  enhanced: Boolean,
+  redEmission: Boolean,
+  blood: Boolean,
+  paint: Boolean,
+  hidePowerAndHealth: Boolean,
   portrait: Union(
     Record({
       type: Literal('custom'),
@@ -73,6 +79,12 @@ const templateApiCard: ApiCard = {
   golden: false,
   squid: false,
   fused: false,
+  blood: false,
+  paint: false,
+  enhanced: false,
+  redEmission: false,
+  smoke: false,
+  hidePowerAndHealth: false,
 }
 
 function convertApiDataToCard(input: ApiCard): Card {
@@ -102,14 +114,6 @@ function convertApiDataToCard(input: ApiCard): Card {
     }
   }
 
-  let type: Card['type'] = 'common'
-  if (input.terrain) {
-    type = 'terrain'
-  }
-  if (input.rare) {
-    type = 'rare'
-  }
-
   let portrait: Portrait | undefined = undefined
   if (input.portrait?.type === 'custom' && (input.portrait.data.common || input.portrait.data.gbc)) {
     portrait = {
@@ -137,7 +141,6 @@ function convertApiDataToCard(input: ApiCard): Card {
   }
 
   const card: Card = {
-    type: type,
     name: input.name,
     health: input.health,
     power: input.power,
@@ -145,21 +148,21 @@ function convertApiDataToCard(input: ApiCard): Card {
     temple: input.temple,
     statIcon: input.staticon,
     tribes: input.tribes,
-    decals: input.decals,
     cost: cost,
     portrait: portrait,
-    meta: {
-      terrain: input.terrain,
-      rare: input.rare,
-    },
     flags: {
-      enhanced: false,
+      smoke: input.smoke,
+      blood: input.blood,
       golden: input.golden,
-      fused: input.fused,
+      rare: input.rare,
+      terrain: input.terrain,
+      terrainLayout: input.terrainLayout,
       squid: input.squid,
-      terrain: input.terrainLayout,
-      hideHealth: false,
-      hidePower: false,
+      enhanced: input.enhanced,
+      redEmission: input.redEmission,
+      fused: input.fused,
+      paint: input.paint,
+      hidePowerAndHealth: input.hidePowerAndHealth,
     },
   }
 
@@ -201,12 +204,13 @@ server.post('/api/card/:id/', (request, reply) => {
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  const generator = ((act): { resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Buffer } => {
+  function a(act: 'gbc' | 'leshy'): ({ resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Buffer }) {
     switch (act) {
-      case 'leshy': return { resource: res, fn: generateAct1Card }
-      case 'gbc': return { resource: res2, fn: generateAct2Card }
+      case 'leshy': return { resource: res, fn: generateAct1Card as any }
+      case 'gbc': return { resource: res2, fn: generateAct2Card as any }
     }
-  })(act)
+  }
+  const generator = (a)(act)
 
   try {
     const buffer = generator.fn(card, generator.resource, options)
