@@ -57,3 +57,31 @@ export class Resource<T extends { [s: string]: { [s: string]: string } } = { [s:
   #path: string
   #data: T
 }
+
+class ResourceCollection<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
+  constructor(resources: Resource<T>[]) {
+    this.#resources = resources
+  }
+
+  public has(category: string, id: string): boolean {
+    for (const resource of this.#resources) {
+      if (resource.has(category, id)) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  public get(category: string, id: string, defaultResourceId?: string): string {
+    for (const resource of this.#resources) {
+      if (resource.has(category, id)) {
+        return resource.get(category, id, defaultResourceId)
+      }
+    }
+
+    throw `Unrecognized id '${category}:${id}'`
+  }
+
+  #resources: Resource<T>[]
+}
