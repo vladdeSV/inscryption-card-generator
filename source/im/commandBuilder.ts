@@ -9,6 +9,10 @@ class ImageMagickCommandBuilder {
     }
   }
 
+  parts(): string[] {
+    return this.#commands
+  }
+
   build(executable: 'convert' | 'magick', out: string): string {
     this.#commands = [executable, ...this.#commands, this.#escape(out)]
 
