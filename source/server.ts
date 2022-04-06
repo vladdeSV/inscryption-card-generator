@@ -230,5 +230,47 @@ server.post('/api/card/:id/front', async (request, reply) => {
   }
 })
 
+server.post('/api/card/:id/back', async (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+
+  const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
+  if (actValidation.success === false) {
+    reply.status(404)
+    reply.send({ error: 'Invalid act', invalid: request.params.id })
+    return
+  }
+  const act = actValidation.value
+
+  const border = request.query.border !== undefined
+  const scanline = request.query.scanline !== undefined
+  const locale = request.query.locale as string ?? 'en'
+
+  const options = { border, scanlines: scanline, locale }
+
+  const generatorFromAct = (act: 'leshy' | 'gbc') => {
+    switch (act) {
+      default:
+      case 'leshy': return new LeshyCardGenerator(res, options)
+      // case 'gbc': new GbcCardGenerator(res2, options)
+    }
+  }
+
+  const generator: CardGenerator = generatorFromAct(act)
+
+  try {
+    const buffer = await generator.generateBack()
+    reply.status(201)
+    reply.type('image/png')
+    reply.send(buffer)
+
+    return
+  } catch (e) {
+    reply.status(422)
+    reply.send({ error: 'Unprocessable data', message: e })
+
+    return
+  }
+})
+
 server.get('/', (_, reply) => reply.status(200).send('OK'))
 server.listen(8080, () => console.log('Server running'))
