@@ -321,9 +321,9 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
     }
 
     let input: Buffer | undefined
-    // if (card.portrait?.type === 'custom') {
-    //   input = card.portrait.data.common
-    // }
+    if (card.portrait?.type === 'custom') {
+      input = card.portrait.data.common
+    }
 
     return bufferFromCommandBuilder(im, input)
   }
