@@ -173,14 +173,14 @@ function convertApiDataToCard(input: ApiCard): Card {
 const server = express()
 server.use(express.json({ limit: 2 * 10e6 }))
 
-server.options('/api/card/*/', (_, reply) => {
+server.options('/api/card/*/*', (_, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
     .header('Access-Control-Allow-Methods', 'POST, OPTIONS')
     .header('Access-Control-Allow-Headers', 'Origin, Content-Type')
     .send()
 })
 
-server.post('/api/card/:id/', async (request, reply) => {
+server.post('/api/card/:id/front', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
   const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
