@@ -6,7 +6,7 @@ import { Resource } from '../resource'
 export { CardGenerator, BaseCardGenerator, bufferFromCommandBuilder }
 
 interface CardGenerator {
-  generateFront: (card: Card) => ImageMagickCommandBuilder
+  generateFront: (card: Card) => Promise<Buffer>
 }
 
 abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string } }, T extends Record<string, any>> implements CardGenerator {
@@ -16,7 +16,7 @@ abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string 
     this.options = options
   }
 
-  abstract generateFront(card: Card): ImageMagickCommandBuilder
+  abstract generateFront(card: Card): Promise<Buffer>
   // abstract generateBack(type: unknown, resource: R, options: T): ImageMagickCommandBuilder
 
   protected resource: Resource<R>

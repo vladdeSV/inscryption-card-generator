@@ -216,8 +216,7 @@ server.post('/api/card/:id/', async (request, reply) => {
   const generator: CardGenerator = generatorFromAct(act)
 
   try {
-    const gen = generator.generateFront(card)
-    const buffer = await bufferFromCommandBuilder(gen)
+    const buffer = await generator.generateFront(card)
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)

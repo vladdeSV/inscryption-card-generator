@@ -1,8 +1,6 @@
 import { Card } from '../card'
-import { ImageMagickCommandBuilder } from '../im/commandBuilder'
-import { Resource } from '../resource'
 import { Act1Resource } from '../temp'
-import { BaseCardGenerator } from './base'
+import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
 import IM from '../im'
 import { getGemCostResourceId } from '../fns/helpers'
 
@@ -15,8 +13,7 @@ const scale = fullsizeCardHeight / originalCardHeight
 type Options = { border?: boolean, locale?: string }
 class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
 
-  generateFront(card: Card): ImageMagickCommandBuilder {
-
+  generateFront(card: Card): Promise<Buffer> {
     const im = IM()
 
     // parts are shifted if having terrain card layout
@@ -325,11 +322,11 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
       }
     }
 
-    const opts: { input?: Buffer } = {}
-    if (card.portrait?.type === 'custom') {
-      opts.input = card.portrait.data.common
-    }
+    let input: Buffer | undefined
+    // if (card.portrait?.type === 'custom') {
+    //   input = card.portrait.data.common
+    // }
 
-    return im
+    return bufferFromCommandBuilder(im, input)
   }
 }
