@@ -7,28 +7,6 @@ import { spawn } from 'child_process'
 import { getGemCostResourceId } from './helpers'
 import { Act1Resource } from '../temp'
 
-// function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-//   const im = IM()
-//   im.resource(res.get('cardback', type))
-//     .background('None')
-//     .gravity('Center')
-//     .filter('Box')
-
-//   if (options.border) {
-//     const backgroundName = type === 'common' ? 'special' : 'common'
-
-//     im.extent(147, 212)
-//       .resource(res.get('cardbackground', backgroundName))
-//       .compose('DstOver')
-//       .composite()
-//       .compose('SrcOver')
-//   }
-
-//   im.resizeExt(g => g.scale(scale * 100))
-
-//   return execSync(im.build('convert', '-'))
-// }
-//
 // function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
 //   const im = IM()
 //   im.resource(res.get('cardboon', boon))

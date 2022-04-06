@@ -327,4 +327,26 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
 
     return bufferFromCommandBuilder(im, input)
   }
+
+  generateBack(type: 'common' | 'bee' | 'deathcard' | 'squirrel' | 'submerge' = 'common'): Promise<Buffer> {
+    const im = IM()
+    im.resource(this.resource.get('cardback', type))
+      .background('None')
+      .gravity('Center')
+      .filter('Box')
+
+    if (this.options.border) {
+      const backgroundName = type === 'common' ? 'special' : 'common'
+
+      im.extent(147, 212)
+        .resource(this.resource.get('cardbackground', backgroundName))
+        .compose('DstOver')
+        .composite()
+        .compose('SrcOver')
+    }
+
+    im.resizeExt(g => g.scale(scale * 100))
+
+    return bufferFromCommandBuilder(im)
+  }
 }

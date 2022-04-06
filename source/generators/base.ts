@@ -7,6 +7,7 @@ export { CardGenerator, BaseCardGenerator, bufferFromCommandBuilder }
 
 interface CardGenerator {
   generateFront: (card: Card) => Promise<Buffer>
+  generateBack: () => Promise<Buffer>
 }
 
 abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string } }, T extends Record<string, any>> implements CardGenerator {
@@ -17,7 +18,7 @@ abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string 
   }
 
   abstract generateFront(card: Card): Promise<Buffer>
-  // abstract generateBack(type: unknown, resource: R, options: T): ImageMagickCommandBuilder
+  abstract generateBack(): Promise<Buffer>
 
   protected resource: Resource<R>
   protected options: T
