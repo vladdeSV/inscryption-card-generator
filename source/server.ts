@@ -4,11 +4,12 @@
 
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
-import { generateAct1Card } from './fns/generateAct1Card'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
 import { res, res2 } from './temp'
 // import { generateAct2Card } from './fns/generateAct2Card'
 import { Resource } from './resource'
+import { LeshyCardGenerator } from './generators/leshyCardGenerator'
+import { BaseCardGenerator, bufferFromCommandBuilder, CardGenerator } from './generators/base'
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -192,7 +193,7 @@ server.post('/api/card/:id/', async (request, reply) => {
 
   const border = request.query.border !== undefined
   const scanline = request.query.scanline !== undefined
-  const locale = request.query.locale ?? 'en'
+  const locale = request.query.locale as string ?? 'en'
 
   const apiCardValidation = ApiCard.validate({ ...templateApiCard, ...request.body })
   if (apiCardValidation.success === false) {
@@ -204,17 +205,19 @@ server.post('/api/card/:id/', async (request, reply) => {
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  function a(act: 'gbc' | 'leshy'): ({ resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Promise<Buffer> }) {
+  const generatorFromAct = (act: 'leshy' | 'gbc') => {
     switch (act) {
       default:
-      case 'leshy': return { resource: res, fn: generateAct1Card as any }
-      // case 'gbc': return { resource: res2, fn: generateAct2Card as any }
+      case 'leshy': return new LeshyCardGenerator(res, options)
+      // case 'gbc': new GbcCardGenerator(res2, options)
     }
   }
-  const generator = (a)(act)
+
+  const generator: CardGenerator = generatorFromAct(act)
 
   try {
-    const buffer = await generator.fn(card, generator.resource, options)
+    const gen = generator.generateFront(card)
+    const buffer = await bufferFromCommandBuilder(gen)
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
