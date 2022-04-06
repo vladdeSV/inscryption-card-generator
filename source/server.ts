@@ -7,7 +7,7 @@ import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boole
 import { generateAct1Card } from './fns/generateAct1Card'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
 import { res, res2 } from './temp'
-import { generateAct2Card } from './fns/generateAct2Card'
+// import { generateAct2Card } from './fns/generateAct2Card'
 import { Resource } from './resource'
 
 type ApiCard = Static<typeof ApiCard>
@@ -179,7 +179,7 @@ server.options('/api/card/*/', (_, reply) => {
     .send()
 })
 
-server.post('/api/card/:id/', (request, reply) => {
+server.post('/api/card/:id/', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
   const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
@@ -204,16 +204,17 @@ server.post('/api/card/:id/', (request, reply) => {
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  function a(act: 'gbc' | 'leshy'): ({ resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Buffer }) {
+  function a(act: 'gbc' | 'leshy'): ({ resource: Resource, fn: (card: Card, resource: Resource, opts?: any) => Promise<Buffer> }) {
     switch (act) {
+      default:
       case 'leshy': return { resource: res, fn: generateAct1Card as any }
-      case 'gbc': return { resource: res2, fn: generateAct2Card as any }
+      // case 'gbc': return { resource: res2, fn: generateAct2Card as any }
     }
   }
   const generator = (a)(act)
 
   try {
-    const buffer = generator.fn(card, generator.resource, options)
+    const buffer = await generator.fn(card, generator.resource, options)
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
