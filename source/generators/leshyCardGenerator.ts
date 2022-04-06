@@ -302,7 +302,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
     }
 
     if (card.flags.enhanced && card.portrait?.type === 'creature') {
-      try {
+      if (this.resource.has('emission', card.portrait.id)) {
         const emissionPath = this.resource.get('emission', card.portrait.id)
 
         for (const i of [false, true]) {
@@ -312,13 +312,11 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
             .geometry(3, -15 * scale)
 
           if (i === true) {
-            im2.command('-blur 0x10')
+            im2.command('-blur').command('0x10')
           }
 
           im.parens(im2).composite()
         }
-      } catch {
-        // ait dude 2
       }
     }
 
