@@ -1,9 +1,9 @@
-export { generateAct1Card, generateAct1BackCard, generateAct1BoonCard, generateAct1RewardCard, generateAct1TrialCard, generateAct1TarotCard }
+export { generateAct1Card/* , generateAct1BackCard, generateAct1BoonCard, generateAct1RewardCard, generateAct1TrialCard, generateAct1TarotCard */ }
 
 import { Resource } from '../resource'
 import IM from '../im'
 import { Card } from '../card'
-import { execSync } from 'child_process'
+import { spawn } from 'child_process'
 import { getGemCostResourceId } from './helpers'
 import { Act1Resource } from '../temp'
 
@@ -11,7 +11,7 @@ const originalCardHeight = 190 // px
 const fullsizeCardHeight = 1050 // px
 const scale = fullsizeCardHeight / originalCardHeight
 
-function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { border?: boolean, locale?: string } = {}): Buffer {
+function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { border?: boolean, locale?: string } = {}): Promise<Buffer> {
   const im = IM()
 
   // parts are shifted if having terrain card layout
@@ -90,7 +90,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
         .resize(undefined, 354)
         .gravity('NorthWest')
         .alpha('Set')
-        .command('-channel A -evaluate multiply 0.4 +channel')
+        .command('-channel').command('A').command('-evaluate').command('multiply').command('0.4').command('+channel')
     ).geometry(position[0], position[1])
       .composite()
   }
@@ -258,7 +258,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
 
   if (card.flags.golden) {
     im.parens(
-      IM().command('-clone 0 -fill rgb\\(255,128,0\\) -colorize 75')
+      IM().command('-clone').command('0').command('-fill').command('rgb(255,128,0)').command('-colorize').command('75')
     ).geometry(0, 0)
       .compose('HardLight')
       .composite()
@@ -270,7 +270,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
         im.parens(
           IM(emissionPath)
             .filter('Box')
-            .command(`-resize ${scale * 100}%`)
+            .command('-resize').command(`${scale * 100}%`)
             .gravity('Center')
             .geometry(0, -15 * scale)
         ).compose('Overlay').composite()
@@ -305,7 +305,7 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
 
       for (const i of [false, true]) {
         const im2 = IM(emissionPath)
-          .command(`-fill rgb\\(161,247,186\\) -colorize 100 -resize ${scale * 100}%`)
+          .command('-fill').command('rgb(161,247,186)').command('-colorize').command('100').command('-resize').command(`${scale * 100}%`)
           .gravity('Center')
           .geometry(3, -15 * scale)
 
@@ -325,110 +325,127 @@ function generateAct1Card(card: Card, res: Resource<Act1Resource>, options: { bo
     opts.input = card.portrait.data.common
   }
 
-  return execSync(im.build('convert', '-'), opts)
+  return new Promise<Buffer>((resolve, reject) => {
+    const process = spawn('convert', [...im.parts(), '-'], { stdio: 'pipe' })
+    console.log('spawned a process', process.pid)
+
+    const buffers: Buffer[] = []
+    process.stdout.on('data', (data: Buffer) => {
+      buffers.push(data)
+    })
+    process.stdout.on('end', () => {
+      const buffer = Buffer.concat(buffers)
+      console.log('ended a process', process.pid)
+      resolve(buffer)
+    })
+    process.stderr.on('data', (data: Buffer) => {
+      reject(data.toString())
+    })
+    process.stdin.end(opts.input)
+  })
 }
 
-function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
-  im.resource(res.get('cardback', type))
-    .background('None')
-    .gravity('Center')
-    .filter('Box')
+// function generateAct1BackCard(type: 'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
+//   const im = IM()
+//   im.resource(res.get('cardback', type))
+//     .background('None')
+//     .gravity('Center')
+//     .filter('Box')
 
-  if (options.border) {
-    const backgroundName = type === 'common' ? 'special' : 'common'
+//   if (options.border) {
+//     const backgroundName = type === 'common' ? 'special' : 'common'
 
-    im.extent(147, 212)
-      .resource(res.get('cardbackground', backgroundName))
-      .compose('DstOver')
-      .composite()
-      .compose('SrcOver')
-  }
+//     im.extent(147, 212)
+//       .resource(res.get('cardbackground', backgroundName))
+//       .compose('DstOver')
+//       .composite()
+//       .compose('SrcOver')
+//   }
 
-  im.resizeExt(g => g.scale(scale * 100))
+//   im.resizeExt(g => g.scale(scale * 100))
 
-  return execSync(im.build('convert', '-'))
-}
+//   return execSync(im.build('convert', '-'))
+// }
+//
+// function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
+//   const im = IM()
+//   im.resource(res.get('cardboon', boon))
+//     .background('None')
+//     .gravity('Center')
+//     .filter('Box')
 
-function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
-  im.resource(res.get('cardboon', boon))
-    .background('None')
-    .gravity('Center')
-    .filter('Box')
+//   if (options.border) {
+//     im.extent(147, 212)
+//       .resource(res.get('cardbackground', 'common'))
+//       .compose('DstOver')
+//       .composite()
+//       .compose('SrcOver')
+//   }
 
-  if (options.border) {
-    im.extent(147, 212)
-      .resource(res.get('cardbackground', 'common'))
-      .compose('DstOver')
-      .composite()
-      .compose('SrcOver')
-  }
+//   im.resizeExt(g => g.scale(scale * 100))
 
-  im.resizeExt(g => g.scale(scale * 100))
+//   im.parens(IM(res.get('boon', boon)).resize(284))
+//     .composite()
 
-  im.parens(IM(res.get('boon', boon)).resize(284))
-    .composite()
+//   return execSync(im.build('convert', '-'))
+// }
 
-  return execSync(im.build('convert', '-'))
-}
+// function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
+//   const im = IM()
+//   im.resource(res.get('cardreward', type))
+//     .background('None')
+//     .gravity('Center')
+//     .filter('Box')
 
-function generateAct1RewardCard(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
-  im.resource(res.get('cardreward', type))
-    .background('None')
-    .gravity('Center')
-    .filter('Box')
+//   if (options.border) {
+//     im.extent(147, 212)
+//       .resource(res.get('cardbackground', 'common'))
+//       .compose('DstOver')
+//       .composite()
+//       .compose('SrcOver')
+//   }
 
-  if (options.border) {
-    im.extent(147, 212)
-      .resource(res.get('cardbackground', 'common'))
-      .compose('DstOver')
-      .composite()
-      .compose('SrcOver')
-  }
+//   im.resizeExt(g => g.scale(scale * 100))
 
-  im.resizeExt(g => g.scale(scale * 100))
+//   return execSync(im.build('convert', '-'))
+// }
 
-  return execSync(im.build('convert', '-'))
-}
+// function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
+//   const im = IM()
+//   im.resource(res.get('cardtrial', type))
+//     .background('None')
+//     .gravity('Center')
+//     .filter('Box')
 
-function generateAct1TrialCard(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
-  im.resource(res.get('cardtrial', type))
-    .background('None')
-    .gravity('Center')
-    .filter('Box')
+//   if (options.border) {
+//     im.extent(147, 212)
+//       .resource(res.get('cardbackground', 'common'))
+//       .compose('DstOver')
+//       .composite()
+//       .compose('SrcOver')
+//   }
 
-  if (options.border) {
-    im.extent(147, 212)
-      .resource(res.get('cardbackground', 'common'))
-      .compose('DstOver')
-      .composite()
-      .compose('SrcOver')
-  }
+//   im.resizeExt(g => g.scale(scale * 100))
 
-  im.resizeExt(g => g.scale(scale * 100))
+//   return execSync(im.build('convert', '-'))
+// }
 
-  return execSync(im.build('convert', '-'))
-}
+// function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
+//   const im = IM()
+//   im.resource(res.get('cardtarot', type))
+//     .background('None')
+//     .gravity('Center')
+//     .filter('Box')
 
-function generateAct1TarotCard(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
-  const im = IM()
-  im.resource(res.get('cardtarot', type))
-    .background('None')
-    .gravity('Center')
-    .filter('Box')
+//   if (options.border) {
+//     im.extent(147, 212)
+//       .resource(res.get('cardbackground', 'common'))
+//       .compose('DstOver')
+//       .composite()
+//       .compose('SrcOver')
+//   }
 
-  if (options.border) {
-    im.extent(147, 212)
-      .resource(res.get('cardbackground', 'common'))
-      .compose('DstOver')
-      .composite()
-      .compose('SrcOver')
-  }
+//   im.resizeExt(g => g.scale(scale * 100))
 
-  im.resizeExt(g => g.scale(scale * 100))
-
-  return execSync(im.build('convert', '-'))
-}
+//   return execSync(im.build('convert', '-'))
+// }
