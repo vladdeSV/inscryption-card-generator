@@ -17,7 +17,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
     const im = IM()
 
     // parts are shifted if having terrain card layout
-    const terrainLayoutXoffset = card.flags.terrain ? -70 : 0
+    const terrainLayoutXoffset = card.flags.terrainLayout ? -70 : 0
 
     // set up defaults
     im.font(this.resource.get('font', 'default'))
@@ -157,7 +157,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Act1Resource, Options> {
       ).geometry(5, 705)
         .composite()
     } else if (card.power !== undefined) {
-      const drawPower = !(card.power === 0 && card.flags.terrain || card.flags.hidePowerAndHealth)
+      const drawPower = !(card.power === 0 && card.flags.terrainLayout || card.flags.hidePowerAndHealth)
       if (drawPower) {
         const w = 114
         const h = 215
