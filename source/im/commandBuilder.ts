@@ -10,14 +10,17 @@ class ImageMagickCommandBuilder {
   }
 
   parts(): string[] {
-    return this.#commands
+    const a: string[] = []
+    this.#commands.forEach(part => part instanceof ImageMagickCommandBuilder ? a.push(...part.parts()) : a.push(part))
+
+    return a
   }
 
-  build(executable: 'convert' | 'magick', out: string): string {
-    this.#commands = [executable, ...this.#commands, this.#escape(out)]
+  // build(executable: 'convert' | 'magick', out: string): string {
+  //   this.#commands = [executable, ...this.#commands, this.#escape(out)]
 
-    return this.#join()
-  }
+  //   return this.#join()
+  // }
 
   command(unsanitizedInput: string): this {
     this.#commands.push(unsanitizedInput)
@@ -32,9 +35,9 @@ class ImageMagickCommandBuilder {
   }
 
   parens(im: this): this {
-    this.#commands.push('\\(')
-    this.#commands.push(im.#join())
-    this.#commands.push('\\)')
+    this.#commands.push('(')
+    this.#commands.push(im)
+    this.#commands.push(')')
 
     return this
   }
@@ -168,6 +171,8 @@ class ImageMagickCommandBuilder {
   #escape(data: unknown): string {
     const input = String(data)
 
+    return input
+
     // if single safe word, return it
     if (input.match(/^[\w+-]+$/)) {
       return input
@@ -176,11 +181,7 @@ class ImageMagickCommandBuilder {
     return `'${input.replace(/\\/g, '\\\\').replace(/'/, '\\\'')}'`
   }
 
-  #join(): string {
-    return this.#commands.join(' ')
-  }
-
-  #commands: string[] = []
+  #commands: (string | ImageMagickCommandBuilder)[] = []
 }
 
 type GravityType = 'None' | 'Center' | 'East' | 'Forget' | 'NorthEast' | 'North' | 'NorthWest' | 'SouthEast' | 'South' | 'SouthWest' | 'West'
