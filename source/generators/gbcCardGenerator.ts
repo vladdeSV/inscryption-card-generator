@@ -17,4 +17,30 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
   generateBack(): Promise<Buffer> {
     throw new Error('Method not implemented.')
   }
+
+  private extendedBorder(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
+    const extraSize = 12
+    im.gravity('Center').background('#d7e2a3').extent(44 + extraSize, 58 + extraSize)
+
+    return im
+  }
+
+  private scanlines(im: ImageMagickCommandBuilder): ImageMagickCommandBuilder {
+    const tileableScanline = IM()
+      .command('-stroke black')
+      .size(1, 2)
+      .command('xc:transparent')
+      .command('-draw "rectangle 0,0 0,0"')
+
+    const scanlines = IM()
+      .parens(tileableScanline)
+      .command('-write mpr:tile +delete -size 100x100 tile:mpr:tile')
+      .command('-channel A -evaluate multiply 0.1 +channel')
+
+    im.parens(scanlines)
+      .compose('Atop')
+      .composite()
+
+    return im
+  }
 }
