@@ -7,9 +7,9 @@ import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boole
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
 import { res, res2 } from './temp'
 // import { generateAct2Card } from './fns/generateAct2Card'
-import { Resource } from './resource'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { BaseCardGenerator, bufferFromCommandBuilder, CardGenerator } from './generators/base'
+import { GbcCardGenerator } from './generators/gbcCardGenerator'
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -205,11 +205,10 @@ server.post('/api/card/:id/front', async (request, reply) => {
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc') => {
+  const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
     switch (act) {
-      default:
       case 'leshy': return new LeshyCardGenerator(res, options)
-      // case 'gbc': new GbcCardGenerator(res2, options)
+      case 'gbc': return new GbcCardGenerator(res2, options)
     }
   }
 
@@ -247,11 +246,10 @@ server.post('/api/card/:id/back', async (request, reply) => {
 
   const options = { border, scanlines: scanline, locale }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc') => {
+  const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
     switch (act) {
-      default:
       case 'leshy': return new LeshyCardGenerator(res, options)
-      // case 'gbc': new GbcCardGenerator(res2, options)
+      case 'gbc': return new GbcCardGenerator(res2, options)
     }
   }
 
