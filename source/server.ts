@@ -180,7 +180,7 @@ server.options('/api/card/*/*', (_, reply) => {
     .send()
 })
 
-server.post('/api/card/:id/front', async (request, reply) => {
+server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
   const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
