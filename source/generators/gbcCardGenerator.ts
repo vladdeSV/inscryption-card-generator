@@ -62,9 +62,14 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
 
     // staticon or power
     if (card.statIcon) {
-      im.gravity('SouthWest').resource(this.resource.get('staticon', card.statIcon)).geometry(2, 2).composite()
+      im.gravity('SouthWest')
+        .resource(this.resource.get('staticon', card.statIcon))
+        .geometry(2, 2)
+        .composite()
     } else {
-      // im.gravity('SouthWest').command(`-draw 'text 2,0 "${Number(card.power)}"'`)
+      im.gravity('SouthWest')
+        .command('-draw')
+        .command(`text 2,0 "${Number(card.power)}"`)
     }
 
     if (card.cost) {
@@ -86,7 +91,7 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
     }
 
     // health
-    // im.gravity('SouthEast').command(`-draw 'text 0,0 "${card.health}"'`)
+    im.gravity('SouthEast').command('-draw').command(`text 0,0 "${card.health}"`)
 
     // sigils
     if (card.sigils.length === 1) {
@@ -116,7 +121,7 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
     }
 
     // black outline onto card
-    im.command('-fill').command('none').command('-stroke').command('rgb\\(2,10,17\\)').command('-strokewidth').command('0')//.command('-draw "rectangle 0,0 41,55"')
+    im.command('-fill').command('none').command('-stroke').command('rgb\\(2,10,17\\)').command('-strokewidth').command('0').command('-draw').command('rectangle 0,0 41,55')
 
     // increase size for all cards, to account for frame
     im.gravity('Center').extent(44, 58)
@@ -184,7 +189,8 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
       .command('-stroke').command('black')
       .size(1, 2)
       .command('xc:transparent')
-    // .command('-draw "rectangle 0,0 0,0"')
+      .command('-draw')
+      .command('rectangle 0,0 0,0')
 
     const scanlines = IM()
       .parens(tileableScanline)
