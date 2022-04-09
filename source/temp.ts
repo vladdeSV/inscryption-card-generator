@@ -9,17 +9,18 @@ export type Act1Resource = {
   cardreward: Record<'1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', string>,
   cardtrial: Record<'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes', string>,
   cardtarot: Record<'death' | 'devil' | 'empress' | 'fool' | 'tower', string>,
-  cost: Record<string, string>,
   boon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
   deathcard: Record<string, string>,
   tribe: Record<Exclude<Card['tribes'][number], 'squirrel'>, string>,
   misc: Record<string, string>,
-  staticon: Record<Exclude<StatIcon, 'greengems'>, string>,
   font: Record<string, string>,
+  decal: Record<string, string>
+  staticon: Record<Exclude<StatIcon, 'greengems'>, string>,
+
+  cost: Record<string, string>,
   sigil: Record<string /* Card['sigils'][number] */, string>,
   portrait: Record<string, string>
   emission: Record<string, string>
-  decal: Record<string, string>
 }
 
 const act1ResourceMap: Act1Resource = {
