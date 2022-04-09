@@ -18,8 +18,7 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
     im.font(this.resource.get('font', 'default'))
       .pointsize(16)
       .gravity('Center')
-      .background('#020a11')
-      .background('None') // debug
+      .background('None')
       .filter('Box')
 
     const cardType = ((card: Card): 'common' | 'rare' | 'terrain' | 'terrain_rare' => {
