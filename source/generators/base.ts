@@ -26,7 +26,7 @@ abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string 
 
 function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer): Promise<Buffer> {
   return new Promise<Buffer>((resolve, reject) => {
-    const process = spawn('magick', [...im.parts(), '-'], { stdio: 'pipe' })
+    const process = spawn('convert', [...im.parts(), '-'], { stdio: 'pipe' })
     console.log('spawned a process', process.pid)
 
     const buffers: Buffer[] = []
