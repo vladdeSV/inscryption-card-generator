@@ -48,6 +48,7 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
       if (card.portrait.type === 'creature') {
         im.parens(IM().resource(this.resource.get('portrait', card.portrait.id)))
           .geometry(1, 1)
+          .composite()
       } else if (card.portrait.type === 'custom' && card.portrait.data.gbc) {
         im.parens(
           IM('-')
@@ -55,10 +56,8 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
             .gravity('North')
             .interpolate('Nearest')
             .resizeExt(g => g.size(41, 28).flag('>'))
-        ).geometry(0, 1)
+        ).geometry(0, 1).composite()
       }
-
-      im.composite()
     }
 
     // staticon or power
