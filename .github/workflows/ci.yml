@@ -22,14 +22,14 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: test
       run: yarn jest
-    - name: verify all resources
-      run: yarn ts-node source/temp.ts
-    - name: build & bundle
-      run: yarn build
     - name: extract resources
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
       run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
+    - name: verify all resources
+      run: yarn ts-node source/temp.ts
+    - name: build & bundle
+      run: yarn build
     - name: build docker image
       run: docker build . --file Dockerfile --tag inscryption-card-generator:ci
     
