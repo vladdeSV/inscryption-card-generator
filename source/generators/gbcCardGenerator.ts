@@ -10,6 +10,8 @@ const originalCardHeight = 56 // px, size: 42x56
 const fullsizeCardHeight = 1050 // px
 const scale = fullsizeCardHeight / originalCardHeight
 
+type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper' | 'prospector'
+
 class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanlines?: boolean }> {
   generateFront(card: Card): Promise<Buffer> {
     const im = IM()
@@ -153,6 +155,32 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
 
   generateBack(type: 'common' | 'submerged' = 'common'): Promise<Buffer> {
     const im = IM(this.resource.get('cardback', type))
+      .gravity('Center')
+      .background('None')
+      .filter('Box')
+
+    // increase size to match regular cards
+    im.extent(44, 58)
+
+    // border
+    if (this.options.border) {
+      this.extendedBorder(im)
+    }
+
+    // scanlines
+    if (this.options.scanlines) {
+      this.scanlines(im)
+    }
+
+    // resize
+    im.resizeExt(g => g.scale(scale * 100)) // 1050 pixels @ 300dpi = 3.5 inches
+
+    return bufferFromCommandBuilder(im)
+  }
+
+  generateAct2NpcCard(npc: Npc): Promise<Buffer> {
+    // npc
+    const im = IM(this.resource.get('npc', npc))
       .gravity('Center')
       .background('None')
       .filter('Box')
