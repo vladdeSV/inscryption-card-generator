@@ -22,6 +22,8 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: test
       run: yarn jest
+    - name: verify all resources
+      run: yarn ts-node source/temp.ts
     - name: build & bundle
       run: yarn build
     - name: extract resources
