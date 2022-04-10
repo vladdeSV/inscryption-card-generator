@@ -38,7 +38,7 @@ jobs:
     - name: wait for server to start (guess)
       run: sleep 10
     - name: validate server running
-      run: curl -s -o /dev/null -w '%{http_code}' localhost:8080 && if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
+      run: if [ $(curl -s -o /dev/null -w '%{http_code}' localhost:8080) != 200 ]; then exit 1; fi
     - name: check generate act 1 card
       run: if [ $(curl -s -o /dev/null -w '%{http_code}' -d '{}' -X POST localhost:8080/api/card/leshy/) != 201 ]; then exit 1; fi
     - name: stop all container
