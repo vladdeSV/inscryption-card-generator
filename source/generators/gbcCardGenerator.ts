@@ -122,7 +122,7 @@ class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanli
     }
 
     // black outline onto card
-    im.command('-fill').command('none').command('-stroke').command('rgb\\(2,10,17\\)').command('-strokewidth').command('0').command('-draw').command('rectangle 0,0 41,55')
+    im.command('-fill').command('none').command('-stroke').command('rgb(2,10,17)').command('-strokewidth').command('0').command('-draw').command('rectangle 0,0 41,55')
 
     // increase size for all cards, to account for frame
     im.gravity('Center').extent(44, 58)
