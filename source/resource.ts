@@ -1,7 +1,12 @@
 import { existsSync } from 'fs'
 import { normalize, join } from 'path'
 
-export class Resource<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
+export interface Resource {
+  has(category: string, id: string): boolean,
+  get(category: string, id: string, defaultResourceId?: string): string,
+}
+
+export class SingleResource<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
   constructor(sourcePath: string, input: T) {
     this.#path = normalize(sourcePath)
     this.#data = input
@@ -58,8 +63,8 @@ export class Resource<T extends { [s: string]: { [s: string]: string } } = { [s:
   #data: T
 }
 
-class ResourceCollection<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
-  constructor(resources: Resource<T>[]) {
+export class ResourceCollection<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
+  constructor(resources: SingleResource<T>[]) {
     this.#resources = resources
   }
 
@@ -83,5 +88,5 @@ class ResourceCollection<T extends { [s: string]: { [s: string]: string } } = { 
     throw `Unrecognized id '${category}:${id}'`
   }
 
-  #resources: Resource<T>[]
+  #resources: SingleResource<T>[]
 }

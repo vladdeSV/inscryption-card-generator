@@ -10,9 +10,8 @@ interface CardGenerator {
   generateBack: () => Promise<Buffer>
 }
 
-abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string } }, T extends Record<string, any>> implements CardGenerator {
-
-  constructor(resources: Resource<R>, options: T) {
+abstract class BaseCardGenerator<T extends Record<string, any>> implements CardGenerator {
+  constructor(resources: Resource, options: T) {
     this.resource = resources
     this.options = options
   }
@@ -20,7 +19,7 @@ abstract class BaseCardGenerator<R extends { [s: string]: { [s: string]: string 
   abstract generateFront(card: Card): Promise<Buffer>
   abstract generateBack(): Promise<Buffer>
 
-  protected resource: Resource<R>
+  protected resource: Resource
   protected options: T
 }
 

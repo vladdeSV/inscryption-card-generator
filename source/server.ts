@@ -5,7 +5,7 @@
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
-import { res, res2 } from './temp'
+import { res2 } from './temp'
 // import { generateAct2Card } from './fns/generateAct2Card'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { BaseCardGenerator, bufferFromCommandBuilder, CardGenerator } from './generators/base'
@@ -207,7 +207,7 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 
   const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
     switch (act) {
-      case 'leshy': return new LeshyCardGenerator(res, options)
+      case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
     }
   }
@@ -248,7 +248,7 @@ server.post('/api/card/:id/back', async (request, reply) => {
 
   const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
     switch (act) {
-      case 'leshy': return new LeshyCardGenerator(res, options)
+      case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
     }
   }

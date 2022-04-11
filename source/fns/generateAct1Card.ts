@@ -1,11 +1,10 @@
-export { /* , generateAct1BackCard, generateAct1BoonCard, generateAct1RewardCard, generateAct1TrialCard, generateAct1TarotCard */ }
+// export { /* , generateAct1BackCard, generateAct1BoonCard, generateAct1RewardCard, generateAct1TrialCard, generateAct1TarotCard */ }
 
-import { Resource } from '../resource'
-import IM from '../im'
-import { Card } from '../card'
-import { spawn } from 'child_process'
-import { getGemCostResourceId } from './helpers'
-import { Act1Resource } from '../temp'
+// import { SingleResource } from '../resource'
+// import IM from '../im'
+// import { Card } from '../card'
+// import { spawn } from 'child_process'
+// import { getGemCostResourceId } from './helpers'
 
 // function generateAct1BoonCard(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', res: Resource<Act1Resource>, options: { border?: boolean } = {}): Buffer {
 //   const im = IM()

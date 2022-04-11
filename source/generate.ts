@@ -2,10 +2,10 @@ import { Card } from './card'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import * as path from 'path'
 // import { generateAct2BackCard, generateAct2Card, generateAct2NpcCard } from './fns/generateAct2Card'
-import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
+// import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
 import { convertJldrCard, JldrCreature, CreatureId as JldrCreatureId } from './jldrcard'
-import { res, res2 } from './temp'
-import { Resource } from './resource'
+import { res2 } from './temp'
+import { SingleResource } from './resource'
 
 function getGameTranslationId(id: string | undefined): string | undefined {
 
@@ -115,7 +115,7 @@ cards.forEach(card => {
   }
 })
 
-function slask<T, T2 extends { [s: string]: { [s: string]: string } }>(folderName: string, fn: (t: T, r: Resource<T2>, opts: any) => Buffer, arr: T[], res: Resource<T2>, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
+function slask<T, T2 extends { [s: string]: { [s: string]: string } }>(folderName: string, fn: (t: T, r: SingleResource<T2>, opts: any) => Buffer, arr: T[], res: SingleResource<T2>, options: any, filenameGenerator: (t: T) => string | undefined = () => undefined) {
   const folderpath = path.join('out', folderName)
   mkdirSync(folderpath, { recursive: true })
 
@@ -142,27 +142,27 @@ function slask<T, T2 extends { [s: string]: { [s: string]: string } }>(folderNam
 
 for (const border of [true/* , false */]) {
   const toplevelName = `act1/${border ? 'border' : 'regular'}`
-  slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
-  slask(toplevelName + '/boons', generateAct1BoonCard, ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'], res, { border: border })
-  slask(toplevelName + '/rewards', generateAct1RewardCard, ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'], res, { border: border })
-  slask(toplevelName + '/trials', generateAct1TrialCard, ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'], res, { border: border })
-  slask(toplevelName + '/tarots', generateAct1TarotCard, ['death', 'devil', 'empress', 'fool', 'tower'], res, { border: border })
-  slask(toplevelName, generateAct1Card, cards, res, { border: border }, (card: Card) => {
+  // slask(toplevelName + '/backs', generateAct1BackCard, ['bee', 'common', 'deathcard', 'squirrel', 'submerge'], res, { border: border })
+  // slask(toplevelName + '/boons', generateAct1BoonCard, ['doubledraw', 'singlestartingbone', 'startingbones', 'startinggoat', 'startingtrees', 'tutordraw'], res, { border: border })
+  // slask(toplevelName + '/rewards', generateAct1RewardCard, ['1blood', '2blood', '3blood', 'bones', 'bird', 'canine', 'hooved', 'insect', 'reptile'], res, { border: border })
+  // slask(toplevelName + '/trials', generateAct1TrialCard, ['abilities', 'blood', 'bones', 'flying', 'pelts', 'power', 'rare', 'ring', 'strafe', 'submerge', 'toughness', 'tribes'], res, { border: border })
+  // slask(toplevelName + '/tarots', generateAct1TarotCard, ['death', 'devil', 'empress', 'fool', 'tower'], res, { border: border })
+  // slask(toplevelName, generateAct1Card, cards, res, { border: border }, (card: Card) => {
 
-    if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'goat_sexy') {
-      return 'goat_sexy'
-    }
+  //   if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'goat_sexy') {
+  //     return 'goat_sexy'
+  //   }
 
-    if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'jerseydevil_flying') {
-      return 'jerseydevil_flying'
-    }
+  //   if (card.portrait?.type === 'resource' && card.portrait?.resourceId === 'jerseydevil_flying') {
+  //     return 'jerseydevil_flying'
+  //   }
 
-    if (card.portrait?.type === 'creature') {
-      return card.portrait.id
-    }
+  //   if (card.portrait?.type === 'creature') {
+  //     return card.portrait.id
+  //   }
 
-    return card.gameId
-  })
+  //   return card.gameId
+  // })
 }
 
 // for (const useScanline of [true, false]) {
@@ -174,15 +174,15 @@ for (const border of [true/* , false */]) {
 //   }
 // }
 
-const template: Card = {
-  name: '',
-  cost: undefined,
-  power: 0,
-  health: 0,
-  sigils: [],
-  tribes: [],
-  temple: 'nature',
-  flags: { smoke: false, blood: false, golden: false, rare: false, terrain: false, terrainLayout: false, squid: false, enhanced: false, redEmission: false, fused: false, paint: false, hidePowerAndHealth: false },
-}
+// const template: Card = {
+//   name: '',
+//   cost: undefined,
+//   power: 0,
+//   health: 0,
+//   sigils: [],
+//   tribes: [],
+//   temple: 'nature',
+//   flags: { smoke: false, blood: false, golden: false, rare: false, terrain: false, terrainLayout: false, squid: false, enhanced: false, redEmission: false, fused: false, paint: false, hidePowerAndHealth: false },
+// }
 
-writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: true, locale: 'en' }))
+// writeFileSync('out/test.png', generateAct1Card({ ...template, name: 'test', cost: { type: 'gem', gems: ['orange'] } }, res, { border: true, locale: 'en' }))

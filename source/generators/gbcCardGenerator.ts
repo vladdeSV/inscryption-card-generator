@@ -12,7 +12,7 @@ const scale = fullsizeCardHeight / originalCardHeight
 
 type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper' | 'prospector'
 
-class GbcCardGenerator extends BaseCardGenerator<any, { border?: boolean, scanlines?: boolean }> {
+class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?: boolean }> {
   generateFront(card: Card): Promise<Buffer> {
     const im = IM()
 
