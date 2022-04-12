@@ -6,6 +6,8 @@ export { Tribe, StatIcon, Decal, Temple, CreatureId, Portrait }
 type Sigil = Static<typeof Sigil>
 type Card = Static<typeof Card>
 type Portrait = Static<typeof Portrait>
+type CreatureId = Static<typeof CreatureId>
+type StatIcon = Static<typeof StatIcon>
 
 const Sigil = Union(
   Literal('reach'), // Reach
@@ -112,7 +114,6 @@ const Tribe = Union(
   Literal('squirrel'),
 )
 
-type StatIcon = Static<typeof StatIcon>
 const StatIcon = Union(
   Literal('ants'), // Ants
   Literal('greengems'), // Greengems
@@ -124,6 +125,7 @@ const StatIcon = Union(
 )
 const Decal = Union(Literal('snelk'), Literal('child'), Literal('leshy'))
 const Temple = Union(Literal('nature'), Literal('tech'), Literal('undead'), Literal('wizard'))
+
 const CreatureId = Union(
   Literal('!bountyhunter_base'),
   Literal('!buildacard_base'),

@@ -4,11 +4,12 @@
 
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
-import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId } from './card'
+import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId as CardCreatureId } from './card'
+import { CreatureId } from './jldrcard'
 import { res2 } from './temp'
 // import { generateAct2Card } from './fns/generateAct2Card'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
-import { BaseCardGenerator, bufferFromCommandBuilder, CardGenerator } from './generators/base'
+import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
 
 type ApiCard = Static<typeof ApiCard>
@@ -136,8 +137,8 @@ function convertApiDataToCard(input: ApiCard): Card {
     }
   } else if (input.portrait?.type === 'creature') {
     portrait = {
-      type: 'creature',
-      id: input.portrait.creature,
+      type: 'resource',
+      resourceId: resourceIdFromCreatureId(input.portrait.creature),
     }
   }
 
@@ -272,3 +273,107 @@ server.post('/api/card/:id/back', async (request, reply) => {
 
 server.get('/', (_, reply) => reply.status(200).send('OK'))
 server.listen(8080, () => console.log('Server running'))
+
+function resourceIdFromCreatureId(creatureId: CreatureId): string {
+  switch (creatureId) {
+    // act 1
+    case 'Adder': return 'adder'
+    case 'Alpha': return 'alpha'
+    case 'Amalgam': return 'amalgam'
+    case 'Amoeba': return 'amoeba'
+    case 'Ant': return 'ant'
+    case 'AntQueen': return 'antqueen'
+    case 'Bat': return 'bat'
+    case 'Beaver': return 'beaver'
+    case 'Bee': return 'bee'
+    case 'Beehive': return 'beehive'
+    case 'Bloodhound': return 'bloodhound'
+    case 'Boulder': return 'boulder'
+    case 'Bullfrog': return 'bullfrog'
+    case 'CagedWolf': return 'cagedwolf'
+    case 'Cat': return 'cat'
+    case 'CatUndead': return 'cat_undead'
+    case 'Cockroach': return 'cockroach'
+    case 'Coyote': return 'coyote'
+    case 'Daus': return 'daus'
+    case 'Elk': return 'deer'
+    case 'ElkCub': return 'deercub'
+    case 'FieldMouse': return 'fieldmice'
+    case 'Geck': return 'geck'
+    case 'Goat': return 'goat'
+    case 'Grizzly': return 'grizzly'
+    case 'JerseyDevil': return 'jerseydevil'
+    case 'Kingfisher': return 'kingfisher'
+    case 'Maggots': return 'maggots'
+    case 'Magpie': return 'magpie'
+    case 'Mantis': return 'mantis'
+    case 'MantisGod': return 'mantisgod'
+    case 'Mole': return 'mole'
+    case 'MoleMan': return 'moleman'
+    case 'Moose': return 'moose'
+    case 'Mothman_Stage1': return 'mothman_1'
+    case 'Mothman_Stage2': return 'mothman_2'
+    case 'Mothman_Stage3': return 'mothman_3'
+    case 'Mule': return 'mule'
+    case 'Opossum': return 'opossum'
+    case 'Otter': return 'otter'
+    case 'Ouroboros': return 'ouroboros'
+    case 'PackRat': return 'packrat'
+    case 'Porcupine': return 'porcupine'
+    case 'Pronghorn': return 'pronghorn'
+    case 'Rabbit': return 'rabbit'
+    case 'RatKing': return 'ratking'
+    case 'Rattler': return 'rattler'
+    case 'Raven': return 'raven'
+    case 'RavenEgg': return 'ravenegg'
+    case 'Shark': return 'shark'
+    case 'Skink': return 'skink'
+    case 'SkinkTail': return 'skink_tail'
+    case 'Skunk': return 'skunk'
+    case 'Snapper': return 'turtle'
+    case 'Sparrow': return 'sparrow'
+    case 'SquidBell': return 'squidbell'
+    case 'SquidCards': return 'squidcards'
+    case 'SquidMirror': return 'squidmirror'
+    case 'Squirrel': return 'squirrel'
+    case 'Tail_Bird': return 'bird_tail'
+    case 'Tail_Furry': return 'canine_tail'
+    case 'Tail_Insect': return 'insect_tail'
+    case 'Urayuli': return 'urayuli'
+    case 'Vulture': return 'vulture'
+    case 'Warren': return 'warren'
+    case 'Wolf': return 'wolf'
+    case 'WolfCub': return 'wolfcub'
+    case 'BaitBucket': return 'baitbucket'
+    case 'Dam': return 'dam'
+    case 'DausBell': return 'dausbell'
+    case 'GoldNugget': return 'goldnugget'
+    case 'PeltGolden': return 'pelt_golden'
+    case 'PeltHare': return 'pelt_hare'
+    case 'PeltWolf': return 'pelt_wolf'
+    case 'RingWorm': return 'ringworm'
+    case 'Smoke': return 'smoke'
+    case 'Smoke_Improved': return 'smoke_improved'
+    case 'Smoke_NoBones': return 'smoke'
+    case 'Starvation': return 'starvingman'
+    case 'Stinkbug_Talking': return 'stinkbug_talking'
+    case 'Stoat_Talking': return 'stoat_talking'
+    case 'Trap': return 'trap'
+    case 'TrapFrog': return 'trapfrog'
+    case 'Wolf_Talking': return 'wolf_talking'
+    case 'FrozenOpossum': return 'frozen_opossum'
+    case 'Tree_SnowCovered': return 'tree_snowcovered'
+    case 'Tree': return 'tree'
+    case 'Stump': return 'stump'
+
+    // act 2
+    case 'Skeleton': return 'skeleton'
+    case 'Banshee': return 'banshee'
+    case 'Bonehound': return 'bonehound'
+    case 'FrankNStein': return 'franknstein'
+    case 'Gravedigger': return 'gravedigger'
+    case 'Revenant': return 'revenant'
+  }
+
+  return creatureId
+}
