@@ -611,6 +611,9 @@ const act1ResourceMap: Act1Resource = {
     'whackamole': 'sigils/whackamole.png',
   },
   'portrait': {
+    'stoat_talking': 'portraits/leshy/stoat_talking.png',
+    'wolf_talking': 'portraits/leshy/wolf_talking.png',
+    'stinkbug_talking': 'portraits/leshy/stinkbug_talking.png',
     'banshee': 'portraits/grimora/banshee.png',
     'bonehound': 'portraits/grimora/bonehound.png',
     'franknstein': 'portraits/grimora/franknstein.png',
