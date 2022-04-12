@@ -72,6 +72,7 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
         .command(`text 2,0 "${Number(card.power)}"`)
     }
 
+    // costs
     if (card.cost) {
       im.gravity('NorthEast')
 
