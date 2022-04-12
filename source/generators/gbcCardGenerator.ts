@@ -49,6 +49,10 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
         im.parens(IM().resource(this.resource.get('portrait', card.portrait.id)))
           .geometry(1, 1)
           .composite()
+      } else if (card.portrait.type === 'resource') {
+        im.parens(IM().resource(this.resource.get('portrait', card.portrait.resourceId)))
+          .geometry(1, 1)
+          .composite()
       } else if (card.portrait.type === 'custom' && card.portrait.data.gbc) {
         im.parens(
           IM('-')
