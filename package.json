@@ -9,6 +9,7 @@
     "decrypt-resources": "gpg -d resources.tar.gz.gpg | tar -xz"
   },
   "dependencies": {
+    "@influxdata/influxdb-client": "^1.24.0",
     "express": "^4.17.3",
     "runtypes": "^6.5.1"
   },
