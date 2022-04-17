@@ -11,6 +11,25 @@ import { res2 } from './temp'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
+import { InfluxDB, Point } from '@influxdata/influxdb-client'
+import { hostname } from 'os'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+// influxdb
+const token = process.env.token
+const org = process.env.org
+const bucket = process.env.bucket
+const url = process.env.url
+
+if (!token || !org || !bucket || !url) {
+  throw new Error('missing influxdb config')
+}
+
+const client = new InfluxDB({ url: url, token: token })
+const writeApi = client.getWriteApi(org, bucket)
+writeApi.useDefaultTags({ host: hostname() })
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -215,19 +234,32 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 
   const generator: CardGenerator = generatorFromAct(act)
 
+  const point = new Point('generator')
+    .tag('card-type', 'front')
+    .tag('act', act)
+
   try {
+    const startGenerateDateTime = new Date()
     const buffer = await generator.generateFront(card)
+    const endGenerateDateTime = new Date()
+
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
+
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
-
-    return
   } catch (e) {
+    point.booleanField('failed', true)
+
     reply.status(422)
     reply.send({ error: 'Unprocessable data', message: e })
-
-    return
   }
+
+  writeApi.writePoint(point)
+  writeApi.flush()
 })
 
 server.post('/api/card/:id/back', async (request, reply) => {
