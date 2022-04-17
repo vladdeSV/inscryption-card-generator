@@ -17,6 +17,20 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
+// influxdb
+const token = process.env.token
+const org = process.env.org
+const bucket = process.env.bucket
+const url = process.env.url
+
+if (!token || !org || !bucket || !url) {
+  throw new Error('missing influxdb config')
+}
+
+const client = new InfluxDB({ url: url, token: token })
+const writeApi = client.getWriteApi(org, bucket)
+writeApi.useDefaultTags({ host: hostname() })
+
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
   name: String,
@@ -220,31 +234,32 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 
   const generator: CardGenerator = generatorFromAct(act)
 
-  // You can generate an API token from the "API Tokens Tab" in the UI
-
-  const writeApi = client.getWriteApi(org, bucket)
-  writeApi.useDefaultTags({host: hostname(), ip: request.ip})
+  const point = new Point('generator')
+    .tag('card-type', 'front')
+    .tag('act', act)
 
   try {
-    const date1 = new Date()
+    const startGenerateDateTime = new Date()
     const buffer = await generator.generateFront(card)
-    const date2 = new Date()
+    const endGenerateDateTime = new Date()
 
-    const duration = (date2.getTime() - date1.getTime()) / 1000
-    writeApi.writePoint(new Point('generator').floatField('generation-time', duration))
-    await writeApi.close()
-    console.log('sent metrics at', date2, ' and took', duration, 'seconds')
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
 
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
   } catch (e) {
-    writeApi.writePoint(new Point('generator').booleanField('failed', true))
-    await writeApi.close()
-    console.log('sent metrics');
+    point.booleanField('failed', true)
+
     reply.status(422)
     reply.send({ error: 'Unprocessable data', message: e })
   }
+
+  writeApi.writePoint(point)
+  writeApi.flush()
 })
 
 server.post('/api/card/:id/back', async (request, reply) => {
