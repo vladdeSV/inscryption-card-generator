@@ -11,6 +11,8 @@ import { res2 } from './temp'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
+import { InfluxDB, Point } from '@influxdata/influxdb-client'
+import { hostname } from 'os'
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -215,18 +217,30 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 
   const generator: CardGenerator = generatorFromAct(act)
 
+  // You can generate an API token from the "API Tokens Tab" in the UI
+
+  const writeApi = client.getWriteApi(org, bucket)
+  writeApi.useDefaultTags({host: hostname(), ip: request.ip})
+
   try {
+    const date1 = new Date()
     const buffer = await generator.generateFront(card)
+    const date2 = new Date()
+
+    const duration = (date2.getTime() - date1.getTime()) / 1000
+    writeApi.writePoint(new Point('generator').floatField('generation-time', duration))
+    await writeApi.close()
+    console.log('sent metrics at', date2, ' and took', duration, 'seconds')
+
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
-
-    return
   } catch (e) {
+    writeApi.writePoint(new Point('generator').booleanField('failed', true))
+    await writeApi.close()
+    console.log('sent metrics');
     reply.status(422)
     reply.send({ error: 'Unprocessable data', message: e })
-
-    return
   }
 })
 
