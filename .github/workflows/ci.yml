@@ -22,6 +22,10 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: test
       run: yarn jest
+    - name: create env file
+      env:
+        ENV: ${{ secrets.ENV }}
+      run: echo "$ENV" > .env
     - name: extract resources
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
