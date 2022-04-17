@@ -13,6 +13,9 @@ import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
