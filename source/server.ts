@@ -14,6 +14,7 @@ import { GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
 import * as dotenv from 'dotenv'
+import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
 
 dotenv.config()
 
@@ -201,7 +202,7 @@ server.options('/api/card/*/*', (_, reply) => {
 server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
-  const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.id)
   if (actValidation.success === false) {
     reply.status(404)
     reply.send({ error: 'Invalid act', invalid: request.params.id })
@@ -223,10 +224,11 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
+  const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
+      case 'pixelprofilgate': return new PixelProfilgateGenerator()
     }
   }
 
