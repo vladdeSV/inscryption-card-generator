@@ -163,6 +163,20 @@ class ImageMagickCommandBuilder {
     return this
   }
 
+  fill(color: string): this {
+    this.#commands.push('-fill')
+    this.#commands.push(this.#escape(color))
+
+    return this
+  }
+
+  opaque(color: string, invert?: boolean): this {
+    this.#commands.push(invert ? '+opaque' : '-opaque')
+    this.#commands.push(this.#escape(color))
+
+    return this
+  }
+
   // expose escape method.
   sanitize(input: unknown) {
     return this.#escape(input)
