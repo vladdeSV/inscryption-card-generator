@@ -130,9 +130,7 @@ function convertApiDataToCard(input: ApiCard): Card {
       gems.push('blue' as const)
     }
 
-    if (gems.length) {
-      cost = { type: 'gem', gems: gems }
-    }
+    cost = { type: 'gem', gems: gems }
   }
 
   let portrait: Portrait | undefined = undefined
