@@ -4,7 +4,7 @@ import { Card } from '../../card'
 import { SingleResource } from '../../resource'
 import { getGemCostResourceId } from '../../fns/helpers'
 
-type Options = { border: boolean }
+type Options = { border: boolean, description?: string }
 
 const originalCardHeight = 146 // px
 const fullsizeCardHeight = 1460 // px
@@ -24,6 +24,14 @@ const cardBorderPalette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc'
   wizard: { common: '#dc93b3', rare: '#ff7ba5' },
   undead: { common: '#97b69e', rare: '#7fbe8c' },
   misc: { common: '#beb6a9', rare: '#d8a986' },
+}
+
+const cardDescriptionTextPalette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc', string> = {
+  nature: '#7d4e30',
+  tech: '#497b9c',
+  wizard: '#9c4980',
+  undead: '#6a7054',
+  misc: '#635f58',
 }
 
 export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
@@ -113,22 +121,40 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     // resize
     im.resizeExt(g => g.scale(scale * 100))
 
-    im.fill('black')
-
     // name
     if (card.name) {
       im.gravity('North')
+        .fill('black')
         .command('-draw').command(`text 0,90 '${card.name.replaceAll('\'', '\\\'')}'`)
     }
 
     // power
     if (!card.statIcon) {
       im.gravity('NorthWest')
+        .fill('black')
         .command('-draw').command(`text 146,842 '${card.power}'`)
+    }
+
+    this.options.description = 'Push your luck, what could go wrong.'
+
+    if (this.options.description) {
+      const description = IM()
+        .background('None')
+        .fill(cardDescriptionTextPalette[cardPalette])
+        .pointsize(45)
+        .label(this.options.description)
+        .trim()
+        .gravity('Center')
+
+      im.parens(description)
+        .gravity('Center')
+        .geometry(609 - 510, 938 - 730)
+        .composite()
     }
 
     // power
     im.gravity('NorthWest')
+      .fill('black')
       .command('-draw').command(`text 841,175 '${card.health}'`)
 
     // extended border
