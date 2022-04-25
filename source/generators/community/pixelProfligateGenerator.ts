@@ -34,6 +34,12 @@ const cardDescriptionTextPalette: Record<'nature' | 'tech' | 'wizard' | 'undead'
   misc: '#635f58',
 }
 
+type SigilEntry = {
+  name: string,
+  text: string,
+  sigilId: string,
+}
+
 export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
   constructor(options: Options) {
     super(
@@ -160,12 +166,12 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     }
 
     // sigils
-    const sigilSections = card.sigils.map(sigil => {
+    const sigilSections = card.sigils.filter(sigil => Object.keys(this.sigilInformationMap).includes(sigil)).map(sigil => {
       const caption = IM()
         .size(660)
         .background('None')
         .pointsize(44)
-        .command(`caption:${'todo: add a very long caption so it wraps multiple lines or more'}`)
+        .command(`caption:${this.sigilInformationMap[sigil].text}`)
         .trim()
 
       const section = IM().size(880, 666).command('xc:transparent')
@@ -175,7 +181,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .gravity('NorthWest').geometry(2, -26).composite()
 
         // draw sigil name
-        .pointsize(55).command('-draw', `text 187,4 '${'todo: name'}'`)
+        .pointsize(55).command('-draw', `text 187,4 '${this.sigilInformationMap[sigil].name.replaceAll('\'', '\\\'')}'`)
 
         // add caption
         .parens(caption).gravity('NorthWest').geometry(220, 60).composite()
@@ -212,6 +218,52 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
   generateBack(): Promise<Buffer> {
     throw new Error('Method not implemented.')
+  }
+
+  private sigilInformationMap: { [s: string]: SigilEntry } = {
+    'allstrike': { name: 'Moon Strike', text: 'This card attacks all opposing lanes when it attacks.', sigilId: 'allstrike' },
+    'beesonhit': { name: 'Bees Within', text: 'When this card is damaged, search 1 "Bee" from your deck to your hand.', sigilId: 'beesonhit' },
+    'buffneighbours': { name: 'Leader', text: 'While this card is on the field, it increases the power of the cards left and right of it by 1.', sigilId: 'buffneighbours' },
+    'corpseeater': { name: 'Corpse Eater', text: 'When a card on your side of the field perishes, this card is played in its place.', sigilId: 'corpseeater' },
+    'createbells': { name: 'Bellist', text: 'n/a', sigilId: 'createbells' },
+    'createdams': { name: 'Dam Builder', text: 'n/a', sigilId: 'createdams' },
+    'deathtouch': { name: 'Touch of Death', text: 'When this card damages an opposing card, that card perishes.', sigilId: 'deathtouch' },
+    'debuffenemy': { name: 'Stinky', text: 'While this card is on the field, the opposing card has their power reduced by 1.', sigilId: 'debuffenemy' },
+    'drawant': { name: 'Ant Spawner', text: 'When this card is played, search 1 "Worker Ant" from your deck to your hand.', sigilId: 'drawant' },
+    'drawcopy': { name: 'Fecundity', text: 'When this card is played, search 1 copy of it from your deck to your hand.', sigilId: 'drawcopy' },
+    'drawcopyondeath': { name: 'Unkillable', text: 'When this card perishes, it goes back to your hand instead of being discarded.', sigilId: 'drawcopyondeath' },
+    'drawrabbits': { name: 'Rabbit Hole', text: 'When this card is played, search 1 "Rabbit" card from your deck to your hand.', sigilId: 'drawrabbits' },
+    'drawrandomcardondeath': { name: 'Gift Bearer', text: 'When this card perishes, draw 1 card from your deck.', sigilId: 'drawrandomcardondeath' },
+    'evolve_1': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "{evolve_card}".', sigilId: 'evolve_1' },
+    'flying': { name: 'Airborne', text: 'This card attacks the opponent directly instead of the opposing card.', sigilId: 'flying' },
+    'guarddog': { name: 'Guardian', text: 'When an opposing card is played opposite of an empty space, this card moves to that space.', sigilId: 'guarddog' },
+    'icecube': { name: 'Frozen Away', text: 'When this card perishes, search a "{thaws_card}" and play it on this card\'s space. This card cannot be sacrificed. ', sigilId: 'icecube' },
+    'preventattack': { name: 'Repulsive', text: 'When an opposing card would damage this card, it does not.', sigilId: 'preventattack' },
+    'quadruplebones': { name: 'Bone King', text: 'When this card perishes, it provides 4 Bones instead of 1.', sigilId: 'quadruplebones' },
+    'randomability': { name: 'Amorphous', text: 'n/a', sigilId: 'randomability' },
+    'randomconsumable': { name: 'Trinket Bearer', text: 'When this card is played, draw 1 card from your deck or side deck.', sigilId: 'randomconsumable' },
+    'reach': { name: 'Mighty Leap', text: 'If the opposing card has the Airborne sigil, it attacks this card instead of attacking directly.', sigilId: 'reach' },
+    'sacrificial': { name: 'Many Lives', text: 'When this card is sacrificed, it does not perish.', sigilId: 'sacrificial' },
+    'sharp': { name: 'Sharp Quills', text: 'When an opposing card damages this card\'s health, that card is dealt 1 damage.', sigilId: 'sharp' },
+    'splitstrike': { name: 'Bifurcated Strike', text: 'This card attacks only the lanes left and right of the opposing space when it attacks.', sigilId: 'splitstrike' },
+    'squirrelorbit': { name: 'Tidal Lock', text: 'n/a', sigilId: 'squirrelorbit' },
+    'steeltrap': { name: 'Steel Trap', text: 'When this card perishes, the opposing card also perishes.', sigilId: 'steeltrap' },
+    'strafe': { name: 'Sprinter', text: 'During your end step, this card shifts to an adjacent empty lane.', sigilId: 'strafe' },
+    'strafepush': { name: 'Hefty', text: 'During your end step, this card shifts to an adjacent lane, pushing cards in the way with it.', sigilId: 'strafepush' },
+    'submerge': { name: 'Waterborne', text: 'Attacks targeting this card instead hit the owner of this card directly.', sigilId: 'submerge' },
+    'tailonhit': { name: 'Loose Tail', text: 'n/a', sigilId: 'tailonhit' },
+    'tripleblood': { name: 'Worthy Sacrifice', text: 'This card is worth 3 Blood when it\'s sacrificed.', sigilId: 'tripleblood' },
+    'tristrike': { name: 'Trifurcated Strike', text: 'This card attacks the lanes left and right, as well as the opposing space when it attacks.', sigilId: 'tristrike' },
+    'tutor': { name: 'Hoarder', text: 'When this card is played, search any 1 card from your deck to your hand.', sigilId: 'tutor' },
+    'whackamole': { name: 'Burrower', text: 'If an opposing card would attack an empty lane, this card moves to that lane to be hit instead.', sigilId: 'whackamole' },
+    'gainbattery': { name: 'Battery Bearer', text: 'When this card is played, it provides 1 energy cell to its owner.', sigilId: 'gainbattery' },
+    'squirrelstrafe': { name: 'Squirrel Shedder', text: 'During your end step, this card shifts to an adjacent empty lane, playing a "Squirrel" card in this card\'s previous lane.', sigilId: 'squirrelstrafe' },
+    'bonedigger': { name: 'Bone Digger', text: 'During your end step, this card generates 1 Bone.', sigilId: 'bonedigger' },
+    'brittle': { name: 'Brittle', text: 'After this card attacks, this card perishes.', sigilId: 'brittle' },
+
+    'evolve': { name: 'Fledgling', text: '', sigilId: 'evolve' },
+    'evolve_2': { name: 'Fledgling', text: '', sigilId: 'evolve_2' },
+    'evolve_3': { name: 'Fledgling', text: '', sigilId: 'evolve_3' },
   }
 }
 
