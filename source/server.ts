@@ -42,7 +42,7 @@ const ApiCard = RRecord({
   bloodCost: Number, // 0 - 4
   boneCost: Number, // 0 - 13, 0 - 10
   energyCost: Number, // 0 - 6
-  gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }),
+  gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }).optional(),
   sigils: Array(Sigil),
   decals: Array(Union(Literal('blood'), Literal('smoke'), Literal('paint'))),
   temple: Temple,
@@ -91,7 +91,7 @@ const templateApiCard: ApiCard = {
   bloodCost: 0,
   boneCost: 0,
   energyCost: 0,
-  gemCost: { orange: false, green: false, blue: false },
+  gemCost: undefined,
   sigils: [],
   decals: [],
   temple: 'nature',
@@ -118,7 +118,7 @@ function convertApiDataToCard(input: ApiCard): Card {
     cost = { type: 'bone', amount: input.boneCost }
   } else if (input.energyCost > 0) {
     cost = { type: 'energy', amount: input.energyCost }
-  } else {
+  } else if (input.gemCost) {
     const gems: ('orange' | 'green' | 'blue')[] = []
 
     if (input.gemCost.orange) {
