@@ -66,7 +66,7 @@ class ImageMagickCommandBuilder {
     return this
   }
 
-  size(w: number, h: number): this {
+  size(w?: number, h?: number): this {
     this.#commands.push('-size')
     this.#commands.push(this.#escape(new Geometry().size(w, h).toString()))
 
