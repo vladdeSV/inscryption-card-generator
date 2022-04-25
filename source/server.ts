@@ -228,7 +228,7 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
-      case 'pixelprofilgate': return new PixelProfilgateGenerator()
+      case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
 
