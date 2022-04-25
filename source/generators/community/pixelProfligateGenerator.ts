@@ -4,6 +4,8 @@ import { Card } from '../../card'
 import { SingleResource } from '../../resource'
 import { getGemCostResourceId } from '../../fns/helpers'
 
+type Options = { border: boolean }
+
 const originalCardHeight = 156 // px
 const fullsizeCardHeight = 1050 // px
 const scale = fullsizeCardHeight / originalCardHeight
@@ -16,11 +18,11 @@ const palette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc', [string,
   misc: ['#978d7a', '#635f58', '#45403c'],
 }
 
-export class PixelProfilgateGenerator extends BaseCardGenerator<{ temp: undefined }> {
-  constructor() {
+export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
+  constructor(options: Options) {
     super(
       new SingleResource('resource-pixelprofilgate', pixelProfilgateResourceMap),
-      { temp: undefined }
+      options
     )
   }
 
