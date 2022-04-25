@@ -6,8 +6,8 @@ import { getGemCostResourceId } from '../../fns/helpers'
 
 type Options = { border: boolean }
 
-const originalCardHeight = 156 // px
-const fullsizeCardHeight = 1050 // px
+const originalCardHeight = 146 // px
+const fullsizeCardHeight = 1460 // px
 const scale = fullsizeCardHeight / originalCardHeight
 
 const palette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc', [string, string, string]> = {
@@ -90,7 +90,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
           .fill(palette[cardPalette][2]).opaque('blue')
 
         im.parens(cost)
-          .geometry(66, 79)
+          .geometry(61, 74)
           .composite()
       }
     }
@@ -101,7 +101,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     // }
 
     // resize
-    im.resizeExt(g => g.scale(scale))
+    im.resizeExt(g => g.scale(scale * 100))
 
     return bufferFromCommandBuilder(im/*, input*/)
   }
