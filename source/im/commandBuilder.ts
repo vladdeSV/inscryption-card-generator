@@ -22,8 +22,8 @@ class ImageMagickCommandBuilder {
   //   return this.#join()
   // }
 
-  command(unsanitizedInput: string): this {
-    this.#commands.push(unsanitizedInput)
+  command(...unsanitizedInput: string[]): this {
+    this.#commands.push(...unsanitizedInput)
 
     return this
   }
