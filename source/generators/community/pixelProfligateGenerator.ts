@@ -30,7 +30,8 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     const im = IM()
     const cardPalette = card.flags.terrain ? 'misc' : card.temple
 
-    im.background('None')
+    im.pointsize(110)
+      .font(this.resource.get('font', 'heavyweight'))
       .filter('Box')
       .gravity('NorthWest')
 
@@ -102,6 +103,11 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     // resize
     im.resizeExt(g => g.scale(scale * 100))
+
+    im.fill('black')
+
+    // power
+    im.command('-draw').command(`text 146,842 '${card.power}'`)
 
     return bufferFromCommandBuilder(im/*, input*/)
   }
@@ -353,5 +359,8 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
     // 'transformer_adder': 'Card Art/Transformer_adder.png',
     // 'transformer_raven': 'Card Art/Transformer_raven.png',
     // 'transformer_wolf': 'Card Art/Transformer_wolf.png',
+  },
+  'font': {
+    'heavyweight': 'Fonts/HEAVYWEIGHT.otf',
   }
 }
