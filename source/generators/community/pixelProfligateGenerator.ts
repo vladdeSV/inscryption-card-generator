@@ -115,6 +115,12 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     im.fill('black')
 
+    // name
+    if (card.name) {
+      im.gravity('North')
+        .command('-draw').command(`text 0,90 '${card.name.replaceAll('\'', '\\\'')}'`)
+    }
+
     // power
     if (!card.statIcon) {
       im.gravity('NorthWest')
