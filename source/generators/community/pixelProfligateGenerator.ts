@@ -46,8 +46,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     const im = IM()
     const cardPalette = card.flags.terrain ? 'misc' : card.temple
 
-    im.pointsize(110)
-      .font(this.resource.get('font', 'heavyweight'))
+    im.font(this.resource.get('font', 'heavyweight'))
       .background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common'])
       .filter('Box')
       .gravity('NorthWest')
@@ -124,6 +123,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     // name
     if (card.name) {
       im.gravity('North')
+        .pointsize(110)
         .fill('black')
         .command('-draw').command(`text 0,90 '${card.name.replaceAll('\'', '\\\'')}'`)
     }
@@ -131,12 +131,14 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     // power
     if (!card.statIcon) {
       im.gravity('NorthWest')
+        .pointsize(110)
         .fill('black')
         .command('-draw').command(`text 146,842 '${card.power}'`)
     }
 
-    this.options.description = 'Push your luck, what could go wrong.'
+    // health
     im.gravity('NorthWest')
+      .pointsize(110)
       .fill('black')
       .command('-draw').command(`text 841,175 '${card.health}'`)
 
