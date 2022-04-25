@@ -117,11 +117,13 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     // power
     if (!card.statIcon) {
-      im.command('-draw').command(`text 146,842 '${card.power}'`)
+      im.gravity('NorthWest')
+        .command('-draw').command(`text 146,842 '${card.power}'`)
     }
 
     // power
-    im.command('-draw').command(`text 841,175 '${card.health}'`)
+    im.gravity('NorthWest')
+      .command('-draw').command(`text 841,175 '${card.health}'`)
 
     // extended border
     if (this.options.border) {
