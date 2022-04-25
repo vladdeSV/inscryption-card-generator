@@ -101,7 +101,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     // }
 
     // resize
-    im.resize(undefined, fullsizeCardHeight)
+    im.resizeExt(g => g.scale(scale))
 
     return bufferFromCommandBuilder(im/*, input*/)
   }
