@@ -157,6 +157,49 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       .fill('black')
       .command('-draw').command(`text 841,175 '${card.health}'`)
 
+    // sigils
+    const sigilSections = card.sigils.map(sigil => {
+      const caption = IM()
+        .size(660)
+        .background('None')
+        .pointsize(44)
+        .command(`caption:${'todo: add a very long caption so it wraps multiple lines or more'}`)
+        .trim()
+
+      const section = IM().size(880, 666).command('xc:transparent')
+        // add sigil icon
+        // .resource(this.resource.get('sigil', sigil))
+        .command('(', 'rose:', '-resize', '176x176!', ')')
+        .gravity('NorthWest').geometry(2, -26).composite()
+
+        // draw sigil name
+        .pointsize(55).command('-draw', `text 187,4 '${'todo: name'}'`)
+
+        // add caption
+        .parens(caption).gravity('NorthWest').geometry(220, 60).composite()
+
+      // add padding to bottom
+      // .gravity('South')
+      // .background('white').command('-splice', '0x1')
+      // .background('black').command('-splice', '0x1')
+      // .trim().command('+repage').command('-chop', '0x1')
+      // .background('transparent').command('-splice 0x24')
+
+      return section
+    })
+
+    if (sigilSections.length) {
+      const sections = IM()
+
+      for (const section of sigilSections) {
+        sections.parens(section)
+      }
+
+      sections.command('-smush', '24')
+
+      im.parens(sections).gravity('North').geometry(0, 976).composite()
+    }
+
     // extended border
     if (this.options.border) {
       im.gravity('Center').extent(1120, 1560)
