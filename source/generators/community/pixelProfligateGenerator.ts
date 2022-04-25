@@ -18,6 +18,14 @@ const palette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc', [string,
   misc: ['#978d7a', '#635f58', '#45403c'],
 }
 
+const cardBorderPalette: Record<'nature' | 'tech' | 'wizard' | 'undead' | 'misc', { common: string, rare: string }> = {
+  nature: { common: '#dc9465', rare: '#ee8272' },
+  tech: { common: '#a8c0d8', rare: '#9db7f6' },
+  wizard: { common: '#dc93b3', rare: '#ff7ba5' },
+  undead: { common: '#97b69e', rare: '#7fbe8c' },
+  misc: { common: '#beb6a9', rare: '#d8a986' },
+}
+
 export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
   constructor(options: Options) {
     super(
@@ -32,6 +40,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     im.pointsize(110)
       .font(this.resource.get('font', 'heavyweight'))
+      .background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common'])
       .filter('Box')
       .gravity('NorthWest')
 
@@ -108,6 +117,11 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     // power
     im.command('-draw').command(`text 146,842 '${card.power}'`)
+
+    // extended border
+    if (this.options.border) {
+      im.gravity('Center').extent(1120, 1560)
+    }
 
     return bufferFromCommandBuilder(im/*, input*/)
   }
