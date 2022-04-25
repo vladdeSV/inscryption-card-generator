@@ -136,6 +136,11 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     }
 
     this.options.description = 'Push your luck, what could go wrong.'
+    im.gravity('NorthWest')
+      .fill('black')
+      .command('-draw').command(`text 841,175 '${card.health}'`)
+
+    // this.options.description = 'Push your luck, what could go wrong.'
 
     if (this.options.description) {
       const description = IM()
@@ -151,11 +156,6 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .geometry(609 - 510, 938 - 730)
         .composite()
     }
-
-    // power
-    im.gravity('NorthWest')
-      .fill('black')
-      .command('-draw').command(`text 841,175 '${card.health}'`)
 
     // sigils
     const sigilSections = card.sigils.map(sigil => {
