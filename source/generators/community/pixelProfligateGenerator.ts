@@ -116,7 +116,9 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     im.fill('black')
 
     // power
-    im.command('-draw').command(`text 146,842 '${card.power}'`)
+    if (!card.statIcon) {
+      im.command('-draw').command(`text 146,842 '${card.power}'`)
+    }
 
     // extended border
     if (this.options.border) {
