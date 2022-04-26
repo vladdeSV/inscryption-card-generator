@@ -192,7 +192,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .trim().command('+repage').command('-chop', '0x1')
 
         // add padding to bottom
-        .background('transparent').command('-splice', '0x24')
+        .gravity('South').background('transparent').command('-splice', '0x24')
 
       return section
     })
