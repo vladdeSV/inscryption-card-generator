@@ -185,12 +185,14 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         // add caption
         .parens(caption).gravity('NorthWest').geometry(220, 60).composite()
 
-      // add padding to bottom
-      // .gravity('South')
-      // .background('white').command('-splice', '0x1')
-      // .background('black').command('-splice', '0x1')
-      // .trim().command('+repage').command('-chop', '0x1')
-      // .background('transparent').command('-splice 0x24')
+        // trim bottom
+        .gravity('North')
+        .background('white').command('-splice', '0x1')
+        .background('black').command('-splice', '0x1')
+        .trim().command('+repage').command('-chop', '0x1')
+
+        // add padding to bottom
+        .background('transparent').command('-splice', '0x24')
 
       return section
     })
@@ -202,7 +204,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         sections.parens(section)
       }
 
-      sections.command('-smush', '24')
+      sections.command('-append')
 
       im.parens(sections).gravity('North').geometry(0, 976).composite()
     }
