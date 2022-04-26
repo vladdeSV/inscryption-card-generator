@@ -165,22 +165,29 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     }
 
     // sigils
-    const sigilSections = card.sigils.filter(sigil => Object.keys(this.sigilInformationMap).includes(sigil)).map(sigil => {
+    const sigilInformations: SigilEntry[] = card.sigils
+      .map(sigil => this.sigilInformationMap[sigil] ?? { name: 'Lorem ipsum', text: 'dolor sit amet', sigilId: sigil })
+
+    if (card.statIcon === 'ants') {
+      sigilInformations.unshift({ name: 'Colony', text: 'This card\\\'s power is equal to the number of cards with this sigil on your side of the field.', sigilId: 'colony' })
+    }
+
+    const sigilSections = sigilInformations.map(sigilInformation => {
       const caption = IM()
         .size(660)
         .background('None')
         .pointsize(44)
-        .command(`caption:${this.sigilInformationMap[sigil].text}`)
+        .command(`caption:${sigilInformation.text}`)
         .trim()
 
       const section = IM().size(880, 666).command('xc:transparent')
         // add sigil icon
-        .resource(this.resource.get('sigil', sigil))
+        .resource(this.resource.get('sigil', sigilInformation.sigilId))
         // .command('(', 'rose:', '-resize', '176x176!', ')')
         .gravity('NorthWest').geometry(2, -10).composite()
 
         // draw sigil name
-        .pointsize(55).command('-draw', `text 187,4 '${this.sigilInformationMap[sigil].name.replaceAll('\'', '\\\'')}'`)
+        .pointsize(55).command('-draw', `text 187,4 '${sigilInformation.name.replaceAll('\'', '\\\'')}'`)
 
         // add caption
         .parens(caption).gravity('NorthWest').geometry(220, 60).composite()
