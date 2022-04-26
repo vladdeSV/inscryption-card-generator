@@ -176,8 +176,8 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
       const section = IM().size(880, 666).command('xc:transparent')
         // add sigil icon
-        // .resource(this.resource.get('sigil', sigil))
-        .command('(', 'rose:', '-resize', '176x176!', ')')
+        .resource(this.resource.get('sigil', sigil))
+        // .command('(', 'rose:', '-resize', '176x176!', ')')
         .gravity('NorthWest').geometry(2, -26).composite()
 
         // draw sigil name
@@ -512,5 +512,73 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
   },
   'font': {
     'heavyweight': 'Fonts/HEAVYWEIGHT.otf',
+  },
+  'sigil': {
+    'colony': 'Sigils/SigilColony.png',
+
+    'madeofstone': 'Sigils/SigilMadeOfStone.png', // missing
+
+    'flying': 'Sigils/SigilAirborne.png',
+    'drawant': 'Sigils/SigilAntSpawner.png',
+    'deathshield': 'Sigils/SigilArmored.png',
+    'conduitbuffattack': 'Sigils/SigilAttackConduit.png',
+    'gainbattery': 'Sigils/SigilBatteryBearer.png',
+    'splitstrike': 'Sigils/SigilBifurcatedStrike.png',
+    'bloodguzzler': 'Sigils/SigilBloodSucker.png',
+    'gaingemblue': 'Sigils/SigilBlueMox.png',
+    'bombspawner': 'Sigils/SigilBombSpewer.png',
+    'bonedigger': 'Sigils/SigilBoneDigger.png',
+    'activatedenergytobones': 'Sigils/SigilBoneHorn.png',
+    'quadruplebones': 'Sigils/SigilBoneKing.png',
+    'brittle': 'Sigils/SigilBrittle.png',
+    'whackamole': 'Sigils/SigilBurrower.png',
+    'corpseeater': 'Sigils/SigilCorpseEater.png',
+    'explodeondeath': 'Sigils/SigilDetonator.png',
+    'activateddrawskeleton': 'Sigils/SigilDisentomb.png',
+    'doubledeath': 'Sigils/SigilDoubleDeath.png',
+    'conduitenergy': 'Sigils/SigilEnergyConduit.png',
+    'activateddealdamage': 'Sigils/SigilEnergyGun.png',
+    'activatedstatsup': 'Sigils/SigilEnlarge.png',
+    'drawcopy': 'Sigils/SigilFecundity.png',
+    'evolve': 'Sigils/SigilFledgeling.png',
+    'icecube': 'Sigils/SigilFrozenAway.png',
+    'beesonhit': 'Sigils/SigilFullOfBees.png',
+    'buffgems': 'Sigils/SigilGemAnimator.png',
+    'gemdependant': 'Sigils/SigilGemDependant.png',
+    'drawrandomcardondeath': 'Sigils/SigilGiftBearer.png',
+    'gaingemtriple': 'Sigils/SigilGreatMox.png',
+    'gaingemgreen': 'Sigils/SigilGreenMox.png',
+    'guarddog': 'Sigils/SigilGuardian.png',
+    'drawnewhand': 'Sigils/SigilHandy.png',
+    'strafepush': 'Sigils/SigilHefty.png',
+    'tutor': 'Sigils/SigilHoarder.png',
+    'buffneighbours': 'Sigils/SigilLeader.png',
+    'loot': 'Sigils/SigilLooter.png',
+    'sacrificial': 'Sigils/SigilManyLives.png',
+    'gemsdraw': 'Sigils/SigilMentalGemnastics.png',
+    'reach': 'Sigils/SigilMightyLeap.png',
+    'conduitnull': 'Sigils/SigilNullConduit.png',
+    'gaingemorange': 'Sigils/SigilOrangeMox.png',
+    'activatedrandompowerenergy': 'Sigils/SigilPowerDice.png',
+    'drawrabbits': 'Sigils/SigilRabbitHole.png',
+    'preventattack': 'Sigils/SigilRepulsive.png',
+    'droprubyondeath': 'Sigils/SigilRubyHeart.png',
+    'sentry': 'Sigils/SigilSentry.png',
+    'sharp': 'Sigils/SigilSharpQuills.png',
+    'skeletonstrafe': 'Sigils/SigilSkeletonCrew.png',
+    'sniper': 'Sigils/SigilSniper.png',
+    'conduitfactory': 'Sigils/SigilSpawnConduit.png',
+    'strafe': 'Sigils/SigilSprinter.png',
+    'squirrelstrafe': 'Sigils/SigilSquirrelShedder.png',
+    'steeltrap': 'Sigils/SigilSteelTrap.png',
+    'activatedstatsupenergy': 'Sigils/SigilStimulate.png',
+    'debuffenemy': 'Sigils/SigilStinky.png',
+    'deathtouch': 'Sigils/SigilTouchOfDeath.png',
+    'tristrike': 'Sigils/SigilTrifurcatedStrike.png',
+    'randomconsumable': 'Sigils/SigilTrinketBearer.png',
+    'activatedsacrificedrawcards': 'Sigils/SigilTrueScholar.png',
+    'drawcopyondeath': 'Sigils/SigilUndying.png',
+    'submerge': 'Sigils/SigilWaterborne.png',
+    'tripleblood': 'Sigils/SigilWorthySacrifice.png',
   }
 }
