@@ -53,7 +53,6 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     const cardPalette = card.flags.terrain ? 'misc' : card.temple
 
     im.font(this.resource.get('font', 'heavyweight'))
-      .background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common'])
       .filter('Box')
       .gravity('NorthWest')
 
@@ -210,7 +209,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     // extended border
     if (this.options.border) {
-      im.gravity('Center').extent(1120, 1560)
+      im.gravity('Center').background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common']).extent(1120, 1560)
     }
 
     return bufferFromCommandBuilder(im/*, input*/)
