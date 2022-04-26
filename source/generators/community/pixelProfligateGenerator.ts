@@ -204,6 +204,11 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       return section
     })
 
+    const isConduit = card.sigils.some(sigil => sigil.includes('conduit'))
+    if (isConduit) {
+      sigilSections.unshift(IM().resource(this.resource.get('conduit', 'null')))
+    }
+
     if (sigilSections.length) {
       const sections = IM()
 
@@ -213,7 +218,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
       sections.command('-append')
 
-      im.parens(sections).gravity('North').geometry(0, 976).composite()
+      im.parens(sections).gravity('North').geometry(0, isConduit ? 956 : 976).composite()
     }
 
     // extended border
@@ -589,5 +594,11 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
     'drawcopyondeath': 'Sigils/SigilUndying.png',
     'submerge': 'Sigils/SigilWaterborne.png',
     'tripleblood': 'Sigils/SigilWorthySacrifice.png',
+  },
+  'conduit': {
+    'attack': 'Conduits/ConduitAttack.png',
+    'energy': 'Conduits/ConduitEnergy.png',
+    'null': 'Conduits/ConduitNull.png',
+    'spawner': 'Conduits/ConduitSpawner.png',
   }
 }
