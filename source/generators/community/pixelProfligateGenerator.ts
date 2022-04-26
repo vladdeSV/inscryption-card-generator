@@ -177,7 +177,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         // add sigil icon
         .resource(this.resource.get('sigil', sigil))
         // .command('(', 'rose:', '-resize', '176x176!', ')')
-        .gravity('NorthWest').geometry(2, -26).composite()
+        .gravity('NorthWest').geometry(2, -10).composite()
 
         // draw sigil name
         .pointsize(55).command('-draw', `text 187,4 '${this.sigilInformationMap[sigil].name.replaceAll('\'', '\\\'')}'`)
