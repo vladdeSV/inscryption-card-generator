@@ -314,6 +314,7 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
     'mox-p': 'Costs/CostMoxP.png',
   },
   'portrait': {
+    'wolfcub': 'Card Art/WolfCub.png',
     'stoat_talking': 'Card Art/Stoat.png',
     // 'wolf_talking': 'Card Art/Wolf_talking.png',
     'stinkbug_talking': 'Card Art/Stinkbug.png',
