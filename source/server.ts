@@ -14,6 +14,7 @@ import { GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
 import * as dotenv from 'dotenv'
+import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
 
 dotenv.config()
 
@@ -41,7 +42,7 @@ const ApiCard = RRecord({
   bloodCost: Number, // 0 - 4
   boneCost: Number, // 0 - 13, 0 - 10
   energyCost: Number, // 0 - 6
-  gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }),
+  gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }).optional(),
   sigils: Array(Sigil),
   decals: Array(Union(Literal('blood'), Literal('smoke'), Literal('paint'))),
   temple: Temple,
@@ -90,7 +91,7 @@ const templateApiCard: ApiCard = {
   bloodCost: 0,
   boneCost: 0,
   energyCost: 0,
-  gemCost: { orange: false, green: false, blue: false },
+  gemCost: undefined,
   sigils: [],
   decals: [],
   temple: 'nature',
@@ -117,7 +118,7 @@ function convertApiDataToCard(input: ApiCard): Card {
     cost = { type: 'bone', amount: input.boneCost }
   } else if (input.energyCost > 0) {
     cost = { type: 'energy', amount: input.energyCost }
-  } else {
+  } else if (input.gemCost) {
     const gems: ('orange' | 'green' | 'blue')[] = []
 
     if (input.gemCost.orange) {
@@ -201,7 +202,7 @@ server.options('/api/card/*/*', (_, reply) => {
 server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
-  const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.id)
   if (actValidation.success === false) {
     reply.status(404)
     reply.send({ error: 'Invalid act', invalid: request.params.id })
@@ -223,10 +224,11 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
+  const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
+      case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
 
