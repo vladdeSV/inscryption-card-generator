@@ -232,13 +232,14 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
     }
   }
 
-  const generator: CardGenerator = generatorFromAct(act)
-
   const point = new Point('generator')
     .tag('card-type', 'front')
     .tag('act', act)
 
   try {
+
+    const generator: CardGenerator = generatorFromAct(act)
+
     const startGenerateDateTime = new Date()
     const buffer = await generator.generateFront(card)
     const endGenerateDateTime = new Date()
