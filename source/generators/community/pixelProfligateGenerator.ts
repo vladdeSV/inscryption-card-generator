@@ -86,7 +86,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .fill(palette[cardPalette][2]).opaque('blue')
 
       im.parens(portrait)
-        .geometry(7, 20)
+        .geometry(7, 21)
         .composite()
     }
 
