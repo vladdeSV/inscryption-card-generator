@@ -11,7 +11,7 @@ import { res2 } from './temp'
 import { LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
-import { InfluxDB, Point } from '@influxdata/influxdb-client'
+import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
 import * as dotenv from 'dotenv'
 import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
@@ -24,13 +24,15 @@ const org = process.env.org
 const bucket = process.env.bucket
 const url = process.env.url
 
+let writeApi: WriteApi | undefined = undefined
 if (!token || !org || !bucket || !url) {
-  throw new Error('missing influxdb config')
+  // throw new Error('missing influxdb config')
+  console.error('missing influxdb config, not sending metrics')
+} else {
+  const client = new InfluxDB({ url: url, token: token })
+  writeApi = client.getWriteApi(org, bucket)
+  writeApi.useDefaultTags({ host: hostname() })
 }
-
-const client = new InfluxDB({ url: url, token: token })
-const writeApi = client.getWriteApi(org, bucket)
-writeApi.useDefaultTags({ host: hostname() })
 
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
@@ -259,8 +261,10 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
     reply.send({ error: 'Unprocessable data', message: e })
   }
 
-  writeApi.writePoint(point)
-  writeApi.flush()
+  if (writeApi) {
+    writeApi.writePoint(point)
+    writeApi.flush()
+  }
 })
 
 server.post('/api/card/:id/back', async (request, reply) => {
