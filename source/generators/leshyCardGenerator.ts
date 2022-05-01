@@ -180,7 +180,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     }
 
     if (card.sigils.length === 1) {
-      const sigilPath = this.resource.has('sigil', card.sigils[0]) ? this.resource.get('sigil', card.sigils[0]) : this.resource.get('sigil', 'missing')
+      const sigilPath = this.resource.get('sigil', card.sigils[0])
       im.parens(
         IM(sigilPath)
           .interpolate('Nearest')
@@ -191,8 +191,8 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
         .geometry(221 + terrainLayoutXoffset, 733)
         .composite()
     } else if (card.sigils.length === 2) {
-      const sigilPath1 = this.resource.has('sigil', card.sigils[0]) ? this.resource.get('sigil', card.sigils[0]) : this.resource.get('sigil', 'missing')
-      const sigilPath2 = this.resource.has('sigil', card.sigils[1]) ? this.resource.get('sigil', card.sigils[1]) : this.resource.get('sigil', 'missing')
+      const sigilPath1 = this.resource.get('sigil', card.sigils[0])
+      const sigilPath2 = this.resource.get('sigil', card.sigils[1])
 
       im.filter('Box')
 

@@ -112,12 +112,12 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
       }
 
       if (sigil !== 'conduitnull') {
-        im.resource(this.resource.get('sigil', sigil, 'missing')).gravity('North').geometry(0, 31 + sigilYOffset).composite()
+        im.resource(this.resource.get('sigil', sigil)).gravity('North').geometry(0, 31 + sigilYOffset).composite()
       }
     } else if (card.sigils.length >= 2) {
       im.gravity('NorthWest')
-      im.resource(this.resource.get('sigil', card.sigils[0], 'missing')).geometry(4, 31).composite()
-      im.resource(this.resource.get('sigil', card.sigils[1], 'missing')).geometry(22, 31).composite()
+      im.resource(this.resource.get('sigil', card.sigils[0])).geometry(4, 31).composite()
+      im.resource(this.resource.get('sigil', card.sigils[1])).geometry(22, 31).composite()
     }
 
     // fused
