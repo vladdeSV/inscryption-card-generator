@@ -48,12 +48,12 @@ export class SingleResource<T extends { [s: string]: { [s: string]: string } } =
   public get(category: string, id: string, defaultResourceId?: string): string {
     const map = this.#data[category]
     if (map === undefined) {
-      throw `Unrecognized category '${category}'`
+      throw new ResourceError(`Unrecognized category '${category}'`, category)
     }
 
     const dest = map[id] ?? (defaultResourceId ? map[defaultResourceId] : undefined)
     if (dest === undefined) {
-      throw `Unrecognized id '${category}:${id}'`
+      throw new ResourceError(`Unrecognized id '${category}:${id}'`, category, id)
     }
 
     return join(this.#path, dest)
@@ -85,8 +85,20 @@ export class ResourceCollection<T extends { [s: string]: { [s: string]: string }
       }
     }
 
-    throw `Unrecognized id '${category}:${id}'`
+    throw new ResourceError(`Unrecognized id '${category}:${id}'`, category, id)
   }
 
   #resources: SingleResource<T>[]
+}
+
+export class ResourceError extends Error {
+  constructor(message: string, category: string, id?: string) {
+    super(message)
+    this.name = 'ResourceError'
+    this.category = category
+    this.id = id
+  }
+
+  public category: string
+  public id: string | undefined
 }
