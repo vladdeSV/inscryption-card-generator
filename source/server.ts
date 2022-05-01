@@ -15,6 +15,7 @@ import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
 import * as dotenv from 'dotenv'
 import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
+import { ResourceError } from './resource'
 
 dotenv.config()
 
@@ -254,11 +255,16 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
-  } catch (e) {
+  } catch (e: unknown) {
     point.booleanField('failed', true)
 
     reply.status(422)
-    reply.send({ error: 'Unprocessable data', message: e })
+
+    if (e instanceof ResourceError) {
+      reply.send({ error: 'Unprocessable data', category: e.category, id: e.id })
+    } else {
+      reply.send({ error: 'Unprocessable data' })
+    }
   }
 
   if (writeApi) {
