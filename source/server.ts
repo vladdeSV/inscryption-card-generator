@@ -314,7 +314,7 @@ server.post('/api/card/:id/back', async (request, reply) => {
   }
 })
 
-server.get('/', (_, reply) => reply.status(200).send('OK'))
+server.get('/', (_, reply) => reply.status(200).send('OK\n'))
 server.listen(8080, () => console.log('Server running'))
 
 function resourceIdFromCreatureId(creatureId: CreatureId): string {
