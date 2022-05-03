@@ -276,7 +276,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           im.parens(
             IM(emissionPath)
               .filter('Box')
-              .command('-resize').command(`${scale * 100}%`)
+              .resizeExt(g => g.scale(scale * 100))
               .gravity('Center')
               .geometry(0, -15 * scale)
           ).compose('Overlay').composite()
@@ -311,7 +311,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
         for (const i of [false, true]) {
           const im2 = IM(emissionPath)
-            .command('-fill').command('rgb(161,247,186)').command('-colorize').command('100').command('-resize').command(`${scale * 100}%`)
+            .command('-fill', 'rgb(161,247,186)', '-colorize', '100').resizeExt(g => g.scale(scale * 100))
             .gravity('Center')
             .geometry(3, -15 * scale)
 
