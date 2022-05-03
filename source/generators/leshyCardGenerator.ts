@@ -96,7 +96,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           .resize(undefined, 354)
           .gravity('NorthWest')
           .alpha('Set')
-          .command('-channel').command('A').command('-evaluate').command('multiply').command('0.4').command('+channel')
+          .command('-channel', 'A', '-evaluate', 'multiply', '0.4', '+channel')
       ).geometry(position[0], position[1])
         .composite()
     }
@@ -264,7 +264,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     if (card.flags.golden) {
       im.parens(
-        IM().command('-clone').command('0').command('-fill').command('rgb(255,128,0)').command('-colorize').command('75')
+        IM().command('-clone', '0', '-fill', 'rgb(255,128,0)', '-colorize', '75')
       ).geometry(0, 0)
         .compose('HardLight')
         .composite()
@@ -316,7 +316,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
             .geometry(3, -15 * scale)
 
           if (i === true) {
-            im2.command('-blur').command('0x10')
+            im2.command('-blur', '0x10')
           }
 
           im.parens(im2).composite()
