@@ -1,4 +1,4 @@
-import { BaseCardGenerator, bufferFromCommandBuilder, CardGenerator } from '../base'
+import { BaseCardGenerator, bufferFromCommandBuilder } from '../base'
 import IM from '../../im'
 import { Card } from '../../card'
 import { SingleResource } from '../../resource'
