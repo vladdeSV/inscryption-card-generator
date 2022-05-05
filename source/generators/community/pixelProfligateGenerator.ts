@@ -88,6 +88,14 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       im.parens(portrait)
         .geometry(7, 21)
         .composite()
+    } else if (card.portrait?.type === 'custom') {
+
+      const portrait = IM('-').resizeExt(g => g.size(88, 66).flag('>'))
+
+      im.parens(portrait)
+        .gravity('Center')
+        .geometry(0, -19)
+        .composite()
     }
 
     if (card.cost) {
@@ -226,7 +234,12 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       im.gravity('Center').background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common']).extent(1120, 1560)
     }
 
-    return bufferFromCommandBuilder(im/*, input*/)
+    let input: Buffer | undefined
+    if (card.portrait?.type === 'custom') {
+      input = card.portrait.data.common
+    }
+
+    return bufferFromCommandBuilder(im, input)
   }
 
   generateBack(): Promise<Buffer> {
