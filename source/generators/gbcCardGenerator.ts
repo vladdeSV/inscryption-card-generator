@@ -151,7 +151,7 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
 
     let input: Buffer | undefined
     if (card.portrait?.type === 'custom') {
-      input = card.portrait.data.common
+      input = card.portrait.data.gbc
     }
 
     return bufferFromCommandBuilder(im, input)
