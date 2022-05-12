@@ -73,4 +73,4 @@ jobs:
     - name: import container and remove artifact
       run: ssh ci@$SERVER_IP "cd /home/ci/ && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
     - name: run container
-      run: ssh ci@$SERVER_IP "docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
+      run: ssh ci@$SERVER_IP "docker stop $(docker ps -q); docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
