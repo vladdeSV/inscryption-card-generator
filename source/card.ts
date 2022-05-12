@@ -103,6 +103,7 @@ const Sigil = Union(
   Literal('activateddrawskeleton'), // ActivatedDrawSkeleton
   Literal('drawrabbits'), // DrawRabbits
   Literal('transformer'), // Transformer
+  Literal('permadeath'), // Overclocked
 )
 
 const Tribe = Union(
