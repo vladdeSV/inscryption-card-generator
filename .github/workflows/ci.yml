@@ -64,11 +64,13 @@ jobs:
       run: echo "$SERVER_IP ssh-rsa $SERVER_KEYSCAN" >> ~/.ssh/known_hosts
     - name: upload artifact
       run: scp inscryption-card-generator.tar.gz "ci@$SERVER_IP:/home/ci/"
+    - name: unzip artifact
+      run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -fd inscryption-card-generator.tar.gz"
     - name: remove previous image
       run: |
         ssh ci@$SERVER_IP 'docker stop $(docker ps -a -q) || echo "No container running. Skipping..."'
         ssh ci@$SERVER_IP 'docker image rm inscryption-card-generator || echo "No previous image exists. Skipping..."'
     - name: import container and remove artifact
-      run: ssh ci@$SERVER_IP "cd /home/ci/ && gzip -fd inscryption-card-generator.tar.gz && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
+      run: ssh ci@$SERVER_IP "cd /home/ci/ && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
     - name: run container
       run: ssh ci@$SERVER_IP "docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
