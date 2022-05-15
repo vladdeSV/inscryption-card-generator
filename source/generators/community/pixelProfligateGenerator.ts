@@ -243,7 +243,15 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
   }
 
   generateBack(): Promise<Buffer> {
-    throw new Error('Method not implemented.')
+    const im = IM(this.resource.get('cardback', 'common'))
+    im.filter('Box')
+      .resizeExt(g => g.scale(scale * 100))
+
+    if (this.options.border) {
+      im.gravity('Center').background('black').extent(1120, 1560)
+    }
+
+    return bufferFromCommandBuilder(im)
   }
 
   private sigilInformationMap: { [s: string]: SigilEntry } = {
