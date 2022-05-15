@@ -276,41 +276,64 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 server.post('/api/card/:id/back', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
-  const actValidation = Union(Literal('leshy'), Literal('gbc')).validate(request.params.id)
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.id)
   if (actValidation.success === false) {
     reply.status(404)
     reply.send({ error: 'Invalid act', invalid: request.params.id })
     return
   }
-  const act = actValidation.value
 
+  const act = actValidation.value
   const border = request.query.border !== undefined
   const scanline = request.query.scanline !== undefined
-  const locale = request.query.locale as string ?? 'en'
 
-  const options = { border, scanlines: scanline, locale }
+  const options = { border, scanlines: scanline }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc'): CardGenerator => {
+  console.log(options)
+
+  const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(res2, options)
+      case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
 
-  const generator: CardGenerator = generatorFromAct(act)
+  const point = new Point('generator')
+    .tag('card-type', 'back')
+    .tag('act', act)
 
   try {
+
+    const generator: CardGenerator = generatorFromAct(act)
+
+    const startGenerateDateTime = new Date()
     const buffer = await generator.generateBack()
+    const endGenerateDateTime = new Date()
+
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
+
     reply.status(201)
     reply.type('image/png')
     reply.send(buffer)
+  } catch (e: unknown) {
+    point.booleanField('failed', true)
 
-    return
-  } catch (e) {
     reply.status(422)
-    reply.send({ error: 'Unprocessable data', message: e })
 
-    return
+    if (e instanceof ResourceError) {
+      reply.send({ error: 'Unprocessable data', category: e.category, id: e.id })
+    } else {
+      reply.send({ error: 'Unprocessable data' })
+    }
+  }
+
+  if (writeApi) {
+    writeApi.writePoint(point)
+    writeApi.flush()
   }
 })
 
