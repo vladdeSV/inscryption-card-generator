@@ -72,5 +72,5 @@ jobs:
         ssh ci@$SERVER_IP 'docker image rm inscryption-card-generator || echo "No previous image exists. Skipping..."'
     - name: import container and remove artifact
       run: ssh ci@$SERVER_IP "cd /home/ci/ && docker load -i inscryption-card-generator.tar && rm inscryption-card-generator.tar"
-    - name: run container
-      run: ssh ci@$SERVER_IP "docker stop $(docker ps -q); docker run --rm -d -p 8080:8080 inscryption-card-generator:ci"
+    - name: stop/run container & prune old images
+      run: ssh ci@$SERVER_IP "docker stop $(docker ps -q); docker run --rm -d -p 8080:8080 inscryption-card-generator:ci; docker image prune -a"
