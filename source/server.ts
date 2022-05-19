@@ -337,6 +337,81 @@ server.post('/api/card/:id/back', async (request, reply) => {
   }
 })
 
+server.get('/api/card/:act/backs/:kind', async (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.act)
+  if (actValidation.success === false) {
+    reply.status(404)
+    reply.send({ error: 'Invalid act', invalid: request.params.act })
+    return
+  }
+
+  const act = actValidation.value
+  const border = request.query.border !== undefined
+  const scanline = request.query.scanline !== undefined
+
+  const options = { border, scanlines: scanline }
+
+  console.log(options)
+  const point = new Point('generator')
+    .tag('card-type', 'back')
+    .tag('act', act)
+
+  try {
+
+    const startGenerateDateTime = new Date()
+    const buffer = await (() => {
+      switch (act) {
+        case 'leshy': {
+          const kind = Union(Literal('common'), Literal('deathcard'), Literal('submerged'), Literal('squirrel'), Literal('bee'),).validate(request.params.kind)
+          if (kind.success === false) {
+            reply.status(422)
+            reply.send({ error: 'Invalid kind', invalid: request.params.kind })
+            return
+          }
+          return new LeshyCardGenerator(options).generateBack(kind.value)
+        }
+        case 'gbc': {
+          const kind = Union(Literal('common'), Literal('submerged')).validate(request.params.kind)
+          if (kind.success === false) {
+            reply.status(422)
+            reply.send({ error: 'Invalid kind', invalid: request.params.kind })
+            return
+          }
+          return new GbcCardGenerator(res2, options).generateBack(kind.value)
+        }
+        case 'pixelprofilgate': return new PixelProfilgateGenerator(options).generateBack()
+      }
+    })()
+    const endGenerateDateTime = new Date()
+
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
+
+    reply.status(201)
+    reply.type('image/png')
+    reply.send(buffer)
+  } catch (e: unknown) {
+    point.booleanField('failed', true)
+
+    reply.status(422)
+
+    if (e instanceof ResourceError) {
+      reply.send({ error: 'Unprocessable data', category: e.category, id: e.id })
+    } else {
+      reply.send({ error: 'Unprocessable data' })
+    }
+  }
+
+  if (writeApi) {
+    writeApi.writePoint(point)
+    writeApi.flush()
+  }
+})
+
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
 server.listen(8080, () => console.log('Server running'))
 
