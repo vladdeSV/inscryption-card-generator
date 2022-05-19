@@ -332,7 +332,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im, input)
   }
 
-  generateBack(type: 'common' | 'bee' | 'deathcard' | 'squirrel' | 'submerge' = 'common'): Promise<Buffer> {
+  generateBack(type: 'common' | 'bee' | 'deathcard' | 'squirrel' | 'submerged' = 'common'): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardback', type))
       .background('None')
@@ -357,7 +357,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
 type Act1Resource = {
   card: Record<'common' | 'rare' | 'terrain', string>,
-  cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerge', string>,
+  cardback: Record<'bee' | 'common' | 'deathcard' | 'squirrel' | 'submerged', string>,
   cardbackground: Record<'common' | 'rare' | 'special' | 'terrain', string>,
   cardboon: Record<'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw', string>,
   cardreward: Record<'1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile', string>,
@@ -388,7 +388,7 @@ const act1ResourceMap: Act1Resource = {
     'common': 'cardbacks/common.png',
     'deathcard': 'cardbacks/deathcard.png',
     'squirrel': 'cardbacks/squirrel.png',
-    'submerge': 'cardbacks/submerge.png',
+    'submerged': 'cardbacks/submerge.png',
   },
   'cardbackground': {
     'common': 'cardbackgrounds/common.png',
