@@ -515,6 +515,60 @@ server.get('/api/card/leshy/:a/:b', async (request, reply) => {
   }
 })
 
+server.get('/api/card/gbc/npc/:npc', async (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+
+  const npc = request.params.npc
+  const border = request.query.border !== undefined
+  const scanline = request.query.scanline !== undefined
+
+  const options = { border, scanlines: scanline }
+  const generator = new GbcCardGenerator(res2, options)
+
+  const point = new Point('generator')
+    .tag('card-type', 'npc')
+    .tag('act', 'gbc')
+
+  try {
+
+    // 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizard' | 'inspector' | 'orangewizard' | 'royal' | 'sawyer' | 'melter' | 'trapper' | 'prospector'
+    const nn = Union(Literal('angler'), Literal('bluewizard'), Literal('briar'), Literal('dredger'), Literal('dummy'), Literal('greenwizard'), Literal('inspector'), Literal('orangewizard'), Literal('royal'), Literal('sawyer'), Literal('melter'), Literal('trapper'), Literal('prospector')).validate(npc)
+    if (!nn.success) {
+      reply.status(422)
+      reply.send({ error: 'Invalid npc', invalid: npc })
+      return
+    }
+
+    const startGenerateDateTime = new Date()
+    const buffer = await generator.generateNpc(nn.value)
+    const endGenerateDateTime = new Date()
+
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
+
+    reply.status(201)
+    reply.type('image/png')
+    reply.send(buffer)
+  } catch (e: unknown) {
+    point.booleanField('failed', true)
+
+    reply.status(422)
+
+    if (e instanceof ResourceError) {
+      reply.send({ error: 'Unprocessable data', category: e.category, id: e.id })
+    } else {
+      reply.send({ error: 'Unprocessable data' })
+    }
+  }
+
+  if (writeApi) {
+    writeApi.writePoint(point)
+    writeApi.flush()
+  }
+})
+
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
 server.listen(8080, () => console.log('Server running'))
 
