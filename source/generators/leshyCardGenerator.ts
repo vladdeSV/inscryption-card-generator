@@ -396,6 +396,26 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     return bufferFromCommandBuilder(im)
   }
+
+  generateTrial(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes'): Promise<Buffer> {
+    const im = IM()
+    im.resource(this.resource.get('cardtrial', type))
+      .background('None')
+      .gravity('Center')
+      .filter('Box')
+
+    if (this.options.border) {
+      im.extent(147, 212)
+        .resource(this.resource.get('cardbackground', 'common'))
+        .compose('DstOver')
+        .composite()
+        .compose('SrcOver')
+    }
+
+    im.resizeExt(g => g.scale(scale * 100))
+
+    return bufferFromCommandBuilder(im)
+  }
 }
 
 type Act1Resource = {
