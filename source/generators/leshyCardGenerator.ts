@@ -353,6 +353,26 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     return bufferFromCommandBuilder(im)
   }
+
+  generateReward(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile'): Promise<Buffer> {
+    const im = IM()
+    im.resource(this.resource.get('cardreward', type))
+      .background('None')
+      .gravity('Center')
+      .filter('Box')
+
+    if (this.options.border) {
+      im.extent(147, 212)
+        .resource(this.resource.get('cardbackground', 'common'))
+        .compose('DstOver')
+        .composite()
+        .compose('SrcOver')
+    }
+
+    im.resizeExt(g => g.scale(scale * 100))
+
+    return bufferFromCommandBuilder(im)
+  }
 }
 
 type Act1Resource = {
