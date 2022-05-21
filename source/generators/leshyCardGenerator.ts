@@ -373,6 +373,29 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
     return bufferFromCommandBuilder(im)
   }
+
+  generateBoon(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw'): Promise<Buffer> {
+    const im = IM()
+    im.resource(this.resource.get('cardboon', boon))
+      .background('None')
+      .gravity('Center')
+      .filter('Box')
+
+    if (this.options.border) {
+      im.extent(147, 212)
+        .resource(this.resource.get('cardbackground', 'common'))
+        .compose('DstOver')
+        .composite()
+        .compose('SrcOver')
+    }
+
+    im.resizeExt(g => g.scale(scale * 100))
+
+    im.parens(IM(this.resource.get('boon', boon)).resize(284))
+      .composite()
+
+    return bufferFromCommandBuilder(im)
+  }
 }
 
 type Act1Resource = {
