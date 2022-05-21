@@ -412,6 +412,109 @@ server.get('/api/card/:act/backs/:kind', async (request, reply) => {
   }
 })
 
+server.get('/api/card/leshy/:a/:b', async (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+
+  const a = request.params.a
+  const b = request.params.b
+  const border = request.query.border !== undefined
+  const scanline = request.query.scanline !== undefined
+
+  const options = { border, scanlines: scanline }
+  const generator = new LeshyCardGenerator(options)
+
+  let buffer: Buffer
+
+  const startGenerateDateTime = new Date()
+
+  const point = new Point('generator')
+    .tag('card-type', a)
+    .tag('act', 'leshy')
+
+  try {
+    switch (a) {
+      default: {
+        reply.status(422)
+        reply.send({ error: 'Invalid a', invalid: a })
+        return
+      }
+      case 'rewards': {
+        const bb = Union(Literal('1blood'), Literal('2blood'), Literal('3blood'), Literal('bones'), Literal('bird'), Literal('canine'), Literal('hooved'), Literal('insect')).validate(b)
+        if (!bb.success) {
+          reply.status(422)
+          reply.send({ error: 'Invalid b', invalid: b })
+          return
+        }
+
+        buffer = await generator.generateReward(bb.value)
+        break
+      }
+      case 'boons': {
+        // 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw'
+        const bb = Union(Literal('doubledraw'), Literal('singlestartingbone'), Literal('startingbones'), Literal('startinggoat'), Literal('startingtrees'), Literal('tutordraw')).validate(b)
+        if (!bb.success) {
+          reply.status(422)
+          reply.send({ error: 'Invalid b', invalid: b })
+          return
+        }
+
+        buffer = await generator.generateBoon(bb.value)
+        break
+      }
+      case 'trials': {
+        // 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes'
+        const bb = Union(Literal('abilities'), Literal('blood'), Literal('bones'), Literal('flying'), Literal('pelts'), Literal('power'), Literal('rare'), Literal('ring'), Literal('strafe'), Literal('submerge'), Literal('toughness'), Literal('tribes')).validate(b)
+        if (!bb.success) {
+          reply.status(422)
+          reply.send({ error: 'Invalid b', invalid: b })
+          return
+        }
+
+        buffer = await generator.generateTrial(bb.value)
+        break
+      }
+      case 'tarots': {
+        // 'death' | 'devil' | 'empress' | 'fool' | 'tower'
+        const bb = Union(Literal('death'), Literal('devil'), Literal('empress'), Literal('fool'), Literal('tower')).validate(b)
+        if (!bb.success) {
+          reply.status(422)
+          reply.send({ error: 'Invalid b', invalid: b })
+          return
+        }
+
+        buffer = await generator.generateTarot(bb.value)
+        break
+      }
+    }
+
+    const endGenerateDateTime = new Date()
+
+    const duration = (endGenerateDateTime.getTime() - startGenerateDateTime.getTime()) / 1000
+    point.floatField('generation-time', duration)
+
+    console.log('sent metrics at', endGenerateDateTime, 'and took', duration, 'seconds')
+
+    reply.status(201)
+    reply.type('image/png')
+    reply.send(buffer)
+  } catch (e: unknown) {
+    point.booleanField('failed', true)
+
+    reply.status(422)
+
+    if (e instanceof ResourceError) {
+      reply.send({ error: 'Unprocessable data', category: e.category, id: e.id })
+    } else {
+      reply.send({ error: 'Unprocessable data' })
+    }
+  }
+
+  if (writeApi) {
+    writeApi.writePoint(point)
+    writeApi.flush()
+  }
+})
+
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
 server.listen(8080, () => console.log('Server running'))
 
