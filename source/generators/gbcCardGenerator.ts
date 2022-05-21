@@ -182,7 +182,7 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
     return bufferFromCommandBuilder(im)
   }
 
-  generateAct2NpcCard(npc: Npc): Promise<Buffer> {
+  generateNpc(npc: Npc): Promise<Buffer> {
     // npc
     const im = IM(this.resource.get('npc', npc))
       .gravity('Center')
