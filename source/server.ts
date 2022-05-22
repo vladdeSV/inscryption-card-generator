@@ -515,7 +515,7 @@ server.get('/api/card/leshy/:a/:b', async (request, reply) => {
   }
 })
 
-server.get('/api/card/gbc/npc/:npc', async (request, reply) => {
+server.get('/api/card/gbc/npcs/:npc', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
   const npc = request.params.npc
