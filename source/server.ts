@@ -439,7 +439,7 @@ server.get('/api/card/leshy/:a/:b', async (request, reply) => {
         return
       }
       case 'rewards': {
-        const bb = Union(Literal('1blood'), Literal('2blood'), Literal('3blood'), Literal('bones'), Literal('bird'), Literal('canine'), Literal('hooved'), Literal('insect')).validate(b)
+        const bb = Union(Literal('1blood'), Literal('2blood'), Literal('3blood'), Literal('bones'), Literal('bird'), Literal('canine'), Literal('hooved'), Literal('insect'), Literal('reptile')).validate(b)
         if (!bb.success) {
           reply.status(422)
           reply.send({ error: 'Invalid b', invalid: b })
