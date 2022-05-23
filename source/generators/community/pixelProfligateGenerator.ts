@@ -244,8 +244,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
   generateBack(): Promise<Buffer> {
     const im = IM(this.resource.get('cardback', 'common'))
-    im.filter('Box')
-      .resizeExt(g => g.scale(scale * 100))
+    im.filter('Box').resizeExt(g => g.scale(scale * 100))
 
     if (this.options.border) {
       im.gravity('Center').background('black').extent(1120, 1560)
