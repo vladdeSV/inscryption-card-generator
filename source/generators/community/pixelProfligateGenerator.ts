@@ -254,6 +254,22 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
+  generateBoss(boss: 'angler' | 'goobert' | 'leshy' | 'lonely' | 'prospector' | 'trapper'): Promise<Buffer> {
+    const im = IM(this.resource.get('cardboss', boss))
+    im.filter('Box').resizeExt(g => g.scale(scale * 100))
+
+    if (this.options.border) {
+      let color = cardBorderPalette['nature'].common
+      if (['goobert', 'lonely'].includes(boss)) {
+        color = cardBorderPalette['wizard'].common
+      }
+
+      im.gravity('Center').background(color).extent(1120, 1560)
+    }
+
+    return bufferFromCommandBuilder(im)
+  }
+
   private sigilInformationMap: { [s: string]: SigilEntry } = {
     'madeofstone': { name: 'Made of Stone', text: 'This card is uneffected by the effects of the "Touch of Death" and "Stinky" sigils.', sigilId: 'madeofstone' },
 
@@ -344,6 +360,14 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
   },
   'cardback': {
     'common': 'Card Back/CardBack.png',
+  },
+  'cardboss': {
+    'angler': 'Card Boss/Angler.png',
+    'goobert': 'Card Boss/Goobert.png',
+    'leshy': 'Card Boss/Leshy.png',
+    'lonely': 'Card Boss/Lonely.png',
+    'prospector': 'Card Boss/Prospector.png',
+    'trapper': 'Card Boss/Trapper.png',
   },
   'cost': {
     'blood_1': 'Costs/CostBlood1.png',
