@@ -46,7 +46,7 @@
 
 // -----
 
-import { JldrCreature } from './source/jldrcard'
+import { JldrCreature } from '../jldrcard'
 import { readFileSync, writeFileSync } from 'fs'
 
 const creatures = JSON.parse(readFileSync('creatures.json', 'utf-8'))
