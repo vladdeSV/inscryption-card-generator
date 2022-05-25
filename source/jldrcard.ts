@@ -512,7 +512,7 @@ const JldrCreature = Record({
   bloodCost: Number,
   cardComplexity: Complexity,
   onePerDeck: Boolean,
-  name: CreatureId,
+  name: String, //CreatureId,
   displayedName: String,
   description: String,
   hideAttackAndHealth: Boolean,
@@ -995,4 +995,81 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
   }
 
   return card
+}
+
+export function convert(card: Card, id?: string): Partial<JldrCreature> {
+  const out: Partial<JldrCreature> = {
+    name: id,
+  }
+
+  if (card.name) {
+    out.displayedName = card.name
+  }
+
+  if (card.cost) {
+    switch (card.cost.type) {
+      case 'blood': {
+        out.bloodCost = card.cost.amount
+        break
+      }
+      case 'energy': {
+        out.energyCost = card.cost.amount
+        break
+      }
+      case 'bone': {
+        out.bonesCost = card.cost.amount
+        break
+      }
+      case 'gem': {
+        out.gemsCost = card.cost.gems.map((gem): 'Orange' | 'Green' | 'Blue' => {
+          switch (gem) {
+            case 'blue': return 'Blue'
+            case 'green': return 'Green'
+            case 'orange': return 'Orange'
+          }
+        })
+      }
+    }
+  }
+
+  if (card.tribes.length) {
+    out.tribes = card.tribes.map(((tribe): 'Squirrel' | 'Reptile' | 'Canine' | 'Bird' | 'Hooved' | 'Insect' => {
+      switch (tribe) {
+        case 'squirrel': return 'Squirrel'
+        case 'reptile': return 'Reptile'
+        case 'canine': return 'Canine'
+        case 'bird': return 'Bird'
+        case 'hooved': return 'Hooved'
+        case 'insect': return 'Insect'
+      }
+    }))
+  }
+
+  return out
+
+  // metaCategories: [],
+  // gemsCost: [],
+  // specialStatIcon: StatIcon,
+  // tribes: [],
+  // traits: [],
+  // specialAbilities: [],
+  // abilities: [],
+  // defaultEvolutionName: String,
+  // flipPortraitForStrafe: true,
+  // energyCost: Number,
+  // bonesCost: Number,
+  // baseHealth: Number,
+  // bloodCost: Number,
+  // cardComplexity: Complexity,
+  // onePerDeck: false,
+  // name: CreatureId,
+  // description: String,
+  // hideAttackAndHealth: false,
+  // temple: Temple,
+  // baseAttack: Number,
+  // appearanceBehaviour: [],
+  // iceCubeName: CreatureId.optional(),
+  // tailName: TailName.optional(),
+  // evolveIntoName: CreatureId.optional(),
+  // evolveTurns: Number.optional(), // 1
 }
