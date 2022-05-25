@@ -5,7 +5,7 @@ const templateCard: Card = {
   name: '',
   cost: undefined,
   power: 0,
-  health: 0,
+  health: 1,
   sigils: [],
   tribes: [],
   statIcon: undefined,
@@ -97,5 +97,24 @@ describe('simple cards', () => {
 
     expect(convert({ ...templateCard, tribes: ['squirrel', 'reptile', 'canine', 'bird', 'hooved', 'insect'] }, 'test'))
       .toEqual({ name: 'test', tribes: ['Squirrel', 'Reptile', 'Canine', 'Bird', 'Hooved', 'Insect',] } as JldrCreature)
+  })
+
+  test('health', () => {
+    expect(convert({ ...templateCard, health: 1 }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, health: 0 }, 'test'))
+      .toEqual({ name: 'test', baseHealth: 0 } as JldrCreature)
+
+    expect(convert({ ...templateCard, health: 4 }, 'test'))
+      .toEqual({ name: 'test', baseHealth: 4 } as JldrCreature)
+  })
+
+  test('temple', () => {
+    expect(convert({ ...templateCard, temple: 'nature' }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, temple: 'tech' }, 'test'))
+      .toEqual({ name: 'test', temple: 'Tech' } as JldrCreature)
   })
 })

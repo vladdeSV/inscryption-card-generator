@@ -1045,31 +1045,47 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     }))
   }
 
+  if (card.health != 1) {
+    out.baseHealth = card.health
+  }
+
+  if (card.temple !== 'nature') {
+    out.temple = (temple => {
+      switch (temple) {
+        case 'tech': return 'Tech'
+        case 'undead': return 'Undead'
+        case 'wizard': return 'Wizard'
+      }
+    })(card.temple)
+  }
+
   return out
 
+  //// baseHealth: Number,
+  //// temple: Temple,
+  // appearanceBehaviour: [],
+  // baseAttack: Number,
   // metaCategories: [],
-  // gemsCost: [],
+  //// gemsCost: [],
   // specialStatIcon: StatIcon,
-  // tribes: [],
+  //// tribes: [],
   // traits: [],
   // specialAbilities: [],
   // abilities: [],
-  // defaultEvolutionName: String,
+  //// energyCost: Number,
+  //// bonesCost: Number,
+  //// bloodCost: Number,
+  //// name: CreatureId,
+
+  // * use default values
   // flipPortraitForStrafe: true,
-  // energyCost: Number,
-  // bonesCost: Number,
-  // baseHealth: Number,
-  // bloodCost: Number,
   // cardComplexity: Complexity,
   // onePerDeck: false,
-  // name: CreatureId,
   // description: String,
   // hideAttackAndHealth: false,
-  // temple: Temple,
-  // baseAttack: Number,
-  // appearanceBehaviour: [],
   // iceCubeName: CreatureId.optional(),
   // tailName: TailName.optional(),
   // evolveIntoName: CreatureId.optional(),
   // evolveTurns: Number.optional(), // 1
+  // defaultEvolutionName: String,
 }
