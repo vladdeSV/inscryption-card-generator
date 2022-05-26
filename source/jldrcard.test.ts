@@ -46,46 +46,30 @@ describe('simple cards', () => {
       .toEqual({ name: 'test' } as JldrCreature)
   })
 
+  test('health', () => {
+    expect(convert({ ...templateCard, health: 0 }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, health: 1 }, 'test'))
+      .toEqual({ name: 'test', baseHealth: 1 } as JldrCreature)
+
+    expect(convert({ ...templateCard, health: 4 }, 'test'))
+      .toEqual({ name: 'test', baseHealth: 4 } as JldrCreature)
+  })
+
   test('blood cost', () => {
-    const card = convert({
-      ...templateCard,
-      cost: {
-        type: 'blood',
-        amount: 1,
-      }
-    }, 'test')
-    expect(card).toEqual({
-      name: 'test',
-      bloodCost: 1,
-    } as JldrCreature)
+    const card = convert({ ...templateCard, cost: { type: 'blood', amount: 1, } }, 'test')
+    expect(card).toEqual({ name: 'test', bloodCost: 1, } as JldrCreature)
   })
 
   test('bone cost', () => {
-    const card = convert({
-      ...templateCard,
-      cost: {
-        type: 'bone',
-        amount: 1,
-      }
-    }, 'test')
-    expect(card).toEqual({
-      name: 'test',
-      bonesCost: 1,
-    } as JldrCreature)
+    const card = convert({ ...templateCard, cost: { type: 'bone', amount: 1, } }, 'test')
+    expect(card).toEqual({ name: 'test', bonesCost: 1, } as JldrCreature)
   })
 
   test('energy cost', () => {
-    const card = convert({
-      ...templateCard,
-      cost: {
-        type: 'energy',
-        amount: 1,
-      }
-    }, 'test')
-    expect(card).toEqual({
-      name: 'test',
-      energyCost: 1,
-    } as JldrCreature)
+    const card = convert({ ...templateCard, cost: { type: 'energy', amount: 1, } }, 'test')
+    expect(card).toEqual({ name: 'test', energyCost: 1, } as JldrCreature)
   })
 
   test('tribes', () => {
@@ -97,17 +81,6 @@ describe('simple cards', () => {
 
     expect(convert({ ...templateCard, tribes: ['squirrel', 'reptile', 'canine', 'bird', 'hooved', 'insect'] }, 'test'))
       .toEqual({ name: 'test', tribes: ['Squirrel', 'Reptile', 'Canine', 'Bird', 'Hooved', 'Insect',] } as JldrCreature)
-  })
-
-  test('health', () => {
-    expect(convert({ ...templateCard, health: 0 }, 'test'))
-      .toEqual({ name: 'test' } as JldrCreature)
-
-    expect(convert({ ...templateCard, health: 1 }, 'test'))
-      .toEqual({ name: 'test', baseHealth: 1 } as JldrCreature)
-
-    expect(convert({ ...templateCard, health: 4 }, 'test'))
-      .toEqual({ name: 'test', baseHealth: 4 } as JldrCreature)
   })
 
   test('temple', () => {
