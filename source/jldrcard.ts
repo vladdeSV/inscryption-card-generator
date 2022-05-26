@@ -1011,7 +1011,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
   return card
 }
 
-export function convert(card: Card, id?: string): Partial<JldrCreature> {
+export function convert(card: Card, id: string): Partial<JldrCreature> {
   const out: Partial<JldrCreature> = {
     name: id,
   }
