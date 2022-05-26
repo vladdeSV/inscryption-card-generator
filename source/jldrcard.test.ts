@@ -176,4 +176,33 @@ describe('simple cards', () => {
     expect(convert({ ...templateCard, sigils: ['sharp', 'brittle'] }, 'test'))
       .toEqual({ name: 'test', abilities: ['Sharp', 'Brittle'] } as JldrCreature)
   })
+
+  test('additional textures', () => {
+    const card: Card = {
+      ...templateCard,
+      portrait: {
+        type: 'custom',
+        data: {
+          common: Buffer.from([]),
+          gbc: Buffer.from([]),
+        }
+      },
+      flags: {
+        ...templateCard.flags,
+        smoke: true,
+        paint: true,
+        squid: true,
+      }
+    }
+
+    const out: Partial<JldrCreature> = {
+      name: 'test123',
+      texture: 'test123_portrait.png',
+      pixelTexture: 'test123_pixel_portrait.png',
+      decals: ['test123_paint.png', 'test123_smoke.png'],
+      titleGraphic: 'test123_squid.png',
+    }
+
+    expect(convert(card, 'test123')).toEqual(out)
+  })
 })

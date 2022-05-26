@@ -1153,7 +1153,15 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   }
 
   if (card.portrait) {
-    // ! portrait
+    if (card.portrait.type === 'custom') {
+      if (card.portrait.data.common) {
+        out.texture = id + '_portrait.png'
+      }
+      if (card.portrait.data.gbc) {
+        out.pixelTexture = id + '_pixel_portrait.png'
+      }
+    }
+    // ! creature
   }
 
   for (const sigil of card.sigils) {
