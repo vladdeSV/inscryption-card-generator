@@ -1067,6 +1067,7 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   out.metaCategories = []
   out.appearanceBehaviour = []
   out.specialAbilities = []
+  out.traits = []
 
   if (card.flags.rare) {
     out.metaCategories.push('Rare')
@@ -1074,6 +1075,7 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   }
 
   if (card.flags.terrain) {
+    out.traits.push('Terrain')
     out.appearanceBehaviour.push('TerrainBackground')
   }
 
@@ -1135,6 +1137,10 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     delete out.specialAbilities
   }
 
+  if (!out.traits.length) {
+    delete out.traits
+  }
+
   return out
 
   //// baseHealth: Number,
@@ -1145,9 +1151,9 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   //// gemsCost: [],
   //// specialStatIcon: StatIcon,
   //// tribes: [],
-  // traits: [],
-  // specialAbilities: [],
+  //// specialAbilities: [],
   // abilities: [],
+  // traits: [],
   //// energyCost: Number,
   //// bonesCost: Number,
   //// bloodCost: Number,

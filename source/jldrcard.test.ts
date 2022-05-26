@@ -112,13 +112,13 @@ describe('simple cards', () => {
       .toEqual({ name: 'test' } as JldrCreature)
 
     expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: true, terrainLayout: false } }, 'test'))
-      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground'] } as JldrCreature)
+      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground'], traits: ['Terrain'] } as JldrCreature)
 
     expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: false, terrainLayout: true } }, 'test'))
       .toEqual({ name: 'test', appearanceBehaviour: ['TerrainLayout'] } as JldrCreature)
 
     expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: true, terrainLayout: true } }, 'test'))
-      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground', 'TerrainLayout'] } as JldrCreature)
+      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground', 'TerrainLayout'], traits: ['Terrain'] } as JldrCreature)
   })
 
   test('stat icons', () => {
