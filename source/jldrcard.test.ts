@@ -148,4 +148,32 @@ describe('simple cards', () => {
     expect(convert({ ...templateCard, statIcon: 'sacrificesthisturn' }, 'test'))
       .toEqual({ name: 'test', specialStatIcon: 'SacrificesThisTurn', specialAbilities: ['SacrificesThisTurn'] } as JldrCreature)
   })
+
+  test('misc', () => {
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, blood: true } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['AlternatingBloodDecal'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, golden: true } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['GoldEmission'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, redEmission: true } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['RedEmission'] } as JldrCreature)
+  })
+
+  test('fused', () => {
+    const out = convert({ ...templateCard, flags: { ...templateCard.flags, fused: true } }, 'test')
+    expect(out.traits?.includes('Fused')).toBeTruthy()
+    // todo decals
+  })
+
+  test('sigils', () => {
+    expect(convert({ ...templateCard, sigils: [] }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, sigils: ['reach'] }, 'test'))
+      .toEqual({ name: 'test', abilities: ['Reach'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, sigils: ['sharp', 'brittle'] }, 'test'))
+      .toEqual({ name: 'test', abilities: ['Sharp', 'Brittle'] } as JldrCreature)
+  })
 })

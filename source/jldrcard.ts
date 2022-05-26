@@ -1,5 +1,5 @@
 import { Static, Union, Array, Record, Literal, String, Number, Boolean } from 'runtypes'
-import { Card } from './card'
+import { Card, Sigil } from './card'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
 
@@ -366,7 +366,9 @@ const SpecialAbility = Union(
   Literal('TrapSpawner'),
 )
 
+type Abililty = Static<typeof Abililty>
 const Abililty = Union(
+  Literal('PermaDeath'),
   Literal('Reach'),
   Literal('AllStrike'),
   Literal('SquirrelOrbit'),
@@ -523,6 +525,9 @@ const JldrCreature = Record({
   tailName: TailName.optional(),
   evolveIntoName: CreatureId.optional(),
   evolveTurns: Number.optional(), // 1
+
+  // unsure how to handle this
+  decals: Array(String).optional(),
 })
 
 function convertJldrCard(jsonCard: JldrCreature): Card {
@@ -628,6 +633,7 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
 
   for (const ability of jsonCard.abilities) {
     switch (ability) {
+      case 'PermaDeath': card.sigils.push('permadeath'); break
       case 'Reach': card.sigils.push('reach'); break
       case 'AllStrike': card.sigils.push('allstrike'); break
       case 'SquirrelOrbit': card.sigils.push('squirrelorbit'); break
@@ -1068,6 +1074,7 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   out.appearanceBehaviour = []
   out.specialAbilities = []
   out.traits = []
+  out.abilities = []
 
   if (card.flags.rare) {
     out.metaCategories.push('Rare')
@@ -1124,6 +1131,147 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     }
   }
 
+  if (card.flags.blood) {
+    out.appearanceBehaviour.push('AlternatingBloodDecal')
+  }
+
+  if (card.flags.golden) {
+    out.appearanceBehaviour.push('GoldEmission')
+  }
+
+  if (card.flags.redEmission) {
+    out.appearanceBehaviour.push('RedEmission')
+  }
+
+  if (card.portrait) {
+    // ! portrait
+  }
+
+  for (const sigil of card.sigils) {
+    const sigilToAbility = (s: Sigil): Abililty => {
+      switch (s) {
+        case 'permadeath': return 'PermaDeath'
+        case 'reach': return 'Reach'
+        case 'allstrike': return 'AllStrike'
+        case 'squirrelorbit': return 'SquirrelOrbit'
+        case 'madeofstone': return 'MadeOfStone'
+        case 'conduitnull': return 'ConduitNull'
+        case 'icecube': return 'IceCube'
+        case 'deathtouch': return 'Deathtouch'
+        case 'buffenemy': return 'BuffEnemy'
+        case 'buffneighbours': return 'BuffNeighbours'
+        case 'randomability': return 'RandomAbility'
+        case 'brittle': return 'Brittle'
+        case 'sentry': return 'Sentry'
+        case 'sharp': return 'Sharp'
+        case 'sniper': return 'Sniper'
+        case 'drawrandomcardondeath': return 'DrawRandomCardOnDeath'
+        case 'flying': return 'Flying'
+        case 'drawant': return 'DrawAnt'
+        case 'submerge': return 'Submerge'
+        case 'conduitbuffattack': return 'ConduitBuffAttack'
+        case 'gainbattery': return 'GainBattery'
+        case 'createdams': return 'CreateDams'
+        case 'beesonhit': return 'BeesOnHit'
+        case 'guarddog': return 'GuardDog'
+        case 'gemsdraw': return 'GemsDraw'
+        case 'movebeside': return 'MoveBeside'
+        case 'bombspawner': return 'BombSpawner'
+        case 'explodeondeath': return 'ExplodeOnDeath'
+        case 'activatedenergytobones': return 'ActivatedEnergyToBones'
+        case 'activatedstatsup': return 'ActivatedStatsUp'
+        case 'strafeswap': return 'StrafeSwap'
+        case 'whackamole': return 'WhackAMole'
+        case 'steeltrap': return 'SteelTrap'
+        case 'drawvesselonhit': return 'DrawVesselOnHit'
+        case 'strafe': return 'Strafe'
+        case 'deletefile': return 'DeleteFile'
+        case 'sacrificial': return 'Sacrificial'
+        case 'cellbuffself': return 'CellBuffSelf'
+        case 'celldrawrandomcardondeath': return 'CellDrawRandomCardOnDeath'
+        case 'celltristrike': return 'CellTriStrike'
+        case 'splitstrike': return 'SplitStrike'
+        case 'drawcopyondeath': return 'DrawCopyOnDeath'
+        case 'quadruplebones': return 'QuadrupleBones'
+        case 'createegg': return 'CreateEgg'
+        case 'createbells': return 'CreateBells'
+        case 'drawnewhand': return 'DrawNewHand'
+        case 'tripleblood': return 'TripleBlood'
+        case 'doublestrike': return 'DoubleStrike'
+        case 'bonedigger': return 'BoneDigger'
+        case 'evolve': return 'Evolve'
+        case 'gaingemblue': return 'GainGemBlue'
+        case 'gaingemgreen': return 'GainGemGreen'
+        case 'gaingemorange': return 'GainGemOrange'
+        case 'conduitenergy': return 'ConduitEnergy'
+        case 'activatedrandompowerenergy': return 'ActivatedRandomPowerEnergy'
+        case 'conduitfactory': return 'ConduitFactory'
+        case 'drawcopy': return 'DrawCopy'
+        case 'preventattack': return 'PreventAttack'
+        case 'explodegems': return 'ExplodeGems'
+        case 'gemdependant': return 'GemDependant'
+        case 'shieldgems': return 'ShieldGems'
+        case 'conduitspawngems': return 'ConduitSpawnGems'
+        case 'skeletonstrafe': return 'SkeletonStrafe'
+        case 'conduitheal': return 'ConduitHeal'
+        case 'gainattackonkill': return 'GainAttackOnKill'
+        case 'tristrike': return 'TriStrike'
+        case 'hydraegg': return 'HydraEgg'
+        case 'submergesquid': return 'SubmergeSquid'
+        case 'latchexplodeondeath': return 'LatchExplodeOnDeath'
+        case 'latchbrittle': return 'LatchBrittle'
+        case 'latchdeathshield': return 'LatchDeathShield'
+        case 'filesizedamage': return 'FileSizeDamage'
+        case 'corpseeater': return 'CorpseEater'
+        case 'tutor': return 'Tutor'
+        case 'activatedsacrificedrawcards': return 'ActivatedSacrificeDrawCards'
+        case 'loot': return 'Loot'
+        case 'morsel': return 'Morsel'
+        case 'strafepush': return 'StrafePush'
+        case 'gaingemtriple': return 'GainGemTriple'
+        case 'deathshield': return 'DeathShield'
+        case 'doubledeath': return 'DoubleDeath'
+        case 'buffgems': return 'BuffGems'
+        case 'randomconsumable': return 'RandomConsumable'
+        case 'activateddealdamage': return 'ActivatedDealDamage'
+        case 'opponentbones': return 'OpponentBones'
+        case 'droprubyondeath': return 'DropRubyOnDeath'
+        case 'tailonhit': return 'TailOnHit'
+        case 'debuffenemy': return 'DebuffEnemy'
+        case 'squirrelstrafe': return 'SquirrelStrafe'
+        case 'activatedstatsupenergy': return 'ActivatedStatsUpEnergy'
+        case 'swapstats': return 'SwapStats'
+        case 'activateddrawskeleton': return 'ActivatedDrawSkeleton'
+        case 'drawrabbits': return 'DrawRabbits'
+        case 'transformer': return 'Transformer'
+      }
+    }
+
+    const ability = sigilToAbility(sigil)
+    out.abilities.push(ability)
+  }
+
+  if (card.flags.fused) {
+    // ! decal
+    out.traits.push('Fused') // only for act 2
+  }
+
+  if (card.flags.enhanced) {
+    // ! decal
+  }
+
+  if (card.flags.paint) {
+    // ! decal
+  }
+
+  if (card.flags.smoke) {
+    // ! decal
+  }
+
+  if (card.flags.squid) {
+    // ! decal
+  }
+
   // remove empty arrays
   if (!out.metaCategories.length) {
     delete out.metaCategories
@@ -1141,23 +1289,11 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     delete out.traits
   }
 
-  return out
+  if (!out.abilities.length) {
+    delete out.abilities
+  }
 
-  //// baseHealth: Number,
-  //// temple: Temple,
-  //// appearanceBehaviour: [],
-  //// baseAttack: Number,
-  //// metaCategories: [],
-  //// gemsCost: [],
-  //// specialStatIcon: StatIcon,
-  //// tribes: [],
-  //// specialAbilities: [],
-  // abilities: [],
-  // traits: [],
-  //// energyCost: Number,
-  //// bonesCost: Number,
-  //// bloodCost: Number,
-  //// name: CreatureId,
+  return out
 
   // * use default values
   // flipPortraitForStrafe: true,
