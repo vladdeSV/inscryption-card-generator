@@ -1,4 +1,4 @@
-import { Static, Union, Array, Record, Literal, String, Number, Boolean } from 'runtypes'
+import { Static, Union, Array, Record, Literal, String, Number, Boolean, Unknown, Undefined } from 'runtypes'
 import { Card, Sigil } from './card'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
@@ -528,6 +528,14 @@ const JldrCreature = Record({
 
   // unsure how to handle this
   decals: Array(String).optional(),
+
+  tailLostPortrait: String.optional(),
+  texture: String.optional(),
+  altTexture: String.optional(),
+  emissionTexture: String.optional(),
+  titleGraphic: String.optional(),
+  pixelTexture: String.optional(),
+  animatedPortrait: Undefined,
 })
 
 function convertJldrCard(jsonCard: JldrCreature): Card {
