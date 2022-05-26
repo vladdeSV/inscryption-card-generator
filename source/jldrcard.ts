@@ -1093,9 +1093,9 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
 
   //// baseHealth: Number,
   //// temple: Temple,
-  // appearanceBehaviour: [],
-  // baseAttack: Number,
-  // metaCategories: [],
+  //// appearanceBehaviour: [],
+  //// baseAttack: Number,
+  //// metaCategories: [],
   //// gemsCost: [],
   // specialStatIcon: StatIcon,
   //// tribes: [],
