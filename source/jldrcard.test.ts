@@ -117,4 +117,12 @@ describe('simple cards', () => {
     expect(convert({ ...templateCard, temple: 'tech' }, 'test'))
       .toEqual({ name: 'test', temple: 'Tech' } as JldrCreature)
   })
+
+  test('rare', () => {
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, rare: false } }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, rare: true } }, 'test'))
+      .toEqual({ name: 'test', metaCategories: ['Rare'], appearanceBehaviour: ['RareCardBackground'] } as JldrCreature)
+  })
 })

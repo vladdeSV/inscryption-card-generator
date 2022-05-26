@@ -1059,6 +1059,24 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     })(card.temple)
   }
 
+  // define arrays for easier processing
+  out.metaCategories = []
+  out.appearanceBehaviour = []
+
+  if (card.flags.rare) {
+    out.metaCategories.push('Rare')
+    out.appearanceBehaviour.push('RareCardBackground')
+  }
+
+  // remove empty arrays
+  if (!out.metaCategories.length) {
+    delete out.metaCategories
+  }
+
+  if (!out.appearanceBehaviour.length) {
+    delete out.appearanceBehaviour
+  }
+
   return out
 
   //// baseHealth: Number,
