@@ -29,10 +29,8 @@ const templateCard: Card = {
 
 describe('simple cards', () => {
   test('empty card', () => {
-    const card = convert({ ...templateCard }, 'test')
-    expect(card).toEqual({
-      name: 'test'
-    } as JldrCreature)
+    expect(convert({ ...templateCard }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
   })
 
   test('display name', () => {
