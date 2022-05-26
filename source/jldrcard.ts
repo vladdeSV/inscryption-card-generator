@@ -1083,6 +1083,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   out.specialAbilities = []
   out.traits = []
   out.abilities = []
+  out.decals = []
 
   if (card.flags.rare) {
     out.metaCategories.push('Rare')
@@ -1260,24 +1261,27 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   }
 
   if (card.flags.fused) {
-    // ! decal
+    out.appearanceBehaviour.push('AlternatingBloodDecal') // todo id blood: true, will include multiple of this
+    out.decals.push(id + 'fungus.png')
+    out.decals.push(id + 'stitches.png')
     out.traits.push('Fused') // only for act 2
   }
 
   if (card.flags.enhanced) {
-    // ! decal
+    // ! emission
+    // if res.has('creature', id) => out.emissionTexture = id + '_emission.png'
   }
 
   if (card.flags.paint) {
-    // ! decal
+    out.decals.push(id + '_paint.png')
   }
 
   if (card.flags.smoke) {
-    // ! decal
+    out.decals.push(id + '_smoke.png')
   }
 
   if (card.flags.squid) {
-    // ! decal
+    out.titleGraphic = id + '_squid.png'
   }
 
   // remove empty arrays
@@ -1299,6 +1303,10 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
 
   if (!out.abilities.length) {
     delete out.abilities
+  }
+
+  if (!out.decals.length) {
+    delete out.decals
   }
 
   return out
