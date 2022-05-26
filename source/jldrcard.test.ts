@@ -5,7 +5,7 @@ const templateCard: Card = {
   name: '',
   cost: undefined,
   power: 0,
-  health: 1,
+  health: 0,
   sigils: [],
   tribes: [],
   statIcon: undefined,
@@ -100,11 +100,11 @@ describe('simple cards', () => {
   })
 
   test('health', () => {
-    expect(convert({ ...templateCard, health: 1 }, 'test'))
+    expect(convert({ ...templateCard, health: 0 }, 'test'))
       .toEqual({ name: 'test' } as JldrCreature)
 
-    expect(convert({ ...templateCard, health: 0 }, 'test'))
-      .toEqual({ name: 'test', baseHealth: 0 } as JldrCreature)
+    expect(convert({ ...templateCard, health: 1 }, 'test'))
+      .toEqual({ name: 'test', baseHealth: 1 } as JldrCreature)
 
     expect(convert({ ...templateCard, health: 4 }, 'test'))
       .toEqual({ name: 'test', baseHealth: 4 } as JldrCreature)

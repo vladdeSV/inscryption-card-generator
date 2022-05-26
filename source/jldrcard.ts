@@ -1006,6 +1006,10 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     out.displayedName = card.name
   }
 
+  if (card.health != 0) {
+    out.baseHealth = card.health
+  }
+
   if (card.cost) {
     switch (card.cost.type) {
       case 'blood': {
@@ -1043,10 +1047,6 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
         case 'insect': return 'Insect'
       }
     }))
-  }
-
-  if (card.health != 1) {
-    out.baseHealth = card.health
   }
 
   if (card.temple !== 'nature') {
