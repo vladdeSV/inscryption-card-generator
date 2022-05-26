@@ -1006,6 +1006,10 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     out.displayedName = card.name
   }
 
+  if (card.power != 0) {
+    out.baseAttack = card.power
+  }
+
   if (card.health != 0) {
     out.baseHealth = card.health
   }

@@ -46,6 +46,14 @@ describe('simple cards', () => {
       .toEqual({ name: 'test' } as JldrCreature)
   })
 
+  test('power', () => {
+    expect(convert({ ...templateCard, power: 0 }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, power: 1 }, 'test'))
+      .toEqual({ name: 'test', baseAttack: 1 } as JldrCreature)
+  })
+
   test('health', () => {
     expect(convert({ ...templateCard, health: 0 }, 'test'))
       .toEqual({ name: 'test' } as JldrCreature)
