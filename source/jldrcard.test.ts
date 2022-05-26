@@ -125,4 +125,18 @@ describe('simple cards', () => {
     expect(convert({ ...templateCard, flags: { ...templateCard.flags, rare: true } }, 'test'))
       .toEqual({ name: 'test', metaCategories: ['Rare'], appearanceBehaviour: ['RareCardBackground'] } as JldrCreature)
   })
+
+  test('terrain', () => {
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: false, terrainLayout: false } }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: true, terrainLayout: false } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: false, terrainLayout: true } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainLayout'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: true, terrainLayout: true } }, 'test'))
+      .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground', 'TerrainLayout'] } as JldrCreature)
+  })
 })

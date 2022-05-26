@@ -1068,6 +1068,14 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     out.appearanceBehaviour.push('RareCardBackground')
   }
 
+  if (card.flags.terrain) {
+    out.appearanceBehaviour.push('TerrainBackground')
+  }
+
+  if (card.flags.terrainLayout) {
+    out.appearanceBehaviour.push('TerrainLayout')
+  }
+
   // remove empty arrays
   if (!out.metaCategories.length) {
     delete out.metaCategories
