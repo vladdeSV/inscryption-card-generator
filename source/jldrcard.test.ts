@@ -120,4 +120,34 @@ describe('simple cards', () => {
     expect(convert({ ...templateCard, flags: { ...templateCard.flags, terrain: true, terrainLayout: true } }, 'test'))
       .toEqual({ name: 'test', appearanceBehaviour: ['TerrainBackground', 'TerrainLayout'] } as JldrCreature)
   })
+
+  test('stat icons', () => {
+
+    expect(convert({ ...templateCard, statIcon: undefined }, 'test'))
+      .toEqual({ name: 'test' } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: undefined, power: 2 }, 'test'))
+      .toEqual({ name: 'test', baseAttack: 2 } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'ants' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'Ants', specialAbilities: ['Ant'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'bell' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'Bell', specialAbilities: ['BellProximity'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'bones' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'Bones', specialAbilities: ['Lammergeier'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'cardsinhand' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'CardsInHand', specialAbilities: ['CardsInHand'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'greengems' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'GreenGems', specialAbilities: ['GreenMage'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'mirror' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'Mirror', specialAbilities: ['Mirror'] } as JldrCreature)
+
+    expect(convert({ ...templateCard, statIcon: 'sacrificesthisturn' }, 'test'))
+      .toEqual({ name: 'test', specialStatIcon: 'SacrificesThisTurn', specialAbilities: ['SacrificesThisTurn'] } as JldrCreature)
+  })
 })

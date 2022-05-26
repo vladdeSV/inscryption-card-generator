@@ -1066,6 +1066,7 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   // define arrays for easier processing
   out.metaCategories = []
   out.appearanceBehaviour = []
+  out.specialAbilities = []
 
   if (card.flags.rare) {
     out.metaCategories.push('Rare')
@@ -1080,6 +1081,47 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
     out.appearanceBehaviour.push('TerrainLayout')
   }
 
+  switch (card.statIcon) {
+    default: {
+      break
+    }
+    case 'ants': {
+      out.specialStatIcon = 'Ants'
+      out.specialAbilities.push('Ant')
+      break
+    }
+    case 'bell': {
+      out.specialStatIcon = 'Bell'
+      out.specialAbilities.push('BellProximity')
+      break
+    }
+    case 'bones': {
+      out.specialStatIcon = 'Bones'
+      out.specialAbilities.push('Lammergeier')
+      break
+    }
+    case 'cardsinhand': {
+      out.specialStatIcon = 'CardsInHand'
+      out.specialAbilities.push('CardsInHand')
+      break
+    }
+    case 'greengems': {
+      out.specialStatIcon = 'GreenGems'
+      out.specialAbilities.push('GreenMage')
+      break
+    }
+    case 'mirror': {
+      out.specialStatIcon = 'Mirror'
+      out.specialAbilities.push('Mirror')
+      break
+    }
+    case 'sacrificesthisturn': {
+      out.specialStatIcon = 'SacrificesThisTurn'
+      out.specialAbilities.push('SacrificesThisTurn')
+      break
+    }
+  }
+
   // remove empty arrays
   if (!out.metaCategories.length) {
     delete out.metaCategories
@@ -1087,6 +1129,10 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
 
   if (!out.appearanceBehaviour.length) {
     delete out.appearanceBehaviour
+  }
+
+  if (!out.specialAbilities.length) {
+    delete out.specialAbilities
   }
 
   return out
@@ -1097,7 +1143,7 @@ export function convert(card: Card, id?: string): Partial<JldrCreature> {
   //// baseAttack: Number,
   //// metaCategories: [],
   //// gemsCost: [],
-  // specialStatIcon: StatIcon,
+  //// specialStatIcon: StatIcon,
   //// tribes: [],
   // traits: [],
   // specialAbilities: [],
