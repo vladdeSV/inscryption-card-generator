@@ -1,5 +1,8 @@
+import { mkdtempSync, readdirSync, rmSync } from 'fs'
 import { Card } from './card'
-import { convert, JldrCreature } from './jldrcard'
+import { act1Resource } from './generators/leshyCardGenerator'
+import { convert, createResourcesForCard, JldrCreature } from './jldrcard'
+import { res2 } from './temp'
 
 const templateCard: Card = {
   name: '',
@@ -27,7 +30,7 @@ const templateCard: Card = {
   special: undefined,
 }
 
-describe('simple cards', () => {
+describe('convert simple cards', () => {
   test('empty card', () => {
     expect(convert({ ...templateCard }, 'test'))
       .toEqual({ name: 'test' } as JldrCreature)
@@ -204,5 +207,30 @@ describe('simple cards', () => {
     }
 
     expect(convert(card, 'test123')).toEqual(out)
+  })
+})
+
+describe('create resouces from card', () => {
+
+  // check there are files in tempPath
+  test('empty template card', () => {
+    const tempPath = mkdtempSync('foo')
+    createResourcesForCard(tempPath, { ...templateCard }, 'test123', act1Resource, res2)
+
+    const files = readdirSync(tempPath)
+    expect(files).toHaveLength(0)
+
+    rmSync(tempPath, { recursive: true, force: true })
+  })
+
+  test('card with smoke decal', () => {
+    const tempPath = mkdtempSync('foo')
+    createResourcesForCard(tempPath, { ...templateCard, flags: { ...templateCard.flags, smoke: true } }, 'test123', act1Resource, res2)
+
+    const files = readdirSync(tempPath)
+    expect(files).toHaveLength(1)
+    expect(files[0]).toMatch(/test123_smoke\.png/)
+
+    rmSync(tempPath, { recursive: true, force: true })
   })
 })

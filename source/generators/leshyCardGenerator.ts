@@ -4,7 +4,7 @@ import IM from '../im'
 import { getGemCostResourceId } from '../fns/helpers'
 import { SingleResource } from '../resource'
 
-export { LeshyCardGenerator }
+export { LeshyCardGenerator, act1Resource }
 
 const originalCardHeight = 190 // px
 const fullsizeCardHeight = 1050 // px

@@ -1358,7 +1358,7 @@ function generateFilesFromCard(card: Card, id: string, res: SingleResource): voi
 }
 */
 
-function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): void {
+export function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): void {
   // if card.flags.smoke
   if (card.flags.smoke) {
     fs.copyFileSync(resource.get('decal', 'smoke'), path.join(folderAbsolute, id + '_smoke.png'))
