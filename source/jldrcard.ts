@@ -1,5 +1,8 @@
-import { Static, Union, Array, Record, Literal, String, Number, Boolean, Unknown, Undefined } from 'runtypes'
+import { Static, Union, Array, Record, Literal, String, Number, Boolean, Undefined } from 'runtypes'
 import { Card, Sigil } from './card'
+import { SingleResource } from './resource'
+import * as path from 'path'
+import * as fs from 'fs'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
 
@@ -1354,3 +1357,41 @@ function generateFilesFromCard(card: Card, id: string, res: SingleResource): voi
   }
 }
 */
+
+function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): void {
+  // if card.flags.smoke
+  if (card.flags.smoke) {
+    fs.copyFileSync(resource.get('decal', 'smoke'), path.join(folderAbsolute, id + '_smoke.png'))
+  }
+
+  if (card.flags.squid) {
+    fs.copyFileSync(resource.get('misc', 'squid'), path.join(folderAbsolute, id + '_squid.png'))
+  }
+
+  if (card.flags.paint) {
+    fs.copyFileSync(resource.get('decal', 'paint'), path.join(folderAbsolute, id + '_paint.png'))
+  }
+
+  if (card.flags.fused) {
+    fs.copyFileSync(resource.get('decal', 'fungus'), path.join(folderAbsolute, id + 'fungus.png'))
+    fs.copyFileSync(resource.get('decal', 'stitches'), path.join(folderAbsolute, id + 'stitches.png'))
+  }
+
+  if (card.portrait?.type === 'custom') {
+    if (card.portrait.data.common) {
+      fs.writeFileSync(card.portrait.data.common, path.join(folderAbsolute, id + '_portrait.png'))
+    }
+    if (card.portrait.data.gbc) {
+      fs.writeFileSync(card.portrait.data.gbc, path.join(folderAbsolute, id + '_pixel_portrait.png'))
+    }
+  }
+
+  if (card.portrait?.type === 'resource') {
+    if (resource.has('portrait', card.portrait.resourceId)) {
+      fs.copyFileSync(resource.get('portrait', card.portrait.resourceId), path.join(folderAbsolute, id + '_portrait.png'))
+    }
+    if (resourceGbc.has('portrait', card.portrait.resourceId)) {
+      fs.copyFileSync(resourceGbc.get('portrait', card.portrait.resourceId), path.join(folderAbsolute, id + '_pixel_portrait.png'))
+    }
+  }
+}
