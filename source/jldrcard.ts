@@ -1321,42 +1321,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   }
 
   return out
-
-  // * use default values
-  // flipPortraitForStrafe: true,
-  // cardComplexity: Complexity,
-  // onePerDeck: false,
-  // description: String,
-  // hideAttackAndHealth: false,
-  // iceCubeName: CreatureId.optional(),
-  // tailName: TailName.optional(),
-  // evolveIntoName: CreatureId.optional(),
-  // evolveTurns: Number.optional(), // 1
-  // defaultEvolutionName: String,
 }
-
-/* wip
-// todo create a function which takes a card and outputs the files 'test123_portrait.png', 'test123_pixel_portrait.png', 'test123_paint.png', 'test123_smoke.png', 'test123_squid.png'
-import * as path from 'path'
-import * as fs from 'fs'
-import { SingleResource } from './resource'
-
-function generateFilesFromCard(card: Card, id: string, res: SingleResource): void {
-
-  if (card.flags.paint) {
-    const paintFile = res.get('decal', 'paint')
-    fs.writeFileSync(paintFile, '/tmp/97hjkhsdfg/id_<name>/<name>_paint.png')
-  }
-  if (card.flags.smoke) {
-    const smokeFile = res.get('decal', 'smoke')
-    fs.writeFileSync(smokeFile, '/tmp/97hjkhsdfg/id_<name>/<name>_smoke.png')
-  }
-  if (card.flags.squid) {
-    const squidFile = res.get('misc', 'squid')
-    fs.writeFileSync(squidFile, '/tmp/97hjkhsdfg/id_<name>/<name>_squid.png')
-  }
-}
-*/
 
 export function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): void {
   // if card.flags.smoke
