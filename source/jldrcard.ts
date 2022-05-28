@@ -3,6 +3,8 @@ import { Card, Sigil } from './card'
 import { SingleResource } from './resource'
 import * as path from 'path'
 import * as fs from 'fs'
+import { act1Resource } from './generators/leshyCardGenerator'
+import { res2 } from './temp'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
 
@@ -1280,8 +1282,8 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
 
   if (card.flags.fused) {
     out.appearanceBehaviour.push('AlternatingBloodDecal') // todo id blood: true, will include multiple of this
-    out.decals.push(id + 'fungus.png')
-    out.decals.push(id + 'stitches.png')
+    out.decals.push(id + '_fungus.png')
+    out.decals.push(id + '_stitches.png')
     out.traits.push('Fused') // only for act 2
   }
 
@@ -1337,7 +1339,7 @@ export function createResourcesForCard(folderAbsolute: string, card: Card, id: s
   }
 
   if (card.flags.squid) {
-    fs.copyFileSync(resource.get('misc', 'squid'), path.join(folderAbsolute, id + '_squid.png'))
+    fs.copyFileSync(resource.get('misc', 'squid_title'), path.join(folderAbsolute, id + '_squid.png'))
   }
 
   if (card.flags.paint) {
@@ -1345,8 +1347,8 @@ export function createResourcesForCard(folderAbsolute: string, card: Card, id: s
   }
 
   if (card.flags.fused) {
-    fs.copyFileSync(resource.get('decal', 'fungus'), path.join(folderAbsolute, id + 'fungus.png'))
-    fs.copyFileSync(resource.get('decal', 'stitches'), path.join(folderAbsolute, id + 'stitches.png'))
+    fs.copyFileSync(resource.get('decal', 'fungus'), path.join(folderAbsolute, id + '_fungus.png'))
+    fs.copyFileSync(resource.get('decal', 'stitches'), path.join(folderAbsolute, id + '_stitches.png'))
   }
 
   if (card.portrait?.type === 'custom') {
