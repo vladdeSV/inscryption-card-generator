@@ -1163,8 +1163,15 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
       if (card.portrait.data.gbc) {
         out.pixelTexture = id + '_pixel_portrait.png'
       }
+    } else if (card.portrait.type === 'resource') {
+      if (act1Resource.has('portrait', card.portrait.resourceId)) {
+        out.texture = id + '_portrait.png'
+      }
+      if (res2.has('portrait', card.portrait.resourceId)) {
+        out.pixelTexture = id + '_pixel_portrait.png'
+      }
     }
-    // ! creature
+    // ! deathcard
   }
 
   for (const sigil of card.sigils) {
