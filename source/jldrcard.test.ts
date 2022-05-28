@@ -236,4 +236,46 @@ describe('create resouces from card', () => {
 
     rmSync(tempPath, { recursive: true, force: true })
   })
+
+  test('card with all resources', () => {
+    const card: Card = {
+      ...templateCard,
+      portrait: {
+        type: 'resource',
+        resourceId: 'adder',
+      },
+      flags: {
+        ...templateCard.flags,
+        smoke: true,
+        squid: true,
+        paint: true,
+        fused: true,
+      }
+    }
+
+    const tempPath = mkdtempSync('foo')
+    createResourcesForCard(tempPath, card, 'test123', act1Resource, res2)
+    const files = readdirSync(tempPath)
+    expect(files).toHaveLength(7)
+    expect(files.sort()).toEqual([
+      'test123_smoke.png',
+      'test123_squid.png',
+      'test123_paint.png',
+      'test123_fungus.png',
+      'test123_stitches.png',
+      'test123_portrait.png',
+      'test123_pixel_portrait.png',
+    ].sort())
+
+    // expect all files to equal resources
+    expect(readFileSync(act1Resource.get('decal', 'smoke')).equals(readFileSync(join(tempPath, 'test123_smoke.png')))).toBeTruthy()
+    expect(readFileSync(act1Resource.get('misc', 'squid_title')).equals(readFileSync(join(tempPath, 'test123_squid.png')))).toBeTruthy()
+    expect(readFileSync(act1Resource.get('decal', 'paint')).equals(readFileSync(join(tempPath, 'test123_paint.png')))).toBeTruthy()
+    expect(readFileSync(act1Resource.get('decal', 'fungus')).equals(readFileSync(join(tempPath, 'test123_fungus.png')))).toBeTruthy()
+    expect(readFileSync(act1Resource.get('decal', 'stitches')).equals(readFileSync(join(tempPath, 'test123_stitches.png')))).toBeTruthy()
+    expect(readFileSync(act1Resource.get('portrait', 'adder')).equals(readFileSync(join(tempPath, 'test123_portrait.png')))).toBeTruthy()
+    expect(readFileSync(res2.get('portrait', 'adder')).equals(readFileSync(join(tempPath, 'test123_pixel_portrait.png')))).toBeTruthy()
+
+    rmSync(tempPath, { recursive: true, force: true })
+  })
 })
