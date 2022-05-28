@@ -1,4 +1,5 @@
-import { mkdtempSync, readdirSync, rmSync } from 'fs'
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'fs'
+import { join } from 'path'
 import { Card } from './card'
 import { act1Resource } from './generators/leshyCardGenerator'
 import { convert, createResourcesForCard, JldrCreature } from './jldrcard'
@@ -229,7 +230,9 @@ describe('create resouces from card', () => {
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(1)
-    expect(files[0]).toMatch(/test123_smoke\.png/)
+    expect(files[0]).toEqual('test123_smoke.png')
+
+    expect(readFileSync(act1Resource.get('decal', 'smoke')).equals(readFileSync(join(tempPath, files[0])))).toBeTruthy()
 
     rmSync(tempPath, { recursive: true, force: true })
   })
