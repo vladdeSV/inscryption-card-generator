@@ -5,10 +5,10 @@
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait, CreatureId as CardCreatureId } from './card'
-import { CreatureId } from './jldrcard'
+import { convert as convertCardToJldr, createResourcesForCard, CreatureId } from './jldrcard'
 import { res2 } from './temp'
 // import { generateAct2Card } from './fns/generateAct2Card'
-import { LeshyCardGenerator } from './generators/leshyCardGenerator'
+import { act1Resource, LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
@@ -16,6 +16,8 @@ import { hostname } from 'os'
 import * as dotenv from 'dotenv'
 import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
 import { ResourceError } from './resource'
+import { mkdtempSync, writeFileSync } from 'fs'
+import { join } from 'path'
 
 dotenv.config()
 
@@ -621,6 +623,32 @@ server.get('/api/card/pixelprofilgate/bosses/:boss', async (request, reply) => {
     writeApi.writePoint(point)
     writeApi.flush()
   }
+})
+
+server.post('/api/jldr', async (request, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+
+  const apiCardValidation = ApiCard.validate({ ...templateApiCard, ...request.body })
+  if (apiCardValidation.success === false) {
+    reply.status(400)
+    reply.send({ error: 'Invalid properties', invalid: Object.keys(apiCardValidation.details ?? { '<SERVER ERROR>': '' }) })
+    return
+  }
+
+  const card = convertApiDataToCard(apiCardValidation.value)
+
+  const id = 'cardtest123'
+  const tempPath = mkdtempSync(id) // ! fixme use /tmp/
+
+  const jldr = convertCardToJldr(card, id) as any
+  jldr.modPrefix = 'foobar'
+  jldr.name = 'foobar_' + jldr.name
+  writeFileSync(join(tempPath, id + '.jldr2'), JSON.stringify(jldr, undefined, 2))
+  createResourcesForCard(tempPath, card, id, act1Resource, res2)
+
+  console.log('created jldr at', tempPath)
+
+  reply.status(201).send()
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
