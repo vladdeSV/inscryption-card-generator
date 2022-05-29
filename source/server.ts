@@ -646,6 +646,12 @@ server.post('/api/jldr', async (request, reply) => {
 
   const card = convertApiDataToCard(apiCardValidation.value)
 
+  if (card.portrait?.type === 'deathcard') {
+    reply.status(501)
+    reply.send({ error: 'Deathcard portraits not implemented', category: 'portrait' })
+    return
+  }
+
   const id = randomBytes(5).toString('hex')
   const modId = randomBytes(5).toString('hex')
   const tempPath = mkdtempSync(id)
