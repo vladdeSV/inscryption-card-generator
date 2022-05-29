@@ -627,6 +627,13 @@ server.get('/api/card/pixelprofilgate/bosses/:boss', async (request, reply) => {
   }
 })
 
+server.options('/api/jldr', (_, reply) => {
+  reply.header('Access-Control-Allow-Origin', '*')
+    .header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    .header('Access-Control-Allow-Headers', 'Origin, Content-Type')
+    .send()
+})
+
 server.post('/api/jldr', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
