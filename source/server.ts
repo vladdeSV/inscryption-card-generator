@@ -16,8 +16,10 @@ import { hostname } from 'os'
 import * as dotenv from 'dotenv'
 import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
 import { ResourceError } from './resource'
-import { mkdtempSync, writeFileSync } from 'fs'
+import { mkdtempSync, readFileSync, rmdirSync, rmSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { randomBytes } from 'crypto'
+import { spawnSync } from 'child_process'
 
 dotenv.config()
 
@@ -637,18 +639,24 @@ server.post('/api/jldr', async (request, reply) => {
 
   const card = convertApiDataToCard(apiCardValidation.value)
 
-  const id = 'cardtest123'
-  const tempPath = mkdtempSync(id) // ! fixme use /tmp/
+  const id = randomBytes(5).toString('hex')
+  const modId = randomBytes(5).toString('hex')
+  const tempPath = mkdtempSync(id)
 
   const jldr = convertCardToJldr(card, id) as any
-  jldr.modPrefix = 'foobar'
-  jldr.name = 'foobar_' + jldr.name
+  jldr.modPrefix = modId
+  jldr.name = modId + '_' + jldr.name
   writeFileSync(join(tempPath, id + '.jldr2'), JSON.stringify(jldr, undefined, 2))
   createResourcesForCard(tempPath, card, id, act1Resource, res2)
+  const buffer = spawnSync('zip', ['-r', '-', tempPath]).stdout
+  rmSync(tempPath, { recursive: true, force: true })
 
-  console.log('created jldr at', tempPath)
-
-  reply.status(201).send()
+  reply
+    .status(201)
+    .contentType('application/zip')
+    .header('Content-Disposition', 'attachment; filename="' + id + '.zip"')
+    .header('Content-Length', buffer.length.toString())
+    .end(buffer)
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
