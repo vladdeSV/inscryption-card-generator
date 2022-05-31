@@ -9,3 +9,5 @@
 /resource-*
 
 /source/coverage
+
+.DS_Store
