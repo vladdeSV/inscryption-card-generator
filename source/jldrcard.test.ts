@@ -214,9 +214,9 @@ describe('convert simple cards', () => {
 describe('create resouces from card', () => {
 
   // check there are files in tempPath
-  test('empty template card', () => {
+  test('empty template card', async () => {
     const tempPath = mkdtempSync('foo')
-    createResourcesForCard(tempPath, { ...templateCard }, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, { ...templateCard }, 'test123', act1Resource, res2)
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(0)
@@ -224,9 +224,9 @@ describe('create resouces from card', () => {
     rmSync(tempPath, { recursive: true, force: true })
   })
 
-  test('card with smoke decal', () => {
+  test('card with smoke decal', async () => {
     const tempPath = mkdtempSync('foo')
-    createResourcesForCard(tempPath, { ...templateCard, flags: { ...templateCard.flags, smoke: true } }, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, { ...templateCard, flags: { ...templateCard.flags, smoke: true } }, 'test123', act1Resource, res2)
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(1)
@@ -237,7 +237,31 @@ describe('create resouces from card', () => {
     rmSync(tempPath, { recursive: true, force: true })
   })
 
-  test('card with all resources', () => {
+  test('card with custom portrait', async () => {
+    const tempPath = mkdtempSync('foo')
+
+    // buffer from base64 string
+    const redSquare20x20pxBuffer = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABlBMVEX/AAD///9BHTQRAAAAAWJLR0QB/wIt3gAAAAd0SU1FB+YGARIwL1AAvE4AAAAMSURBVAjXY2CgLgAAAFAAASIT6HUAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjItMDYtMDFUMTg6NDg6NDcrMDA6MDA0lwTpAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIyLTA2LTAxVDE4OjQ4OjQ3KzAwOjAwRcq8VQAAAABJRU5ErkJggg==', 'base64')
+
+    await createResourcesForCard(tempPath, {
+      ...templateCard,
+      portrait: {
+        type: 'custom',
+        data: {
+          common: undefined,
+          gbc: redSquare20x20pxBuffer,
+        }
+      }
+    }, 'test123', act1Resource, res2)
+
+    const files = readdirSync(tempPath)
+    expect(files).toHaveLength(1)
+    expect(files[0]).toEqual('test123_pixel_portrait.png')
+
+    rmSync(tempPath, { recursive: true, force: true })
+  })
+
+  test('card with all resources', async () => {
     const card: Card = {
       ...templateCard,
       portrait: {
@@ -254,7 +278,7 @@ describe('create resouces from card', () => {
     }
 
     const tempPath = mkdtempSync('foo')
-    createResourcesForCard(tempPath, card, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, card, 'test123', act1Resource, res2)
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(7)
     expect(files.sort()).toEqual([
