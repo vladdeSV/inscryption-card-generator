@@ -1,4 +1,4 @@
-FROM vladdesv/node17-magick7.1:v1
+FROM vladdesv/node17-magick7.1:v2
 
 # copy resources for generator
 COPY build/bundle.js translations.json .env ./
