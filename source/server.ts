@@ -660,7 +660,7 @@ server.post('/api/jldr', async (request, reply) => {
   jldr.modPrefix = modId
   jldr.name = modId + '_' + jldr.name
   writeFileSync(join(tempPath, id + '.jldr2'), JSON.stringify(jldr, undefined, 2))
-  createResourcesForCard(tempPath, card, id, act1Resource, res2)
+  await createResourcesForCard(tempPath, card, id, act1Resource, res2)
   const buffer = spawnSync('zip', ['-r', '-', tempPath]).stdout
   rmSync(tempPath, { recursive: true, force: true })
 

@@ -5,6 +5,8 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { act1Resource } from './generators/leshyCardGenerator'
 import { res2 } from './temp'
+import { bufferFromCommandBuilder } from './generators/base'
+import IM from './im'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
 
@@ -1332,7 +1334,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   return out
 }
 
-export function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): void {
+export async function createResourcesForCard(folderAbsolute: string, card: Card, id: string, resource: SingleResource, resourceGbc: SingleResource): Promise<void> {
   // if card.flags.smoke
   if (card.flags.smoke) {
     fs.copyFileSync(resource.get('decal', 'smoke'), path.join(folderAbsolute, id + '_smoke.png'))
@@ -1353,10 +1355,15 @@ export function createResourcesForCard(folderAbsolute: string, card: Card, id: s
 
   if (card.portrait?.type === 'custom') {
     if (card.portrait.data.common) {
-      fs.writeFileSync(card.portrait.data.common, path.join(folderAbsolute, id + '_portrait.png'))
+
+      const im = IM('-').filter('Point').interpolate('Nearest').resizeExt(g => g.size(114, 94).flag('>'))
+      const buffer = await bufferFromCommandBuilder(im, card.portrait.data.common)
+      fs.writeFileSync(path.join(folderAbsolute, id + '_portrait.png'), buffer)
     }
     if (card.portrait.data.gbc) {
-      fs.writeFileSync(card.portrait.data.gbc, path.join(folderAbsolute, id + '_pixel_portrait.png'))
+      const im = IM('-').filter('Point').interpolate('Nearest').resizeExt(g => g.size(41, 28).flag('>'))
+      const buffer = await bufferFromCommandBuilder(im, card.portrait.data.gbc)
+      fs.writeFileSync(path.join(folderAbsolute, id + '_pixel_portrait.png'), buffer)
     }
   }
 
