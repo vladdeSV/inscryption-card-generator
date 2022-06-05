@@ -3,6 +3,7 @@ import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
 import IM from '../im'
 import { getGemCostResourceId } from '../fns/helpers'
+import { ResourceError } from '../resource'
 
 export { GbcCardGenerator }
 
@@ -97,6 +98,11 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
 
     // health
     im.gravity('SouthEast').command('-draw').command(`text 0,0 "${card.health}"`)
+
+    // hack: throw if multiple sigils and any is starts with activated
+    if (card.sigils.length > 1 && card.sigils.some(s => s.startsWith('activated'))) {
+      throw new ResourceError('Multiple sigils, and at least one is activated', 'sigil')
+    }
 
     // sigils
     if (card.sigils.length === 1) {
