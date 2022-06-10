@@ -16,12 +16,6 @@ class ImageMagickCommandBuilder {
     return a
   }
 
-  // build(executable: 'convert' | 'magick', out: string): string {
-  //   this.#commands = [executable, ...this.#commands, this.#escape(out)]
-
-  //   return this.#join()
-  // }
-
   command(...unsanitizedInput: string[]): this {
     this.#commands.push(...unsanitizedInput)
 
@@ -177,7 +171,6 @@ class ImageMagickCommandBuilder {
     return this
   }
 
-  // expose escape method.
   sanitize(input: unknown) {
     return this.#escape(input)
   }
