@@ -30,7 +30,6 @@ const url = process.env.url
 
 let writeApi: WriteApi | undefined = undefined
 if (!token || !org || !bucket || !url) {
-  // throw new Error('missing influxdb config')
   console.error('missing influxdb config, not sending metrics')
 } else {
   const client = new InfluxDB({ url: url, token: token })
@@ -41,13 +40,13 @@ if (!token || !org || !bucket || !url) {
 type ApiCard = Static<typeof ApiCard>
 const ApiCard = RRecord({
   name: String,
-  health: Number, // 0 - 9999
-  power: Number, // 0 - 9999
+  health: Number,
+  power: Number,
   staticon: StatIcon.optional(),
-  tribes: Array(Tribe), // Tribe[], max length 5
-  bloodCost: Number, // 0 - 4
-  boneCost: Number, // 0 - 13, 0 - 10
-  energyCost: Number, // 0 - 6
+  tribes: Array(Tribe),
+  bloodCost: Number,
+  boneCost: Number,
+  energyCost: Number,
   gemCost: RRecord({ orange: Boolean, green: Boolean, blue: Boolean }).optional(),
   sigils: Array(Sigil),
   decals: Array(Union(Literal('blood'), Literal('smoke'), Literal('paint'))),
@@ -307,7 +306,6 @@ server.post('/api/card/:id/back', async (request, reply) => {
     .tag('act', act)
 
   try {
-
     const generator: CardGenerator = generatorFromAct(act)
 
     const startGenerateDateTime = new Date()
