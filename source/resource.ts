@@ -37,7 +37,7 @@ export class SingleResource<T extends { [s: string]: { [s: string]: string } } =
         console.error(`ERROR: ${category}:${id} '${path}' does not exist`)
       }
 
-      throw ''
+      throw 'ERROR: Missing resource(s)'
     }
   }
 
