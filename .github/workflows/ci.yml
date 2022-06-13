@@ -20,18 +20,18 @@ jobs:
         node-version: '17.x'
     - name: install dependencies
       run: yarn install --frozen-lockfile
-    - name: test
-      run: yarn jest
-    - name: create env file
-      env:
-        ENV: ${{ secrets.ENV }}
-      run: echo "$ENV" > .env
     - name: extract resources
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
       run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
     - name: verify all resources
       run: yarn ts-node source/temp.ts
+    - name: test
+      run: yarn jest
+    - name: create env file
+      env:
+        ENV: ${{ secrets.ENV }}
+      run: echo "$ENV" > .env
     - name: build & bundle
       run: yarn build
     - name: build docker image
