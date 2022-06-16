@@ -521,7 +521,7 @@ const JldrCreature = Record({
   bloodCost: Number,
   cardComplexity: Complexity,
   onePerDeck: Boolean,
-  name: String, //CreatureId,
+  name: String,
   displayedName: String,
   description: String,
   hideAttackAndHealth: Boolean,
@@ -531,11 +531,8 @@ const JldrCreature = Record({
   iceCubeName: CreatureId.optional(),
   tailName: TailName.optional(),
   evolveIntoName: CreatureId.optional(),
-  evolveTurns: Number.optional(), // 1
-
-  // unsure how to handle this
+  evolveTurns: Number.optional(),
   decals: Array(String).optional(),
-
   tailLostPortrait: String.optional(),
   texture: String.optional(),
   altTexture: String.optional(),
