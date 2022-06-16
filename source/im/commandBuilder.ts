@@ -16,8 +16,8 @@ class ImageMagickCommandBuilder {
     return a
   }
 
-  command(...unsanitizedInput: string[]): this {
-    this.#commands.push(...unsanitizedInput)
+  command(...commands: string[]): this {
+    this.#commands.push(...commands)
 
     return this
   }
