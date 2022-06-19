@@ -19,3 +19,22 @@ test('command with nested command', () => {
   const command = new IMCB('-').parens(new IMCB('test')).gravity('NorthEast').geometry(10, 10).composite()
   expect(command.parts()).toEqual(['-', '(', 'test', ')', '-gravity', 'NorthEast', '-geometry', '+10+10', '-composite'])
 })
+
+test('multiple custom buffer resources', () => {
+  const command = new IMCB()
+
+  const bufferFoo = Buffer.from('test1')
+  const customFoo = command.fd(bufferFoo)
+
+  expect(customFoo).toEqual('fd:3')
+  expect(command.fds()).toEqual([bufferFoo])
+
+  const bufferBar = Buffer.from('test2')
+  const customBar = command.fd(bufferBar)
+
+  expect(customBar).toEqual('fd:4')
+  expect(command.fds()).toEqual([bufferFoo, bufferBar])
+
+  command.resource(customFoo).resource(customBar).composite()
+  expect(command.parts()).toEqual(['fd:3', 'fd:4', '-composite'])
+})
