@@ -35,6 +35,6 @@ test('multiple custom buffer resources', () => {
   expect(customBar).toEqual('fd:4')
   expect(command.fds()).toEqual([bufferFoo, bufferBar])
 
-  command.resource(customFoo).resource(customBar).composite()
-  expect(command.parts()).toEqual(['fd:3', 'fd:4', '-composite'])
+  command.resource(customFoo).resource(customBar)
+  expect(command.parts()).toEqual(['fd:3', 'fd:4'])
 })
