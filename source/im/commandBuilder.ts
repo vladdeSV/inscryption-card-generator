@@ -175,6 +175,19 @@ class ImageMagickCommandBuilder {
     return this.#escape(input)
   }
 
+  fd(buffer: Buffer): string {
+    const bufferStartIndex = 3
+    const currentBufferLength = this.#buffers.length
+
+    this.#buffers.push(buffer)
+
+    return `fd:${bufferStartIndex + currentBufferLength}`
+  }
+
+  fds(): Buffer[] {
+    return this.#buffers
+  }
+
   #escape(data: unknown): string {
     const input = String(data)
 
@@ -189,6 +202,7 @@ class ImageMagickCommandBuilder {
   }
 
   #commands: (string | ImageMagickCommandBuilder)[] = []
+  #buffers: Buffer[] = []
 }
 
 type GravityType = 'None' | 'Center' | 'East' | 'Forget' | 'NorthEast' | 'North' | 'NorthWest' | 'SouthEast' | 'South' | 'SouthWest' | 'West'
