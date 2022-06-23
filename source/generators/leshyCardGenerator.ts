@@ -310,16 +310,16 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
         const emissionPath = this.resource.get('emission', card.portrait.id)
 
         for (const i of [false, true]) {
-          const im2 = IM(emissionPath)
+          const emission = IM(emissionPath)
             .command('-fill', 'rgb(161,247,186)', '-colorize', '100').resizeExt(g => g.scale(scale * 100))
             .gravity('Center')
             .geometry(3, -15 * scale)
 
           if (i === true) {
-            im2.command('-blur', '0x10')
+            emission.command('-blur', '0x10')
           }
 
-          im.parens(im2).composite()
+          im.parens(emission).composite()
         }
       }
     }
