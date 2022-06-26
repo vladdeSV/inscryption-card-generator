@@ -125,11 +125,6 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    // let input: Buffer | undefined
-    // if (card.portrait?.type === 'custom') {
-    //   input = card.portrait.data.common
-    // }
-
     // resize
     im.resizeExt(g => g.scale(scale * 100))
 
