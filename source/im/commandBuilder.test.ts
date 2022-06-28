@@ -1,4 +1,5 @@
 import { ImageMagickCommandBuilder as IMCB } from './commandBuilder'
+import { Fds } from './fds'
 
 test('empty command', () => {
   const command = new IMCB()

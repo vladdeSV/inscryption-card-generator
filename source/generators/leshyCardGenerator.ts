@@ -1,6 +1,7 @@
 import { Card, StatIcon } from '../card'
-import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
+import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 import IM from '../im'
+import { Fds } from '../im/fds'
 import { getGemCostResourceId } from '../fns/helpers'
 import { SingleResource } from '../resource'
 
@@ -19,6 +20,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
 
   generateFront(card: Card): Promise<Buffer> {
     const im = IM()
+    const fds = new Fds()
 
     // parts are shifted if having terrain card layout
     const terrainLayoutXoffset = card.flags.terrainLayout ? -70 : 0
@@ -53,7 +55,10 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           break
         }
         case 'custom': {
-          im.parens(IM('-').resizeExt(g => g.size(114, 94).flag('>')))
+          if (card.portrait.data.common) {
+            const portraitFd = fds.fd(card.portrait.data.common)
+            im.parens(IM(portraitFd).resizeExt(g => g.size(114, 94).flag('>')))
+          }
           break
         }
         case 'deathcard': {
@@ -324,12 +329,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    let input: Buffer | undefined
-    if (card.portrait?.type === 'custom') {
-      input = card.portrait.data.common
-    }
-
-    return bufferFromCommandBuilder(im, input)
+    return bufferFromCommandBuilderFds(im, fds)
   }
 
   generateBack(type: 'common' | 'bee' | 'deathcard' | 'squirrel' | 'submerged' = 'common'): Promise<Buffer> {
