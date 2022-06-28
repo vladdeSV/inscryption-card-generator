@@ -20,20 +20,39 @@ test('command with nested command', () => {
   expect(command.parts()).toEqual(['-', '(', 'test', ')', '-gravity', 'NorthEast', '-geometry', '+10+10', '-composite'])
 })
 
+class Fds {
+
+  fd(buffer: Buffer): string {
+    const bufferStartIndex = 3
+    const currentBufferLength = this.#buffers.length
+
+    this.#buffers.push(buffer)
+
+    return `fd:${bufferStartIndex + currentBufferLength}`
+  }
+
+  fds(): Buffer[] {
+    return this.#buffers
+  }
+
+  #buffers: Buffer[] = []
+}
+
 test('multiple custom buffer resources', () => {
   const command = new IMCB()
+  const fds = new Fds()
 
   const bufferFoo = Buffer.from('test1')
-  const customFoo = command.fd(bufferFoo)
+  const customFoo = fds.fd(bufferFoo)
 
   expect(customFoo).toEqual('fd:3')
-  expect(command.fds()).toEqual([bufferFoo])
+  expect(fds.fds()).toEqual([bufferFoo])
 
   const bufferBar = Buffer.from('test2')
-  const customBar = command.fd(bufferBar)
+  const customBar = fds.fd(bufferBar)
 
   expect(customBar).toEqual('fd:4')
-  expect(command.fds()).toEqual([bufferFoo, bufferBar])
+  expect(fds.fds()).toEqual([bufferFoo, bufferBar])
 
   command.resource(customFoo).resource(customBar)
   expect(command.parts()).toEqual(['fd:3', 'fd:4'])
