@@ -1,4 +1,5 @@
 import { ImageMagickCommandBuilder as IMCB } from './commandBuilder'
+import { Fds } from './fds'
 
 test('empty command', () => {
   const command = new IMCB()
@@ -20,24 +21,6 @@ test('command with nested command', () => {
   expect(command.parts()).toEqual(['-', '(', 'test', ')', '-gravity', 'NorthEast', '-geometry', '+10+10', '-composite'])
 })
 
-class Fds {
-
-  fd(buffer: Buffer): string {
-    const bufferStartIndex = 3
-    const currentBufferLength = this.#buffers.length
-
-    this.#buffers.push(buffer)
-
-    return `fd:${bufferStartIndex + currentBufferLength}`
-  }
-
-  fds(): Buffer[] {
-    return this.#buffers
-  }
-
-  #buffers: Buffer[] = []
-}
-
 test('multiple custom buffer resources', () => {
   const command = new IMCB()
   const fds = new Fds()
@@ -56,4 +39,21 @@ test('multiple custom buffer resources', () => {
 
   command.resource(customFoo).resource(customBar)
   expect(command.parts()).toEqual(['fd:3', 'fd:4'])
+})
+
+test('nested custom buffer resources', () => {
+  const fds = new Fds()
+
+  const buffer1 = Buffer.from('test1')
+  const custom1 = fds.fd(buffer1)
+
+  const buffer2 = Buffer.from('test2')
+  const custom2 = fds.fd(buffer2)
+
+  const parent = new IMCB()
+  const achild = new IMCB()
+
+  parent.parens(achild).resource(custom1).command('+append')
+  achild.resource(custom2)
+  expect(parent.parts()).toEqual(['(', 'fd:4', ')', 'fd:3', '+append'])
 })
