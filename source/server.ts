@@ -12,15 +12,13 @@ import { CardGenerator } from './generators/base'
 import { GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
-import * as dotenv from 'dotenv'
+import 'dotenv/config'
 import { PixelProfilgateGenerator } from './generators/community/pixelProfligateGenerator'
 import { ResourceError } from './resource'
 import { mkdtempSync, rmSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { randomBytes } from 'crypto'
 import { spawnSync } from 'child_process'
-
-dotenv.config()
 
 // influxdb
 const token = process.env.token
