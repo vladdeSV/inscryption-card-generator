@@ -1,7 +1,3 @@
-// -> 201 default
-// -> 400
-// -> 422
-
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait } from './card'
