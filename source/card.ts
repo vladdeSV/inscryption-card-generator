@@ -415,6 +415,7 @@ const CustomPortrait = Record({
   data: Record({
     common: InstanceOf(Buffer).optional(),
     gbc: InstanceOf(Buffer).optional(),
+    custom: InstanceOf(Buffer).optional(),
   })
 })
 const ResourcePortrait = Record({

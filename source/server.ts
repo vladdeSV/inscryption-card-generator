@@ -63,6 +63,7 @@ const ApiCard = RRecord({
       data: Record({
         common: String.optional(),
         gbc: String.optional(),
+        custom: String.optional(),
       })
     }),
     Record({
@@ -140,6 +141,7 @@ function convertApiDataToCard(input: ApiCard): Card {
       data: {
         common: input.portrait.data.common ? Buffer.from(input.portrait.data.common.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
         gbc: input.portrait.data.gbc ? Buffer.from(input.portrait.data.gbc.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
+        custom: input.portrait.data.custom ? Buffer.from(input.portrait.data.custom.replace(/data:image\/png;base64,/, ''), 'base64') : undefined,
       }
     }
   } else if (input.portrait?.type === 'deathcard') {
