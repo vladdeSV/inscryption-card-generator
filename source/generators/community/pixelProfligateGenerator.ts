@@ -1,8 +1,9 @@
-import { BaseCardGenerator, bufferFromCommandBuilder } from '../base'
+import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from '../base'
 import IM from '../../im'
 import { Card } from '../../card'
 import { SingleResource } from '../../resource'
 import { getGemCostResourceId } from '../../fns/helpers'
+import { Fds } from '../../im/fds'
 
 type Options = { border: boolean, description?: string }
 
@@ -50,6 +51,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
   generateFront(card: Card): Promise<Buffer> {
     const im = IM()
+    const fds = new Fds()
     const cardPalette = card.flags.terrain ? 'misc' : card.temple
 
     im.font(this.resource.get('font', 'heavyweight'))
@@ -88,9 +90,10 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       im.parens(portrait)
         .geometry(7, 21)
         .composite()
-    } else if (card.portrait?.type === 'custom') {
+    } else if (card.portrait?.type === 'custom' && card.portrait?.data.custom) {
 
-      const portrait = IM('-').resizeExt(g => g.size(88, 66).flag('>'))
+      const portraitFd = fds.fd(card.portrait.data.custom)
+      const portrait = IM(portraitFd).resizeExt(g => g.size(88, 66).flag('>'))
 
       im.parens(portrait)
         .gravity('Center')
@@ -229,12 +232,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       im.gravity('Center').background(cardBorderPalette[cardPalette][card.flags.rare ? 'rare' : 'common']).extent(1120, 1560)
     }
 
-    let input: Buffer | undefined
-    if (card.portrait?.type === 'custom') {
-      input = card.portrait.data.custom
-    }
-
-    return bufferFromCommandBuilder(im, input)
+    return bufferFromCommandBuilderFds(im, fds)
   }
 
   generateBack(): Promise<Buffer> {
