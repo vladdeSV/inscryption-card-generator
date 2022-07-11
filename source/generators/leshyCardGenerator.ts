@@ -48,10 +48,16 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       switch (card.portrait?.type) {
         case 'resource': {
           im.resource(this.resource.get('portrait', card.portrait.resourceId))
+            .gravity('Center')
+            .geometry(1, -15)
+            .composite()
           break
         }
         case 'creature': {
           im.resource(this.resource.get('portrait', card.portrait.id))
+            .gravity('Center')
+            .geometry(1, -15)
+            .composite()
           break
         }
         case 'custom': {
@@ -59,6 +65,9 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           if (portraitBuffer) {
             const portraitFd = fds.fd(portraitBuffer)
             im.parens(IM(portraitFd).resizeExt(g => g.size(114, 94).flag('>')))
+              .gravity('Center')
+              .geometry(1, -15)
+              .composite()
           }
           break
         }
@@ -76,13 +85,12 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           }
 
           im.parens(dc)
+            .gravity('Center')
+            .geometry(1, -15)
+            .composite()
           break
         }
       }
-
-      im.gravity('Center')
-        .geometry(1, -15)
-        .composite()
     }
 
     // resize
