@@ -189,7 +189,6 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
       const section = IM().size(880, 666).command('xc:transparent')
         // add sigil icon
         .resource(this.resource.get('sigil', sigilInformation.sigilId))
-        // .command('(', 'rose:', '-resize', '176x176!', ')')
         .gravity('NorthWest').geometry(2, -10).composite()
 
         // draw sigil name
