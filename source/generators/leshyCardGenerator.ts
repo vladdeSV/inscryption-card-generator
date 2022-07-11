@@ -55,8 +55,9 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
           break
         }
         case 'custom': {
-          if (card.portrait.data.common) {
-            const portraitFd = fds.fd(card.portrait.data.common)
+          const portraitBuffer = card.portrait.data.common
+          if (portraitBuffer) {
+            const portraitFd = fds.fd(portraitBuffer)
             im.parens(IM(portraitFd).resizeExt(g => g.size(114, 94).flag('>')))
           }
           break
