@@ -1,9 +1,10 @@
 import { Card } from '../card'
 import { ImageMagickCommandBuilder } from '../im/commandBuilder'
-import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
+import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 import IM from '../im'
 import { getGemCostResourceId } from '../fns/helpers'
 import { ResourceError } from '../resource'
+import { Fds } from '../im/fds'
 
 export { GbcCardGenerator }
 
@@ -16,6 +17,7 @@ type Npc = 'angler' | 'bluewizard' | 'briar' | 'dredger' | 'dummy' | 'greenwizar
 class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?: boolean }> {
   generateFront(card: Card): Promise<Buffer> {
     const im = IM()
+    const fds = new Fds()
 
     // set up defaults
     im.font(this.resource.get('font', 'default'))
@@ -55,8 +57,9 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
           .geometry(1, 1)
           .composite()
       } else if (card.portrait.type === 'custom' && card.portrait.data.gbc) {
+        const portraitFd = fds.fd(card.portrait.data.gbc)
         im.parens(
-          IM('-')
+          IM(portraitFd)
             .filter('Point')
             .gravity('North')
             .interpolate('Nearest')
@@ -155,12 +158,7 @@ class GbcCardGenerator extends BaseCardGenerator<{ border?: boolean, scanlines?:
     // resize
     im.resizeExt(g => g.scale(scale * 100))
 
-    let input: Buffer | undefined
-    if (card.portrait?.type === 'custom') {
-      input = card.portrait.data.gbc
-    }
-
-    return bufferFromCommandBuilder(im, input)
+    return bufferFromCommandBuilderFds(im, fds)
   }
 
   generateBack(type: 'common' | 'submerged' = 'common'): Promise<Buffer> {
