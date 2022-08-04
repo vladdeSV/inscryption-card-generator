@@ -646,7 +646,7 @@ server.post('/api/jldr', async (request, reply) => {
   }
 
   const id = randomBytes(5).toString('hex')
-  const modId = randomBytes(5).toString('hex')
+  const modId = 'generator.cards'
   const tempPath = mkdtempSync(id)
 
   const jldr = convertCardToJldr(card, id) as any
