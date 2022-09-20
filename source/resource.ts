@@ -1,7 +1,7 @@
 import { existsSync } from 'fs'
 import { normalize, join } from 'path'
 
-export { ResourceMap, SingleResource, ResourceError }
+export { ResourceMap, Resource, SingleResource, ResourceError }
 
 type ResourceMap = Record<string, Record<string, string>>
 interface Resource {
