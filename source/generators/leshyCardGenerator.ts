@@ -349,6 +349,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       .filter('Box')
 
     if (this.options.border) {
+      // logic is scuffed. if we have a common card (purple tint) we want the special background (also purple tint)
       const backgroundName = type === 'common' ? 'special' : 'common'
 
       im.extent(147, 212)
