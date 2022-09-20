@@ -1,13 +1,16 @@
 import { existsSync } from 'fs'
 import { normalize, join } from 'path'
 
-export interface Resource {
+export { ResourceMap, SingleResource, ResourceError }
+
+type ResourceMap = Record<string, Record<string, string>>
+interface Resource {
   has(category: string, id: string): boolean,
   get(category: string, id: string, defaultResourceId?: string): string,
 }
 
-export class SingleResource<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
-  constructor(sourcePath: string, input: T) {
+class SingleResource implements Resource {
+  constructor(sourcePath: string, input: ResourceMap) {
     this.#path = normalize(sourcePath)
     this.#data = input
 
@@ -60,38 +63,10 @@ export class SingleResource<T extends { [s: string]: { [s: string]: string } } =
   }
 
   #path: string
-  #data: T
+  #data: ResourceMap
 }
 
-export class ResourceCollection<T extends { [s: string]: { [s: string]: string } } = { [s: string]: { [s: string]: string } }> {
-  constructor(resources: SingleResource<T>[]) {
-    this.#resources = resources
-  }
-
-  public has(category: string, id: string): boolean {
-    for (const resource of this.#resources) {
-      if (resource.has(category, id)) {
-        return true
-      }
-    }
-
-    return false
-  }
-
-  public get(category: string, id: string, defaultResourceId?: string): string {
-    for (const resource of this.#resources) {
-      if (resource.has(category, id)) {
-        return resource.get(category, id, defaultResourceId)
-      }
-    }
-
-    throw new ResourceError(`Unrecognized id '${category}:${id}'`, category, id)
-  }
-
-  #resources: SingleResource<T>[]
-}
-
-export class ResourceError extends Error {
+class ResourceError extends Error {
   constructor(message: string, category: string, id?: string) {
     super(message)
     this.name = 'ResourceError'
