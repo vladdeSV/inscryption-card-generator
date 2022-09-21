@@ -341,7 +341,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilderFds(im, fds)
   }
 
-  generateBack(type: 'common' | 'bee' | 'deathcard' | 'squirrel' | 'submerged' = 'common'): Promise<Buffer> {
+  generateBack(type: keyof LeshyResourceMap['cardback'] = 'common'): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardback', type))
       .background('None')
@@ -364,7 +364,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  generateReward(type: '1blood' | '2blood' | '3blood' | 'bones' | 'bird' | 'canine' | 'hooved' | 'insect' | 'reptile'): Promise<Buffer> {
+  generateReward(type: keyof LeshyResourceMap['cardreward']): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardreward', type))
       .background('None')
@@ -384,7 +384,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  generateBoon(boon: 'doubledraw' | 'singlestartingbone' | 'startingbones' | 'startinggoat' | 'startingtrees' | 'tutordraw'): Promise<Buffer> {
+  generateBoon(boon: keyof LeshyResourceMap['cardboon']): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardboon', boon))
       .background('None')
@@ -407,7 +407,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  generateTrial(type: 'abilities' | 'blood' | 'bones' | 'flying' | 'pelts' | 'power' | 'rare' | 'ring' | 'strafe' | 'submerge' | 'toughness' | 'tribes'): Promise<Buffer> {
+  generateTrial(type: keyof LeshyResourceMap['cardboon']): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardtrial', type))
       .background('None')
@@ -427,7 +427,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  generateTarot(type: 'death' | 'devil' | 'empress' | 'fool' | 'tower'): Promise<Buffer> {
+  generateTarot(type: keyof LeshyResourceMap['cardtarot']): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardtarot', type))
       .background('None')
