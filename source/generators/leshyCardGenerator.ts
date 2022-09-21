@@ -407,7 +407,7 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  generateTrial(type: keyof LeshyResourceMap['cardboon']): Promise<Buffer> {
+  generateTrial(type: keyof LeshyResourceMap['cardtrial']): Promise<Buffer> {
     const im = IM()
     im.resource(this.resource.get('cardtrial', type))
       .background('None')
