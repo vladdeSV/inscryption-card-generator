@@ -170,12 +170,26 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .composite()
     }
 
+    function isSupportedSigil(sigilId: string): sigilId is keyof PixelProfilgateResourceMap['sigil'] {
+      return sigilId in pixelProfilgateResourceMap.sigil
+    }
+
+    const sigilIds: (keyof PixelProfilgateResourceMap['sigil'])[] = []
+    card.sigils.forEach(sigil => {
+      if (!isSupportedSigil(sigil)) {
+        console.warn('could not find pixel profilgate sigil description for sigil', sigil)
+        return
+      }
+      sigilIds.push(sigil)
+    })
+
     // sigils
-    const sigilInformations: SigilEntry[] = card.sigils
-      .map(sigil => this.sigilInformationMap[sigil] ?? { name: 'Lorem ipsum', text: 'dolor sit amet', sigilId: sigil })
+    const sigilInformations: SigilEntry[] = sigilIds.map(sigil => {
+      return this.sigilInformationMap[sigil]
+    })
 
     if (card.statIcon === 'ants') {
-      sigilInformations.unshift({ name: 'Colony', text: 'This card\'s power is equal to the numer of cards with the "colony" sigil on your side of the field.', sigilId: 'colony' })
+      sigilInformations.unshift(this.sigilInformationMap['colony'])
     }
 
     const sigilSections = sigilInformations.map(sigilInformation => {
@@ -261,9 +275,9 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     return bufferFromCommandBuilder(im)
   }
 
-  private sigilInformationMap: { [s: string]: SigilEntry } = {
+  private sigilInformationMap: Record<keyof PixelProfilgateResourceMap['sigil'], SigilEntry> = {
     'madeofstone': { name: 'Made of Stone', text: 'This card is uneffected by the effects of the "Touch of Death" and "Stinky" sigils.', sigilId: 'madeofstone' },
-
+    'colony': { name: 'Colony', text: 'This card\'s power is equal to the numer of cards with the "colony" sigil on your side of the field.', sigilId: 'colony' },
     'sacrificial': { name: 'Many Lives', text: 'When this card is sacrificed, it does not perish.', sigilId: 'sacrificial' },
     'flying': { name: 'Airborne', text: 'This card attacks the opponent directly instead of the opposing card.', sigilId: 'flying' },
     'debuffenemy': { name: 'Stinky', text: 'While this card is on the field, the opposing card has their Power reduced by 1.', sigilId: 'debuffenemy' },
@@ -278,7 +292,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     'drawant': { name: 'Ant Spawner', text: 'When this card is played, search 1 "Worker Ant" from your deck to your hand.', sigilId: 'drawant' },
     'drawcopy': { name: 'Fecundity', text: 'When this card is played, search 1 copy of it from your deck to your hand.', sigilId: 'drawcopy' },
     'drawrabbits': { name: 'Rabbit Hole', text: 'When this card is played, search 1 "Rabbit" from your deck to your hand.', sigilId: 'drawrabbits' },
-    'evolve_1': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "X"', sigilId: 'evolve_1' },
+    'evolve': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "X"', sigilId: 'evolve_1' },
     'guarddog': { name: 'Guardian', text: 'When an opposing card is played opposite an empty space, this card moves to that space.', sigilId: 'guarddog' },
     'quadruplebones': { name: 'Bone King', text: 'When this card perishes, it provides 4 Bones instead of 1.', sigilId: 'quadruplebones' },
     'randomconsumable': { name: 'Trinket Bearer', text: 'When this card is played, draw 1 card from your deck or side deck.', sigilId: 'randomconsumable' },
@@ -300,19 +314,19 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     'droprubyondeath': { name: 'Ruby Heart', text: 'When this card perishes, search 1 "Ruby Mox" from your side deck and play it in this space.', sigilId: 'droprubyondeath' },
     'gemdependant': { name: 'Gem Dependant', text: 'If there are no Gems on your side of the field, this card perishes.', sigilId: 'gemdependant' },
     'gemsdraw': { name: 'Mental Gemnastics', text: 'When this card is played, draw cards from your deck equal to the number of "Mox" cards on your side of the field.', sigilId: 'gemsdraw' },
-    'custom-gempowered': { name: 'Gem Powered', text: 'This card\'s power is equal to the number of Gems provided on your side of the field, to a maximum of 5 Power.', sigilId: 'custom-gempowered' },
-    'custom-bloodless': { name: 'Bloodless', text: 'This card cannot be sacrificed.', sigilId: 'custom-bloodless' },
-    'shieldgems': { name: 'Gem Guardian', text: 'While this card is on the field, any attacks targeting "Mox" cards on your side of the field are negated.', sigilId: 'shieldgems' },
+    // 'custom-gempowered': { name: 'Gem Powered', text: 'This card\'s power is equal to the number of Gems provided on your side of the field, to a maximum of 5 Power.', sigilId: 'custom-gempowered' },
+    // 'custom-bloodless': { name: 'Bloodless', text: 'This card cannot be sacrificed.', sigilId: 'custom-bloodless' },
+    // 'shieldgems': { name: 'Gem Guardian', text: 'While this card is on the field, any attacks targeting "Mox" cards on your side of the field are negated.', sigilId: 'shieldgems' },
     'gaingemblue': { name: 'Blue Gem', text: 'While this card is on the field, it provides 1 "Blue Gem".', sigilId: 'gaingemblue' },
     'gaingemgreen': { name: 'Green Gem', text: 'While this card is on the field, it provides 1 "Green Gem".', sigilId: 'gaingemgreen' },
     'gaingemorange': { name: 'Orange Gem', text: 'While this card is on the field, it provides 1 "Orange Gem".', sigilId: 'gaingemorange' },
-    'custom-gaingemprism': { name: 'Prism Gem', text: 'While this card is on the field, it provides 1 Gem of any color.', sigilId: 'custom-gaingemprism' },
+    // 'custom-gaingemprism': { name: 'Prism Gem', text: 'While this card is on the field, it provides 1 Gem of any color.', sigilId: 'custom-gaingemprism' },
     'gaingemtriple': { name: 'Grand Mox', text: 'While this card is on the field, it provides 1 "Orange Gem," 1 "Blue Gem," and 1 "Green Gem".', sigilId: 'gaingemtriple' },
     'icecube': { name: 'Frozen Away', text: 'When this card perishes, search 1 "X" from your deck and play it in this card\'s place.', sigilId: 'icecube' },
     'skeletonstrafe': { name: 'Skeleton Crew', text: 'During your End Step, this card shifts to an adjacent empty lane. Play a "Skeleton" card in this card\'s previous lane.', sigilId: 'skeletonstrafe' },
     'drawnewhand': { name: 'Handy', text: 'When this card is played, discard your hand, then draw a total of 4 cards from your deck and/or side deck.', sigilId: 'drawnewhand' },
     'loot': { name: 'Looter', text: 'When this card deals damage directly, draw a card for each damage dealt by this card.', sigilId: 'loot' },
-    'custom-spinewalker': { name: 'Spine Walker', text: 'During your End Step, this card shifts to an adjacent empty lane, generating 1 Bone in the process.', sigilId: 'custom-spinewalker' },
+    // 'custom-spinewalker': { name: 'Spine Walker', text: 'During your End Step, this card shifts to an adjacent empty lane, generating 1 Bone in the process.', sigilId: 'custom-spinewalker' },
     'doubledeath': { name: 'Double Death', text: 'While this card is on the field, any cards that perish on your side of the field perish a second time.', sigilId: 'doubledeath' },
     'bloodguzzler': { name: 'Bloodsucker', text: 'When this card damages an opposing card, this card restores 1 Health, up to this cards\' maximum Health.', sigilId: 'bloodguzzler' },
     'explodeondeath': { name: 'Detonator', text: 'When this card perishes, adjacent and opposing cards are dealt 10 damage.', sigilId: 'explodeondeath' },
@@ -320,7 +334,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     'sniper': { name: 'Sniper', text: 'When this card attacks, it can target and 1 space on the opponents\' side of the field.', sigilId: 'sniper' },
     'bombspawner': { name: 'Insta-Bomber', text: 'When this card is played, target 1 card on the field. That card is dealt 10 damage.', sigilId: 'bombspawner' },
     'steeltrap': { name: 'Steel Trap', text: 'When this card perishes, the opposing card is dealt 10 damage.', sigilId: 'steeltrap' },
-    'custom-moxdropper': { name: 'Mox Dropper', text: 'During your End Step, this card shifts to an adjacent empty lane. Search 1 "Mox" card from your side deck and play it in this card\'s previous lane.', sigilId: 'custom-moxdropper' },
+    // 'custom-moxdropper': { name: 'Mox Dropper', text: 'During your End Step, this card shifts to an adjacent empty lane. Search 1 "Mox" card from your side deck and play it in this card\'s previous lane.', sigilId: 'custom-moxdropper' },
     'activateddealdamage': { name: 'Energy Gun', text: 'During your Play Step, you can pay 1 Energy to deal 1 damage to a card opposing this card.', sigilId: 'activateddealdamage' },
     'activatedrandompowerenergy': { name: 'Power Dice', text: 'During your Play Step, you can pay 1 Energy to roll a 6 sided die. This cards\' Power is equal to the number rolled.', sigilId: 'activatedrandompowerenergy' },
     'activatedenergytobones': { name: 'Bonehorn', text: 'During your Play Step, you can pay 1 Energy to gain 3 Bones. This card can only do this once per turn.', sigilId: 'activatedenergytobones' },
@@ -332,11 +346,12 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     'conduitbuffattack': { name: 'Attack Conduit', text: 'While this card is part of a Circuit, all cards inside the Circuit gain 1 Power.', sigilId: 'conduitbuffattack' },
     'conduitfactory': { name: 'Spawn Conduit', text: 'While this card is part of a Circuit, during your End Step search 1 "L33pb0t" from your side deck and play it within an empty space in the Circuit.', sigilId: 'conduitfactory' },
     'conduitenergy': { name: 'Energy Conduit', text: 'While this card is part of a Circuit, your Energy does not deplete from its current level.', sigilId: 'conduitenergy' },
-    'custom-conduitfrog': { name: 'Frog Friend', text: 'During your End Step, this card shifts to an adjacent empty lane. Search 1 "Frog" card from your deck and play it in this card\'s previous lane.', sigilId: 'custom-conduitfrog' }
+    // 'custom-conduitfrog': { name: 'Frog Friend', text: 'During your End Step, this card shifts to an adjacent empty lane. Search 1 "Frog" card from your deck and play it in this card\'s previous lane.', sigilId: 'custom-conduitfrog' }
   }
 }
 
-const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
+type PixelProfilgateResourceMap = typeof pixelProfilgateResourceMap
+const pixelProfilgateResourceMap = {
   'card': {
     'nature': 'Card Base/CardBeastCommon.png',
     'naturerare': 'Card Base/CardBeastRare.png',
@@ -665,4 +680,4 @@ const pixelProfilgateResourceMap: Record<string, Record<string, string>> = {
     'null': 'Conduits/ConduitNull.png',
     'spawner': 'Conduits/ConduitSpawner.png',
   }
-}
+} as const
