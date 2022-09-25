@@ -62,13 +62,13 @@ function readTranslations(path: string) {
   return translations
 }
 
-// const translations = readTranslations('./localization')
-// writeFileSync('./translations.json', JSON.stringify(translations, null, 2))
+const translations = readTranslations('./localization')
+writeFileSync('./translations.json', JSON.stringify(translations, null, 2))
 
 // read file translation.json
-const translations = JSON.parse(readFileSync('./translations.json', 'utf8'))
-const creatures = ['adder', 'alpha', 'amalgam', 'amoeba', 'ant', 'antflying', 'antqueen', 'aquasquirrel', 'baitbucket', 'bat', 'beaver', 'bee', 'beehive', 'bird_tail', 'bloodhound', 'boulder', 'brokenegg', 'bull', 'bullfrog', 'cagedwolf', 'canine_tail', 'cat', 'cat_undead', 'cockroach', 'coyote', 'cuckoo', 'dam', 'daus', 'dausbell', 'deer', 'deercub', 'direwolf', 'direwolfcub', 'fieldmice', 'frozen_opossum', 'geck', 'goat', 'goat_sexy', 'goldnugget', 'grizzly', 'hodag', 'hunterhare', 'hydra', 'hydraegg', 'hydraegg_light', 'ijiraq', 'insect_tail', 'jerseydevil', 'jerseydevil_sleeping', 'kingfisher', 'kraken', 'lammergeier', 'lice', 'maggots', 'magpie', 'mantis', 'mantisgod', 'mealworm', 'mole', 'moleman', 'moleseaman', 'moose', 'mothman_1', 'mothman_2', 'mothman_3', 'mudturtle', 'mudturtle_shelled', 'mule', 'opossum', 'otter', 'ouroboros', 'packrat', 'pelt_golden', 'pelt_hare', 'pelt_wolf', 'porcupine', 'pronghorn', 'rabbit', 'raccoon', 'ratking', 'rattler', 'raven', 'ravenegg', 'redhart', 'ringworm', 'shark', 'sinkhole', 'skeletonparrot', 'skeletonpirate', 'skink', 'skink_tail', 'skink_tailless', 'skunk', 'smoke', 'smoke_improved', 'sparrow', 'squidbell', 'squidcards', 'squidmirror', 'squirrel', 'squirrel_scared', 'starvingman', 'stoat', 'stoat_bloated', 'stones', 'stump', 'tadpole', 'trap', 'trap_closed', 'trapfrog', 'tree', 'tree_snowcovered', 'turtle', 'urayuli', 'vulture', 'warren', 'wolf', 'wolfcub', 'wolverine', 'wolverine_cub',]
+// const translations = JSON.parse(readFileSync('./translations.json', 'utf8'))
+// const creatures = ['adder', 'alpha', 'amalgam', 'amoeba', 'ant', 'antflying', 'antqueen', 'aquasquirrel', 'baitbucket', 'bat', 'beaver', 'bee', 'beehive', 'bird_tail', 'bloodhound', 'boulder', 'brokenegg', 'bull', 'bullfrog', 'cagedwolf', 'canine_tail', 'cat', 'cat_undead', 'cockroach', 'coyote', 'cuckoo', 'dam', 'daus', 'dausbell', 'deer', 'deercub', 'direwolf', 'direwolfcub', 'fieldmice', 'frozen_opossum', 'geck', 'goat', 'goat_sexy', 'goldnugget', 'grizzly', 'hodag', 'hunterhare', 'hydra', 'hydraegg', 'hydraegg_light', 'ijiraq', 'insect_tail', 'jerseydevil', 'jerseydevil_sleeping', 'kingfisher', 'kraken', 'lammergeier', 'lice', 'maggots', 'magpie', 'mantis', 'mantisgod', 'mealworm', 'mole', 'moleman', 'moleseaman', 'moose', 'mothman_1', 'mothman_2', 'mothman_3', 'mudturtle', 'mudturtle_shelled', 'mule', 'opossum', 'otter', 'ouroboros', 'packrat', 'pelt_golden', 'pelt_hare', 'pelt_wolf', 'porcupine', 'pronghorn', 'rabbit', 'raccoon', 'ratking', 'rattler', 'raven', 'ravenegg', 'redhart', 'ringworm', 'shark', 'sinkhole', 'skeletonparrot', 'skeletonpirate', 'skink', 'skink_tail', 'skink_tailless', 'skunk', 'smoke', 'smoke_improved', 'sparrow', 'squidbell', 'squidcards', 'squidmirror', 'squirrel', 'squirrel_scared', 'starvingman', 'stoat', 'stoat_bloated', 'stones', 'stump', 'tadpole', 'trap', 'trap_closed', 'trapfrog', 'tree', 'tree_snowcovered', 'turtle', 'urayuli', 'vulture', 'warren', 'wolf', 'wolfcub', 'wolverine', 'wolverine_cub',]
 
-for (const creature of creatures) {
-  console.log(creature, translations['en'][creature])
-}
+// for (const creature of creatures) {
+//   console.log(creature, translations['en'][creature])
+// }
