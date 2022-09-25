@@ -12,7 +12,7 @@ interface CardGenerator {
   generateBack: () => Promise<Buffer>
 }
 
-abstract class BaseCardGenerator<T extends Record<string, any>> implements CardGenerator {
+abstract class BaseCardGenerator<T extends Record<string, unknown>> implements CardGenerator {
   constructor(resources: Resource, options: T) {
     this.resource = resources
     this.options = options
