@@ -1,4 +1,4 @@
-import { Card, StatIcon } from '../card'
+import { Card } from '../card'
 import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 import IM from '../im'
 import { Fds } from '../im/fds'
