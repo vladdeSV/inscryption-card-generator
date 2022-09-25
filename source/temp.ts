@@ -1,6 +1,4 @@
 import { SingleResource } from './resource'
-import { GbcCardGenerator } from './generators/gbcCardGenerator'
-import { writeFileSync } from 'fs'
 
 const act2ResourceMap = {
   'card': {
@@ -262,4 +260,3 @@ const act2ResourceMap = {
 }
 
 export const res2 = new SingleResource('resource-gbc', act2ResourceMap)
-
