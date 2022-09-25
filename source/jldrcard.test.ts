@@ -1,9 +1,9 @@
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'fs'
 import { join } from 'path'
 import { Card } from './card'
+import { act2Resource } from './generators/gbcCardGenerator'
 import { act1Resource } from './generators/leshyCardGenerator'
 import { convert, createResourcesForCard, JldrCreature } from './jldrcard'
-import { res2 } from './temp'
 
 const defaultMetaCategories = ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable']
 
@@ -219,7 +219,7 @@ describe('create resouces from card', () => {
   // check there are files in tempPath
   test('empty template card', async () => {
     const tempPath = mkdtempSync('foo')
-    await createResourcesForCard(tempPath, { ...templateCard }, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, { ...templateCard }, 'test123', act1Resource, act2Resource)
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(0)
@@ -229,7 +229,7 @@ describe('create resouces from card', () => {
 
   test('card with smoke decal', async () => {
     const tempPath = mkdtempSync('foo')
-    await createResourcesForCard(tempPath, { ...templateCard, flags: { ...templateCard.flags, smoke: true } }, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, { ...templateCard, flags: { ...templateCard.flags, smoke: true } }, 'test123', act1Resource, act2Resource)
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(1)
@@ -255,7 +255,7 @@ describe('create resouces from card', () => {
           gbc: redSquare20x20pxBuffer,
         }
       }
-    }, 'test123', act1Resource, res2)
+    }, 'test123', act1Resource, act2Resource)
 
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(1)
@@ -281,7 +281,7 @@ describe('create resouces from card', () => {
     }
 
     const tempPath = mkdtempSync('foo')
-    await createResourcesForCard(tempPath, card, 'test123', act1Resource, res2)
+    await createResourcesForCard(tempPath, card, 'test123', act1Resource, act2Resource)
     const files = readdirSync(tempPath)
     expect(files).toHaveLength(7)
     expect(files.sort()).toEqual([
@@ -301,7 +301,7 @@ describe('create resouces from card', () => {
     expect(readFileSync(act1Resource.get('decal', 'fungus')).equals(readFileSync(join(tempPath, 'test123_fungus.png')))).toBeTruthy()
     expect(readFileSync(act1Resource.get('decal', 'stitches')).equals(readFileSync(join(tempPath, 'test123_stitches.png')))).toBeTruthy()
     expect(readFileSync(act1Resource.get('portrait', 'adder')).equals(readFileSync(join(tempPath, 'test123_portrait.png')))).toBeTruthy()
-    expect(readFileSync(res2.get('portrait', 'adder')).equals(readFileSync(join(tempPath, 'test123_pixel_portrait.png')))).toBeTruthy()
+    expect(readFileSync(act2Resource.get('portrait', 'adder')).equals(readFileSync(join(tempPath, 'test123_pixel_portrait.png')))).toBeTruthy()
 
     rmSync(tempPath, { recursive: true, force: true })
   })
