@@ -24,8 +24,8 @@ jobs:
       env:
         ENCRYPTION_PASSWORD: ${{ secrets.ENCRYPTION_PASSWORD }}
       run: echo "$ENCRYPTION_PASSWORD" | gpg --batch --quiet --passphrase-fd 0 -d resources.tar.gz.gpg | tar -xz
-    - name: verify all resources
-      run: yarn ts-node source/temp.ts
+    # - name: verify all resources
+    #   run: yarn ts-node source/temp.ts
     - name: test
       run: yarn jest
     - name: create env file
