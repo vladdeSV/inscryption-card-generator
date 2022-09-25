@@ -2,10 +2,9 @@ import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait } from './card'
 import { convert as convertCardToJldr, createResourcesForCard, CreatureId, JldrCreature } from './jldrcard'
-import { res2 } from './temp'
 import { act1Resource, LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
-import { GbcCardGenerator } from './generators/gbcCardGenerator'
+import { act2Resource, GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
 import { hostname } from 'os'
 import 'dotenv/config'
@@ -228,7 +227,7 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
   const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
-      case 'gbc': return new GbcCardGenerator(res2, options)
+      case 'gbc': return new GbcCardGenerator(options)
       case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
@@ -292,7 +291,7 @@ server.post('/api/card/:id/back', async (request, reply) => {
   const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
-      case 'gbc': return new GbcCardGenerator(res2, options)
+      case 'gbc': return new GbcCardGenerator(options)
       case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
@@ -376,7 +375,7 @@ server.get('/api/card/:act/backs/:kind', async (request, reply) => {
             reply.send({ error: 'Invalid kind', invalid: request.params.kind })
             return
           }
-          return new GbcCardGenerator(res2, options).generateBack(kind.value)
+          return new GbcCardGenerator(options).generateBack(kind.value)
         }
         case 'pixelprofilgate': return new PixelProfilgateGenerator(options).generateBack()
       }
@@ -520,7 +519,7 @@ server.get('/api/card/gbc/npcs/:npc', async (request, reply) => {
   const scanline = request.query.scanline !== undefined
 
   const options = { border, scanlines: scanline }
-  const generator = new GbcCardGenerator(res2, options)
+  const generator = new GbcCardGenerator(options)
 
   const point = new Point('generator')
     .tag('card-type', 'npc')
@@ -653,7 +652,7 @@ server.post('/api/jldr', async (request, reply) => {
   jldr.modPrefix = modId
   jldr.name = modId + '_' + jldr.name
   writeFileSync(join(tempPath, id + '.jldr2'), JSON.stringify(jldr, undefined, 2))
-  await createResourcesForCard(tempPath, card, id, act1Resource, res2)
+  await createResourcesForCard(tempPath, card, id, act1Resource, act2Resource)
   const buffer = spawnSync('zip', ['-r', '-', tempPath]).stdout
   rmSync(tempPath, { recursive: true, force: true })
 

@@ -4,9 +4,9 @@ import { SingleResource } from './resource'
 import * as path from 'path'
 import * as fs from 'fs'
 import { act1Resource } from './generators/leshyCardGenerator'
-import { res2 } from './temp'
 import { bufferFromCommandBuilder } from './generators/base'
 import IM from './im'
+import { act2Resource } from './generators/gbcCardGenerator'
 
 export { JldrCreature, CreatureId, Gem, convertJldrCard }
 
@@ -1168,7 +1168,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
       if (act1Resource.has('portrait', card.portrait.resourceId)) {
         out.texture = id + '_portrait.png'
       }
-      if (res2.has('portrait', card.portrait.resourceId)) {
+      if (act2Resource.has('portrait', card.portrait.resourceId)) {
         out.pixelTexture = id + '_pixel_portrait.png'
       }
     }
