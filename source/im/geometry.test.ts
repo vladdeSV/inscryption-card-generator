@@ -48,7 +48,8 @@ describe('geometry misc', () => {
 
     const invalidFlags = ['!<', '@', '>>', 1]
     for (const flag of invalidFlags) {
-      expect(() => new Geometry().flag(flag as any).toString()).toThrowError()
+      // hack to show invalid input will throw
+      expect(() => new Geometry().flag(flag as '!').toString()).toThrowError()
     }
   })
 
