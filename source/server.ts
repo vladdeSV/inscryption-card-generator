@@ -1,7 +1,7 @@
 import express from 'express'
 import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boolean, Record } from 'runtypes'
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait } from './card'
-import { convert as convertCardToJldr, createResourcesForCard, CreatureId } from './jldrcard'
+import { convert as convertCardToJldr, createResourcesForCard, CreatureId, JldrCreature } from './jldrcard'
 import { res2 } from './temp'
 import { act1Resource, LeshyCardGenerator } from './generators/leshyCardGenerator'
 import { CardGenerator } from './generators/base'
@@ -649,7 +649,7 @@ server.post('/api/jldr', async (request, reply) => {
   const modId = 'generator.cards'
   const tempPath = mkdtempSync(id)
 
-  const jldr = convertCardToJldr(card, id) as any
+  const jldr = convertCardToJldr(card, id) as Partial<JldrCreature> & { modPrefix: string, modId: string }
   jldr.modPrefix = modId
   jldr.name = modId + '_' + jldr.name
   writeFileSync(join(tempPath, id + '.jldr2'), JSON.stringify(jldr, undefined, 2))
