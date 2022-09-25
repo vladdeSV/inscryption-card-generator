@@ -2,7 +2,7 @@ import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFd
 import IM from '../../im'
 import { Card, Sigil } from '../../card'
 import { SingleResource } from '../../resource'
-import { getGemCostResourceId } from '../../fns/helpers'
+import { getGemCostResourceId } from '../../helpers'
 import { Fds } from '../../im/fds'
 
 type Options = { border: boolean, description?: string }

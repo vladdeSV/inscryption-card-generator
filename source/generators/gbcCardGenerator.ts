@@ -2,7 +2,7 @@ import { Card } from '../card'
 import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 import IM from '../im'
-import { getGemCostResourceId } from '../fns/helpers'
+import { getGemCostResourceId } from '../helpers'
 import { ResourceError } from '../resource'
 import { Fds } from '../im/fds'
 

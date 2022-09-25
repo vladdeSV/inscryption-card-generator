@@ -2,7 +2,7 @@ import { Card, StatIcon } from '../card'
 import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 import IM from '../im'
 import { Fds } from '../im/fds'
-import { getGemCostResourceId } from '../fns/helpers'
+import { getGemCostResourceId } from '../helpers'
 import { SingleResource } from '../resource'
 
 export { LeshyCardGenerator, act1Resource }
