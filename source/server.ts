@@ -666,7 +666,7 @@ server.post('/api/jldr', async (request, reply) => {
 })
 
 server.get('/', (_, reply) => reply.status(200).send('OK\n'))
-server.listen(8080, () => console.log('Server running'))
+server.listen(8080, () => console.log('server running at http://localhost:8080'))
 
 function resourceIdFromCreatureId(creatureId: CreatureId): string {
   switch (creatureId) {
