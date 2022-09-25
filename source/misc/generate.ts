@@ -1,11 +1,11 @@
-import { Card } from './card'
+import { Card } from '../card'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import * as path from 'path'
 // import { generateAct2BackCard, generateAct2Card, generateAct2NpcCard } from './fns/generateAct2Card'
 // import { generateAct1BackCard, generateAct1BoonCard, generateAct1Card, generateAct1RewardCard, generateAct1TarotCard, generateAct1TrialCard } from './fns/generateAct1Card'
-import { convertJldrCard, JldrCreature, CreatureId as JldrCreatureId } from './jldrcard'
-import { res2 } from './temp'
-import { SingleResource } from './resource'
+import { convertJldrCard, JldrCreature, CreatureId as JldrCreatureId } from '../jldrcard'
+import { res2 } from '../temp'
+import { SingleResource } from '../resource'
 
 function getGameTranslationId(id: string | undefined): string | undefined {
 
