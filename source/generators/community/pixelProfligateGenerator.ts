@@ -1,6 +1,6 @@
 import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from '../base'
 import IM from '../../im'
-import { Card } from '../../card'
+import { Card, Sigil } from '../../card'
 import { SingleResource } from '../../resource'
 import { getGemCostResourceId } from '../../fns/helpers'
 import { Fds } from '../../im/fds'
@@ -38,13 +38,13 @@ const cardDescriptionTextPalette: Record<'nature' | 'tech' | 'wizard' | 'undead'
 type SigilEntry = {
   name: string,
   text: string,
-  sigilId: string,
+  sigilId: Sigil | keyof PixelProfilgateResourceMap['sigil'],
 }
 
 export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
   constructor(options: Options) {
     super(
-      new SingleResource('resource-pixelprofilgate', pixelProfilgateResourceMap),
+      pixelProfilgateResource,
       options
     )
   }
@@ -292,7 +292,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
     'drawant': { name: 'Ant Spawner', text: 'When this card is played, search 1 "Worker Ant" from your deck to your hand.', sigilId: 'drawant' },
     'drawcopy': { name: 'Fecundity', text: 'When this card is played, search 1 copy of it from your deck to your hand.', sigilId: 'drawcopy' },
     'drawrabbits': { name: 'Rabbit Hole', text: 'When this card is played, search 1 "Rabbit" from your deck to your hand.', sigilId: 'drawrabbits' },
-    'evolve': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "X"', sigilId: 'evolve_1' },
+    'evolve': { name: 'Fledgling', text: 'During your next draw step after this card is played, it ages into a "X"', sigilId: 'evolve' },
     'guarddog': { name: 'Guardian', text: 'When an opposing card is played opposite an empty space, this card moves to that space.', sigilId: 'guarddog' },
     'quadruplebones': { name: 'Bone King', text: 'When this card perishes, it provides 4 Bones instead of 1.', sigilId: 'quadruplebones' },
     'randomconsumable': { name: 'Trinket Bearer', text: 'When this card is played, draw 1 card from your deck or side deck.', sigilId: 'randomconsumable' },
@@ -681,3 +681,5 @@ const pixelProfilgateResourceMap = {
     'spawner': 'Conduits/ConduitSpawner.png',
   }
 } as const
+
+const pixelProfilgateResource = new SingleResource('resource-pixelprofilgate', pixelProfilgateResourceMap)
