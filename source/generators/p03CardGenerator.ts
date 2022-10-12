@@ -33,10 +33,14 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 type P03ResourceMap = typeof p03ResourceMap
 const p03ResourceMap = {
   'card': {
-    'common': 'cards/default.png',
+    'common': 'cards/floppy-front-transparent.png',
   },
   'cardback': {
-    'common': 'cardbacks/default.png',
+    'common': 'cardbacks/floppy-back.png',
+  },
+  'cardextra': {
+    'gems': 'cardextras/floppy-gems-transparent.png',
+    'wire': 'cardextras/floppy-wire-transparent.png',
   },
   'cost': {
     'energy': 'costs/energy.png',
