@@ -43,7 +43,7 @@ const p03ResourceMap = {
     'wire': 'cardextras/floppy-wire-transparent.png',
   },
   'cost': {
-    'energy': 'costs/energy.png',
+//     'energy': 'costs/energy.png',
   },
   'deathcard': {
     'base': 'deathcards/base.png',
