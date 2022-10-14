@@ -3,6 +3,7 @@ import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boole
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait } from './card'
 import { convert as convertCardToJldr, createResourcesForCard, CreatureId, JldrCreature } from './jldrcard'
 import { act1Resource, LeshyCardGenerator } from './generators/leshyCardGenerator'
+import { P03CardGenerator  } from './generators/p03CardGenerator'
 import { CardGenerator } from './generators/base'
 import { act2Resource, GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
@@ -202,7 +203,7 @@ server.options('/api/card/*/*', (_, reply) => {
 server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
-  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.id)
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('p03'), Literal('pixelprofilgate')).validate(request.params.id)
   if (actValidation.success === false) {
     reply.status(404)
     reply.send({ error: 'Invalid act', invalid: request.params.id })
@@ -224,10 +225,11 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
-  const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
+  const generatorFromAct = (act: 'leshy' | 'gbc' | 'p03' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(options)
+      case 'p03': return new P03CardGenerator(options)
       case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
