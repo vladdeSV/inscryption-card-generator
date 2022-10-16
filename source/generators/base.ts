@@ -25,9 +25,9 @@ abstract class BaseCardGenerator<T extends Record<string, unknown>> implements C
   protected options: T
 }
 
-function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer): Promise<Buffer> {
+function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer, filetype = 'PNG'): Promise<Buffer> {
   return new Promise<Buffer>((resolve, reject) => {
-    const process = spawn('convert', [...im.parts(), '-'], { stdio: 'pipe' })
+    const process = spawn('convert', [...im.parts(), filetype ? `${filetype}:-` : '-'], { stdio: 'pipe' })
     console.log('spawned a process', process.pid)
 
     const buffers: Buffer[] = []
