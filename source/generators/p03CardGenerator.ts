@@ -27,7 +27,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .resize(undefined, fullsizeCardHeight)
 
     // draw background
-    im.fill('#050510')
+    im.fill('#112')
       .command('-draw')
       .command('rectangle 10,100 680,1030')
 
