@@ -6,6 +6,11 @@ import { SingleResource } from '../resource'
 
 export { P03CardGenerator, p03Resource }
 
+//original width: 1307 -> scaled width: 698
+const originalCardHeight = 1967 // px
+const fullsizeCardHeight = 1050 // px
+const scale = fullsizeCardHeight / originalCardHeight
+
 type Options = { border?: boolean, locale?: string }
 class P03CardGenerator extends BaseCardGenerator<Options> {
 
@@ -14,9 +19,18 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateFront(card: Card): Promise<Buffer> {
-    const im = IM()
+    const im = IM().size(698,1050).command('xc:transparent')
 
-    // ! fixme: implement
+    const front = IM(this.resource.get('card', 'common'))
+      .resize(undefined, 1050)
+
+    // draw background
+    im.fill('#050510')
+      .command('-draw')
+      .command('rectangle 10,100 680,1030')
+
+    // append front image
+    im.parens(front).composite()
 
     return bufferFromCommandBuilder(im)
   }
