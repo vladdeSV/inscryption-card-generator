@@ -31,6 +31,46 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .command('-draw')
       .command('rectangle 10,100 680,1030')
 
+    if(card.portrait) {
+
+      switch (card.portrait.type) {
+        default: {
+          break
+        }
+        case 'resource': {
+          im.gravity('Center')
+
+          const portaitPath = this.resource.get('portrait', card.portrait.resourceId)
+          const s = 400
+          const portrait = IM(portaitPath)
+            .fill('#0df')
+            .command('-colorize', '100')
+            .resizeExt(g => g.scale(s))
+
+          const portaitBlur = IM('xc:transparent').size(fullsizeCardWidth, fullsizeCardHeight)
+          .parens(
+            IM(portaitPath)
+            .fill('cyan')
+            .command('-colorize', '75')
+            .resizeExt(g => g.scale(s))
+            .alpha('Set')
+            .command('-channel', 'A')
+            .command('-evaluate', 'multiply', '0.8')
+            .command('+channel')
+          )
+          .composite()
+          .command('-blur', '0x60')
+
+          im
+          .parens(portaitBlur).composite()
+          .parens(portrait).composite()
+
+
+          break
+        }
+      }
+    }
+
     // append front image
     im.parens(front).composite()
 
