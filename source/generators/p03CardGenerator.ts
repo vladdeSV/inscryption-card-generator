@@ -21,10 +21,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateFront(card: Card): Promise<Buffer> {
-    const im = IM().size(698,1050).command('xc:transparent')
+    const im = IM().size(fullsizeCardWidth,fullsizeCardHeight).command('xc:transparent')
 
     const front = IM(this.resource.get('card', 'common'))
-      .resize(undefined, 1050)
+      .resize(undefined, fullsizeCardHeight)
 
     // draw background
     im.fill('#050510')
@@ -40,7 +40,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   generateBack(): Promise<Buffer> {
     const cardBackPath = this.resource.get('cardback', 'common')
     const im = IM(cardBackPath)
-      .resize(undefined, 1050)
+      .resize(undefined, fullsizeCardHeight)
 
     return bufferFromCommandBuilder(im)
   }
