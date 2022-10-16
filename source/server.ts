@@ -275,7 +275,7 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
 server.post('/api/card/:id/back', async (request, reply) => {
   reply.header('Access-Control-Allow-Origin', '*')
 
-  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('pixelprofilgate')).validate(request.params.id)
+  const actValidation = Union(Literal('leshy'), Literal('gbc'), Literal('p03'), Literal('pixelprofilgate')).validate(request.params.id)
   if (actValidation.success === false) {
     reply.status(404)
     reply.send({ error: 'Invalid act', invalid: request.params.id })
@@ -290,10 +290,11 @@ server.post('/api/card/:id/back', async (request, reply) => {
 
   console.log(options)
 
-  const generatorFromAct = (act: 'leshy' | 'gbc' | 'pixelprofilgate'): CardGenerator => {
+  const generatorFromAct = (act: 'leshy' | 'gbc' | 'p03' | 'pixelprofilgate'): CardGenerator => {
     switch (act) {
       case 'leshy': return new LeshyCardGenerator(options)
       case 'gbc': return new GbcCardGenerator(options)
+      case 'p03': return new P03CardGenerator(options)
       case 'pixelprofilgate': return new PixelProfilgateGenerator(options)
     }
   }
