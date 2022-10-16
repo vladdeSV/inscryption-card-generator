@@ -47,9 +47,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             .command('-colorize', '100')
             .resizeExt(g => g.scale(s))
 
-          const portaitBlur = IM('xc:transparent').size(fullsizeCardWidth, fullsizeCardHeight)
-          .parens(
-            IM(portaitPath)
+          const basePortraitBlur = IM(portaitPath)
             .fill('cyan')
             .command('-colorize', '75')
             .resizeExt(g => g.scale(s))
@@ -57,14 +55,17 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             .command('-channel', 'A')
             .command('-evaluate', 'multiply', '0.8')
             .command('+channel')
-          )
-          .composite()
-          .command('-blur', '0x60')
 
-          im
-          .parens(portaitBlur).composite()
-          .parens(portrait).composite()
+          const portaitBlur = IM('xc:transparent').size(fullsizeCardWidth, fullsizeCardHeight)
+            .parens(basePortraitBlur)
+            .composite()
+            .command('-blur', '0x60')
 
+          const full = IM()
+            .parens(portaitBlur)
+            .parens(portrait).composite()
+
+          im.parens(full).geometry(0, -50).composite()
 
           break
         }
