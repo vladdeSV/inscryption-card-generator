@@ -36,9 +36,9 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateBack(): Promise<Buffer> {
-    const im = IM()
-
-    // ! fixme: implement
+    const cardBackPath = this.resource.get('cardback', 'common')
+    const im = IM(cardBackPath)
+      .resize(undefined, 1050)
 
     return bufferFromCommandBuilder(im)
   }
