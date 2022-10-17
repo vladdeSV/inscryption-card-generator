@@ -21,7 +21,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateFront(card: Card): Promise<Buffer> {
-    const im = IM().size(fullsizeCardWidth,fullsizeCardHeight).command('xc:transparent')
+    const im = IM().size(fullsizeCardWidth, fullsizeCardHeight).command('xc:transparent')
 
     const front = IM(this.resource.get('card', 'common'))
       .resize(undefined, fullsizeCardHeight)
@@ -31,8 +31,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .command('-draw')
       .command('rectangle 10,100 680,1030')
 
-    if(card.portrait) {
-
+    if (card.portrait) {
       switch (card.portrait.type) {
         default: {
           break
@@ -100,7 +99,7 @@ const p03ResourceMap = {
     'wire': 'cardextras/floppy-wire-transparent.png',
   },
   'cost': {
-     // 'energy': 'costs/energy.png',
+    // 'energy': 'costs/energy.png',
   },
   'deathcard': {
     'base': 'deathcards/base.png',
