@@ -59,31 +59,34 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
           im.gravity('Center')
 
           const portaitPath = this.resource.get('portrait', card.portrait.resourceId)
-          const s = 400
           const portrait = IM(portaitPath)
             .fill('#0df')
             .command('-colorize', '100')
-            .resizeExt(g => g.scale(s))
+            .filter('Box')
+            .resize(undefined, 500)
 
-          const basePortraitBlur = IM(portaitPath)
-            .fill('cyan')
-            .command('-colorize', '75')
-            .resizeExt(g => g.scale(s))
-            .alpha('Set')
-            .command('-channel', 'A')
-            .command('-evaluate', 'multiply', '0.8')
-            .command('+channel')
+          const portraitBlack = blur(
+            IM(portaitPath)
+              .fill('#112')
+              .command('-colorize', '100')
+              .resize(606, 500),
+            20
+          )
 
-          const portaitBlur = IM('xc:transparent').size(fullsizeCardWidth, fullsizeCardHeight)
-            .parens(basePortraitBlur)
-            .composite()
-            .command('-blur', '0x60')
+          const portraitBlur = blur(
+            IM(portaitPath)
+              .fill('cyan')
+              .command('-colorize', '75')
+              .resize(606, 500),
+            60
+          )
 
           const full = IM()
-            .parens(portaitBlur)
+            .parens(portraitBlur)
+            .parens(portraitBlack).composite()
             .parens(portrait).composite()
 
-          im.parens(full).geometry(0, -50).composite()
+          im.parens(full).gravity('Center').geometry(-1, -105).composite()
 
           break
         }
