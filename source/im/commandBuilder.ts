@@ -9,6 +9,12 @@ class ImageMagickCommandBuilder {
     }
   }
 
+  clone(): ImageMagickCommandBuilder {
+    const builder = new ImageMagickCommandBuilder()
+    builder.#commands = [...this.#commands]
+    return builder
+  }
+
   parts(): string[] {
     const a: string[] = []
     this.#commands.forEach(part => part instanceof ImageMagickCommandBuilder ? a.push(...part.parts()) : a.push(part))
