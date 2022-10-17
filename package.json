@@ -7,7 +7,7 @@
     "build": "yarn esbuild source/server.ts --outfile=build/bundle.js --platform=node --bundle --minify",
     "encrypt-resources": "tar -cz resource resource-gbc resource-pixelprofilgate | gpg -co resources.tar.gz.gpg",
     "decrypt-resources": "gpg -d resources.tar.gz.gpg | tar -xz",
-    "server": "yarn nodemon source/server.ts"
+    "serve": "yarn nodemon source/server.ts"
   },
   "dependencies": {
     "@influxdata/influxdb-client": "^1.24.0",
