@@ -3,6 +3,7 @@ import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
 
 import IM from '../im'
 import { SingleResource } from '../resource'
+import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 
 export { P03CardGenerator, p03Resource }
 
@@ -30,6 +31,24 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     im.fill('#112')
       .command('-draw')
       .command('rectangle 10,100 680,1030')
+
+    const blur = (im: ImageMagickCommandBuilder, amount: number): ImageMagickCommandBuilder => {
+      // make resource transparent
+      const a = im.clone()
+        .alpha('Set')
+        .command('-channel', 'A')
+        .command('-evaluate', 'multiply', '0.8')
+        .command('+channel')
+
+      // apply blurred resource to transparent canvas
+      const b = IM('xc:transparent')
+        .size(fullsizeCardWidth, fullsizeCardHeight)
+        .parens(a)
+        .composite()
+        .command('-blur', `0x${amount}`)
+
+      return IM().parens(b).parens(im).composite()
+    }
 
     if (card.portrait) {
       switch (card.portrait.type) {
