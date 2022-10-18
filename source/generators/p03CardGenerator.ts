@@ -95,9 +95,9 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    // draw middle line rectangle
-    const a = IM().size(664, 11).command('xc:#6bdfff')
-    im.parens(this.#blur(a, 10).parens(a).composite().geometry(0, 149)).composite()
+    // // draw middle line rectangle
+    // const a = IM().size(664, 11).command('xc:#6bdfff')
+    // im.parens(this.#blur(a, 10).parens(a).composite().geometry(0, 149)).composite()
 
     // append front image
     im.parens(front).composite()
