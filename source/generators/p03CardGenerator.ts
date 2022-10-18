@@ -14,7 +14,7 @@ const originalCardHeight = 1967 // px
 const fullsizeCardHeight = 1050 // px
 const scale = fullsizeCardHeight / originalCardHeight
 
-type Options = { border?: boolean, locale?: string }
+type Options = { border?: boolean, locale?: string, scanlines?: boolean }
 class P03CardGenerator extends BaseCardGenerator<Options> {
 
   constructor(options: Options) {
@@ -144,6 +144,23 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .compose('DstOver')
       .composite()
       .compose('Over')
+
+    if (this.options.scanlines) {
+      const tileableScanline = IM()
+        .size(15, 15)
+        .command('gradient:', '-function', 'Polynomial', '-2,2,0')
+
+      const scanlines = IM()
+        .parens(tileableScanline)
+        .command('-write').command('mpr:tile').command('+delete').size(670, 925).command('tile:mpr:tile')
+        .command('-channel', 'A').command('-evaluate', 'multiply', '0.1').command('+channel')
+
+      im.parens(scanlines)
+        .geometry(0, 40)
+        .compose('Overlay')
+        .composite()
+        .compose('Over')
+    }
 
     // append front image
     im.parens(front).composite()
