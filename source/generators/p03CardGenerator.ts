@@ -40,7 +40,9 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateFront(card: Card): Promise<Buffer> {
-    const im = IM().size(fullsizeCardWidth, fullsizeCardHeight).command('xc:transparent')
+    const im = IM().size(fullsizeCardWidth, fullsizeCardHeight)
+      .command('xc:transparent')
+      .filter('Box')
 
     const front = IM(this.resource.get('card', 'common'))
       .resize(undefined, fullsizeCardHeight)
@@ -62,7 +64,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
           const portrait = IM(portaitPath)
             .fill('#0df')
             .command('-colorize', '100')
-            .filter('Box')
             .resize(undefined, 500)
 
           const portraitBlack = this.#blur(
