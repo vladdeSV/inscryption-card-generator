@@ -85,8 +85,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             .parens(portraitBlur)
             .parens(portraitBlack).composite()
             .parens(portrait).composite()
+            .gravity('Center')
+            .geometry(-1, -105)
 
-          im.parens(full).gravity('Center').geometry(-1, -105).composite()
+          im.parens(full).composite()
 
           break
         }
