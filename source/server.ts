@@ -3,7 +3,7 @@ import { Static, Union, Array, Record as RRecord, Literal, String, Number, Boole
 import { Card, Tribe, StatIcon, Temple, Sigil, Portrait } from './card'
 import { convert as convertCardToJldr, createResourcesForCard, CreatureId, JldrCreature } from './jldrcard'
 import { act1Resource, LeshyCardGenerator } from './generators/leshyCardGenerator'
-import { P03CardGenerator  } from './generators/p03CardGenerator'
+import { P03CardGenerator } from './generators/p03CardGenerator'
 import { CardGenerator } from './generators/base'
 import { act2Resource, GbcCardGenerator } from './generators/gbcCardGenerator'
 import { InfluxDB, Point, WriteApi } from '@influxdata/influxdb-client'
