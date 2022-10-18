@@ -100,6 +100,102 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     // const a = IM().size(664, 11).command('xc:#6bdfff')
     // im.parens(this.#blur(a, 10).parens(a).composite().geometry(0, 149)).composite()
 
+    const sigils = card.sigils?.slice(0, 4)
+    if (sigils) {
+      im.gravity('Center')
+
+      const glow = (im: ImageMagickCommandBuilder) => {
+        const blueBlur = this.#blur(im.clone().fill('cyan').command('-colorize', '75'), 12)
+        const blackBlur = this.#blur(im.clone().fill('black').command('-colorize', '100'), 10)
+        const original = im.clone()
+
+        return IM()
+          .parens(blueBlur)
+          .parens(blackBlur)
+          .composite()
+          .parens(original)
+          .composite()
+      }
+
+      if (sigils.length === 1) {
+        const a = (resource: string) => IM(resource)
+          .fill('#0df')
+          .command('-colorize', '100')
+          .resize(220, 220)
+
+        const sigilPath = this.resource.get('sigil', sigils[0])
+        const sigilImage = glow(a(sigilPath)).geometry(0, 270)
+
+        im.parens(sigilImage).composite()
+      }
+
+      if (sigils.length === 2) {
+        const a = (resource: string) => IM(resource)
+          .fill('#0df')
+          .command('-colorize', '100')
+          .resize(220, 220)
+
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+
+        const sigilImage1 = glow(a(sigilPath1)).geometry(-132, 270)
+        const sigilImage2 = glow(a(sigilPath2)).geometry(132, 270)
+
+        im.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+      }
+
+      if (sigils.length === 3) {
+        const a = (resource: string) => IM(resource)
+          .fill('#0df')
+          .command('-colorize', '100')
+          .resize(175, 175)
+
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+        const sigilPath3 = this.resource.get('sigil', sigils[2])
+
+        const sigilImage1 = glow(a(sigilPath1)).geometry(-205, 270)
+        const sigilImage2 = glow(a(sigilPath2)).geometry(0, 270)
+        const sigilImage3 = glow(a(sigilPath3)).geometry(205, 270)
+
+        im.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+          .parens(sigilImage3)
+          .composite()
+      }
+
+      if (sigils.length === 4) {
+        const a = (resource: string) => IM(resource)
+          .fill('#0df')
+          .command('-colorize', '100')
+          .resize(135, 135)
+
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+        const sigilPath3 = this.resource.get('sigil', sigils[2])
+        const sigilPath4 = this.resource.get('sigil', sigils[3])
+
+        const sigilImage1 = glow(a(sigilPath1)).geometry(-216, 270)
+        const sigilImage2 = glow(a(sigilPath2)).geometry(-73, 270)
+        const sigilImage3 = glow(a(sigilPath3)).geometry(73, 270)
+        const sigilImage4 = glow(a(sigilPath4)).geometry(216, 270)
+
+        im.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+          .parens(sigilImage3)
+          .composite()
+          .parens(sigilImage4)
+          .composite()
+      }
+    }
+
     // append front image
     im.parens(front).composite()
 
