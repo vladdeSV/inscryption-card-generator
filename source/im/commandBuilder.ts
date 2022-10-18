@@ -9,10 +9,15 @@ class ImageMagickCommandBuilder {
     }
   }
 
-  clone(): ImageMagickCommandBuilder {
-    const builder = new ImageMagickCommandBuilder()
-    builder.#commands = [...this.#commands]
-    return builder
+  clone(index?: number): ImageMagickCommandBuilder {
+    if (index) {
+      this.#commands.push('-clone')
+      this.#commands.push(this.#escape(index))
+    } else {
+      this.#commands.push('+clone')
+    }
+
+    return this
   }
 
   parts(): string[] {
