@@ -21,24 +21,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     super(p03Resource, options)
   }
 
-  #blur(im: ImageMagickCommandBuilder, amount: number): ImageMagickCommandBuilder {
-    // make resource transparent
-    const a = im.clone()
-      .alpha('Set')
-      .command('-channel', 'A')
-      .command('-evaluate', 'multiply', '0.4')
-      .command('+channel')
-
-    // apply blurred resource to transparent canvas
-    const b = IM('xc:transparent')
-      .size(fullsizeCardWidth, fullsizeCardHeight)
-      .parens(a)
-      .composite()
-      .command('-blur', `0x${amount}`)
-
-    return IM().parens(b).parens(im).composite()
-  }
-
   generateFront(card: Card): Promise<Buffer> {
     const im = IM().size(fullsizeCardWidth, fullsizeCardHeight)
       .command('xc:transparent')
@@ -46,11 +28,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     const front = IM(this.resource.get('card', 'common'))
       .resize(undefined, fullsizeCardHeight)
-
-    // draw background
-    im.fill('#112')
-      .command('-draw')
-      .command('rectangle 10,100 680,1030')
 
     if (card.portrait) {
       switch (card.portrait.type) {
@@ -60,36 +37,12 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         case 'resource': {
           im.gravity('Center')
 
-          const portaitPath = this.resource.get('portrait', card.portrait.resourceId)
-          const portrait = IM(portaitPath)
-            .fill('#0df')
-            .command('-colorize', '100')
-            .resize(undefined, 500)
-
-          const portraitBlack = this.#blur(
-            IM(portaitPath)
-              .fill('#112')
-              .command('-colorize', '100')
-              .resize(606, 500),
-            20
-          )
-
-          const portraitBlur = this.#blur(
-            IM(portaitPath)
-              .fill('cyan')
-              .command('-colorize', '75')
-              .resize(606, 500),
-            60
-          )
-
-          const full = IM()
-            .parens(portraitBlur)
-            .parens(portraitBlack).composite()
-            .parens(portrait).composite()
+          const portraitPath = this.resource.get('portrait', card.portrait.resourceId)
+          const portrait = IM(portraitPath).resize(undefined, 500)
             .gravity('Center')
             .geometry(-1, -105)
 
-          im.parens(full).composite()
+          im.parens(portrait).composite()
 
           break
         }
@@ -104,42 +57,22 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     if (sigils) {
       im.gravity('Center')
 
-      const glow = (im: ImageMagickCommandBuilder) => {
-        const blueBlur = this.#blur(im.clone().fill('cyan').command('-colorize', '75'), 12)
-        const blackBlur = this.#blur(im.clone().fill('black').command('-colorize', '100'), 10)
-        const original = im.clone()
-
-        return IM()
-          .parens(blueBlur)
-          .parens(blackBlur)
-          .composite()
-          .parens(original)
-          .composite()
-      }
+      const sigilSize = (resource: string, size: number) => IM(resource).resize(size, size)
 
       if (sigils.length === 1) {
-        const a = (resource: string) => IM(resource)
-          .fill('#0df')
-          .command('-colorize', '100')
-          .resize(220, 220)
 
         const sigilPath = this.resource.get('sigil', sigils[0])
-        const sigilImage = glow(a(sigilPath)).geometry(0, 270)
+        const sigilImage = sigilSize(sigilPath, 220).geometry(0, 270)
 
         im.parens(sigilImage).composite()
       }
 
       if (sigils.length === 2) {
-        const a = (resource: string) => IM(resource)
-          .fill('#0df')
-          .command('-colorize', '100')
-          .resize(220, 220)
-
         const sigilPath1 = this.resource.get('sigil', sigils[0])
         const sigilPath2 = this.resource.get('sigil', sigils[1])
 
-        const sigilImage1 = glow(a(sigilPath1)).geometry(-132, 270)
-        const sigilImage2 = glow(a(sigilPath2)).geometry(132, 270)
+        const sigilImage1 = sigilSize(sigilPath1, 220).geometry(-132, 270)
+        const sigilImage2 = sigilSize(sigilPath2, 220).geometry(132, 270)
 
         im.parens(sigilImage1)
           .composite()
@@ -148,18 +81,13 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
 
       if (sigils.length === 3) {
-        const a = (resource: string) => IM(resource)
-          .fill('#0df')
-          .command('-colorize', '100')
-          .resize(175, 175)
-
         const sigilPath1 = this.resource.get('sigil', sigils[0])
         const sigilPath2 = this.resource.get('sigil', sigils[1])
         const sigilPath3 = this.resource.get('sigil', sigils[2])
 
-        const sigilImage1 = glow(a(sigilPath1)).geometry(-205, 270)
-        const sigilImage2 = glow(a(sigilPath2)).geometry(0, 270)
-        const sigilImage3 = glow(a(sigilPath3)).geometry(205, 270)
+        const sigilImage1 = sigilSize(sigilPath1, 175).geometry(-205, 270)
+        const sigilImage2 = sigilSize(sigilPath2, 175).geometry(0, 270)
+        const sigilImage3 = sigilSize(sigilPath3, 175).geometry(205, 270)
 
         im.parens(sigilImage1)
           .composite()
@@ -170,20 +98,16 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
 
       if (sigils.length === 4) {
-        const a = (resource: string) => IM(resource)
-          .fill('#0df')
-          .command('-colorize', '100')
-          .resize(135, 135)
 
         const sigilPath1 = this.resource.get('sigil', sigils[0])
         const sigilPath2 = this.resource.get('sigil', sigils[1])
         const sigilPath3 = this.resource.get('sigil', sigils[2])
         const sigilPath4 = this.resource.get('sigil', sigils[3])
 
-        const sigilImage1 = glow(a(sigilPath1)).geometry(-216, 270)
-        const sigilImage2 = glow(a(sigilPath2)).geometry(-73, 270)
-        const sigilImage3 = glow(a(sigilPath3)).geometry(73, 270)
-        const sigilImage4 = glow(a(sigilPath4)).geometry(216, 270)
+        const sigilImage1 = sigilSize(sigilPath1, 135).geometry(-216, 270)
+        const sigilImage2 = sigilSize(sigilPath2, 135).geometry(-73, 270)
+        const sigilImage3 = sigilSize(sigilPath3, 135).geometry(73, 270)
+        const sigilImage4 = sigilSize(sigilPath4, 135).geometry(216, 270)
 
         im.parens(sigilImage1)
           .composite()
@@ -195,6 +119,31 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
           .composite()
       }
     }
+
+    // make blue
+    im.fill('#0df').command('-colorize', '100')
+
+    // glow
+    const g = IM()
+      .clone()
+      .alpha('Set')
+      .command('-channel', 'A')
+      .command('-evaluate', 'multiply', '0.4')
+      .command('+channel')
+      .command('-blur', '0x12')
+
+    im.parens(g).composite()
+
+    // draw background
+    const screenBackground = IM()
+      .size(670, 920)
+      .geometry(0, 40)
+      .command('xc:#112')
+
+    im.parens(screenBackground)
+      .compose('DstOver')
+      .composite()
+      .compose('Over')
 
     // append front image
     im.parens(front).composite()
