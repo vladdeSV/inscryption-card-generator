@@ -49,10 +49,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    // // draw middle line rectangle
-    // const a = IM().size(664, 11).command('xc:#6bdfff')
-    // im.parens(this.#blur(a, 10).parens(a).composite().geometry(0, 149)).composite()
-
     const sigils = card.sigils?.slice(0, 4)
     if (sigils) {
       im.gravity('Center')
@@ -122,6 +118,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     // make blue
     im.fill('#0df').command('-colorize', '100')
+
+    // draw middle line rectangle
+    const line = IM().size(664, 8).command('xc:#6bdfff').geometry(0, 152)
+    im.parens(line).composite()
 
     // glow
     const g = IM()
