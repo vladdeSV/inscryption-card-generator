@@ -21,6 +21,24 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     super(p03Resource, options)
   }
 
+  #blur(im: ImageMagickCommandBuilder, amount: number): ImageMagickCommandBuilder {
+    // make resource transparent
+    const a = im.clone()
+      .alpha('Set')
+      .command('-channel', 'A')
+      .command('-evaluate', 'multiply', '0.8')
+      .command('+channel')
+
+    // apply blurred resource to transparent canvas
+    const b = IM('xc:transparent')
+      .size(fullsizeCardWidth, fullsizeCardHeight)
+      .parens(a)
+      .composite()
+      .command('-blur', `0x${amount}`)
+
+    return IM().parens(b).parens(im).composite()
+  }
+
   generateFront(card: Card): Promise<Buffer> {
     const im = IM().size(fullsizeCardWidth, fullsizeCardHeight).command('xc:transparent')
 
@@ -31,24 +49,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     im.fill('#112')
       .command('-draw')
       .command('rectangle 10,100 680,1030')
-
-    const blur = (im: ImageMagickCommandBuilder, amount: number): ImageMagickCommandBuilder => {
-      // make resource transparent
-      const a = im.clone()
-        .alpha('Set')
-        .command('-channel', 'A')
-        .command('-evaluate', 'multiply', '0.8')
-        .command('+channel')
-
-      // apply blurred resource to transparent canvas
-      const b = IM('xc:transparent')
-        .size(fullsizeCardWidth, fullsizeCardHeight)
-        .parens(a)
-        .composite()
-        .command('-blur', `0x${amount}`)
-
-      return IM().parens(b).parens(im).composite()
-    }
 
     if (card.portrait) {
       switch (card.portrait.type) {
@@ -65,7 +65,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             .filter('Box')
             .resize(undefined, 500)
 
-          const portraitBlack = blur(
+          const portraitBlack = this.#blur(
             IM(portaitPath)
               .fill('#112')
               .command('-colorize', '100')
@@ -73,7 +73,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             20
           )
 
-          const portraitBlur = blur(
+          const portraitBlur = this.#blur(
             IM(portaitPath)
               .fill('cyan')
               .command('-colorize', '75')
@@ -95,7 +95,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     // draw middle line rectangle
     const a = IM().size(664, 11).command('xc:#6bdfff')
-    im.parens(IM().parens(blur(a, 10)).parens(a).composite()).geometry(0, 149).composite()
+    im.parens(IM().parens(this.#blur(a, 10)).parens(a).composite()).geometry(0, 149).composite()
 
     // append front image
     im.parens(front).composite()
