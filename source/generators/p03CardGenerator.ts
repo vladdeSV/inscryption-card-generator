@@ -26,7 +26,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     const a = im.clone()
       .alpha('Set')
       .command('-channel', 'A')
-      .command('-evaluate', 'multiply', '0.8')
+      .command('-evaluate', 'multiply', '0.4')
       .command('+channel')
 
     // apply blurred resource to transparent canvas
