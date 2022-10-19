@@ -164,6 +164,22 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     // append front image
     im.parens(front).composite()
 
+    const cost = card.cost
+    if (cost && cost.type === 'energy') {
+      const amount = cost.amount
+
+      // i dislike typescript. please allow `[1,2,3,4,5,6].includes(amount)`. eat shit https://github.com/microsoft/TypeScript/issues/15048
+      if (amount === 1 || amount === 2 || amount === 3 || amount === 4 || amount === 5 || amount === 6) {
+        const energyResourcePath = this.resource.get('cost', `energy-${amount}`)
+        console.log('energy cost 223123', cost.amount)
+
+        const energy = IM(energyResourcePath)
+          .resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
+
+        im.parens(energy).composite()
+      }
+    }
+
     return bufferFromCommandBuilder(im)
   }
 
@@ -189,7 +205,12 @@ const p03ResourceMap = {
     'wire': 'cardextras/floppy-wire-transparent.png',
   },
   'cost': {
-    // 'energy': 'costs/energy.png',
+    'energy-1': 'costs/energy-1.png',
+    'energy-2': 'costs/energy-2.png',
+    'energy-3': 'costs/energy-3.png',
+    'energy-4': 'costs/energy-4.png',
+    'energy-5': 'costs/energy-5.png',
+    'energy-6': 'costs/energy-6.png',
   },
   'deathcard': {
     'base': 'deathcards/base.png',
