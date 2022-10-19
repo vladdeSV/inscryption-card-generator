@@ -136,7 +136,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     // draw background
     const screenBackground = IM()
       .size(670, 925)
-      .geometry(0, 40)
+      .geometry(0, 45)
       .command('xc:#112')
 
     im.parens(screenBackground)
