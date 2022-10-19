@@ -12,7 +12,6 @@ const originalCardWidth = 1307
 const fullsizeCardWidth = 698
 const originalCardHeight = 1967 // px
 const fullsizeCardHeight = 1050 // px
-const scale = fullsizeCardHeight / originalCardHeight
 
 type Options = { border?: boolean, locale?: string, scanlines?: boolean }
 class P03CardGenerator extends BaseCardGenerator<Options> {
