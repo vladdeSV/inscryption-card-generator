@@ -180,6 +180,45 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
+    const nametagPath = this.resource.get('cardextra', 'name')
+    const nametag = IM(nametagPath).resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
+    im.parens(nametag).composite()
+
+    const name = card.name
+    if (name) {
+      // default for english
+      let size = { w: 570, h: 115 }
+      let position = { x: 0, y: 28 + 37 }
+
+      im.font(this.resource.get('font', 'default'))
+        .fill('black')
+
+      const locale = this.options.locale
+      if (locale === 'ko') {
+        im.font(this.resource.get('font', locale))
+        position = { x: 4, y: 34 }
+      } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
+        size = { w: 570, h: 166 }
+        position = { x: 0, y: 16 }
+        im.font(this.resource.get('font', locale))
+      }
+
+      const nameText = IM()
+        .pointsize()
+        .size(size.w, size.h)
+        .background('None')
+        .label(name)
+        .trim()
+        .gravity('Center')
+        .extent(size.w, size.h)
+        .resizeExt(g => g.scale(106, 100).flag('!'))
+
+      im.parens(nameText).gravity('North')
+        .geometry(position.x, position.y)
+        .composite()
+        .font(this.resource.get('font', 'default'))
+    }
+
     return bufferFromCommandBuilder(im)
   }
 
@@ -203,6 +242,7 @@ const p03ResourceMap = {
   'cardextra': {
     'gems': 'cardextras/floppy-gems-transparent.png',
     'wire': 'cardextras/floppy-wire-transparent.png',
+    'name': 'cardextras/floppy-name-transparent.png',
   },
   'cost': {
     'energy-1': 'costs/energy-1.png',
