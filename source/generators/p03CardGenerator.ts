@@ -115,6 +115,40 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
+    im.font(this.resource.get('font', 'p03'))
+
+    // health
+    const d = 27
+    const w = 243
+    const h = 90 + d + d
+    const healthText = IM()
+      .pointsize()
+      .size(w, h)
+      .background('None')
+      .label(card.health)
+      .trim()
+      .gravity('Center')
+      .extent(w, h)
+
+    im.parens(healthText).gravity('NorthWest')
+      .geometry(415, 938 - d)
+      .composite()
+      .gravity('Center')
+
+    const powerText = IM()
+      .pointsize()
+      .size(w, h)
+      .background('None')
+      .label(card.power)
+      .trim()
+      .gravity('Center')
+      .extent(w, h)
+
+    im.parens(powerText).gravity('NorthWest')
+      .geometry(34, 938 - d)
+      .composite()
+      .gravity('Center')
+
     // make blue
     im.fill('#0df').command('-colorize', '100')
 
@@ -180,38 +214,30 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    const nametagPath = this.resource.get('cardextra', 'name')
-    const nametag = IM(nametagPath).resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
-    im.parens(nametag).composite()
-
-    const name = card.name
+    const name = card.name?.trim()
     if (name) {
+      const nametagPath = this.resource.get('cardextra', 'name')
+      const nametag = IM(nametagPath).resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
+      im.parens(nametag).composite()
+
       // default for english
       let size = { w: 570, h: 115 }
-      let position = { x: 0, y: 28 + 37 }
+      let position = { x: 0, y: 65 }
 
       im.font(this.resource.get('font', 'default'))
-        .fill('black')
+        .fill('#001')
 
       const locale = this.options.locale
       if (locale === 'ko') {
         im.font(this.resource.get('font', locale))
-        position = { x: 4, y: 34 }
+        position = { x: 4, y: 71 }
       } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
-        size = { w: 570, h: 166 }
-        position = { x: 0, y: 16 }
+        size = { w: 533, h: 129 }
+        position = { x: -6, y: 66 }
         im.font(this.resource.get('font', locale))
       }
 
-      const nameText = IM()
-        .pointsize()
-        .size(size.w, size.h)
-        .background('None')
-        .label(name)
-        .trim()
-        .gravity('Center')
-        .extent(size.w, size.h)
-        .resizeExt(g => g.scale(106, 100).flag('!'))
+      const nameText = this.#text(name, size.w, size.h)
 
       im.parens(nameText).gravity('North')
         .geometry(position.x, position.y)
@@ -220,6 +246,18 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     }
 
     return bufferFromCommandBuilder(im)
+  }
+
+  #text(text: string, width: number, height: number): ImageMagickCommandBuilder {
+    return IM()
+      .pointsize()
+      .size(width, height)
+      .background('None')
+      .label(text)
+      .trim()
+      .gravity('Center')
+      .extent(width, height)
+      .resizeExt(g => g.scale(106, 100).flag('!'))
   }
 
   generateBack(): Promise<Buffer> {
@@ -285,6 +323,7 @@ const p03ResourceMap = {
   },
   'font': {
     'default': 'fonts/HEAVYWEIGHT.otf',
+    'p03': 'fonts/DAGGERSQUARE.otf',
     'ko': 'fonts/Stylish-Regular.ttf',
     'jp': 'fonts/ShipporiMincho-ExtraBold.ttf',
     'zh-cn': 'fonts/NotoSerifSC-Bold.otf',
