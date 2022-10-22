@@ -8,7 +8,6 @@ import { ImageMagickCommandBuilder } from '../im/commandBuilder'
 export { P03CardGenerator, p03Resource }
 
 //original width: 1307 -> scaled width: 698
-const originalCardWidth = 1307
 const fullsizeCardWidth = 698
 const originalCardHeight = 1967 // px
 const fullsizeCardHeight = 1050 // px
