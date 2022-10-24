@@ -20,6 +20,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
   }
 
   generateFront(card: Card): Promise<Buffer> {
+    const makeBlue = (...imcb: ImageMagickCommandBuilder[]): void => {
+      imcb.map(im => im.fill('#0df').command('-colorize', '100'))
+    }
+
     const im = IM().size(fullsizeCardWidth, fullsizeCardHeight)
       .command('xc:transparent')
       .filter('Box')
@@ -44,6 +48,8 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
             .gravity('Center')
             .geometry(-1, -100)
 
+          makeBlue(portrait)
+
           im.parens(portrait).composite()
 
           break
@@ -62,6 +68,8 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         const sigilPath = this.resource.get('sigil', sigils[0])
         const sigilImage = sigilSize(sigilPath, 220).geometry(0, 270)
 
+        makeBlue(sigilImage)
+
         im.parens(sigilImage).composite()
       }
 
@@ -71,6 +79,8 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
         const sigilImage1 = sigilSize(sigilPath1, 220).geometry(-132, 270)
         const sigilImage2 = sigilSize(sigilPath2, 220).geometry(132, 270)
+
+        makeBlue(sigilImage1, sigilImage2)
 
         im.parens(sigilImage1)
           .composite()
@@ -86,6 +96,8 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         const sigilImage1 = sigilSize(sigilPath1, 175).geometry(-205, 270)
         const sigilImage2 = sigilSize(sigilPath2, 175).geometry(0, 270)
         const sigilImage3 = sigilSize(sigilPath3, 175).geometry(205, 270)
+
+        makeBlue(sigilImage1, sigilImage2, sigilImage3)
 
         im.parens(sigilImage1)
           .composite()
@@ -106,6 +118,8 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         const sigilImage2 = sigilSize(sigilPath2, 135).geometry(-73, 270)
         const sigilImage3 = sigilSize(sigilPath3, 135).geometry(73, 270)
         const sigilImage4 = sigilSize(sigilPath4, 135).geometry(216, 270)
+
+        makeBlue(sigilImage1, sigilImage2, sigilImage3, sigilImage4)
 
         im.parens(sigilImage1)
           .composite()
@@ -151,9 +165,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .geometry(34, 938 - d)
       .composite()
       .gravity('Center')
-
-    // make blue
-    im.fill('#0df').command('-colorize', '100')
 
     // glow
     const g = IM()
