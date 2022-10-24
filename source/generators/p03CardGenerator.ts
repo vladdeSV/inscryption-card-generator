@@ -42,7 +42,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
           const portraitPath = this.resource.get('portrait', card.portrait.resourceId)
           const portrait = IM(portraitPath).resize(undefined, 500)
             .gravity('Center')
-            .geometry(-1, -105)
+            .geometry(-1, -100)
 
           im.parens(portrait).composite()
 
