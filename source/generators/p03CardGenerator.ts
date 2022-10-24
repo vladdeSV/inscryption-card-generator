@@ -27,6 +27,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     const front = IM(this.resource.get('card', 'common'))
       .resize(undefined, fullsizeCardHeight)
 
+    // draw middle line rectangle
+    const line = IM().size(664, 8).command('xc:#6bdfff').geometry(0, 152)
+    im.parens(line).gravity('Center').composite()
+
     if (card.portrait) {
       switch (card.portrait.type) {
         default: {
@@ -150,10 +154,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     // make blue
     im.fill('#0df').command('-colorize', '100')
-
-    // draw middle line rectangle
-    const line = IM().size(664, 8).command('xc:#6bdfff').geometry(0, 152)
-    im.parens(line).composite()
 
     // glow
     const g = IM()
