@@ -32,7 +32,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .resize(undefined, fullsizeCardHeight)
 
     // draw middle line rectangle
-    const line = IM().size(664, 8).command('xc:#6bdfff').geometry(0, 152)
+    const line = IM().size(664, 8).command('xc:#6bffff').geometry(0, 152)
     im.parens(line).gravity('Center').composite()
 
     if (card.portrait) {
