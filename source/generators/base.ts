@@ -46,9 +46,9 @@ function bufferFromCommandBuilder(im: ImageMagickCommandBuilder, input?: Buffer,
   })
 }
 
-function bufferFromCommandBuilderFds(im: ImageMagickCommandBuilder, fds: Fds): Promise<Buffer> {
+function bufferFromCommandBuilderFds(im: ImageMagickCommandBuilder, fds: Fds, filetype = 'PNG'): Promise<Buffer> {
   return new Promise<Buffer>((resolve, reject) => {
-    const process = spawn('convert', [...im.parts(), '-'], { stdio: ['pipe', 'pipe', 'pipe', ...(new Array(fds.fds().length).fill('pipe'))] })
+    const process = spawn('convert', [...im.parts(), filetype ? `${filetype}:-` : '-'], { stdio: ['pipe', 'pipe', 'pipe', ...(new Array(fds.fds().length).fill('pipe'))] })
     console.log('spawned a process', process.pid)
 
     const buffers: Buffer[] = []
