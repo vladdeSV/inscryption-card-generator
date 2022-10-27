@@ -156,17 +156,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     display.gravity('Center')
 
-    // draw background
-    const screenBackground = IM()
-      .size(664, 849)
-      .command('xc:#051423')
-
-    display
-      .parens(screenBackground)
-      .compose('DstOver')
-      .composite()
-      .compose('Over')
-
     if (card.portrait) {
 
       display.gravity('South')
@@ -237,8 +226,6 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    display.extent(664, 849)
-
     // // glow
     // const g = IM()
     //   .clone()
@@ -248,7 +235,20 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     //   .command('+channel')
     //   .command('-blur', '0x12')
 
-    // display.parens(g).gravity('Center').composite()
+    // display.parens(g).composite()
+
+    // draw background
+    const screenBackground = IM()
+      .size(664, 849)
+      .command('xc:#051423')
+
+    display
+      .parens(screenBackground)
+      .compose('DstOver')
+      .composite()
+      .compose('Over')
+
+    display.extent(664, 849)
 
     if (this.options.scanlines) {
       const tileableScanline = IM()
