@@ -1,9 +1,11 @@
 import { Card } from '../card'
-import { BaseCardGenerator, bufferFromCommandBuilder } from './base'
+import { BaseCardGenerator, bufferFromCommandBuilder, bufferFromCommandBuilderFds } from './base'
 
 import IM from '../im'
+import { Fds } from '../im/fds'
 import { SingleResource } from '../resource'
 import { ImageMagickCommandBuilder } from '../im/commandBuilder'
+import im from '../im'
 
 export { P03CardGenerator, p03Resource }
 
@@ -11,6 +13,8 @@ export { P03CardGenerator, p03Resource }
 const fullsizeCardWidth = 698
 const originalCardHeight = 1967 // px
 const fullsizeCardHeight = 1050 // px
+
+const p03Blue = '#00c1ff'
 
 type Options = { border?: boolean, locale?: string, scanlines?: boolean }
 class P03CardGenerator extends BaseCardGenerator<Options> {
@@ -21,36 +25,170 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
   generateFront(card: Card): Promise<Buffer> {
     const makeBlue = (...imcb: ImageMagickCommandBuilder[]): void => {
-      imcb.map(im => im.fill('#0df').command('-colorize', '100'))
+      imcb.map(im => im.fill(p03Blue).command('-colorize', '100'))
     }
 
-    const im = IM().size(fullsizeCardWidth, fullsizeCardHeight)
+    const im2 = IM().size(fullsizeCardWidth, fullsizeCardHeight)
       .command('xc:transparent')
       .filter('Box')
+      .fill(p03Blue)
 
-    const front = IM(this.resource.get('card', 'common'))
-      .resize(undefined, fullsizeCardHeight)
+    const fds = new Fds()
+
+    const display = IM()
+      .size(984, 849)
+      .command('xc:transparent')
+      .gravity('NorthWest')
+
+    display.gravity('NorthWest')
+
+    const sigils = card.sigils?.slice(0, 4)
+    if (sigils) {
+
+      const sigilSize = (resource: string, size: number) => IM(resource).resize(size, size)
+
+      if (sigils.length === 1) {
+
+        const sigilPath = this.resource.get('sigil', sigils[0])
+        const sigilImage = sigilSize(sigilPath, 215).geometry(385, 503)
+
+        makeBlue(sigilImage)
+
+        display.parens(sigilImage).composite()
+      }
+
+      if (sigils.length === 2) {
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+
+        const sigilImage1 = sigilSize(sigilPath1, 215).geometry(250, 503)
+        const sigilImage2 = sigilSize(sigilPath2, 215).geometry(520, 503)
+
+        makeBlue(sigilImage1, sigilImage2)
+
+        display.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+      }
+
+      if (sigils.length === 3) {
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+        const sigilPath3 = this.resource.get('sigil', sigils[2])
+
+        const sigilImage1 = sigilSize(sigilPath1, 173).geometry(190, 523)
+        const sigilImage2 = sigilSize(sigilPath2, 173).geometry(405, 523)
+        const sigilImage3 = sigilSize(sigilPath3, 173).geometry(620, 523)
+
+        makeBlue(sigilImage1, sigilImage2, sigilImage3)
+
+        display.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+          .parens(sigilImage3)
+          .composite()
+      }
+
+      if (sigils.length === 4) {
+
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
+        const sigilPath3 = this.resource.get('sigil', sigils[2])
+        const sigilPath4 = this.resource.get('sigil', sigils[3])
+
+        const sigilImage1 = sigilSize(sigilPath1, 135).geometry(200, 542)
+        const sigilImage2 = sigilSize(sigilPath2, 135).geometry(350, 542)
+        const sigilImage3 = sigilSize(sigilPath3, 135).geometry(500, 542)
+        const sigilImage4 = sigilSize(sigilPath4, 135).geometry(650, 542)
+
+        makeBlue(sigilImage1, sigilImage2, sigilImage3, sigilImage4)
+
+        display.parens(sigilImage1)
+          .composite()
+          .parens(sigilImage2)
+          .composite()
+          .parens(sigilImage3)
+          .composite()
+          .parens(sigilImage4)
+          .composite()
+      }
+    }
+
+    display.gravity('South')
+      .font(this.resource.get('font', 'p03'))
+      .background('transparent')
+
+    // health
+    const numberHeight = 79
+    const dyFromBottomWithouthRGChannelDistorion = 16
+    //const dyFromBottom = 22
+    const dxLeftFromMiddle = -205
+    const dxRightFromMiddle = 193
+
+    const healthText = IM()
+      .pointsize(200)
+      .label(card.health)
+      .trim()
+      .resize(undefined, numberHeight)
+
+    display.parens(healthText)
+      .geometry(dxLeftFromMiddle, dyFromBottomWithouthRGChannelDistorion)
+      .composite()
+
+    const powerText = IM()
+      .pointsize(200)
+      .label(card.power)
+      .trim()
+      .resize(undefined, numberHeight)
+
+    display.parens(powerText)
+      .geometry(dxRightFromMiddle, dyFromBottomWithouthRGChannelDistorion)
+      .composite()
+
+    // explanation: after some fiddling in my image editor, i found that the in-game display render thing is 984 wide, but when rendered in-game it's 928 px wide. it has the same height, but it is squished. EXCEPT that the portrait is widened onto the display by (100/94 * 100) %. wtf.
+    display.resizeExt(g => g.scale(94, 100))
 
     // draw middle line rectangle
-    const line = IM().size(664, 8).command('xc:#6bffff').geometry(0, 152)
-    im.parens(line).gravity('Center').composite()
+    const line = IM().size(984, 8).command('xc:#7cdfff').geometry(0, 487)
+    display.parens(line).gravity('NorthWest').composite()
+
+    display.gravity('Center')
+
+    // draw background
+    const screenBackground = IM()
+      .size(664, 849)
+      .command('xc:#051423')
+
+    display
+      .parens(screenBackground)
+      .compose('DstOver')
+      .composite()
+      .compose('Over')
 
     if (card.portrait) {
+
+      display.gravity('South')
+
+      const portraitWidth = 609
+      const portraitHeight = 502
+      const dx = -1
+      const dy = 362
+
       switch (card.portrait.type) {
         default: {
           break
         }
         case 'resource': {
-          im.gravity('Center')
-
           const portraitPath = this.resource.get('portrait', card.portrait.resourceId)
-          const portrait = IM(portraitPath).resize(undefined, 500)
-            .gravity('Center')
-            .geometry(-1, -100)
+          const portrait = IM(portraitPath)
+            .resize(portraitWidth, portraitHeight)
+            .geometry(dx, dy)
 
           makeBlue(portrait)
 
-          im.parens(portrait).composite()
+          display.parens(portrait).composite()
 
           break
         }
@@ -69,147 +207,48 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
           makeBlue(dc)
 
-          dc.resize(undefined, 500)
+          dc.resize(portraitWidth, portraitHeight)
 
-          im.parens(dc)
-            .gravity('Center')
-            .geometry(-1, -99)
+          display.parens(dc)
+            .gravity('South')
+            .geometry(dx, dy)
             .composite()
+          break
+        }
+        case 'custom': {
+          const portraitBuffer = card.portrait.data.common
+          if (portraitBuffer) {
+            const portraitFd = fds.fd(portraitBuffer)
+
+            const custom = IM(portraitFd)
+              .filter('Box')
+              .resizeExt(g => g.size(114, 94).flag('>'))
+              .resize(portraitWidth, portraitHeight)
+
+            // makeBlue(custom)
+            custom.command('-fill', p03Blue, '-colorize', '100')
+
+            display.parens(custom)
+              .geometry(dx, dy)
+              .composite()
+          }
           break
         }
       }
     }
 
-    const sigils = card.sigils?.slice(0, 4)
-    if (sigils) {
-      im.gravity('Center')
+    display.extent(664, 849)
 
-      const sigilSize = (resource: string, size: number) => IM(resource).resize(size, size)
+    // // glow
+    // const g = IM()
+    //   .clone()
+    //   .alpha('Set')
+    //   .command('-channel', 'A')
+    //   .command('-evaluate', 'multiply', '0.4')
+    //   .command('+channel')
+    //   .command('-blur', '0x12')
 
-      if (sigils.length === 1) {
-
-        const sigilPath = this.resource.get('sigil', sigils[0])
-        const sigilImage = sigilSize(sigilPath, 220).geometry(0, 270)
-
-        makeBlue(sigilImage)
-
-        im.parens(sigilImage).composite()
-      }
-
-      if (sigils.length === 2) {
-        const sigilPath1 = this.resource.get('sigil', sigils[0])
-        const sigilPath2 = this.resource.get('sigil', sigils[1])
-
-        const sigilImage1 = sigilSize(sigilPath1, 220).geometry(-132, 270)
-        const sigilImage2 = sigilSize(sigilPath2, 220).geometry(132, 270)
-
-        makeBlue(sigilImage1, sigilImage2)
-
-        im.parens(sigilImage1)
-          .composite()
-          .parens(sigilImage2)
-          .composite()
-      }
-
-      if (sigils.length === 3) {
-        const sigilPath1 = this.resource.get('sigil', sigils[0])
-        const sigilPath2 = this.resource.get('sigil', sigils[1])
-        const sigilPath3 = this.resource.get('sigil', sigils[2])
-
-        const sigilImage1 = sigilSize(sigilPath1, 175).geometry(-205, 270)
-        const sigilImage2 = sigilSize(sigilPath2, 175).geometry(0, 270)
-        const sigilImage3 = sigilSize(sigilPath3, 175).geometry(205, 270)
-
-        makeBlue(sigilImage1, sigilImage2, sigilImage3)
-
-        im.parens(sigilImage1)
-          .composite()
-          .parens(sigilImage2)
-          .composite()
-          .parens(sigilImage3)
-          .composite()
-      }
-
-      if (sigils.length === 4) {
-
-        const sigilPath1 = this.resource.get('sigil', sigils[0])
-        const sigilPath2 = this.resource.get('sigil', sigils[1])
-        const sigilPath3 = this.resource.get('sigil', sigils[2])
-        const sigilPath4 = this.resource.get('sigil', sigils[3])
-
-        const sigilImage1 = sigilSize(sigilPath1, 135).geometry(-216, 270)
-        const sigilImage2 = sigilSize(sigilPath2, 135).geometry(-73, 270)
-        const sigilImage3 = sigilSize(sigilPath3, 135).geometry(73, 270)
-        const sigilImage4 = sigilSize(sigilPath4, 135).geometry(216, 270)
-
-        makeBlue(sigilImage1, sigilImage2, sigilImage3, sigilImage4)
-
-        im.parens(sigilImage1)
-          .composite()
-          .parens(sigilImage2)
-          .composite()
-          .parens(sigilImage3)
-          .composite()
-          .parens(sigilImage4)
-          .composite()
-      }
-    }
-
-    im.font(this.resource.get('font', 'p03'))
-
-    // health
-    const d = 27
-    const w = 243
-    const h = 90 + d + d
-    const healthText = IM()
-      .pointsize()
-      .size(w, h)
-      .background('None')
-      .label(card.health)
-      .trim()
-      .gravity('Center')
-      .extent(w, h)
-
-    im.parens(healthText).gravity('NorthWest')
-      .geometry(415, 938 - d)
-      .composite()
-      .gravity('Center')
-
-    const powerText = IM()
-      .pointsize()
-      .size(w, h)
-      .background('None')
-      .label(card.power)
-      .trim()
-      .gravity('Center')
-      .extent(w, h)
-
-    im.parens(powerText).gravity('NorthWest')
-      .geometry(34, 938 - d)
-      .composite()
-      .gravity('Center')
-
-    // glow
-    const g = IM()
-      .clone()
-      .alpha('Set')
-      .command('-channel', 'A')
-      .command('-evaluate', 'multiply', '0.4')
-      .command('+channel')
-      .command('-blur', '0x12')
-
-    im.parens(g).composite()
-
-    // draw background
-    const screenBackground = IM()
-      .size(670, 925)
-      .geometry(0, 45)
-      .command('xc:#112')
-
-    im.parens(screenBackground)
-      .compose('DstOver')
-      .composite()
-      .compose('Over')
+    // display.parens(g).gravity('Center').composite()
 
     if (this.options.scanlines) {
       const tileableScanline = IM()
@@ -221,7 +260,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         .command('-write').command('mpr:tile').command('+delete').size(670, 925).command('tile:mpr:tile')
         .command('-channel', 'A').command('-evaluate', 'multiply', '0.1').command('+channel')
 
-      im.parens(scanlines)
+      display.parens(scanlines)
         .geometry(0, 40)
         .compose('Overlay')
         .composite()
@@ -229,7 +268,11 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     }
 
     // append front image
-    im.parens(front).composite()
+    im2.parens(display).gravity('Center').geometry(0, 88).composite()
+
+    const front = IM(this.resource.get('card', 'common'))
+      .resize(undefined, fullsizeCardHeight)
+    im2.parens(front).composite()
 
     const cost = card.cost
     if (cost && cost.type === 'energy') {
@@ -243,7 +286,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         const energy = IM(energyResourcePath)
           .resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
 
-        im.parens(energy).composite()
+        im2.parens(energy).composite()
       }
     }
 
@@ -251,34 +294,34 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     if (name) {
       const nametagPath = this.resource.get('cardextra', 'name')
       const nametag = IM(nametagPath).resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
-      im.parens(nametag).composite()
+      im2.parens(nametag).composite()
 
       // default for english
       let size = { w: 570, h: 115 }
       let position = { x: 0, y: 65 }
 
-      im.font(this.resource.get('font', 'default'))
+      im2.font(this.resource.get('font', 'default'))
         .fill('#001')
 
       const locale = this.options.locale
       if (locale === 'ko') {
-        im.font(this.resource.get('font', locale))
+        im2.font(this.resource.get('font', locale))
         position = { x: 4, y: 71 }
       } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
         size = { w: 533, h: 129 }
         position = { x: -6, y: 66 }
-        im.font(this.resource.get('font', locale))
+        im2.font(this.resource.get('font', locale))
       }
 
       const nameText = this.#text(name, size.w, size.h)
 
-      im.parens(nameText).gravity('North')
+      im2.parens(nameText).gravity('North')
         .geometry(position.x, position.y)
         .composite()
         .font(this.resource.get('font', 'default'))
     }
 
-    return bufferFromCommandBuilder(im)
+    return bufferFromCommandBuilderFds(im2, fds)
   }
 
   #text(text: string, width: number, height: number): ImageMagickCommandBuilder {
