@@ -54,6 +54,29 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
           break
         }
+        case 'deathcard': {
+          const data = card.portrait.data
+          const dc = IM(this.resource.get('deathcard', 'base'))
+            .gravity('NorthWest')
+            .resource(this.resource.get('deathcard', `head_${data.headType}`)).composite()
+            .resource(this.resource.get('deathcard', `mouth_${data.mouthIndex + 1}`)).geometry(40, 68).composite()
+            .resource(this.resource.get('deathcard', `eyes_${data.eyesIndex + 1}`)).geometry(40, 46).composite()
+
+          if (data.lostEye) {
+            // draw black box over left-side eye
+            dc.parens(IM().command('xc:black[17x17]').geometry(40, 46)).composite()
+          }
+
+          makeBlue(dc)
+
+          dc.resize(undefined, 500)
+
+          im.parens(dc)
+            .gravity('Center')
+            .geometry(-1, -99)
+            .composite()
+          break
+        }
       }
     }
 
