@@ -222,6 +222,10 @@ server.post(['/api/card/:id/front', '/api/card/:id/'], async (request, reply) =>
     return
   }
 
+  if (apiCardValidation.value.name?.toLocaleLowerCase() === 'dmullins273') {
+    apiCardValidation.value.name = 'DOUBLEWINGS'
+  }
+
   const card = convertApiDataToCard(apiCardValidation.value)
   const options = { border, scanlines: scanline, locale }
 
