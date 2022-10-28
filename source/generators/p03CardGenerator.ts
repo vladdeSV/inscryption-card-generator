@@ -254,7 +254,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       const tileableScanline = IM()
         .size(15, 15)
         .command('gradient:', '-function', 'Polynomial', '-2,2,0')
-        .fill('white').command('-colorize', '80%')
+        .fill('white').command('-colorize', '50%')
 
       const scanlines = IM()
         .parens(tileableScanline)
@@ -263,7 +263,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       display.parens(scanlines)
         .gravity('Center')
         .geometry(0, 40)
-        .compose('Multiply')
+        .compose('Overlay')
         .composite()
         .compose('Over')
     }
