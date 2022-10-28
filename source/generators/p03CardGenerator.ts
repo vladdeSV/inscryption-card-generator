@@ -134,18 +134,26 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .resize(undefined, numberHeight)
 
     display.parens(healthText)
-      .geometry(dxLeftFromMiddle, dyFromBottomWithouthRGChannelDistorion)
-      .composite()
-
-    const powerText = IM()
-      .pointsize(200)
-      .label(card.power)
-      .trim()
-      .resize(undefined, numberHeight)
-
-    display.parens(powerText)
       .geometry(dxRightFromMiddle, dyFromBottomWithouthRGChannelDistorion)
       .composite()
+
+    const statIcon = card.statIcon
+    if (statIcon) {
+      const statIconPath = this.resource.get('staticon', statIcon)
+      const statIconImage = IM(statIconPath).fill('#99e6ff').command('-colorize', '100').resize(109, 109)
+
+      display.parens(statIconImage).gravity('NorthWest').geometry(229, 738).composite()
+    } else {
+      const powerText = IM()
+        .pointsize(200)
+        .label(card.power)
+        .trim()
+        .resize(undefined, numberHeight)
+
+      display.parens(powerText)
+        .geometry(dxLeftFromMiddle, dyFromBottomWithouthRGChannelDistorion)
+        .composite()
+    }
 
     // explanation: after some fiddling in my image editor, i found that the in-game display render thing is 984 wide, but when rendered in-game it's 928 px wide. it has the same height, but it is squished. EXCEPT that the portrait is widened onto the display by (100/94 * 100) %. wtf.
     display.resizeExt(g => g.scale(94, 100))
