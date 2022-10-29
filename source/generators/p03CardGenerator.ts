@@ -234,16 +234,18 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    // // glow
-    // const g = IM()
-    //   .clone()
-    //   .alpha('Set')
-    //   .command('-channel', 'A')
-    //   .command('-evaluate', 'multiply', '0.4')
-    //   .command('+channel')
-    //   .command('-blur', '0x12')
+    // glow
+    const g = IM()
+      .clone()
+      .alpha('Set')
+      .command('-channel', 'A')
+      .command('-evaluate', 'multiply', '0.3')
+      .command('+channel')
+      .command('-blur', '0x12')
 
-    // display.parens(g).composite()
+    display.parens(g)
+      .geometry(0, 0) // ? this is weird. why do i have to set this to 0,0?
+      .composite()
 
     // draw background
     const screenBackground = IM()
