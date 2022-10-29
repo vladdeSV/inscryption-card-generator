@@ -286,11 +286,12 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
     const cost = card.cost
     if (cost && cost.type === 'energy') {
-      const amount = cost.amount
+      const amount = Math.min(cost.amount, 6)
 
       // i dislike typescript. please allow `[1,2,3,4,5,6].includes(amount)`. eat shit https://github.com/microsoft/TypeScript/issues/15048
       if (amount === 1 || amount === 2 || amount === 3 || amount === 4 || amount === 5 || amount === 6) {
-        const energyResourcePath = this.resource.get('cost', `energy-${amount}`)
+        const energyResource = `energy-${amount}` as const
+        const energyResourcePath = this.resource.get('cost', energyResource)
         console.log('energy cost 223123', cost.amount)
 
         const energy = IM(energyResourcePath)
