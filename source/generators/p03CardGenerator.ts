@@ -250,8 +250,7 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       .size(664, 849)
       .command('xc:#051423')
 
-    display
-      .parens(screenBackground)
+    display.parens(screenBackground)
       .compose('DstOver')
       .composite()
       .compose('Over')
