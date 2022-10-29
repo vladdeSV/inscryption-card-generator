@@ -304,47 +304,51 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
     const name = card.name?.trim()
     if (name) {
       const nametagPath = this.resource.get('cardextra', 'name')
-      const nametag = IM(nametagPath).resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
-      im2.parens(nametag).composite()
+      const nametag = IM(nametagPath)
+        .resizeExt(g => g.scale(fullsizeCardHeight / originalCardHeight * 100))
+      im2.parens(nametag).gravity('North').geometry(0, 58).composite()
+
+      im2.gravity('Center')
 
       // default for english
       let size = { w: 570, h: 115 }
-      let position = { x: 0, y: 65 }
-
-      im2.font(this.resource.get('font', 'default'))
-        .fill('#001')
+      let position = { x: 0, y: 63 }
 
       const locale = this.options.locale
       if (locale === 'ko') {
         im2.font(this.resource.get('font', locale))
-        position = { x: 4, y: 71 }
+        position = { x: 4 - 6, y: 71 - 9 - 3 }
       } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
         size = { w: 533, h: 129 }
         position = { x: -6, y: 66 }
         im2.font(this.resource.get('font', locale))
+      } else {
+        im2.font(this.resource.get('font', 'default'))
       }
 
-      const nameText = this.#text(name, size.w, size.h)
+      const nameText = IM()
+        .pointsize()
+        .size(size.w, size.h)
+        .background('none')
+        .fill('#575738').command('-draw', `point ${size.w / 2},${size.h / 2}`) // ensure there is at least one pixel of text, otherwise crashes
+        .fill('#001')
+        .label(name)
+        .trim()
+        .gravity('Center')
+        .extent(size.w, size.h)
+        .resizeExt(g => g.scale(106, 100).flag('!'))
 
-      im2.parens(nameText).gravity('North')
+      if (locale === 'ko') {
+        nameText.resizeExt(g => g.scale(100, 105).flag('!'))
+      }
+
+      im2.parens(nameText)
+        .gravity('North')
         .geometry(position.x, position.y)
         .composite()
-        .font(this.resource.get('font', 'default'))
     }
 
     return bufferFromCommandBuilderFds(im2, fds)
-  }
-
-  #text(text: string, width: number, height: number): ImageMagickCommandBuilder {
-    return IM()
-      .pointsize()
-      .size(width, height)
-      .background('None')
-      .label(text)
-      .trim()
-      .gravity('Center')
-      .extent(width, height)
-      .resizeExt(g => g.scale(106, 100).flag('!'))
   }
 
   generateBack(): Promise<Buffer> {
