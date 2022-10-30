@@ -373,6 +373,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         .composite()
     }
 
+    if (this.options.border) {
+      im2.background('#2e2e2e').gravity('Center').extent(813, 1172)
+    }
+
     return bufferFromCommandBuilderFds(im2, fds)
   }
 
