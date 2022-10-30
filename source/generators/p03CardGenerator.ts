@@ -318,7 +318,15 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
       if (locale === 'ko') {
         im2.font(this.resource.get('font', locale))
         position = { x: 4 - 6, y: 71 - 9 - 3 }
-      } else if (locale === 'jp' || locale === 'zh-cn' || locale === 'zh-tw') {
+      } else if (locale === 'jp') {
+        size = { w: 533, h: 129 }
+        position = { x: -6, y: 65 }
+        im2.font(this.resource.get('font', locale))
+      } else if (locale === 'zh-cn') {
+        size = { w: 533, h: 129 }
+        position = { x: -6, y: 66 }
+        im2.font(this.resource.get('font', locale))
+      } else if (locale === 'zh-tw') {
         size = { w: 533, h: 129 }
         position = { x: -6, y: 66 }
         im2.font(this.resource.get('font', locale))
@@ -336,10 +344,17 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         .trim()
         .gravity('Center')
         .extent(size.w, size.h)
-        .resizeExt(g => g.scale(106, 100).flag('!'))
 
-      if (locale === 'ko') {
+      if (locale !== 'zh-tw') {
+        nameText.resizeExt(g => g.scale(106, 100).flag('!'))
+      }
+
+      if (locale === 'ko' || locale === 'jp') {
         nameText.resizeExt(g => g.scale(100, 105).flag('!'))
+      }
+
+      if (locale === 'jp') {
+        nameText.resizeExt(g => g.scale(99.6, 100).flag('!'))
       }
 
       im2.parens(nameText)
