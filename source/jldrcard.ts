@@ -1082,7 +1082,7 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
   }
 
   // define arrays for easier processing
-  out.metaCategories = ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable']
+  out.metaCategories = ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable', 'Part3Random']
   out.appearanceBehaviour = []
   out.specialAbilities = []
   out.traits = []
