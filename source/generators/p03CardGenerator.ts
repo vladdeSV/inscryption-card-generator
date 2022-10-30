@@ -316,20 +316,28 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
 
       const locale = this.options.locale
       if (locale === 'ko') {
+
         im2.font(this.resource.get('font', locale))
-        position = { x: 4 - 6, y: 71 - 9 - 3 }
+        position = { x: -2, y: 58 }
+
       } else if (locale === 'jp') {
+
         size = { w: 533, h: 129 }
         position = { x: -6, y: 65 }
         im2.font(this.resource.get('font', locale))
+
       } else if (locale === 'zh-cn') {
-        size = { w: 533, h: 129 }
-        position = { x: -6, y: 66 }
+
+        size = { w: 533, h: 153 }
+        position = { x: 0, y: 42 }
         im2.font(this.resource.get('font', locale))
+
       } else if (locale === 'zh-tw') {
-        size = { w: 533, h: 129 }
-        position = { x: -6, y: 66 }
+
+        size = { w: 533, h: 125 }
+        position = { x: 0, y: 68 }
         im2.font(this.resource.get('font', locale))
+
       } else {
         im2.font(this.resource.get('font', 'default'))
       }
@@ -345,8 +353,10 @@ class P03CardGenerator extends BaseCardGenerator<Options> {
         .gravity('Center')
         .extent(size.w, size.h)
 
-      if (locale !== 'zh-tw') {
+      if (locale !== 'zh-tw' && locale !== 'zh-cn') {
         nameText.resizeExt(g => g.scale(106, 100).flag('!'))
+      } else {
+        nameText.resizeExt(g => g.scale(97, 100).flag('!'))
       }
 
       if (locale === 'ko' || locale === 'jp') {
