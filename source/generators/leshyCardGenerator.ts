@@ -193,32 +193,38 @@ class LeshyCardGenerator extends BaseCardGenerator<Options> {
       }
     }
 
-    if (card.sigils.length === 1) {
-      const sigilPath = this.resource.get('sigil', card.sigils[0])
-      im.parens(
-        IM(sigilPath)
-          .interpolate('Nearest')
-          .filter('Point')
-          .resize(undefined, 253)
-          .filter('Box')
-      ).gravity('NorthWest')
-        .geometry(221 + terrainLayoutXoffset, 733)
-        .composite()
-    } else if (card.sigils.length === 2) {
-      const sigilPath1 = this.resource.get('sigil', card.sigils[0])
-      const sigilPath2 = this.resource.get('sigil', card.sigils[1])
+    const sigils = card.sigils?.slice(0, 2)
+    if (sigils) {
 
-      im.filter('Box')
+      if (sigils.length === 1) {
+        const sigilPath = this.resource.get('sigil', sigils[0])
+        im.parens(
+          IM(sigilPath)
+            .interpolate('Nearest')
+            .filter('Point')
+            .resize(undefined, 253)
+            .filter('Box')
+        ).gravity('NorthWest')
+          .geometry(221 + terrainLayoutXoffset, 733)
+          .composite()
+      }
 
-      im.parens(IM(sigilPath1).resize(undefined, 180))
-        .gravity('NorthWest')
-        .geometry(180 + terrainLayoutXoffset, 833)
-        .composite()
+      if (sigils.length === 2) {
+        const sigilPath1 = this.resource.get('sigil', sigils[0])
+        const sigilPath2 = this.resource.get('sigil', sigils[1])
 
-      im.parens(IM(sigilPath2).resize(undefined, 180))
-        .gravity('NorthWest')
-        .geometry(331 + terrainLayoutXoffset, 720)
-        .composite()
+        im.filter('Box')
+
+        im.parens(IM(sigilPath1).resize(undefined, 180))
+          .gravity('NorthWest')
+          .geometry(180 + terrainLayoutXoffset, 833)
+          .composite()
+
+        im.parens(IM(sigilPath2).resize(undefined, 180))
+          .gravity('NorthWest')
+          .geometry(331 + terrainLayoutXoffset, 720)
+          .composite()
+      }
     }
 
     if (card.flags.squid) {
