@@ -99,6 +99,7 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
         .gravity('Center')
         .geometry(0, -19)
         .composite()
+        .gravity('NorthWest')
     }
 
     if (card.cost) {
