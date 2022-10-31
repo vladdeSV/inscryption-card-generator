@@ -5,7 +5,7 @@ import { act2Resource } from './generators/gbcCardGenerator'
 import { act1Resource } from './generators/leshyCardGenerator'
 import { convert, createResourcesForCard, JldrCreature } from './jldrcard'
 
-const defaultMetaCategories = ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable']
+const defaultMetaCategories = ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable', 'Part3Random']
 
 const templateCard: Card = {
   name: '',
@@ -207,7 +207,7 @@ describe('convert simple cards', () => {
       pixelTexture: 'test123_pixel_portrait.png',
       decals: ['test123_paint.png', 'test123_smoke.png'],
       titleGraphic: 'test123_squid.png',
-      metaCategories: ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable']
+      metaCategories: ['ChoiceNode', 'TraderOffer', 'GBCPack', 'GBCPlayable', 'Part3Random']
     }
 
     expect(convert(card, 'test123')).toEqual(out)
