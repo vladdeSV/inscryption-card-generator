@@ -142,17 +142,17 @@ export class PixelProfilgateGenerator extends BaseCardGenerator<Options> {
 
     // power
     if (!card.statIcon) {
-      im.gravity('NorthWest')
+      im.gravity('Center')
         .pointsize(110)
         .fill('black')
-        .command('-draw').command(`text 146,842 '${card.power}'`)
+        .command('-draw').command(`text -341,168 '${card.power}'`)
     }
 
     // health
-    im.gravity('NorthWest')
+    im.gravity('Center')
       .pointsize(110)
       .fill('black')
-      .command('-draw').command(`text 841,175 '${card.health}'`)
+      .command('-draw').command(`text 354,-499 '${card.health}'`)
 
     // this.options.description = 'Push your luck, what could go wrong.'
 
