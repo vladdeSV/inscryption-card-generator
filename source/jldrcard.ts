@@ -425,6 +425,9 @@ const Abililty = Union(
   Literal('DoubleStrike'),
   Literal('BoneDigger'),
   Literal('Evolve'),
+  Literal('Evolve_1'),
+  Literal('Evolve_2'),
+  Literal('Evolve_3'),
   Literal('GainGemBlue'),
   Literal('GainGemGreen'),
   Literal('GainGemOrange'),
@@ -695,6 +698,9 @@ function convertJldrCard(jsonCard: JldrCreature): Card {
       case 'DoubleStrike': card.sigils.push('doublestrike'); break
       case 'BoneDigger': card.sigils.push('bonedigger'); break
       case 'Evolve': card.sigils.push('evolve'); break
+      case 'Evolve_1': card.sigils.push('evolve_1'); break
+      case 'Evolve_2': card.sigils.push('evolve_2'); break
+      case 'Evolve_3': card.sigils.push('evolve_3'); break
       case 'GainGemBlue': card.sigils.push('gaingemblue'); break
       case 'GainGemGreen': card.sigils.push('gaingemgreen'); break
       case 'GainGemOrange': card.sigils.push('gaingemorange'); break
@@ -1228,6 +1234,9 @@ export function convert(card: Card, id: string): Partial<JldrCreature> {
         case 'doublestrike': return 'DoubleStrike'
         case 'bonedigger': return 'BoneDigger'
         case 'evolve': return 'Evolve'
+        case 'evolve_1': return 'Evolve_1'
+        case 'evolve_2': return 'Evolve_2'
+        case 'evolve_3': return 'Evolve_3'
         case 'gaingemblue': return 'GainGemBlue'
         case 'gaingemgreen': return 'GainGemGreen'
         case 'gaingemorange': return 'GainGemOrange'
