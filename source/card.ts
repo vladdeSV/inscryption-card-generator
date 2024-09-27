@@ -59,6 +59,9 @@ const Sigil = Union(
   Literal('doublestrike'), // DoubleStrike
   Literal('bonedigger'), // BoneDigger
   Literal('evolve'), // Evolve
+  Literal('evolve_1'), // Evolve_1
+  Literal('evolve_2'), // Evolve_2
+  Literal('evolve_3'), // Evolve_3
   Literal('gaingemblue'), // GainGemBlue
   Literal('gaingemgreen'), // GainGemGreen
   Literal('gaingemorange'), // GainGemOrange
